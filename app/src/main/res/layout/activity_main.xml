@@ -85,13 +85,35 @@
 
             <ImageView
                 android:id="@+id/eggImage"
-                android:layout_width="330dp"
-                android:layout_height="350dp"
+                android:layout_width="300dp"
+                android:layout_height="320dp"
                 android:src="@drawable/white_egg"
                 android:scaleType="fitXY"
                 android:layout_marginTop="50dp"
                 android:layout_gravity="center|top"/>
 
+            <TextView
+                android:id="@+id/timeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0:00"
+                android:textColor="#000000"
+                android:textSize="55sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginTop="120dp"/>
+
+            <Button
+                android:id="@+id/hatchButton"
+                android:layout_width="130dp"
+                android:layout_height="64dp"
+                android:backgroundTint="#1A5E00"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Hatch"
+                android:textColor="#DFFFEA"
+                android:textSize="28sp"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="55dp"/>
         </FrameLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

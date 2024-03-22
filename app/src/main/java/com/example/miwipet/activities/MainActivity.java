@@ -12,7 +12,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,8 @@ import com.example.miwipet.fragments.HistoryFragment;
 import com.example.miwipet.fragments.InboxFragment;
 import com.example.miwipet.fragments.StoreFragment;
 import com.example.miwipet.fragments.TradeFragment;
+import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.NormalEgg;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -37,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     TextView chipTokenValue, glazeTokenValue;
     Integer chipToken = 0, glazeToken = 0;
+    ImageView eggImage;
+    TextView timeText;
+    Button hatchButton;
 
     private void initializeComponents()
     {
@@ -46,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigationView);
         chipTokenValue = findViewById(R.id.chipTokenValue);
         glazeTokenValue = findViewById(R.id.glazeTokenValue);
+        eggImage = findViewById(R.id.eggImage);
+        timeText = findViewById(R.id.timeText);
+        hatchButton = findViewById(R.id.hatchButton);
     }
 
     @Override
@@ -58,15 +69,6 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
             MainActivity.this, drawerLayout, materialToolbar, R.string.drawer_close, R.string.drawer_open);
             drawerLayout.addDrawerListener(toggle);
-
-        materialToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(MainActivity.this, "Hahaha", Toast.LENGTH_SHORT).show();
-
-                return false;
-            }
-        });
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -101,48 +103,20 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        Toast.makeText(this, "I am start", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        Toast.makeText(this, "I am destroy", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        Toast.makeText(this, "I am stop", Toast.LENGTH_SHORT).show();
+        hatchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EggModel normalEgg = new NormalEgg();
+                eggImage.setImageResource(normalEgg.getPetBirth());
+            }
+        });
     }
 
     @Override
     protected void onPause() {
         super.onPause();
 
-        Toast.makeText(this, "I am pause", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        Toast.makeText(this, "I am resume", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        Toast.makeText(this, "I am restart", Toast.LENGTH_SHORT).show();
     }
 
     private void replaceFragment(Fragment fragment)
