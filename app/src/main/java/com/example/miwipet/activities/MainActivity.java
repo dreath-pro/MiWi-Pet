@@ -1,4 +1,4 @@
-package com.example.miwipet;
+package com.example.miwipet.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -16,6 +16,13 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.miwipet.R;
+import com.example.miwipet.fragments.AboutFragment;
+import com.example.miwipet.fragments.CollectionFragment;
+import com.example.miwipet.fragments.HistoryFragment;
+import com.example.miwipet.fragments.InboxFragment;
+import com.example.miwipet.fragments.StoreFragment;
+import com.example.miwipet.fragments.TradeFragment;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 

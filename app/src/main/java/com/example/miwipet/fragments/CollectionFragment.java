@@ -1,4 +1,4 @@
-package com.example.miwipet;
+package com.example.miwipet.fragments;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class TradeFragment extends Fragment {
+import com.example.miwipet.R;
+
+public class CollectionFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trade, container, false);
+        return inflater.inflate(R.layout.fragment_collection, container, false);
     }
 }
