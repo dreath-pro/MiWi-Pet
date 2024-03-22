@@ -7,11 +7,11 @@ import java.util.ArrayList;
 public class NormalEgg extends EggModel {
     int[][] pets = {
             {R.drawable.butterfly, R.drawable.cat, R.drawable.blue_chick, R.drawable.dog,
-                    R.drawable.elephant, R.drawable.parrot, R.drawable.rhinoceros},
+                    R.drawable.bird, R.drawable.lady_bug, R.drawable.bee, R.drawable.caterpillar},
 
 
             {R.drawable.chicken, R.drawable.flamingo, R.drawable.owl, R.drawable.reindeer,
-                    R.drawable.cow, R.drawable.snake, R.drawable.pig},
+                    R.drawable.cow, R.drawable.snake, R.drawable.pig, R.drawable.sheep},
 
 
             {R.drawable.bear, R.drawable.crocodile, R.drawable.lion, R.drawable.piranha,
