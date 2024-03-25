@@ -33,6 +33,7 @@ import com.google.android.material.navigation.NavigationView;
 
 //egg hatch, logo, simple
 //husky, 3d render, full body view, white background, simplistic kiddy design, cute
+//frost egg, 3d render, white background, simple design
 //ocean background, digital art, cartoon, unfocus, blur
 
 public class MainActivity extends AppCompatActivity {

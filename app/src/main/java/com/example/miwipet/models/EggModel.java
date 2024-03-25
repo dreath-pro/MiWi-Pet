@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class EggModel{
     private String eggName;
-    private int[][] petImage;
     private int eggImage;
     private int second, minute, hour;
     private int petBirth;
@@ -24,7 +23,6 @@ public class EggModel{
 
     protected void selectRarity(int[][] petImage)
     {
-        this.petImage = petImage;
         int selectedRarity = random.nextInt(100) + 1;
 
         if(selectedRarity <= 2)
@@ -64,24 +62,8 @@ public class EggModel{
         return eggName;
     }
 
-    public void setEggName(String eggName) {
-        this.eggName = eggName;
-    }
-
-    public int[][] getPetImage() {
-        return petImage;
-    }
-
-    public void setPetImage(int[][] petImage) {
-        this.petImage = petImage;
-    }
-
     public int getEggImage() {
         return eggImage;
-    }
-
-    public void setEggImage(int eggImage) {
-        this.eggImage = eggImage;
     }
 
     public int getSecond() {
@@ -108,35 +90,11 @@ public class EggModel{
         this.hour = hour;
     }
 
-    public Random getRandom() {
-        return random;
-    }
-
-    public void setRandom(Random random) {
-        this.random = random;
-    }
-
-    public int getSelectedPet() {
-        return selectedPet;
-    }
-
-    public void setSelectedPet(int selectedPet) {
-        this.selectedPet = selectedPet;
-    }
-
     public int getPetBirth() {
         return petBirth;
     }
 
-    public void setPetBirth(int petBirth) {
-        this.petBirth = petBirth;
-    }
-
     public String getRarityText() {
         return rarityText;
-    }
-
-    public void setRarityText(String rarityText) {
-        this.rarityText = rarityText;
     }
 }
