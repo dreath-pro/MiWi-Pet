@@ -6,11 +6,13 @@ import java.util.Random;
 public class EggModel{
     private String eggName;
     private int eggImage;
+    private String petName;
+    private int petImage;
+    private int age, type;
+
     private int second, minute, hour;
-    private int petBirth;
 
     private Random random = new Random();
-    private int selectedPet;
     private String rarityText;
 
     public EggModel(String eggName, int eggImage, int second, int minute, int hour) {
@@ -19,40 +21,49 @@ public class EggModel{
         this.second = second;
         this.minute = minute;
         this.hour = hour;
+
+        age = 0;
+        type = 0;
     }
 
-    protected void selectRarity(int[][] petImage)
+    protected void selectRarity(int[][] petImage, String[][] petNames)
     {
         int selectedRarity = random.nextInt(100) + 1;
+        int selectedPet;
 
         if(selectedRarity <= 2)
         {
             selectedPet = random.nextInt(petImage[4].length);
-            petBirth = petImage[4][selectedPet];
+            this.petImage = petImage[4][selectedPet];
+            this.petName = petNames[4][selectedPet];
 
             rarityText = "Mythic";
         }else if(selectedRarity <= 10)
         {
             selectedPet = random.nextInt(petImage[3].length);
-            petBirth = petImage[3][selectedPet];
+            this.petImage = petImage[3][selectedPet];
+            this.petName = petNames[3][selectedPet];
 
             rarityText = "Ancient";
         }else if(selectedRarity <= 25)
         {
             selectedPet = random.nextInt(petImage[2].length);
-            petBirth = petImage[2][selectedPet];
+            this.petImage = petImage[2][selectedPet];
+            this.petName = petNames[2][selectedPet];
 
             rarityText = "Rare";
         }else if(selectedRarity <= 60)
         {
             selectedPet = random.nextInt(petImage[1].length);
-            petBirth = petImage[1][selectedPet];
+            this.petImage = petImage[1][selectedPet];
+            this.petName = petNames[1][selectedPet];
 
             rarityText = "Uncommon";
         }else
         {
             selectedPet = random.nextInt(petImage[0].length);
-            petBirth = petImage[0][selectedPet];
+            this.petImage = petImage[0][selectedPet];
+            this.petName = petNames[0][selectedPet];
 
             rarityText = "Common";
         }
@@ -64,6 +75,14 @@ public class EggModel{
 
     public int getEggImage() {
         return eggImage;
+    }
+
+    public String getPetName() {
+        return petName;
+    }
+
+    public int getPetImage() {
+        return petImage;
     }
 
     public int getSecond() {
@@ -90,11 +109,15 @@ public class EggModel{
         this.hour = hour;
     }
 
-    public int getPetBirth() {
-        return petBirth;
-    }
-
     public String getRarityText() {
         return rarityText;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public int getType() {
+        return type;
     }
 }

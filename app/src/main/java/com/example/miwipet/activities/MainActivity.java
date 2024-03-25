@@ -3,7 +3,6 @@ package com.example.miwipet.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -27,7 +26,7 @@ import com.example.miwipet.fragments.InboxFragment;
 import com.example.miwipet.fragments.StoreFragment;
 import com.example.miwipet.fragments.TradeFragment;
 import com.example.miwipet.models.EggModel;
-import com.example.miwipet.models.NormalEgg;
+import com.example.miwipet.models.eggs.NormalEgg;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -109,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EggModel normalEgg = new NormalEgg();
-                eggImage.setImageResource(normalEgg.getPetBirth());
+                eggImage.setImageResource(normalEgg.getPetImage());
+                Toast.makeText(MainActivity.this, "You got a " + normalEgg.getPetName() + ", Congratulations!", Toast.LENGTH_SHORT).show();
             }
         });
     }

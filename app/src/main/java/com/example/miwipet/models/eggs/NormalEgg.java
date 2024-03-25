@@ -1,6 +1,7 @@
-package com.example.miwipet.models;
+package com.example.miwipet.models.eggs;
 
 import com.example.miwipet.R;
+import com.example.miwipet.models.EggModel;
 
 public class NormalEgg extends EggModel {
     int[][] pets = {
@@ -22,8 +23,21 @@ public class NormalEgg extends EggModel {
             {R.drawable.unicorn, R.drawable.pegasus}
     };
 
+    String[][] petNames = {
+            {"Cockroach", "Fly", "Mosquito", "Slug"},
+
+            {"Butterfly", "Monarch Butterfly", "Dragonfly", "Grasshopper", "Lizard", "Lady Bug",
+                    "Bee", "Caterpillar"},
+
+            {"Cat", "Dog", "Bird", "Rabbit", "Blue Chick", "Donkey", "Chicken", "Cockatoo"},
+
+            {"Cow", "Musk Ox", "Buffalo", "Sheep", "Pig", "Parrot", "Fox", "Horse"},
+
+            {"Unicorn", "Pegasus"}
+    };
+
     public NormalEgg() {
         super("Normal Egg", R.drawable.egg_normal, 30, 20, 0);
-        super.selectRarity(pets);
+        super.selectRarity(pets, petNames);
     }
 }
