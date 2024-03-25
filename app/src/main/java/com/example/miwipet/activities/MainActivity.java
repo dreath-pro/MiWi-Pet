@@ -26,6 +26,7 @@ import com.example.miwipet.fragments.InboxFragment;
 import com.example.miwipet.fragments.StoreFragment;
 import com.example.miwipet.fragments.TradeFragment;
 import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.NormalEgg;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
@@ -109,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EggModel normalEgg = new NormalEgg();
                 eggImage.setImageResource(normalEgg.getPetImage());
-                Toast.makeText(MainActivity.this, "You got a " + normalEgg.getPetName() + ", Congratulations!", Toast.LENGTH_SHORT).show();
             }
         });
     }
