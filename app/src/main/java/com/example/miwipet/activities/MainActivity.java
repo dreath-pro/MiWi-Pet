@@ -29,6 +29,7 @@ import com.example.miwipet.fragments.TradeFragment;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.NormalEgg;
+import com.example.miwipet.models.eggs.OceanEgg;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -46,13 +47,13 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     NavigationView navigationView;
     TextView chipTokenValue, glazeTokenValue;
-    Integer chipToken = 0, glazeToken = 0;
     ImageView eggImage;
     TextView timeText;
     Button hatchButton;
 
     private ArrayList<EggModel> eggInventory = new ArrayList<>();
     private ArrayList<EggModel> incubated = new ArrayList<>();
+    private int chipToken = 0, glazeToken = 0;
 
     private void initializeComponents() {
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -67,14 +68,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void generateEggs() {
-        for (int i = 0; i <= 200; i++) {
+        for (int i = 0; i <= 80; i++) {
             Random random = new Random();
-            int selectedEgg = random.nextInt(2);
+            int selectedEgg = random.nextInt(3);
 
-            if (selectedEgg == 0) {
-                eggInventory.add(new NormalEgg());
-            } else {
-                eggInventory.add(new ForestEgg());
+            switch (selectedEgg)
+            {
+                case 0:
+                    eggInventory.add(new NormalEgg());
+                    break;
+                case 1:
+                    eggInventory.add(new ForestEgg());
+                    break;
+                case 2:
+                    eggInventory.add(new OceanEgg());
+                    break;
             }
         }
     }
@@ -134,7 +142,13 @@ public class MainActivity extends AppCompatActivity {
         eggImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(new EggFragment(eggInventory, incubated, eggImage));
+                if(incubated.isEmpty())
+                {
+                    replaceFragment(new EggFragment(eggInventory, incubated, eggImage));
+                }else
+                {
+                    Toast.makeText(MainActivity.this, "Please hatch the egg first", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

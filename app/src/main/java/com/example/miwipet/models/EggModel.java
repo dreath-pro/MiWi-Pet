@@ -11,7 +11,7 @@ public class EggModel{
     private int age, type;
 
     private int second, minute, hour;
-
+    private boolean toHatch;
     private Random random = new Random();
     private String rarityText;
 
@@ -24,6 +24,7 @@ public class EggModel{
 
         age = 0;
         type = 0;
+        toHatch = false;
     }
 
     protected void selectRarity(int[][] petImage, String[][] petNames)
@@ -155,5 +156,13 @@ public class EggModel{
 
     public void setRarityText(String rarityText) {
         this.rarityText = rarityText;
+    }
+
+    public boolean isToHatch() {
+        return toHatch;
+    }
+
+    public void setToHatch(boolean toHatch) {
+        this.toHatch = toHatch;
     }
 }
