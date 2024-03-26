@@ -73,16 +73,48 @@ public class EggModel{
         return eggName;
     }
 
+    public void setEggName(String eggName) {
+        this.eggName = eggName;
+    }
+
     public int getEggImage() {
         return eggImage;
+    }
+
+    public void setEggImage(int eggImage) {
+        this.eggImage = eggImage;
     }
 
     public String getPetName() {
         return petName;
     }
 
+    public void setPetName(String petName) {
+        this.petName = petName;
+    }
+
     public int getPetImage() {
         return petImage;
+    }
+
+    public void setPetImage(int petImage) {
+        this.petImage = petImage;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getSecond() {
@@ -109,15 +141,19 @@ public class EggModel{
         this.hour = hour;
     }
 
+    public Random getRandom() {
+        return random;
+    }
+
+    public void setRandom(Random random) {
+        this.random = random;
+    }
+
     public String getRarityText() {
         return rarityText;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public int getType() {
-        return type;
+    public void setRarityText(String rarityText) {
+        this.rarityText = rarityText;
     }
 }

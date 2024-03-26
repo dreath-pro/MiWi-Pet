@@ -87,7 +87,7 @@
                 android:id="@+id/eggImage"
                 android:layout_width="300dp"
                 android:layout_height="320dp"
-                android:src="@drawable/egg_normal"
+                android:src="@drawable/add_egg_icon"
                 android:scaleType="fitXY"
                 android:layout_marginTop="50dp"
                 android:layout_gravity="center|top"/>

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.miwipet.R;
 import com.example.miwipet.fragments.AboutFragment;
 import com.example.miwipet.fragments.CollectionFragment;
+import com.example.miwipet.fragments.EggFragment;
 import com.example.miwipet.fragments.HistoryFragment;
 import com.example.miwipet.fragments.InboxFragment;
 import com.example.miwipet.fragments.StoreFragment;
@@ -110,6 +111,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EggModel normalEgg = new NormalEgg();
                 eggImage.setImageResource(normalEgg.getPetImage());
+            }
+        });
+
+        eggImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new EggFragment());
             }
         });
     }
