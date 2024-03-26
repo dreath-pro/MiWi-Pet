@@ -107,10 +107,10 @@
                 android:id="@+id/hatchButton"
                 android:layout_width="130dp"
                 android:layout_height="64dp"
-                android:backgroundTint="#1A5E00"
+                android:backgroundTint="#CFCE97"
                 android:fontFamily="sans-serif-condensed"
                 android:text="Hatch"
-                android:textColor="#DFFFEA"
+                android:textColor="#171104"
                 android:textSize="28sp"
                 android:layout_gravity="center|bottom"
                 android:layout_marginBottom="55dp"/>

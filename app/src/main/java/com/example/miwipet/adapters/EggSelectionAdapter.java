@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
@@ -19,11 +21,18 @@ import java.util.ArrayList;
 public class EggSelectionAdapter extends RecyclerView.Adapter<EggSelectionAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<EggModel> eggModels;
+    private ArrayList<EggModel> incubated;
+    private FragmentManager fragmentManager;
 
-    public EggSelectionAdapter(Context context, ArrayList<EggModel> eggModels)
-    {
+    ImageView eggImage;
+
+    public EggSelectionAdapter(Context context, ArrayList<EggModel> eggModels, ArrayList<EggModel> incubated,
+                               FragmentManager fragmentManager, ImageView eggImage) {
         this.context = context;
         this.eggModels = eggModels;
+        this.fragmentManager = fragmentManager;
+        this.eggImage = eggImage;
+        this.incubated = incubated;
     }
 
     @NonNull
@@ -39,6 +48,18 @@ public class EggSelectionAdapter extends RecyclerView.Adapter<EggSelectionAdapte
         holder.eggImage.setImageResource(eggModels.get(position).getEggImage());
         holder.eggName.setText(eggModels.get(position).getEggName());
         holder.eggQuantity.setText("x1");
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eggImage.setImageResource(eggModels.get(holder.getAdapterPosition()).getEggImage());
+                incubated.add(eggModels.get(holder.getAdapterPosition()));
+                eggModels.remove(holder.getAdapterPosition());
+                if (fragmentManager != null) {
+                    fragmentManager.popBackStack();
+                }
+            }
+        });
     }
 
     @Override
@@ -46,8 +67,7 @@ public class EggSelectionAdapter extends RecyclerView.Adapter<EggSelectionAdapte
         return eggModels.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView eggImage;
         TextView eggName, eggQuantity;
 

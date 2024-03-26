@@ -32,6 +32,9 @@ import com.example.miwipet.models.eggs.NormalEgg;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 //egg hatch, logo, simple
 //husky, 3d render, full body view, white background, simplistic kiddy design, cute
 //frost egg, 3d render, white background, simple design
@@ -48,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
     TextView timeText;
     Button hatchButton;
 
-    private void initializeComponents()
-    {
+    private ArrayList<EggModel> eggInventory = new ArrayList<>();
+    private ArrayList<EggModel> incubated = new ArrayList<>();
+
+    private void initializeComponents() {
         drawerLayout = findViewById(R.id.drawer_layout);
         materialToolbar = findViewById(R.id.materialToolbar);
         frameLayout = findViewById(R.id.frameLayout);
@@ -61,43 +66,49 @@ public class MainActivity extends AppCompatActivity {
         hatchButton = findViewById(R.id.hatchButton);
     }
 
+    private void generateEggs() {
+        for (int i = 0; i <= 200; i++) {
+            Random random = new Random();
+            int selectedEgg = random.nextInt(2);
+
+            if (selectedEgg == 0) {
+                eggInventory.add(new NormalEgg());
+            } else {
+                eggInventory.add(new ForestEgg());
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initializeComponents();
+        generateEggs();
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            MainActivity.this, drawerLayout, materialToolbar, R.string.drawer_close, R.string.drawer_open);
-            drawerLayout.addDrawerListener(toggle);
+                MainActivity.this, drawerLayout, materialToolbar, R.string.drawer_close, R.string.drawer_open);
+        drawerLayout.addDrawerListener(toggle);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if(item.getItemId() == R.id.home_nav)
-                {
+                if (item.getItemId() == R.id.home_nav) {
                     getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                }else if(item.getItemId() == R.id.collection_nav)
-                {
+                } else if (item.getItemId() == R.id.collection_nav) {
                     replaceFragment(new CollectionFragment());
-                }else if(item.getItemId() == R.id.store_nav)
-                {
+                } else if (item.getItemId() == R.id.store_nav) {
                     replaceFragment(new StoreFragment());
-                }else if(item.getItemId() == R.id.trade_nav)
-                {
+                } else if (item.getItemId() == R.id.trade_nav) {
                     replaceFragment(new TradeFragment());
-                }else if(item.getItemId() == R.id.history_nav)
-                {
+                } else if (item.getItemId() == R.id.history_nav) {
                     replaceFragment(new HistoryFragment());
-                }else if(item.getItemId() == R.id.inbox_nav)
-                {
+                } else if (item.getItemId() == R.id.inbox_nav) {
                     replaceFragment(new InboxFragment());
-                }else if(item.getItemId() == R.id.about_nav)
-                {
+                } else if (item.getItemId() == R.id.about_nav) {
                     replaceFragment(new AboutFragment());
-                }else if(item.getItemId() == R.id.exit_nav)
-                {
+                } else if (item.getItemId() == R.id.exit_nav) {
                     System.exit(0);
                 }
 
@@ -109,15 +120,21 @@ public class MainActivity extends AppCompatActivity {
         hatchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EggModel normalEgg = new NormalEgg();
-                eggImage.setImageResource(normalEgg.getPetImage());
+                if(!incubated.isEmpty())
+                {
+                    eggImage.setImageResource(incubated.get(0).getPetImage());
+                    incubated.clear();
+                }else
+                {
+                    Toast.makeText(MainActivity.this, "Please tap the egg to select first", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         eggImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(new EggFragment());
+                replaceFragment(new EggFragment(eggInventory, incubated, eggImage));
             }
         });
     }
@@ -128,8 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void replaceFragment(Fragment fragment)
-    {
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout, fragment);

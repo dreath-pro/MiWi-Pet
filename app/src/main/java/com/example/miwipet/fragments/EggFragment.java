@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.miwipet.R;
@@ -19,6 +20,7 @@ import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.NormalEgg;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -26,8 +28,16 @@ public class EggFragment extends Fragment {
     Button backButton;
     RecyclerView eggSelection;
     Context context;
+    ImageView eggImage;
 
-    private ArrayList<EggModel> eggInventory = new ArrayList<>();
+    private ArrayList<EggModel> eggInventory;
+    private ArrayList<EggModel> incubated;
+
+    public EggFragment(ArrayList<EggModel> eggInventory, ArrayList<EggModel> incubated, ImageView eggImage) {
+        this.eggInventory = eggInventory;
+        this.eggImage = eggImage;
+        this.incubated = incubated;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,25 +47,16 @@ public class EggFragment extends Fragment {
         backButton = view.findViewById(R.id.backButton);
         eggSelection = view.findViewById(R.id.eggSelection);
 
-        eggInventory.add(new ForestEgg());
-        eggInventory.add(new ForestEgg());
-        eggInventory.add(new NormalEgg());
-        eggInventory.add(new ForestEgg());
-        eggInventory.add(new NormalEgg());
-        eggInventory.add(new ForestEgg());
-        eggInventory.add(new ForestEgg());
-        eggInventory.add(new NormalEgg());
-        eggInventory.add(new NormalEgg());
-
-        EggSelectionAdapter eggSelectionAdapter = new EggSelectionAdapter(context, eggInventory);
+        EggSelectionAdapter eggSelectionAdapter =
+                new EggSelectionAdapter(context, eggInventory, incubated,
+                        requireActivity().getSupportFragmentManager(), eggImage);
         eggSelection.setAdapter(eggSelectionAdapter);
         eggSelection.setLayoutManager(new LinearLayoutManager(context));
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getActivity() != null)
-                {
+                if (getActivity() != null) {
                     getActivity().getSupportFragmentManager().popBackStack();
                 }
             }
