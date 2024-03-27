@@ -1,14 +1,44 @@
 package com.example.miwipet.models;
 
 public class PetModel {
+    /**
+     * age 0 = newborn
+     * age 1 = juvenile
+     * age 2 = teen
+     * age 3 = young adult
+     * age 4 = adult
+     * age 5 = elder
+     */
+
     private String petName;
     private int petImage, age, type;
+    private int maxExp;
+    private int exp;
 
     public PetModel(String petName, int petImage, int age, int type) {
         this.petName = petName;
         this.petImage = petImage;
         this.age = age;
         this.type = type;
+
+        maxExp = 50;
+        exp = 0;
+    }
+
+    private void growAge() {
+        if(exp >= maxExp)
+        {
+            age += 1;
+            exp -= maxExp;
+            maxExp *= 2;
+
+            while(exp >= maxExp)
+            {
+                age += 1;
+                exp -= maxExp;
+                maxExp *= 2;
+            }
+        }
     }
 
     public String getPetName() {
@@ -41,5 +71,22 @@ public class PetModel {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getMaxExp() {
+        return maxExp;
+    }
+
+    public void setMaxExp(int maxExp) {
+        this.maxExp = maxExp;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp += exp;
+        growAge();
     }
 }

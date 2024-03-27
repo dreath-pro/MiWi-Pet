@@ -27,6 +27,7 @@ import com.example.miwipet.fragments.InboxFragment;
 import com.example.miwipet.fragments.StoreFragment;
 import com.example.miwipet.fragments.TradeFragment;
 import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.PetModel;
 import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.FossilEgg;
 import com.example.miwipet.models.eggs.NormalEgg;
@@ -38,7 +39,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 //egg hatch, logo, simple
-//husky, 3d render, full body view, white background, simplistic kiddy design, cute
+//parasaurolophus, 3d render, full body view, white background, simplistic kiddy design, cute
 //frost egg, 3d render, white background, simple design
 //ocean background, digital art, cartoon, unfocus, blur
 
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<EggModel> eggInventory = new ArrayList<>();
     private ArrayList<EggModel> incubated = new ArrayList<>();
-    private int chipToken = 0, glazeToken = 0;
 
     private void initializeComponents() {
         drawerLayout = findViewById(R.id.drawer_layout);
