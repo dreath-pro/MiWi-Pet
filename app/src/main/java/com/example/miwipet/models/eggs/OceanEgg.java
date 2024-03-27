@@ -25,7 +25,7 @@ public class OceanEgg extends EggModel {
     };
 
     String[][] petNames = {
-            {"Fish", "Puffer fish", "Stingray", "Clownfish", "Squid"},
+            {"Fish", "Puffer Fish", "Stingray", "Clownfish", "Squid"},
 
             {"Angelfish", "Jellyfish", "Starfish", "Lionfish", "Shrimp"},
 

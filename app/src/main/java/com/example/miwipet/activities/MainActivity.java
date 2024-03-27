@@ -28,6 +28,7 @@ import com.example.miwipet.fragments.StoreFragment;
 import com.example.miwipet.fragments.TradeFragment;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.eggs.ForestEgg;
+import com.example.miwipet.models.eggs.FossilEgg;
 import com.example.miwipet.models.eggs.NormalEgg;
 import com.example.miwipet.models.eggs.OceanEgg;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     private void generateEggs() {
         for (int i = 0; i <= 80; i++) {
             Random random = new Random();
-            int selectedEgg = random.nextInt(3);
+            int selectedEgg = random.nextInt(4);
 
             switch (selectedEgg)
             {
@@ -82,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 2:
                     eggInventory.add(new OceanEgg());
+                    break;
+                case 3:
+                    eggInventory.add(new FossilEgg());
                     break;
             }
         }
