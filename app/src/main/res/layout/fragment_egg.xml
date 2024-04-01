@@ -16,7 +16,7 @@
         android:paddingBottom="8sp"
         android:paddingStart="20sp"
         android:paddingEnd="20sp"
-        android:text="Back"
+        android:text="@string/back_button"
         android:textSize="30sp"
         android:textColor="#AAE8ED"
         android:backgroundTint="#124160"/>
@@ -34,7 +34,7 @@
             android:id="@+id/selectEggText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Egg"
+            android:text="@string/select_egg"
             android:layout_centerHorizontal="true"
             android:textSize="42sp"
             android:textColor="@color/black"/>

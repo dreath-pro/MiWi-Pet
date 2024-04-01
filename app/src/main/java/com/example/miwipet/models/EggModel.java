@@ -45,7 +45,7 @@ public class EggModel{
             this.petImage = petImage[3][selectedPet];
             this.petName = petNames[3][selectedPet];
 
-            rarityText = "Ancient";
+            rarityText = "Legendary";
         }else if(selectedRarity <= 25)
         {
             selectedPet = random.nextInt(petImage[2].length);

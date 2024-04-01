@@ -27,6 +27,7 @@ import com.example.miwipet.fragments.InboxFragment;
 import com.example.miwipet.fragments.StoreFragment;
 import com.example.miwipet.fragments.TradeFragment;
 import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.PetModel;
 import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.FossilEgg;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<EggModel> eggInventory = new ArrayList<>();
     private ArrayList<EggModel> incubated = new ArrayList<>();
+    private InventoryModel inventoryModel = new InventoryModel();
 
     private void initializeComponents() {
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -73,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
             Random random = new Random();
             int selectedEgg = random.nextInt(4);
 
-            switch (selectedEgg)
-            {
+            switch (selectedEgg) {
                 case 0:
                     eggInventory.add(new NormalEgg());
                     break;
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.home_nav) {
                     getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 } else if (item.getItemId() == R.id.collection_nav) {
-                    replaceFragment(new CollectionFragment());
+                    replaceFragment(new CollectionFragment(inventoryModel.getPetLists(), getApplicationContext()));
                 } else if (item.getItemId() == R.id.store_nav) {
                     replaceFragment(new StoreFragment());
                 } else if (item.getItemId() == R.id.trade_nav) {
@@ -132,12 +133,16 @@ public class MainActivity extends AppCompatActivity {
         hatchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!incubated.isEmpty())
-                {
+                if (!incubated.isEmpty()) {
+                    PetModel petModel;
+
                     eggImage.setImageResource(incubated.get(0).getPetImage());
+                    petModel = new PetModel(incubated.get(0).getPetName(), incubated.get(0).getPetImage(),
+                            incubated.get(0).getAge(), incubated.get(0).getType(), incubated.get(0).getRarityText());
+                    inventoryModel.addPetLists(petModel);
+
                     incubated.clear();
-                }else
-                {
+                } else {
                     Toast.makeText(MainActivity.this, "Please tap the egg to select first", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -146,11 +151,9 @@ public class MainActivity extends AppCompatActivity {
         eggImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(incubated.isEmpty())
-                {
+                if (incubated.isEmpty()) {
                     replaceFragment(new EggFragment(eggInventory, incubated, eggImage));
-                }else
-                {
+                } else {
                     Toast.makeText(MainActivity.this, "Please hatch the egg first", Toast.LENGTH_SHORT).show();
                 }
             }

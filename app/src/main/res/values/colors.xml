@@ -2,4 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!--    rarity and type colors-->
+    <color name="common">#E6CDBF</color>
+    <color name="uncommon">#FFCF36</color>
+    <color name="rare">#BAEF64</color>
+    <color name="legendary">#FA664C</color>
+    <color name="mythic">#CB74EF</color>
+
+    <color name="normal">#B68B69</color>
+    <color name="crystal">#59D3E3</color>
+    <color name="gemstone">#E4489E</color>
 </resources>

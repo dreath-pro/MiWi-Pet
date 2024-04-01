@@ -10,16 +10,17 @@ public class PetModel {
      * age 5 = elder
      */
 
-    private String petName;
+    private String petName, rarity;
     private int petImage, age, type;
     private int maxExp;
     private int exp;
 
-    public PetModel(String petName, int petImage, int age, int type) {
+    public PetModel(String petName, int petImage, int age, int type, String rarity) {
         this.petName = petName;
         this.petImage = petImage;
         this.age = age;
         this.type = type;
+        this.rarity = rarity;
 
         maxExp = 50;
         exp = 0;
@@ -88,5 +89,13 @@ public class PetModel {
     public void setExp(int exp) {
         this.exp += exp;
         growAge();
+    }
+
+    public String getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(String rarity) {
+        this.rarity = rarity;
     }
 }

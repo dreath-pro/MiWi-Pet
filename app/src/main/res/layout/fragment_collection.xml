@@ -4,16 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#60A9DA"
+    android:background="#3B5668"
     tools:context=".fragments.CollectionFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Collection"
-        android:layout_gravity="center"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/petsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="@string/pets_button"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:backgroundTint="#59C17F"
+                android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:id="@+id/itemsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="@string/items_button"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:backgroundTint="#59C1AC"
+                android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:id="@+id/foodsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="@string/foods_button"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:backgroundTint="#84C159"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/petInventory"
+            android:layout_width="250dp"
+            android:layout_height="500dp"/>
+
+    </LinearLayout>
 
 </FrameLayout>
