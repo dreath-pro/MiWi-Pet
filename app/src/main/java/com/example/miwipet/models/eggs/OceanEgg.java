@@ -6,18 +6,19 @@ import com.example.miwipet.models.EggModel;
 public class OceanEgg extends EggModel {
     int[][] pets = {
             {R.drawable.fish, R.drawable.pufferfish, R.drawable.stingray, R.drawable.clownfish,
-                    R.drawable.squid},
+                    R.drawable.squid, R.drawable.clam},
 
 
-            {R.drawable.angelfish, R.drawable.jellyfish, R.drawable.starfish, R.drawable.lionfish,
-                    R.drawable.shrimp},
+            {R.drawable.angelfish, R.drawable.nautilus, R.drawable.starfish, R.drawable.lionfish,
+                    R.drawable.shrimp, R.drawable.crab},
 
 
-            {R.drawable.turtle, R.drawable.lobster, R.drawable.swordfish, R.drawable.nautilus,
-                    R.drawable.barracuda},
+            {R.drawable.turtle, R.drawable.lobster, R.drawable.swordfish, R.drawable.jellyfish,
+                    R.drawable.barracuda, R.drawable.flying_fish},
 
 
-            {R.drawable.tuna, R.drawable.shark, R.drawable.whale_shark, R.drawable.octopus},
+            {R.drawable.tuna, R.drawable.shark, R.drawable.whale_shark, R.drawable.octopus,
+                    R.drawable.dolphin, R.drawable.anglerfish},
 
 
             {R.drawable.space_whale, R.drawable.ghost_shark, R.drawable.hollow_squid,
@@ -25,13 +26,13 @@ public class OceanEgg extends EggModel {
     };
 
     String[][] petNames = {
-            {"Fish", "Puffer Fish", "Stingray", "Clownfish", "Squid"},
+            {"Fish", "Puffer Fish", "Stingray", "Clownfish", "Squid", "Clam"},
 
-            {"Angelfish", "Jellyfish", "Starfish", "Lionfish", "Shrimp"},
+            {"Angelfish", "Nautilus", "Starfish", "Lionfish", "Shrimp", "Crab"},
 
-            {"Turtle", "Lobster", "Swordfish", "Nautilus", "Barracuda"},
+            {"Turtle", "Lobster", "Swordfish", "Jellyfish", "Barracuda", "Flying Fish"},
 
-            {"Tuna", "Shark", "Whale Shark", "Octopus"},
+            {"Tuna", "Shark", "Whale Shark", "Octopus", "Dolphin", "Anglerfish"},
 
             {"Space Whale", "Ghost Shark", "Hollow Squid", "Goldfish"}
     };

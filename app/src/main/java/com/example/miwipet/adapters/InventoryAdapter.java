@@ -60,10 +60,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyVi
                 break;
         }
 
-        Random random = new Random();
-        int selectedType = random.nextInt(3);
-
-        switch (selectedType)
+        switch (petModels.get(position).getType())
         {
             case 0:
                 holder.petImageContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.normal));
@@ -75,19 +72,6 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyVi
                 holder.petImageContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.gemstone));
                 break;
         }
-
-//        switch (petModels.get(position).getType())
-//        {
-//            case 0:
-//                holder.petImageContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.normal));
-//                break;
-//            case 1:
-//
-//                break;
-//            case 2:
-//
-//                break;
-//        }
     }
 
     @Override

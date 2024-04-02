@@ -5,7 +5,8 @@ import com.example.miwipet.models.EggModel;
 
 public class FossilEgg extends EggModel {
     int[][] pets = {
-            {R.drawable.brachiosaurus, R.drawable.t_rex, R.drawable.smilodon, R.drawable.mammoth},
+            {R.drawable.brachiosaurus, R.drawable.t_rex, R.drawable.smilodon, R.drawable.mammoth,
+                    R.drawable.paraceratherium},
 
 
             {R.drawable.titanoboa, R.drawable.triceratops, R.drawable.spinosaurus,
@@ -17,22 +18,22 @@ public class FossilEgg extends EggModel {
 
 
             {R.drawable.pteranodon, R.drawable.mosasaurus, R.drawable.dunkleosteus,
-                    R.drawable.carnotaurus},
+                    R.drawable.carnotaurus, R.drawable.glyptodon},
 
 
-            {R.drawable.polymesh_rex, R.drawable.skeleton_t_rex, R.drawable.blazing_pteranodon}
+            {R.drawable.polymesh_rex, R.drawable.skeleton_t_rex, R.drawable.leviathan}
     };
 
     String[][] petNames = {
-            {"Brachiosaurus", "T-Rex", "Smilodon", "Mammoth"},
+            {"Brachiosaurus", "T-Rex", "Smilodon", "Mammoth", "Paraceratherium"},
 
             {"Titanoboa", "Triceratops", "Spinosaurus", "Parasaurolophus"},
 
             {"Ankylosaurus", "Stegosaurus", "Megalodon", "Amargasaurus", "Sarcosuchus"},
 
-            {"Pteranodon", "Mosasaurus", "Dunkleosteus", "Carnotaurus"},
+            {"Pteranodon", "Mosasaurus", "Dunkleosteus", "Carnotaurus", "Glyptodon"},
 
-            {"Polymesh Rex", "Skeleton T-Rex", "Blazing Pteranodon"}
+            {"Poly Rex", "Skeleton T-Rex", "Leviathan"}
     };
 
     public FossilEgg() {
