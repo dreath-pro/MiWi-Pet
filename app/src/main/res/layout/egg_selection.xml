@@ -29,7 +29,9 @@
 
             <TextView
                 android:id="@+id/eggName"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:layout_height="wrap_content"
                 android:text="@string/egg_name"
                 android:layout_centerInParent="true"
