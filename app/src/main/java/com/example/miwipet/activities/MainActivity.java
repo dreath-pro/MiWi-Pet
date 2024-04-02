@@ -29,6 +29,7 @@ import com.example.miwipet.fragments.TradeFragment;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.PetModel;
+import com.example.miwipet.models.eggs.ChristmasEgg;
 import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.FossilEgg;
 import com.example.miwipet.models.eggs.NormalEgg;
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private void generateEggs() {
         for (int i = 0; i <= 80; i++) {
             Random random = new Random();
-            int selectedEgg = random.nextInt(4);
+            int selectedEgg = random.nextInt(5);
 
             switch (selectedEgg) {
                 case 0:
@@ -87,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 3:
                     eggInventory.add(new FossilEgg());
+                    break;
+                case 4:
+                    eggInventory.add(new ChristmasEgg());
                     break;
             }
         }
@@ -163,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
+        Toast.makeText(this, "Hahaha posposi", Toast.LENGTH_SHORT).show();
     }
 
     private void replaceFragment(Fragment fragment) {

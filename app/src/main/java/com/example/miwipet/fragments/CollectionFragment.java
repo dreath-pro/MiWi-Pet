@@ -4,12 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 
 import com.example.miwipet.R;
 import com.example.miwipet.adapters.InventoryAdapter;
@@ -36,9 +38,11 @@ public class CollectionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_collection, container, false);
         petInventory = view.findViewById(R.id.petInventory);
 
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2);
+        petInventory.setLayoutManager(gridLayoutManager);
+
         InventoryAdapter inventoryAdapter = new InventoryAdapter(context, petModels);
         petInventory.setAdapter(inventoryAdapter);
-        petInventory.setLayoutManager(new LinearLayoutManager(context));
 
         return view;
     }
