@@ -34,6 +34,7 @@ import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.FossilEgg;
 import com.example.miwipet.models.eggs.NormalEgg;
 import com.example.miwipet.models.eggs.OceanEgg;
+import com.example.miwipet.utils.PetDatabase;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<EggModel> eggInventory = new ArrayList<>();
     private ArrayList<EggModel> incubated = new ArrayList<>();
     private InventoryModel inventoryModel = new InventoryModel();
+    private PetDatabase petDatabase = new PetDatabase(MainActivity.this);
 
     private void initializeComponents() {
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
         initializeComponents();
         generateEggs();
+        getPetFromDatabase();
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 MainActivity.this, drawerLayout, materialToolbar, R.string.drawer_close, R.string.drawer_open);
@@ -143,7 +146,9 @@ public class MainActivity extends AppCompatActivity {
                     eggImage.setImageResource(incubated.get(0).getPetImage());
                     petModel = new PetModel(incubated.get(0).getPetName(), incubated.get(0).getPetImage(),
                             incubated.get(0).getAge(), incubated.get(0).getType(), incubated.get(0).getRarityText());
-                    inventoryModel.addPetLists(petModel);
+
+                    petDatabase.addPet(petModel);
+                    getPetFromDatabase();
 
                     incubated.clear();
                 } else {
@@ -176,5 +181,17 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    private void getPetFromDatabase()
+    {
+        ArrayList<PetModel> petModels;
+        petModels = petDatabase.getPetList();
+
+        inventoryModel.clearPetLists();
+        for(PetModel pet : petModels)
+        {
+            inventoryModel.addPetLists(pet);
+        }
     }
 }

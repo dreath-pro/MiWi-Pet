@@ -46,10 +46,10 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyVi
             case "Common":
                 holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.common));
                 break;
-            case "Uncommon":
+            case "Rare":
                 holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.uncommon));
                 break;
-            case "Rare":
+            case "Ultra":
                 holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.rare));
                 break;
             case "Legendary":

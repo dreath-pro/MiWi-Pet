@@ -19,9 +19,12 @@ public class InventoryModel {
         petLists.add(pet);
     }
 
-    public void removePetLists(int idx)
-    {
+    public void removePetLists(int idx) {
         petLists.remove(idx);
+    }
+
+    public void clearPetLists() {
+        petLists.clear();
     }
 
     public ArrayList<EggModel> getEggLists() {
@@ -32,9 +35,13 @@ public class InventoryModel {
         eggLists.add(egg);
     }
 
-    public void removeEggLists(int idx)
-    {
+    public void removeEggLists(int idx) {
         eggLists.remove(idx);
+    }
+
+    public void clearEggList()
+    {
+        eggLists.clear();
     }
 
     public int getChipToken() {

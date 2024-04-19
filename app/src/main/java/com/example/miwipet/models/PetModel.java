@@ -26,6 +26,17 @@ public class PetModel {
         exp = 0;
     }
 
+    public PetModel(String petName, int petImage, int age, int type, String rarity, int maxExp, int exp)
+    {
+        this.petName = petName;
+        this.petImage = petImage;
+        this.age = age;
+        this.type = type;
+        this.rarity = rarity;
+        this.maxExp = maxExp;
+        this.exp = exp;
+    }
+
     private void growAge() {
         if(exp >= maxExp)
         {
