@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Toast.makeText(this, "Hahaha posposi", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Hahaha ni stop na jimhardcore", Toast.LENGTH_SHORT).show();
     }
 
     private void replaceFragment(Fragment fragment) {

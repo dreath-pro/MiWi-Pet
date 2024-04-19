@@ -10,14 +10,14 @@ public class FossilEgg extends EggModel {
 
 
             {R.drawable.titanoboa, R.drawable.triceratops, R.drawable.spinosaurus,
-                    R.drawable.parasaurolophus},
+                    R.drawable.parasaurolophus, R.drawable.megalodon},
 
 
-            {R.drawable.ankylosaurus, R.drawable.stegosaurus, R.drawable.megalodon,
+            {R.drawable.ankylosaurus, R.drawable.stegosaurus, R.drawable.mosasaurus,
                     R.drawable.amargasaurus, R.drawable.sarcosuchus},
 
 
-            {R.drawable.pteranodon, R.drawable.mosasaurus, R.drawable.dunkleosteus,
+            {R.drawable.pteranodon, R.drawable.dodo, R.drawable.dunkleosteus,
                     R.drawable.carnotaurus, R.drawable.glyptodon},
 
 
@@ -27,11 +27,11 @@ public class FossilEgg extends EggModel {
     String[][] petNames = {
             {"Brachiosaurus", "T-Rex", "Smilodon", "Mammoth", "Paraceratherium"},
 
-            {"Titanoboa", "Triceratops", "Spinosaurus", "Parasaurolophus"},
+            {"Titanoboa", "Triceratops", "Spinosaurus", "Parasaurolophus", "Megalodon"},
 
-            {"Ankylosaurus", "Stegosaurus", "Megalodon", "Amargasaurus", "Sarcosuchus"},
+            {"Ankylosaurus", "Stegosaurus", "Mosasaurus", "Amargasaurus", "Sarcosuchus"},
 
-            {"Pteranodon", "Mosasaurus", "Dunkleosteus", "Carnotaurus", "Glyptodon"},
+            {"Pteranodon", "Dodo", "Dunkleosteus", "Carnotaurus", "Glyptodon"},
 
             {"Poly Rex", "Skeleton T-Rex", "Leviathan"}
     };
