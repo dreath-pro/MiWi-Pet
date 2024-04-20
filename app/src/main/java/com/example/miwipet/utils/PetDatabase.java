@@ -13,15 +13,15 @@ import com.example.miwipet.models.PetModel;
 import java.util.ArrayList;
 
 public class PetDatabase extends SQLiteOpenHelper {
-    public static final String id = "id";
-    public static final String petTable = "pet_table";
-    public static final String image = "image";
-    public static final String name = "name";
-    public static final String rarity = "rarity";
-    public static final String age = "age";
-    public static final String type = "type";
-    public static final String maxExp = "max_exp";
-    public static final String exp = "exp";
+    private static final String id = "id";
+    private static final String petTable = "pet_table";
+    private static final String image = "image";
+    private static final String name = "name";
+    private static final String rarity = "rarity";
+    private static final String age = "age";
+    private static final String type = "type";
+    private static final String maxExp = "max_exp";
+    private static final String exp = "exp";
 
     public PetDatabase(@Nullable Context context) {
         super(context, "pet.db", null, 1);

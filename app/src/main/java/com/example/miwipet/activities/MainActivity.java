@@ -34,6 +34,7 @@ import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.FossilEgg;
 import com.example.miwipet.models.eggs.NormalEgg;
 import com.example.miwipet.models.eggs.OceanEgg;
+import com.example.miwipet.utils.CurrencyDatabase;
 import com.example.miwipet.utils.PetDatabase;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
@@ -59,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<EggModel> eggInventory = new ArrayList<>();
     private ArrayList<EggModel> incubated = new ArrayList<>();
     private InventoryModel inventoryModel = new InventoryModel();
+
     private PetDatabase petDatabase = new PetDatabase(MainActivity.this);
+    private CurrencyDatabase currencyDatabase = new CurrencyDatabase(MainActivity.this);
 
     private void initializeComponents() {
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -71,6 +74,24 @@ public class MainActivity extends AppCompatActivity {
         eggImage = findViewById(R.id.eggImage);
         timeText = findViewById(R.id.timeText);
         hatchButton = findViewById(R.id.hatchButton);
+    }
+
+    private void generateToken()
+    {
+        if(!currencyDatabase.doesDataExist())
+        {
+            currencyDatabase.generateTokens();
+        }
+        updateToken();
+    }
+
+    private void updateToken()
+    {
+        inventoryModel.setChipToken(currencyDatabase.getChipToken());
+        inventoryModel.setGlazeToken(currencyDatabase.getGlazeToken());
+
+        chipTokenValue.setText("" + inventoryModel.getChipToken());
+        glazeTokenValue.setText("" + inventoryModel.getGlazeToken());
     }
 
     private void generateEggs() {
@@ -105,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
         initializeComponents();
         generateEggs();
+        generateToken();
         getPetFromDatabase();
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -146,6 +168,29 @@ public class MainActivity extends AppCompatActivity {
                     eggImage.setImageResource(incubated.get(0).getPetImage());
                     petModel = new PetModel(incubated.get(0).getPetName(), incubated.get(0).getPetImage(),
                             incubated.get(0).getAge(), incubated.get(0).getType(), incubated.get(0).getRarityText());
+
+                    switch (petModel.getRarity())
+                    {
+                        case "Common":
+                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 10);
+                            break;
+                        case "Rare":
+                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 20);
+                            break;
+                        case "Ultra":
+                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 30);
+                            break;
+                        case "Legendary":
+                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 40);
+                            inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() + 10);
+                            break;
+                        case "Mythic":
+                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 50);
+                            inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() + 20);
+                            break;
+                    }
+                    currencyDatabase.updateToken(inventoryModel);
+                    updateToken();
 
                     petDatabase.addPet(petModel);
                     getPetFromDatabase();
