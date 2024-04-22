@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
 import com.example.miwipet.models.PetModel;
+import com.example.miwipet.utils.RarityNames;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -22,6 +23,7 @@ import java.util.Random;
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<PetModel> petModels;
+    private RarityNames rarityNames = new RarityNames();
 
     public InventoryAdapter(Context context, ArrayList<PetModel> petModels) {
         this.context = context;
@@ -41,23 +43,28 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyVi
         holder.petImage.setImageResource(petModels.get(position).getPetImage());
         holder.petName.setText(petModels.get(position).getPetName());
 
-        switch (petModels.get(position).getRarity())
+        String[] rarities = new String[]{
+                rarityNames.getRarity(0),
+                rarityNames.getRarity(1),
+                rarityNames.getRarity(2),
+                rarityNames.getRarity(3),
+                rarityNames.getRarity(4)};
+
+        if(petModels.get(position).getRarity().equals(rarities[0]))
         {
-            case "Common":
-                holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.common));
-                break;
-            case "Rare":
-                holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.uncommon));
-                break;
-            case "Ultra":
-                holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.rare));
-                break;
-            case "Legendary":
-                holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.legendary));
-                break;
-            case "Mythic":
-                holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.mythic));
-                break;
+            holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.common));
+        }else if(petModels.get(position).getRarity().equals(rarities[1]))
+        {
+            holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.uncommon));
+        }else if(petModels.get(position).getRarity().equals(rarities[2]))
+        {
+            holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.rare));
+        }else if(petModels.get(position).getRarity().equals(rarities[3]))
+        {
+            holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.legendary));
+        }else if(petModels.get(position).getRarity().equals(rarities[4]))
+        {
+            holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.mythic));
         }
 
         switch (petModels.get(position).getType())

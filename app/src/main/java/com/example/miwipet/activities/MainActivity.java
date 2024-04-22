@@ -36,6 +36,7 @@ import com.example.miwipet.models.eggs.NormalEgg;
 import com.example.miwipet.models.eggs.OceanEgg;
 import com.example.miwipet.utils.CurrencyDatabase;
 import com.example.miwipet.utils.PetDatabase;
+import com.example.miwipet.utils.RarityNames;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     private PetDatabase petDatabase = new PetDatabase(MainActivity.this);
     private CurrencyDatabase currencyDatabase = new CurrencyDatabase(MainActivity.this);
+    private RarityNames rarityNames = new RarityNames();
 
     private void initializeComponents() {
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -169,26 +171,32 @@ public class MainActivity extends AppCompatActivity {
                     petModel = new PetModel(incubated.get(0).getPetName(), incubated.get(0).getPetImage(),
                             incubated.get(0).getAge(), incubated.get(0).getType(), incubated.get(0).getRarityText());
 
-                    switch (petModel.getRarity())
+                    String[] rarities = new String[]{
+                            rarityNames.getRarity(0),
+                            rarityNames.getRarity(1),
+                            rarityNames.getRarity(2),
+                            rarityNames.getRarity(3),
+                            rarityNames.getRarity(4)};
+
+                    if(petModel.getRarity().equals(rarities[0]))
                     {
-                        case "Common":
-                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 10);
-                            break;
-                        case "Rare":
-                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 20);
-                            break;
-                        case "Ultra":
-                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 30);
-                            break;
-                        case "Legendary":
-                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 40);
-                            inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() + 10);
-                            break;
-                        case "Mythic":
-                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 50);
-                            inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() + 20);
-                            break;
+                        inventoryModel.setChipToken(inventoryModel.getChipToken() + 10);
+                    }else if(petModel.getRarity().equals(rarities[1]))
+                    {
+                        inventoryModel.setChipToken(inventoryModel.getChipToken() + 20);
+                    }else if(petModel.getRarity().equals(rarities[2]))
+                    {
+                        inventoryModel.setChipToken(inventoryModel.getChipToken() + 30);
+                    }else if(petModel.getRarity().equals(rarities[3]))
+                    {
+                        inventoryModel.setChipToken(inventoryModel.getChipToken() + 40);
+                        inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() + 10);
+                    }else if(petModel.getRarity().equals(rarities[4]))
+                    {
+                        inventoryModel.setChipToken(inventoryModel.getChipToken() + 50);
+                        inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() + 20);
                     }
+
                     currencyDatabase.updateToken(inventoryModel);
                     updateToken();
 
