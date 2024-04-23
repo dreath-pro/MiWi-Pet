@@ -38,7 +38,7 @@ public class ChristmasEgg extends EggModel {
     };
 
     public ChristmasEgg() {
-        super("Christmas Egg", R.drawable.egg_christmas, 0, 0, 2);
+        super("Christmas Egg", R.drawable.egg_christmas, 0, 0, 0, 0, 2);
         super.selectRarity(pets, petNames);
     }
 }

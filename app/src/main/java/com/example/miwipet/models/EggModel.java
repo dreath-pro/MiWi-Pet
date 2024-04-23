@@ -11,6 +11,7 @@ public class EggModel{
     private String petName;
     private int petImage;
     private int age, type;
+    private int chipPrice, glazePrice;
 
     private int second, minute, hour;
     private boolean toHatch;
@@ -18,9 +19,11 @@ public class EggModel{
     private String rarityText;
     private RarityNames rarityNames = new RarityNames();
 
-    public EggModel(String eggName, int eggImage, int second, int minute, int hour) {
+    public EggModel(String eggName, int eggImage, int chipPrice, int glazePrice, int second, int minute, int hour) {
         this.eggName = eggName;
         this.eggImage = eggImage;
+        this.chipPrice = chipPrice;
+        this.glazePrice = glazePrice;
         this.second = second;
         this.minute = minute;
         this.hour = hour;
@@ -117,6 +120,22 @@ public class EggModel{
 
     public void setPetImage(int petImage) {
         this.petImage = petImage;
+    }
+
+    public int getChipPrice() {
+        return chipPrice;
+    }
+
+    public void setChipPrice(int chipPrice) {
+        this.chipPrice = chipPrice;
+    }
+
+    public int getGlazePrice() {
+        return glazePrice;
+    }
+
+    public void setGlazePrice(int glazePrice) {
+        this.glazePrice = glazePrice;
     }
 
     public int getAge() {
