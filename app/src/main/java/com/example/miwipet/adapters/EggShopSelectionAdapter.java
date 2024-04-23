@@ -14,16 +14,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.eggs.ChristmasEgg;
+import com.example.miwipet.models.eggs.ForestEgg;
+import com.example.miwipet.models.eggs.FossilEgg;
+import com.example.miwipet.models.eggs.NormalEgg;
+import com.example.miwipet.models.eggs.OceanEgg;
 
 import java.util.ArrayList;
 
 public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelectionAdapter.MyViewHolder> {
     private Context context;
-    private ArrayList<EggModel> eggModels;
+    private ArrayList<EggModel> displayEggs, boughtEggs;
+    private TextView chipToken, glazeToken;
 
-    public EggShopSelectionAdapter(Context context, ArrayList<EggModel> eggModels) {
+    public EggShopSelectionAdapter(
+            Context context,
+            ArrayList<EggModel> displayEggs,
+            ArrayList<EggModel> boughtEggs,
+            TextView chipToken,
+            TextView glazeToken)
+    {
         this.context = context;
-        this.eggModels = eggModels;
+        this.displayEggs = displayEggs;
+        this.boughtEggs = boughtEggs;
+        this.chipToken = chipToken;
+        this.glazeToken = glazeToken;
     }
 
     @NonNull
@@ -36,22 +51,44 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
 
     @Override
     public void onBindViewHolder(@NonNull EggShopSelectionAdapter.MyViewHolder holder, int position) {
-        holder.eggImage.setImageResource(eggModels.get(position).getEggImage());
-        holder.eggName.setText(eggModels.get(position).getEggName());
-        holder.chipPrice.setText(eggModels.get(position).getChipPrice() + "");
-        holder.glazePrice.setText(eggModels.get(position).getGlazePrice() + "");
+        holder.eggImage.setImageResource(displayEggs.get(position).getEggImage());
+        holder.eggName.setText(displayEggs.get(position).getEggName());
+        holder.chipPrice.setText(displayEggs.get(position).getChipPrice() + "");
+        holder.glazePrice.setText(displayEggs.get(position).getGlazePrice() + "");
 
         holder.buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Haha Buy", Toast.LENGTH_SHORT).show();
+                switch (holder.eggName.getText().toString())
+                {
+                    case "Christmas Egg":
+                        boughtEggs.add(new ChristmasEgg());
+                        Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "Forest Egg":
+                        boughtEggs.add(new ForestEgg());
+                        Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "Fossil Egg":
+                        boughtEggs.add(new FossilEgg());
+                        Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "Normal Egg":
+                        boughtEggs.add(new NormalEgg());
+                        Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "Ocean Egg":
+                        boughtEggs.add(new OceanEgg());
+                        Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
+                        break;
+                }
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return eggModels.size();
+        return displayEggs.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     TextView timeText;
     Button hatchButton;
 
-    private ArrayList<EggModel> eggInventory = new ArrayList<>();
     private ArrayList<EggModel> incubated = new ArrayList<>();
     private InventoryModel inventoryModel = new InventoryModel();
 
@@ -96,38 +95,12 @@ public class MainActivity extends AppCompatActivity {
         glazeTokenValue.setText("" + inventoryModel.getGlazeToken());
     }
 
-    private void generateEggs() {
-        for (int i = 0; i <= 80; i++) {
-            Random random = new Random();
-            int selectedEgg = random.nextInt(5);
-
-            switch (selectedEgg) {
-                case 0:
-                    eggInventory.add(new NormalEgg());
-                    break;
-                case 1:
-                    eggInventory.add(new ForestEgg());
-                    break;
-                case 2:
-                    eggInventory.add(new OceanEgg());
-                    break;
-                case 3:
-                    eggInventory.add(new FossilEgg());
-                    break;
-                case 4:
-                    eggInventory.add(new ChristmasEgg());
-                    break;
-            }
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initializeComponents();
-        generateEggs();
         generateToken();
         getPetFromDatabase();
 
@@ -143,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.collection_nav) {
                     replaceFragment(new CollectionFragment(inventoryModel.getPetLists(), getApplicationContext()));
                 } else if (item.getItemId() == R.id.store_nav) {
-                    replaceFragment(new StoreFragment());
+                    replaceFragment(new StoreFragment(inventoryModel.getEggLists(), chipTokenValue, glazeTokenValue));
                 } else if (item.getItemId() == R.id.trade_nav) {
                     replaceFragment(new TradeFragment());
                 } else if (item.getItemId() == R.id.history_nav) {
@@ -214,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (incubated.isEmpty()) {
-                    replaceFragment(new EggFragment(eggInventory, incubated, eggImage));
+                    replaceFragment(new EggFragment(inventoryModel.getEggLists(), incubated, eggImage));
                 } else {
                     Toast.makeText(MainActivity.this, "Please hatch the egg first", Toast.LENGTH_SHORT).show();
                 }

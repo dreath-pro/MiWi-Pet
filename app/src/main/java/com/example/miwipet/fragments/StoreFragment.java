@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.miwipet.R;
 import com.example.miwipet.adapters.EggShopSelectionAdapter;
@@ -18,15 +19,27 @@ import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.eggs.ChristmasEgg;
 import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.FossilEgg;
+import com.example.miwipet.models.eggs.NormalEgg;
 import com.example.miwipet.models.eggs.OceanEgg;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class StoreFragment extends Fragment {
     private EggShopSelectionAdapter eggShopSelectionAdapter;
     private ArrayList<EggModel> eggModels = new ArrayList<>();
+    private ArrayList<EggModel> boughtEggs = new ArrayList<>();
     private RecyclerView eggShopSelection, itemShopSelection, foodShopSelection;
     private Context context;
+
+    private TextView chipToken, glazeToken;
+
+    public StoreFragment(ArrayList<EggModel> boughtEggs, TextView chipToken,TextView glazeToken)
+    {
+        this.boughtEggs = boughtEggs;
+        this.chipToken = chipToken;
+        this.glazeToken = glazeToken;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,17 +50,30 @@ public class StoreFragment extends Fragment {
         itemShopSelection = view.findViewById(R.id.itemShopSelection);
         foodShopSelection = view.findViewById(R.id.foodShopSelection);
 
-        eggModels.add(new ChristmasEgg());
-        eggModels.add(new FossilEgg());
-        eggModels.add(new OceanEgg());
-        eggModels.add(new ForestEgg());
-        eggModels.add(new OceanEgg());
-        eggModels.add(new OceanEgg());
-        eggModels.add(new ChristmasEgg());
-        eggModels.add(new ForestEgg());
-        eggModels.add(new ForestEgg());
+        for (int i = 0; i <= 20; i++) {
+            Random random = new Random();
+            int selectedEgg = random.nextInt(5);
 
-        eggShopSelectionAdapter = new EggShopSelectionAdapter(context, eggModels);
+            switch (selectedEgg) {
+                case 0:
+                    eggModels.add(new NormalEgg());
+                    break;
+                case 1:
+                    eggModels.add(new ForestEgg());
+                    break;
+                case 2:
+                    eggModels.add(new OceanEgg());
+                    break;
+                case 3:
+                    eggModels.add(new FossilEgg());
+                    break;
+                case 4:
+                    eggModels.add(new ChristmasEgg());
+                    break;
+            }
+        }
+
+        eggShopSelectionAdapter = new EggShopSelectionAdapter(context, eggModels, boughtEggs, chipToken, glazeToken);
         eggShopSelection.setAdapter(eggShopSelectionAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         eggShopSelection.setLayoutManager(layoutManager);
