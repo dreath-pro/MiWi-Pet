@@ -68,23 +68,18 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
                     switch (holder.eggName.getText().toString()) {
                         case "Christmas Egg":
                             inventoryModel.addEggLists(new ChristmasEgg());
-                            Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
                             break;
                         case "Forest Egg":
                             inventoryModel.addEggLists(new ForestEgg());
-                            Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
                             break;
                         case "Fossil Egg":
                             inventoryModel.addEggLists(new FossilEgg());
-                            Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
                             break;
                         case "Normal Egg":
                             inventoryModel.addEggLists(new NormalEgg());
-                            Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
                             break;
                         case "Ocean Egg":
                             inventoryModel.addEggLists(new OceanEgg());
-                            Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
                             break;
                     }
 
@@ -97,8 +92,6 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
                     chipToken.setText(inventoryModel.getChipToken() + "");
                     glazeToken.setText(inventoryModel.getGlazeToken() + "");
 
-                } else {
-                    Toast.makeText(context, "Insufficient Tokens", Toast.LENGTH_SHORT).show();
                 }
             }
         });

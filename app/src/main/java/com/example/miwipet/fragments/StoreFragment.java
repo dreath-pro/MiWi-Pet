@@ -53,7 +53,7 @@ public class StoreFragment extends Fragment {
 
         for (int i = 0; i <= 20; i++) {
             Random random = new Random();
-            int selectedEgg = random.nextInt(5);
+            int selectedEgg = random.nextInt(3);
 
             switch (selectedEgg) {
                 case 0:
@@ -65,13 +65,14 @@ public class StoreFragment extends Fragment {
                 case 2:
                     eggModels.add(new OceanEgg());
                     break;
-                case 3:
-                    eggModels.add(new FossilEgg());
-                    break;
-                case 4:
-                    eggModels.add(new ChristmasEgg());
-                    break;
             }
+
+//            case 3:
+//                eggModels.add(new FossilEgg());
+//                break;
+//            case 4:
+//                eggModels.add(new ChristmasEgg());
+//                break;
         }
 
         eggShopSelectionAdapter = new EggShopSelectionAdapter(context, eggModels, chipToken, glazeToken, inventoryModels);

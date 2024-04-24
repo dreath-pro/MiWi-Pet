@@ -82,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
         if(!currencyDatabase.doesDataExist())
         {
             currencyDatabase.generateTokens();
+
+            inventoryModel.setChipToken(10);
+            currencyDatabase.updateToken(inventoryModel);
         }
         updateToken();
     }
