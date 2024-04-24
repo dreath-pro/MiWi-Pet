@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.miwipet.R;
 import com.example.miwipet.adapters.EggShopSelectionAdapter;
 import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.eggs.ChristmasEgg;
 import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.FossilEgg;
@@ -28,15 +29,15 @@ import java.util.Random;
 public class StoreFragment extends Fragment {
     private EggShopSelectionAdapter eggShopSelectionAdapter;
     private ArrayList<EggModel> eggModels = new ArrayList<>();
-    private ArrayList<EggModel> boughtEggs = new ArrayList<>();
+    private InventoryModel inventoryModels;
     private RecyclerView eggShopSelection, itemShopSelection, foodShopSelection;
     private Context context;
 
     private TextView chipToken, glazeToken;
 
-    public StoreFragment(ArrayList<EggModel> boughtEggs, TextView chipToken,TextView glazeToken)
+    public StoreFragment(InventoryModel inventoryModels, TextView chipToken, TextView glazeToken)
     {
-        this.boughtEggs = boughtEggs;
+        this.inventoryModels = inventoryModels;
         this.chipToken = chipToken;
         this.glazeToken = glazeToken;
     }
@@ -73,7 +74,7 @@ public class StoreFragment extends Fragment {
             }
         }
 
-        eggShopSelectionAdapter = new EggShopSelectionAdapter(context, eggModels, boughtEggs, chipToken, glazeToken);
+        eggShopSelectionAdapter = new EggShopSelectionAdapter(context, eggModels, chipToken, glazeToken, inventoryModels);
         eggShopSelection.setAdapter(eggShopSelectionAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         eggShopSelection.setLayoutManager(layoutManager);

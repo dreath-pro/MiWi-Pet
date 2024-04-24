@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.eggs.ChristmasEgg;
 import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.FossilEgg;
@@ -24,21 +25,21 @@ import java.util.ArrayList;
 
 public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelectionAdapter.MyViewHolder> {
     private Context context;
-    private ArrayList<EggModel> displayEggs, boughtEggs;
+    private ArrayList<EggModel> displayEggs;
+    private InventoryModel inventoryModel;
     private TextView chipToken, glazeToken;
 
     public EggShopSelectionAdapter(
             Context context,
             ArrayList<EggModel> displayEggs,
-            ArrayList<EggModel> boughtEggs,
             TextView chipToken,
-            TextView glazeToken)
-    {
+            TextView glazeToken,
+            InventoryModel inventoryModel) {
         this.context = context;
         this.displayEggs = displayEggs;
-        this.boughtEggs = boughtEggs;
         this.chipToken = chipToken;
         this.glazeToken = glazeToken;
+        this.inventoryModel = inventoryModel;
     }
 
     @NonNull
@@ -59,28 +60,45 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
         holder.buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (holder.eggName.getText().toString())
-                {
-                    case "Christmas Egg":
-                        boughtEggs.add(new ChristmasEgg());
-                        Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
-                        break;
-                    case "Forest Egg":
-                        boughtEggs.add(new ForestEgg());
-                        Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
-                        break;
-                    case "Fossil Egg":
-                        boughtEggs.add(new FossilEgg());
-                        Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
-                        break;
-                    case "Normal Egg":
-                        boughtEggs.add(new NormalEgg());
-                        Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
-                        break;
-                    case "Ocean Egg":
-                        boughtEggs.add(new OceanEgg());
-                        Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
-                        break;
+                if (inventoryModel.getChipToken() >=
+                        displayEggs.get(holder.getAdapterPosition()).getChipPrice() &&
+                        inventoryModel.getGlazeToken() >=
+                                displayEggs.get(holder.getAdapterPosition()).getGlazePrice()) {
+
+                    switch (holder.eggName.getText().toString()) {
+                        case "Christmas Egg":
+                            inventoryModel.addEggLists(new ChristmasEgg());
+                            Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "Forest Egg":
+                            inventoryModel.addEggLists(new ForestEgg());
+                            Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "Fossil Egg":
+                            inventoryModel.addEggLists(new FossilEgg());
+                            Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "Normal Egg":
+                            inventoryModel.addEggLists(new NormalEgg());
+                            Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "Ocean Egg":
+                            inventoryModel.addEggLists(new OceanEgg());
+                            Toast.makeText(context, "Successfully Purchased!", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+
+                    inventoryModel.setChipToken(inventoryModel.getChipToken() -
+                            displayEggs.get(holder.getAdapterPosition()).getChipPrice());
+
+                    inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() -
+                            displayEggs.get(holder.getAdapterPosition()).getGlazePrice());
+
+                    chipToken.setText(inventoryModel.getChipToken() + "");
+                    glazeToken.setText(inventoryModel.getGlazeToken() + "");
+
+                } else {
+                    Toast.makeText(context, "Insufficient Tokens", Toast.LENGTH_SHORT).show();
                 }
             }
         });

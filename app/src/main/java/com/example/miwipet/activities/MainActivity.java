@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.collection_nav) {
                     replaceFragment(new CollectionFragment(inventoryModel.getPetLists(), getApplicationContext()));
                 } else if (item.getItemId() == R.id.store_nav) {
-                    replaceFragment(new StoreFragment(inventoryModel.getEggLists(), chipTokenValue, glazeTokenValue));
+                    replaceFragment(new StoreFragment(inventoryModel, chipTokenValue, glazeTokenValue));
                 } else if (item.getItemId() == R.id.trade_nav) {
                     replaceFragment(new TradeFragment());
                 } else if (item.getItemId() == R.id.history_nav) {
