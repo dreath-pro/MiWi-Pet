@@ -30,19 +30,19 @@ public class EggModel{
 
         age = 0;
         type = 0;
-//        int selectedType = random.nextInt(3);
-//        switch (selectedType)
-//        {
-//            case 0:
-//                type = 0;
-//                break;
-//            case 1:
-//                type = 1;
-//                break;
-//            case 2:
-//                type = 2;
-//                break;
-//        }
+        int selectedType = random.nextInt(3);
+        switch (selectedType)
+        {
+            case 0:
+                type = 0;
+                break;
+            case 1:
+                type = 1;
+                break;
+            case 2:
+                type = 2;
+                break;
+        }
 
         toHatch = false;
     }

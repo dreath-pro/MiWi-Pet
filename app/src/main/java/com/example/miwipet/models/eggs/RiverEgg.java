@@ -11,10 +11,10 @@ public class RiverEgg extends EggModel {
             {R.drawable.salmon, R.drawable.goose, R.drawable.capybara, R.drawable.hippo, R.drawable.salamander},
 
 
-            {R.drawable.swan, R.drawable.turtle, R.drawable.electric_eel, R.drawable.crocodile, R.drawable.koi},
+            {R.drawable.swan, R.drawable.turtle, R.drawable.electric_eel, R.drawable.piranha, R.drawable.koi},
 
 
-            {R.drawable.catfish, R.drawable.pink_dolphin, R.drawable.axolotl, R.drawable.bull_shark},
+            {R.drawable.catfish, R.drawable.pink_dolphin, R.drawable.axolotl, R.drawable.bull_shark, R.drawable.crocodile},
 
 
             {R.drawable.ancient_turtle, R.drawable.majestic_koi}
@@ -25,9 +25,9 @@ public class RiverEgg extends EggModel {
 
             {"Salmon", "Goose", "Capybara", "Hippo", "Salamander"},
 
-            {"Swan", "Turtle", "Electric Eel", "Crocodile", "Koi"},
+            {"Swan", "Turtle", "Electric Eel", "Piranha", "Koi"},
 
-            {"Catfish", "Pink Dolphin", "Axolotl", "Bull Shark"},
+            {"Catfish", "Pink Dolphin", "Axolotl", "Bull Shark", "Crocodile"},
 
             {"Ancient Turtle", "Majestic Koi"}
     };
