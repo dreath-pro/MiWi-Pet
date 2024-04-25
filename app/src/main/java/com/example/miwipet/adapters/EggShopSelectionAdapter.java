@@ -20,6 +20,7 @@ import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.FossilEgg;
 import com.example.miwipet.models.eggs.NormalEgg;
 import com.example.miwipet.models.eggs.OceanEgg;
+import com.example.miwipet.models.eggs.RiverEgg;
 
 import java.util.ArrayList;
 
@@ -80,6 +81,9 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
                             break;
                         case "Ocean Egg":
                             inventoryModel.addEggLists(new OceanEgg());
+                            break;
+                        case "River Egg":
+                            inventoryModel.addEggLists(new RiverEgg());
                             break;
                     }
 

@@ -13,7 +13,7 @@ public class OceanEgg extends EggModel {
                     R.drawable.shrimp, R.drawable.crab},
 
 
-            {R.drawable.turtle, R.drawable.lobster, R.drawable.swordfish, R.drawable.jellyfish,
+            {R.drawable.sea_turtle, R.drawable.lobster, R.drawable.swordfish, R.drawable.jellyfish,
                     R.drawable.barracuda, R.drawable.flying_fish},
 
 
@@ -30,7 +30,7 @@ public class OceanEgg extends EggModel {
 
             {"Angelfish", "Nautilus", "Starfish", "Lionfish", "Shrimp", "Crab"},
 
-            {"Turtle", "Lobster", "Swordfish", "Jellyfish", "Barracuda", "Flying Fish"},
+            {"Sea Turtle", "Lobster", "Swordfish", "Jellyfish", "Barracuda", "Flying Fish"},
 
             {"Tuna", "Shark", "Whale Shark", "Octopus", "Dolphin", "Anglerfish"},
 

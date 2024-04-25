@@ -5,11 +5,11 @@ import com.example.miwipet.models.EggModel;
 
 public class ForestEgg extends EggModel {
     int[][] pets = {
-            {R.drawable.bat, R.drawable.beaver, R.drawable.snake, R.drawable.spider,
+            {R.drawable.bat, R.drawable.beaver, R.drawable.panther, R.drawable.spider,
                     R.drawable.squirrel, R.drawable.woodpecker},
 
 
-            {R.drawable.owl, R.drawable.monkey, R.drawable.deer, R.drawable.panther},
+            {R.drawable.owl, R.drawable.monkey, R.drawable.deer, R.drawable.snake},
 
 
             {R.drawable.bear, R.drawable.gorilla, R.drawable.moose, R.drawable.sloth},
@@ -22,9 +22,9 @@ public class ForestEgg extends EggModel {
     };
 
     String[][] petNames = {
-            {"Bat", "Beaver", "Snake", "Spider", "Squirrel", "Woodpecker"},
+            {"Bat", "Beaver", "Panther", "Spider", "Squirrel", "Woodpecker"},
 
-            {"Owl", "Monkey", "Deer", "Panther"},
+            {"Owl", "Monkey", "Deer", "Snake"},
 
             {"Bear", "Gorilla", "Moose", "Sloth"},
 

@@ -22,6 +22,7 @@ import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.FossilEgg;
 import com.example.miwipet.models.eggs.NormalEgg;
 import com.example.miwipet.models.eggs.OceanEgg;
+import com.example.miwipet.models.eggs.RiverEgg;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -35,8 +36,7 @@ public class StoreFragment extends Fragment {
 
     private TextView chipToken, glazeToken;
 
-    public StoreFragment(InventoryModel inventoryModels, TextView chipToken, TextView glazeToken)
-    {
+    public StoreFragment(InventoryModel inventoryModels, TextView chipToken, TextView glazeToken) {
         this.inventoryModels = inventoryModels;
         this.chipToken = chipToken;
         this.glazeToken = glazeToken;
@@ -51,9 +51,9 @@ public class StoreFragment extends Fragment {
         itemShopSelection = view.findViewById(R.id.itemShopSelection);
         foodShopSelection = view.findViewById(R.id.foodShopSelection);
 
-        for (int i = 0; i <= 20; i++) {
+        for (int i = 0; i <= 80; i++) {
             Random random = new Random();
-            int selectedEgg = random.nextInt(3);
+            int selectedEgg = random.nextInt(6);
 
             switch (selectedEgg) {
                 case 0:
@@ -64,6 +64,15 @@ public class StoreFragment extends Fragment {
                     break;
                 case 2:
                     eggModels.add(new OceanEgg());
+                    break;
+                case 3:
+                    eggModels.add(new FossilEgg());
+                    break;
+                case 4:
+                    eggModels.add(new ChristmasEgg());
+                    break;
+                case 5:
+                    eggModels.add(new RiverEgg());
                     break;
             }
 
@@ -84,8 +93,7 @@ public class StoreFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(@NonNull Context context)
-    {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         this.context = context;
     }
