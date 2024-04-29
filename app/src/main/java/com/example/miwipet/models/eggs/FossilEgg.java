@@ -13,7 +13,7 @@ public class FossilEgg extends EggModel {
                     R.drawable.parasaurolophus, R.drawable.megalodon},
 
 
-            {R.drawable.ankylosaurus, R.drawable.stegosaurus, R.drawable.mosasaurus,
+            {R.drawable.ankylosaurus, R.drawable.stegosaurus, R.drawable.plesiosaurus,
                     R.drawable.amargasaurus, R.drawable.sarcosuchus},
 
 
@@ -29,7 +29,7 @@ public class FossilEgg extends EggModel {
 
             {"Titanoboa", "Triceratops", "Spinosaurus", "Parasaurolophus", "Megalodon"},
 
-            {"Ankylosaurus", "Stegosaurus", "Mosasaurus", "Amargasaurus", "Sarcosuchus"},
+            {"Ankylosaurus", "Stegosaurus", "Plesiosaurus", "Amargasaurus", "Sarcosuchus"},
 
             {"Pteranodon", "Dodo", "Dunkleosteus", "Carnotaurus", "Glyptodon"},
 
