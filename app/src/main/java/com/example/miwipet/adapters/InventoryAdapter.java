@@ -92,7 +92,6 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyVi
         ImageView petImage = dialog.findViewById(R.id.petImage);
         TextView petName = dialog.findViewById(R.id.petName),
                 progressDetail = dialog.findViewById(R.id.progressDetail),
-                name = dialog.findViewById(R.id.name),
                 rarity = dialog.findViewById(R.id.rarity),
                 age = dialog.findViewById(R.id.age),
                 type = dialog.findViewById(R.id.type);
@@ -104,7 +103,6 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyVi
         petName.setText(petModels.get(holder.getAdapterPosition()).getPetName());
         progressDetail.setText(petModels.get(holder.getAdapterPosition()).getExp() + "/" +
                 petModels.get(holder.getAdapterPosition()).getMaxExp());
-        name.setText(petModels.get(holder.getAdapterPosition()).getPetName());
         rarity.setText(petModels.get(holder.getAdapterPosition()).getRarity());
         age.setText(petModels.get(holder.getAdapterPosition()).ageToString() + "");
         type.setText(petModels.get(holder.getAdapterPosition()).typeToString() + "");
