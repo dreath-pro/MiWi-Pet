@@ -1,8 +1,7 @@
 package com.example.miwipet.models;
 
-import com.example.miwipet.utils.RarityNames;
+import com.example.miwipet.utils.Rarity;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class EggModel{
@@ -17,7 +16,7 @@ public class EggModel{
     private boolean toHatch;
     private Random random = new Random();
     private String rarityText;
-    private RarityNames rarityNames = new RarityNames();
+    private Rarity rarity = new Rarity();
 
     public EggModel(String eggName, int eggImage, int chipPrice, int glazePrice, int second, int minute, int hour) {
         this.eggName = eggName;
@@ -58,35 +57,35 @@ public class EggModel{
             this.petImage = petImage[4][selectedPet];
             this.petName = petNames[4][selectedPet];
 
-            rarityText = rarityNames.getRarity(4);
+            rarityText = rarity.getRarity(4);
         }else if(selectedRarity <= 10)
         {
             selectedPet = random.nextInt(petImage[3].length);
             this.petImage = petImage[3][selectedPet];
             this.petName = petNames[3][selectedPet];
 
-            rarityText = rarityNames.getRarity(3);
+            rarityText = rarity.getRarity(3);
         }else if(selectedRarity <= 25)
         {
             selectedPet = random.nextInt(petImage[2].length);
             this.petImage = petImage[2][selectedPet];
             this.petName = petNames[2][selectedPet];
 
-            rarityText = rarityNames.getRarity(2);
+            rarityText = rarity.getRarity(2);
         }else if(selectedRarity <= 60)
         {
             selectedPet = random.nextInt(petImage[1].length);
             this.petImage = petImage[1][selectedPet];
             this.petName = petNames[1][selectedPet];
 
-            rarityText = rarityNames.getRarity(1);
+            rarityText = rarity.getRarity(1);
         }else
         {
             selectedPet = random.nextInt(petImage[0].length);
             this.petImage = petImage[0][selectedPet];
             this.petName = petNames[0][selectedPet];
 
-            rarityText = rarityNames.getRarity(0);
+            rarityText = rarity.getRarity(0);
         }
     }
 

@@ -29,19 +29,13 @@ import com.example.miwipet.fragments.TradeFragment;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.PetModel;
-import com.example.miwipet.models.eggs.ChristmasEgg;
-import com.example.miwipet.models.eggs.ForestEgg;
-import com.example.miwipet.models.eggs.FossilEgg;
-import com.example.miwipet.models.eggs.NormalEgg;
-import com.example.miwipet.models.eggs.OceanEgg;
 import com.example.miwipet.utils.CurrencyDatabase;
 import com.example.miwipet.utils.PetDatabase;
-import com.example.miwipet.utils.RarityNames;
+import com.example.miwipet.utils.Rarity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 //egg hatch, logo, simple
 //parasaurolophus, 3d render, full body view, white background, simplistic kiddy design, cute
@@ -63,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     private PetDatabase petDatabase = new PetDatabase(MainActivity.this);
     private CurrencyDatabase currencyDatabase = new CurrencyDatabase(MainActivity.this);
-    private RarityNames rarityNames = new RarityNames();
+    private Rarity rarity = new Rarity();
 
     private void initializeComponents() {
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -148,11 +142,11 @@ public class MainActivity extends AppCompatActivity {
                             incubated.get(0).getAge(), incubated.get(0).getType(), incubated.get(0).getRarityText());
 
                     String[] rarities = new String[]{
-                            rarityNames.getRarity(0),
-                            rarityNames.getRarity(1),
-                            rarityNames.getRarity(2),
-                            rarityNames.getRarity(3),
-                            rarityNames.getRarity(4)};
+                            rarity.getRarity(0),
+                            rarity.getRarity(1),
+                            rarity.getRarity(2),
+                            rarity.getRarity(3),
+                            rarity.getRarity(4)};
 
                     if(petModel.getRarity().equals(rarities[0]))
                     {

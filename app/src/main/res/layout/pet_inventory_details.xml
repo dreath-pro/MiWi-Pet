@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:paddingBottom="30dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:background="#94BACC">
+
+        <ImageView
+            android:id="@+id/petImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/angelfish"
+            android:background="#CDEDF3"/>
+
+        <TextView
+            android:id="@+id/petName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Angel Fish"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp">
+
+            <ProgressBar
+                android:id="@+id/expBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:max="100"
+                android:progress="40"
+                android:progressDrawable="@drawable/custom_exp_bar"
+                android:layout_centerInParent="true"/>
+
+            <TextView
+                android:id="@+id/progressDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="40/100"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/namePage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/nameDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name: "
+                android:textSize="25dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Angel Fish"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/nameDescription"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rarityPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/rarityDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rarity: "
+                android:textSize="25dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/rarity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Common"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/rarityDescription"/>
+
+            <ImageView
+                android:id="@+id/rarityColor"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_toEndOf="@+id/rarity"
+                android:layout_marginStart="5dp"
+                android:layout_centerInParent="true"
+                android:background="@color/common"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/agePage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/ageDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age: "
+                android:textSize="25dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Newborn"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/ageDescription"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/typePage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/typeDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type: "
+                android:textSize="25dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Normal"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/typeDescription"/>
+
+            <ImageView
+                android:id="@+id/typeColor"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_toEndOf="@+id/type"
+                android:layout_marginStart="5dp"
+                android:layout_centerInParent="true"
+                android:background="@color/normal"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

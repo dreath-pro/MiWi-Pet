@@ -41,7 +41,7 @@ public class CollectionFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2);
         petInventory.setLayoutManager(gridLayoutManager);
 
-        InventoryAdapter inventoryAdapter = new InventoryAdapter(context, petModels);
+        InventoryAdapter inventoryAdapter = new InventoryAdapter(getActivity(), petModels);
         petInventory.setAdapter(inventoryAdapter);
 
         return view;
