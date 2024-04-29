@@ -53,20 +53,8 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyVi
     public void onBindViewHolder(@NonNull InventoryAdapter.MyViewHolder holder, int position) {
         holder.petImage.setImageResource(petModels.get(position).getPetImage());
         holder.petName.setText(petModels.get(position).getPetName());
-
-        if (petModels.get(position).getRarity().equals(rarities[0])) {
-            holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, rarity.getRarityColor(0)));
-        } else if (petModels.get(position).getRarity().equals(rarities[1])) {
-            holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, rarity.getRarityColor(1)));
-        } else if (petModels.get(position).getRarity().equals(rarities[2])) {
-            holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, rarity.getRarityColor(2)));
-        } else if (petModels.get(position).getRarity().equals(rarities[3])) {
-            holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, rarity.getRarityColor(3)));
-        } else if (petModels.get(position).getRarity().equals(rarities[4])) {
-            holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, rarity.getRarityColor(4)));
-        }
-
-        holder.petImageContainer.setBackgroundColor(ContextCompat.getColor(context, rarity.getTypeColor(petModels.get(position).getType())));
+        holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, petModels.get(position).getRarityColor()));
+        holder.petImageContainer.setBackgroundColor(ContextCompat.getColor(context, petModels.get(position).getTypeColor()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,24 +106,13 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyVi
                 petModels.get(holder.getAdapterPosition()).getMaxExp());
         name.setText(petModels.get(holder.getAdapterPosition()).getPetName());
         rarity.setText(petModels.get(holder.getAdapterPosition()).getRarity());
-        age.setText(petModels.get(holder.getAdapterPosition()).getAge() + "");
-        type.setText(petModels.get(holder.getAdapterPosition()).getType() + "");
+        age.setText(petModels.get(holder.getAdapterPosition()).ageToString() + "");
+        type.setText(petModels.get(holder.getAdapterPosition()).typeToString() + "");
         expBar.setMax(petModels.get(holder.getAdapterPosition()).getMaxExp());
         expBar.setProgress(petModels.get(holder.getAdapterPosition()).getExp());
 
-        if (petModels.get(holder.getAdapterPosition()).getRarity().equals(rarities[0])) {
-            rarityColor.setBackgroundColor(ContextCompat.getColor(context, this.rarity.getRarityColor(0)));
-        } else if (petModels.get(holder.getAdapterPosition()).getRarity().equals(rarities[1])) {
-            rarityColor.setBackgroundColor(ContextCompat.getColor(context, this.rarity.getRarityColor(1)));
-        } else if (petModels.get(holder.getAdapterPosition()).getRarity().equals(rarities[2])) {
-            rarityColor.setBackgroundColor(ContextCompat.getColor(context, this.rarity.getRarityColor(2)));
-        } else if (petModels.get(holder.getAdapterPosition()).getRarity().equals(rarities[3])) {
-            rarityColor.setBackgroundColor(ContextCompat.getColor(context, this.rarity.getRarityColor(3)));
-        } else if (petModels.get(holder.getAdapterPosition()).getRarity().equals(rarities[4])) {
-            rarityColor.setBackgroundColor(ContextCompat.getColor(context, this.rarity.getRarityColor(4)));
-        }
-
-        typeColor.setBackgroundColor(ContextCompat.getColor(context, this.rarity.getTypeColor(petModels.get(holder.getAdapterPosition()).getType())));
+        rarityColor.setBackgroundColor(ContextCompat.getColor(context, petModels.get(holder.getAdapterPosition()).getRarityColor()));
+        typeColor.setBackgroundColor(ContextCompat.getColor(context, petModels.get(holder.getAdapterPosition()).getTypeColor()));
 
         dialog.show();
     }

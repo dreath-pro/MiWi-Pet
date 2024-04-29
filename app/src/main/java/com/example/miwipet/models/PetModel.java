@@ -1,19 +1,24 @@
 package com.example.miwipet.models;
 
-public class PetModel {
-    /**
-     * age 0 = newborn
-     * age 1 = juvenile
-     * age 2 = teen
-     * age 3 = young adult
-     * age 4 = adult
-     * age 5 = elder
-     */
+import com.example.miwipet.R;
+import com.example.miwipet.utils.Rarity;
 
+public class PetModel {
     private String petName, rarity;
     private int petImage, age, type;
     private int maxExp;
     private int exp;
+
+    private Rarity rarityClass = new Rarity();
+    private String[] rarities = new String[]{
+            rarityClass.getRarity(0),
+            rarityClass.getRarity(1),
+            rarityClass.getRarity(2),
+            rarityClass.getRarity(3),
+            rarityClass.getRarity(4)};
+    private int[] rarityColors = new int[]{R.color.common, R.color.rare, R.color.ultra,
+            R.color.legendary, R.color.mythic};
+    private int[] typeColors = new int[]{R.color.normal, R.color.crystal, R.color.gemstone};
 
     public PetModel(String petName, int petImage, int age, int type, String rarity) {
         this.petName = petName;
@@ -26,8 +31,7 @@ public class PetModel {
         exp = 0;
     }
 
-    public PetModel(String petName, int petImage, int age, int type, String rarity, int maxExp, int exp)
-    {
+    public PetModel(String petName, int petImage, int age, int type, String rarity, int maxExp, int exp) {
         this.petName = petName;
         this.petImage = petImage;
         this.age = age;
@@ -37,20 +41,88 @@ public class PetModel {
         this.exp = exp;
     }
 
-    private void growAge() {
-        if(exp >= maxExp)
-        {
-            age += 1;
-            exp -= maxExp;
-            maxExp *= 2;
+    public int rarityToInt() {
+        int number = 0;
 
-            while(exp >= maxExp)
-            {
+        if (getRarity().equals(rarities[0])) {
+            number = 0;
+        } else if (getRarity().equals(rarities[1])) {
+            number = 1;
+        } else if (getRarity().equals(rarities[2])) {
+            number = 2;
+        } else if (getRarity().equals(rarities[3])) {
+            number = 3;
+        } else if (getRarity().equals(rarities[4])) {
+            number = 4;
+        }
+
+        return number;
+    }
+
+    public String typeToString() {
+        String text = "";
+
+        switch (getType())
+        {
+            case 0:
+                text = "Normal";
+                break;
+            case 1:
+                text = "Crystal";
+                break;
+            case 2:
+                text = "Gemstone";
+                break;
+        }
+
+        return text;
+    }
+
+    public String ageToString() {
+        String text = "";
+
+        switch (getAge())
+        {
+            case 0:
+                text = "Offspring";
+                break;
+            case 1:
+                text = "Baby";
+                break;
+            case 2:
+                text = "Teen";
+                break;
+            case 3:
+                text = "Adult";
+                break;
+        }
+
+        return text;
+    }
+
+    private void growAge() {
+        if(age <= 3)
+        {
+            if (exp >= maxExp) {
                 age += 1;
                 exp -= maxExp;
                 maxExp *= 2;
+
+                while (exp >= maxExp) {
+                    age += 1;
+                    exp -= maxExp;
+                    maxExp *= 2;
+                }
             }
         }
+    }
+
+    public int getRarityColor() {
+        return rarityColors[rarityToInt()];
+    }
+
+    public int getTypeColor() {
+        return typeColors[getType()];
     }
 
     public String getPetName() {

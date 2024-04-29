@@ -5,8 +5,8 @@
 
 <!--    rarity and type colors-->
     <color name="common">#E6CDBF</color>
-    <color name="uncommon">#FFCF36</color>
-    <color name="rare">#BAEF64</color>
+    <color name="rare">#FFCF36</color>
+    <color name="ultra">#BAEF64</color>
     <color name="legendary">#FA664C</color>
     <color name="mythic">#CB74EF</color>
 
