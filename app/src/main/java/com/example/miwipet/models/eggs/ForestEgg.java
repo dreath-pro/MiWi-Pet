@@ -5,32 +5,34 @@ import com.example.miwipet.models.EggModel;
 
 public class ForestEgg extends EggModel {
     int[][] pets = {
-            {R.drawable.bat, R.drawable.beaver, R.drawable.panther, R.drawable.spider,
+            {R.drawable.ant, R.drawable.beaver, R.drawable.panther, R.drawable.spider,
                     R.drawable.squirrel, R.drawable.woodpecker},
 
 
-            {R.drawable.owl, R.drawable.monkey, R.drawable.deer, R.drawable.snake},
+            {R.drawable.owl, R.drawable.monkey, R.drawable.deer, R.drawable.snake,
+                    R.drawable.bat, R.drawable.orangutan},
 
 
-            {R.drawable.bear, R.drawable.gorilla, R.drawable.moose, R.drawable.sloth},
+            {R.drawable.bear, R.drawable.gorilla, R.drawable.moose, R.drawable.sloth,
+                    R.drawable.hawk, R.drawable.kangaroo},
 
 
-            {R.drawable.albino_tiger, R.drawable.sugar_glider, R.drawable.tiger},
+            {R.drawable.albino_tiger, R.drawable.sugar_glider, R.drawable.tiger, R.drawable.peacock},
 
 
-            {R.drawable.galactic_owl, R.drawable.golden_tiger, R.drawable.vampire_bat}
+            {R.drawable.galactic_owl, R.drawable.tree_deer, R.drawable.soul_dragon}
     };
 
     String[][] petNames = {
-            {"Bat", "Beaver", "Panther", "Spider", "Squirrel", "Woodpecker"},
+            {"Ant", "Beaver", "Panther", "Spider", "Squirrel", "Woodpecker"},
 
-            {"Owl", "Monkey", "Deer", "Snake"},
+            {"Owl", "Monkey", "Deer", "Snake", "Bat", "Orangutan"},
 
-            {"Bear", "Gorilla", "Moose", "Sloth"},
+            {"Bear", "Gorilla", "Moose", "Sloth", "Hawk", "Kangaroo"},
 
-            {"Albino Tiger", "Sugar Glider", "tiger"},
+            {"Albino Tiger", "Sugar Glider", "Tiger", "Peacock"},
 
-            {"Galactic Owl", "Golden Tiger", "Vampire Bat"}
+            {"Galactic Owl", "Tree Deer", "Soul Dragon"}
     };
 
     public ForestEgg() {

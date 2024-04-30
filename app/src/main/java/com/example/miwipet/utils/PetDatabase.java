@@ -40,8 +40,7 @@ public class PetDatabase extends SQLiteOpenHelper {
 
     }
 
-    public boolean addPet(PetModel petModel)
-    {
+    public boolean addPet(PetModel petModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         boolean result;
@@ -55,31 +54,41 @@ public class PetDatabase extends SQLiteOpenHelper {
         contentValues.put(exp, petModel.getExp());
 
         long insert = db.insert(petTable, null, contentValues);
-        if(insert == -1)
-        {
+        if (insert == -1) {
             result = false;
-        }else
-        {
+        } else {
             result = true;
         }
 
         db.close();
 
-        return  result;
+        return result;
     }
 
-    public ArrayList<PetModel> getPetList()
-    {
+    public boolean clearPet() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        boolean result;
+
+        int rowsDeleted = db.delete(petTable, null, null);
+        if (rowsDeleted > 0) {
+            result = true;
+        } else {
+            result = false;
+        }
+
+        db.close();
+        return result;
+    }
+
+    public ArrayList<PetModel> getPetList() {
         ArrayList<PetModel> petModels = new ArrayList<>();
         String queryString = "SELECT * FROM " + petTable;
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(queryString, null);
 
-        if(cursor.moveToFirst())
-        {
-            do
-            {
+        if (cursor.moveToFirst()) {
+            do {
                 int id = cursor.getInt(0);
                 int image = cursor.getInt(1);
                 String name = cursor.getString(2);
@@ -91,7 +100,7 @@ public class PetDatabase extends SQLiteOpenHelper {
 
                 PetModel petModel = new PetModel(name, image, age, type, rarity, maxExp, exp);
                 petModels.add(petModel);
-            }while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
 
         cursor.close();

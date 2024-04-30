@@ -30,6 +30,7 @@ import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.PetModel;
 import com.example.miwipet.utils.CurrencyDatabase;
+import com.example.miwipet.utils.InspectInventory;
 import com.example.miwipet.utils.PetDatabase;
 import com.example.miwipet.utils.Rarity;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -100,6 +101,20 @@ public class MainActivity extends AppCompatActivity {
         initializeComponents();
         generateToken();
         getPetFromDatabase();
+
+        InspectInventory inspectInventory = new InspectInventory(inventoryModel);
+        inspectInventory.updatePet();
+        if(inspectInventory.isWithResult())
+        {
+            petDatabase.clearPet();
+
+            for(PetModel petModel : inventoryModel.getPetLists())
+            {
+                petDatabase.addPet(petModel);
+            }
+            inventoryModel.clearPetLists();
+            getPetFromDatabase();
+        }
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 MainActivity.this, drawerLayout, materialToolbar, R.string.drawer_close, R.string.drawer_open);
