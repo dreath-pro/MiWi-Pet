@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
             }
             inventoryModel.clearPetLists();
             getPetFromDatabase();
-            Toast.makeText(this, " with result ", Toast.LENGTH_SHORT).show();
         }
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

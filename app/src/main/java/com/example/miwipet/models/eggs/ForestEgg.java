@@ -14,13 +14,14 @@ public class ForestEgg extends EggModel {
 
 
             {R.drawable.bear, R.drawable.gorilla, R.drawable.moose, R.drawable.sloth,
-                    R.drawable.hawk, R.drawable.kangaroo},
+                    R.drawable.hawk, R.drawable.koala},
 
 
-            {R.drawable.albino_tiger, R.drawable.sugar_glider, R.drawable.tiger, R.drawable.peacock},
+            {R.drawable.albino_tiger, R.drawable.sugar_glider, R.drawable.tiger, R.drawable.peacock,
+                    R.drawable.kangaroo, R.drawable.panda},
 
 
-            {R.drawable.galactic_owl, R.drawable.tree_deer, R.drawable.soul_dragon}
+            {R.drawable.galactic_owl, R.drawable.guardian_deer, R.drawable.dark_deer}
     };
 
     String[][] petNames = {
@@ -28,11 +29,11 @@ public class ForestEgg extends EggModel {
 
             {"Owl", "Monkey", "Deer", "Snake", "Bat", "Orangutan"},
 
-            {"Bear", "Gorilla", "Moose", "Sloth", "Hawk", "Kangaroo"},
+            {"Bear", "Gorilla", "Moose", "Sloth", "Hawk", "Koala"},
 
-            {"Albino Tiger", "Sugar Glider", "Tiger", "Peacock"},
+            {"Albino Tiger", "Sugar Glider", "Tiger", "Peacock", "Kangaroo", "Panda"},
 
-            {"Galactic Owl", "Tree Deer", "Soul Dragon"}
+            {"Galactic Owl", "Guardian Deer", "Dark Deer"}
     };
 
     public ForestEgg() {

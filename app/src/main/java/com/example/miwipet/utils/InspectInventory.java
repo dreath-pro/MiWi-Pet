@@ -24,7 +24,7 @@ public class InspectInventory {
 
         for(PetModel petModel : inventoryModel.getPetLists())
         {
-            if(petModel.getPetName().equals("Bat") && petModel.getPetName().equals(rarity.getRarity(0)))
+            if(petModel.getPetName().equals("Bat") && petModel.getRarity().equals(rarity.getRarity(0)))
             {
                 inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(1));
 
@@ -33,16 +33,39 @@ public class InspectInventory {
 
             if(petModel.getPetName().equals("Golden Tiger"))
             {
-                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.tree_deer);
-                inventoryModel.getPetLists().get(count).setPetName("Tree Deer");
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.guardian_deer);
+                inventoryModel.getPetLists().get(count).setPetName("Guardian Deer");
 
                 setWithResult(true);
             }
 
             if(petModel.getPetName().equals("Vampire Bat"))
             {
-                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.soul_dragon);
-                inventoryModel.getPetLists().get(count).setPetName("Soul Dragon");
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.dark_deer);
+                inventoryModel.getPetLists().get(count).setPetName("Dark Deer");
+
+                setWithResult(true);
+            }
+
+            if(petModel.getPetName().equals("Kangaroo") && petModel.getRarity().equals(rarity.getRarity(2)))
+            {
+                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(3));
+
+                setWithResult(true);
+            }
+
+            if(petModel.getPetName().equals("Tree Deer"))
+            {
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.guardian_deer);
+                inventoryModel.getPetLists().get(count).setPetName("Guardian Deer");
+
+                setWithResult(true);
+            }
+
+            if(petModel.getPetName().equals("Soul Dragon"))
+            {
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.dark_deer);
+                inventoryModel.getPetLists().get(count).setPetName("Dark Deer");
 
                 setWithResult(true);
             }
