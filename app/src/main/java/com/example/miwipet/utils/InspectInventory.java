@@ -24,7 +24,7 @@ public class InspectInventory {
 
         for(PetModel petModel : inventoryModel.getPetLists())
         {
-            if(petModel.getPetName().equals("Bat"))
+            if(petModel.getPetName().equals("Bat") && petModel.getPetName().equals(rarity.getRarity(0)))
             {
                 inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(1));
 

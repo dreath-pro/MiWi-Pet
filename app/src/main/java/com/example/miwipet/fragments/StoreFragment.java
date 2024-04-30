@@ -24,6 +24,7 @@ import com.example.miwipet.models.eggs.NormalEgg;
 import com.example.miwipet.models.eggs.OceanEgg;
 import com.example.miwipet.models.eggs.RiverEgg;
 import com.example.miwipet.models.eggs.SavannahEgg;
+import com.example.miwipet.utils.EggSource;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,6 +35,8 @@ public class StoreFragment extends Fragment {
     private InventoryModel inventoryModels;
     private RecyclerView eggShopSelection, itemShopSelection, foodShopSelection;
     private Context context;
+
+    private EggSource eggSource = new EggSource();
 
     private TextView chipToken, glazeToken;
 
@@ -54,38 +57,9 @@ public class StoreFragment extends Fragment {
 
         for (int i = 0; i <= 80; i++) {
             Random random = new Random();
-            int selectedEgg = random.nextInt(7);
-
-            switch (selectedEgg) {
-                case 0:
-                    eggModels.add(new NormalEgg());
-                    break;
-                case 1:
-                    eggModels.add(new ForestEgg());
-                    break;
-                case 2:
-                    eggModels.add(new OceanEgg());
-                    break;
-                case 3:
-                    eggModels.add(new FossilEgg());
-                    break;
-                case 4:
-                    eggModels.add(new ChristmasEgg());
-                    break;
-                case 5:
-                    eggModels.add(new RiverEgg());
-                    break;
-                case 6:
-                    eggModels.add(new SavannahEgg());
-                    break;
-            }
-
-//            case 3:
-//                eggModels.add(new FossilEgg());
-//                break;
-//            case 4:
-//                eggModels.add(new ChristmasEgg());
-//                break;
+            int selectedEgg = random.nextInt(eggSource.getCount());
+            eggSource.getEgg(selectedEgg);
+            eggModels.add(eggSource.getEgg(selectedEgg));
         }
 
         eggShopSelectionAdapter = new EggShopSelectionAdapter(context, eggModels, chipToken, glazeToken, inventoryModels);

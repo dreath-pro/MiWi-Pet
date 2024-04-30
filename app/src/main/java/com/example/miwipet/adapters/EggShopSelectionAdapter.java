@@ -22,6 +22,7 @@ import com.example.miwipet.models.eggs.NormalEgg;
 import com.example.miwipet.models.eggs.OceanEgg;
 import com.example.miwipet.models.eggs.RiverEgg;
 import com.example.miwipet.models.eggs.SavannahEgg;
+import com.example.miwipet.utils.EggSource;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,8 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
     private ArrayList<EggModel> displayEggs;
     private InventoryModel inventoryModel;
     private TextView chipToken, glazeToken;
+
+    private EggSource eggSource = new EggSource();
 
     public EggShopSelectionAdapter(
             Context context,
@@ -67,28 +70,12 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
                         inventoryModel.getGlazeToken() >=
                                 displayEggs.get(holder.getAdapterPosition()).getGlazePrice()) {
 
-                    switch (holder.eggName.getText().toString()) {
-                        case "Christmas Egg":
-                            inventoryModel.addEggLists(new ChristmasEgg());
-                            break;
-                        case "Forest Egg":
-                            inventoryModel.addEggLists(new ForestEgg());
-                            break;
-                        case "Fossil Egg":
-                            inventoryModel.addEggLists(new FossilEgg());
-                            break;
-                        case "Normal Egg":
-                            inventoryModel.addEggLists(new NormalEgg());
-                            break;
-                        case "Ocean Egg":
-                            inventoryModel.addEggLists(new OceanEgg());
-                            break;
-                        case "River Egg":
-                            inventoryModel.addEggLists(new RiverEgg());
-                            break;
-                        case "Savannah Egg":
-                            inventoryModel.addEggLists(new SavannahEgg());
-                            break;
+                    for(int i = 0; i <= eggSource.getCount() - 1; i++)
+                    {
+                        if(holder.eggName.getText().toString().equals(eggSource.getName(i)))
+                        {
+                            inventoryModel.addEggLists(eggSource.getEgg(i));
+                        }
                     }
 
                     inventoryModel.setChipToken(inventoryModel.getChipToken() -
