@@ -18,7 +18,7 @@ public class FossilEgg extends EggModel {
 
 
             {R.drawable.pteranodon, R.drawable.dodo, R.drawable.dunkleosteus,
-                    R.drawable.carnotaurus, R.drawable.glyptodon},
+                    R.drawable.phorusrhacids, R.drawable.glyptodon},
 
 
             {R.drawable.polymesh_rex, R.drawable.skeleton_t_rex, R.drawable.leviathan}
@@ -31,7 +31,7 @@ public class FossilEgg extends EggModel {
 
             {"Ankylosaurus", "Stegosaurus", "Plesiosaurus", "Amargasaurus", "Sarcosuchus"},
 
-            {"Pteranodon", "Dodo", "Dunkleosteus", "Carnotaurus", "Glyptodon"},
+            {"Pteranodon", "Dodo", "Dunkleosteus", "Phorusrhacids", "Glyptodon"},
 
             {"Poly Rex", "Skeleton T-Rex", "Leviathan"}
     };

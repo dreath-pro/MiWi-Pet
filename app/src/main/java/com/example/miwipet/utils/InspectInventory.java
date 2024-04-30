@@ -70,6 +70,14 @@ public class InspectInventory {
                 setWithResult(true);
             }
 
+            if(petModel.getPetName().equals("Carnotaurus"))
+            {
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.phorusrhacids);
+                inventoryModel.getPetLists().get(count).setPetName("Phorusrhacids");
+
+                setWithResult(true);
+            }
+
             count++;
         }
 
