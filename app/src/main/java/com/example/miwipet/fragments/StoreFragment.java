@@ -23,6 +23,7 @@ import com.example.miwipet.models.eggs.FossilEgg;
 import com.example.miwipet.models.eggs.NormalEgg;
 import com.example.miwipet.models.eggs.OceanEgg;
 import com.example.miwipet.models.eggs.RiverEgg;
+import com.example.miwipet.models.eggs.SavannahEgg;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -53,7 +54,7 @@ public class StoreFragment extends Fragment {
 
         for (int i = 0; i <= 80; i++) {
             Random random = new Random();
-            int selectedEgg = random.nextInt(6);
+            int selectedEgg = random.nextInt(7);
 
             switch (selectedEgg) {
                 case 0:
@@ -73,6 +74,9 @@ public class StoreFragment extends Fragment {
                     break;
                 case 5:
                     eggModels.add(new RiverEgg());
+                    break;
+                case 6:
+                    eggModels.add(new SavannahEgg());
                     break;
             }
 
