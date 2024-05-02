@@ -13,7 +13,7 @@ public class EggModel{
     private int chipPrice, glazePrice;
 
     private int second, minute, hour;
-    private boolean toHatch;
+    private boolean toHatch, isSelected;
     private Random random = new Random();
     private String rarityText;
     private Rarity rarity = new Rarity();
@@ -44,6 +44,7 @@ public class EggModel{
         }
 
         toHatch = false;
+        isSelected = false;
     }
 
     protected void selectRarity(int[][] petImage, String[][] petNames)
@@ -199,5 +200,13 @@ public class EggModel{
 
     public void setToHatch(boolean toHatch) {
         this.toHatch = toHatch;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.miwipet.fragments;
+package com.example.miwipet.fragments.single;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.miwipet.R;
 import com.example.miwipet.adapters.EggSelectionAdapter;
 import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.NormalEgg;
 
@@ -30,11 +31,11 @@ public class EggFragment extends Fragment {
     Context context;
     ImageView eggImage;
 
-    private ArrayList<EggModel> eggInventory;
+    private InventoryModel inventoryModels;
     private ArrayList<EggModel> incubated;
 
-    public EggFragment(ArrayList<EggModel> eggInventory, ArrayList<EggModel> incubated, ImageView eggImage) {
-        this.eggInventory = eggInventory;
+    public EggFragment(InventoryModel inventoryModels, ArrayList<EggModel> incubated, ImageView eggImage) {
+        this.inventoryModels = inventoryModels;
         this.eggImage = eggImage;
         this.incubated = incubated;
     }
@@ -48,7 +49,7 @@ public class EggFragment extends Fragment {
         eggSelection = view.findViewById(R.id.eggSelection);
 
         EggSelectionAdapter eggSelectionAdapter =
-                new EggSelectionAdapter(context, eggInventory, incubated,
+                new EggSelectionAdapter(context, inventoryModels, incubated,
                         requireActivity().getSupportFragmentManager(), eggImage);
         eggSelection.setAdapter(eggSelectionAdapter);
         eggSelection.setLayoutManager(new LinearLayoutManager(context));

@@ -19,13 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.miwipet.R;
-import com.example.miwipet.fragments.AboutFragment;
-import com.example.miwipet.fragments.CollectionFragment;
-import com.example.miwipet.fragments.EggFragment;
-import com.example.miwipet.fragments.HistoryFragment;
-import com.example.miwipet.fragments.InboxFragment;
-import com.example.miwipet.fragments.StoreFragment;
-import com.example.miwipet.fragments.TradeFragment;
+import com.example.miwipet.fragments.navigation.AboutFragment;
+import com.example.miwipet.fragments.navigation.CollectionFragment;
+import com.example.miwipet.fragments.single.EggFragment;
+import com.example.miwipet.fragments.navigation.HistoryFragment;
+import com.example.miwipet.fragments.navigation.InboxFragment;
+import com.example.miwipet.fragments.navigation.StoreFragment;
+import com.example.miwipet.fragments.navigation.TradeFragment;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.PetModel;
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (incubated.isEmpty()) {
-                    replaceFragment(new EggFragment(inventoryModel.getEggLists(), incubated, eggImage));
+                    replaceFragment(new EggFragment(inventoryModel, incubated, eggImage));
                 } else {
                     Toast.makeText(MainActivity.this, "Please hatch the egg first", Toast.LENGTH_SHORT).show();
                 }

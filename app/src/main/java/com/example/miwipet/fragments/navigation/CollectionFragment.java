@@ -1,4 +1,4 @@
-package com.example.miwipet.fragments;
+package com.example.miwipet.fragments.navigation;
 
 import android.content.Context;
 import android.os.Bundle;

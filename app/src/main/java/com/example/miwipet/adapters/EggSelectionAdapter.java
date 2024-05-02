@@ -15,21 +15,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.InventoryModel;
 
 import java.util.ArrayList;
 
 public class EggSelectionAdapter extends RecyclerView.Adapter<EggSelectionAdapter.MyViewHolder> {
     private Context context;
-    private ArrayList<EggModel> eggModels;
+    private InventoryModel inventoryModels;
     private ArrayList<EggModel> incubated;
     private FragmentManager fragmentManager;
 
     ImageView eggImage;
 
-    public EggSelectionAdapter(Context context, ArrayList<EggModel> eggModels, ArrayList<EggModel> incubated,
+    public EggSelectionAdapter(Context context, InventoryModel inventoryModels, ArrayList<EggModel> incubated,
                                FragmentManager fragmentManager, ImageView eggImage) {
         this.context = context;
-        this.eggModels = eggModels;
+        this.inventoryModels = inventoryModels;
         this.fragmentManager = fragmentManager;
         this.eggImage = eggImage;
         this.incubated = incubated;
@@ -45,16 +46,24 @@ public class EggSelectionAdapter extends RecyclerView.Adapter<EggSelectionAdapte
 
     @Override
     public void onBindViewHolder(@NonNull EggSelectionAdapter.MyViewHolder holder, int position) {
-        holder.eggImage.setImageResource(eggModels.get(position).getEggImage());
-        holder.eggName.setText(eggModels.get(position).getEggName());
+        holder.eggImage.setImageResource(inventoryModels.getEggLists().get(position).getEggImage());
+        holder.eggName.setText(inventoryModels.getEggLists().get(position).getEggName());
         holder.eggQuantity.setText("x1");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                eggImage.setImageResource(eggModels.get(holder.getAdapterPosition()).getEggImage());
-                incubated.add(eggModels.get(holder.getAdapterPosition()));
-                eggModels.remove(holder.getAdapterPosition());
+                eggImage.setImageResource(inventoryModels.getEggLists().get(holder.getAdapterPosition()).getEggImage());
+
+                for(EggModel eggModel : inventoryModels.getEggLists())
+                {
+                    eggModel.setSelected(false);
+                }
+                inventoryModels.getEggLists().get(holder.getAdapterPosition()).setSelected(true);
+
+                incubated.add(inventoryModels.getEggLists().get(holder.getAdapterPosition()));
+                inventoryModels.getEggLists().remove(holder.getAdapterPosition());
+
                 if (fragmentManager != null) {
                     fragmentManager.popBackStack();
                 }
@@ -64,7 +73,7 @@ public class EggSelectionAdapter extends RecyclerView.Adapter<EggSelectionAdapte
 
     @Override
     public int getItemCount() {
-        return eggModels.size();
+        return inventoryModels.getEggLists().size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
