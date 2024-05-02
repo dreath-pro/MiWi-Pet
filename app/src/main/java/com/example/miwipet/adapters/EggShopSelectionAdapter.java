@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
+import com.example.miwipet.database.EggDatabase;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.utils.EggSource;
@@ -49,6 +50,8 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
 
     @Override
     public void onBindViewHolder(@NonNull EggShopSelectionAdapter.MyViewHolder holder, int position) {
+        EggDatabase eggDatabase = new EggDatabase(context);
+
         holder.eggImage.setImageResource(displayEggs.get(position).getEggImage());
         holder.eggName.setText(displayEggs.get(position).getEggName());
         holder.chipPrice.setText(displayEggs.get(position).getChipPrice() + "");
@@ -66,6 +69,7 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
                     {
                         if(holder.eggName.getText().toString().equals(eggSource.getName(i)))
                         {
+                            eggDatabase.addEgg(eggSource.getEgg(i));
                             inventoryModel.addEggLists(eggSource.getEgg(i));
                         }
                     }

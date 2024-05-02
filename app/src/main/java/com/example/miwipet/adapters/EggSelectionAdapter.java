@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
+import com.example.miwipet.activities.MainActivity;
+import com.example.miwipet.database.EggDatabase;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.InventoryModel;
 
@@ -46,6 +48,8 @@ public class EggSelectionAdapter extends RecyclerView.Adapter<EggSelectionAdapte
 
     @Override
     public void onBindViewHolder(@NonNull EggSelectionAdapter.MyViewHolder holder, int position) {
+        EggDatabase eggDatabase = new EggDatabase(context);
+
         holder.eggImage.setImageResource(inventoryModels.getEggLists().get(position).getEggImage());
         holder.eggName.setText(inventoryModels.getEggLists().get(position).getEggName());
         holder.eggQuantity.setText("x1");
@@ -61,6 +65,7 @@ public class EggSelectionAdapter extends RecyclerView.Adapter<EggSelectionAdapte
                 }
                 inventoryModels.getEggLists().get(holder.getAdapterPosition()).setSelected(true);
 
+                eggDatabase.deleteEgg(inventoryModels.getEggLists().get(holder.getAdapterPosition()));
                 incubated.add(inventoryModels.getEggLists().get(holder.getAdapterPosition()));
                 inventoryModels.getEggLists().remove(holder.getAdapterPosition());
 

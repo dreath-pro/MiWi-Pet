@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.miwipet.R;
+import com.example.miwipet.database.EggDatabase;
 import com.example.miwipet.fragments.navigation.AboutFragment;
 import com.example.miwipet.fragments.navigation.CollectionFragment;
 import com.example.miwipet.fragments.single.EggFragment;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<EggModel> incubated = new ArrayList<>();
     private InventoryModel inventoryModel = new InventoryModel();
 
+    private EggDatabase eggDatabase = new EggDatabase(MainActivity.this);
     private PetDatabase petDatabase = new PetDatabase(MainActivity.this);
     private CurrencyDatabase currencyDatabase = new CurrencyDatabase(MainActivity.this);
     private Rarity rarity = new Rarity();
@@ -72,10 +74,8 @@ public class MainActivity extends AppCompatActivity {
         hatchButton = findViewById(R.id.hatchButton);
     }
 
-    private void generateToken()
-    {
-        if(!currencyDatabase.doesDataExist())
-        {
+    private void generateToken() {
+        if (!currencyDatabase.doesDataExist()) {
             currencyDatabase.generateTokens();
 
             inventoryModel.setChipToken(10);
@@ -84,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
         updateToken();
     }
 
-    private void updateToken()
-    {
+    private void updateToken() {
         inventoryModel.setChipToken(currencyDatabase.getChipToken());
         inventoryModel.setGlazeToken(currencyDatabase.getGlazeToken());
 
@@ -101,15 +100,14 @@ public class MainActivity extends AppCompatActivity {
         initializeComponents();
         generateToken();
         getPetFromDatabase();
+        getEggFromDatabase();
 
         InspectInventory inspectInventory = new InspectInventory(inventoryModel);
         inspectInventory.updatePet();
-        if(inspectInventory.isWithResult())
-        {
+        if (inspectInventory.isWithResult()) {
             petDatabase.clearPet();
 
-            for(PetModel petModel : inventoryModel.getPetLists())
-            {
+            for (PetModel petModel : inventoryModel.getPetLists()) {
                 petDatabase.addPet(petModel);
             }
             inventoryModel.clearPetLists();
@@ -163,21 +161,16 @@ public class MainActivity extends AppCompatActivity {
                             rarity.getRarity(3),
                             rarity.getRarity(4)};
 
-                    if(petModel.getRarity().equals(rarities[0]))
-                    {
+                    if (petModel.getRarity().equals(rarities[0])) {
                         inventoryModel.setChipToken(inventoryModel.getChipToken() + 10);
-                    }else if(petModel.getRarity().equals(rarities[1]))
-                    {
+                    } else if (petModel.getRarity().equals(rarities[1])) {
                         inventoryModel.setChipToken(inventoryModel.getChipToken() + 20);
-                    }else if(petModel.getRarity().equals(rarities[2]))
-                    {
+                    } else if (petModel.getRarity().equals(rarities[2])) {
                         inventoryModel.setChipToken(inventoryModel.getChipToken() + 30);
-                    }else if(petModel.getRarity().equals(rarities[3]))
-                    {
+                    } else if (petModel.getRarity().equals(rarities[3])) {
                         inventoryModel.setChipToken(inventoryModel.getChipToken() + 40);
                         inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() + 10);
-                    }else if(petModel.getRarity().equals(rarities[4]))
-                    {
+                    } else if (petModel.getRarity().equals(rarities[4])) {
                         inventoryModel.setChipToken(inventoryModel.getChipToken() + 50);
                         inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() + 20);
                     }
@@ -221,15 +214,23 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private void getPetFromDatabase()
-    {
+    private void getPetFromDatabase() {
         ArrayList<PetModel> petModels;
         petModels = petDatabase.getPetList();
 
         inventoryModel.clearPetLists();
-        for(PetModel pet : petModels)
-        {
+        for (PetModel pet : petModels) {
             inventoryModel.addPetLists(pet);
+        }
+    }
+
+    private void getEggFromDatabase() {
+        ArrayList<EggModel> eggModels;
+        eggModels = eggDatabase.getEggList();
+
+        inventoryModel.clearEggList();
+        for (EggModel egg : eggModels) {
+            inventoryModel.addEggLists(egg);
         }
     }
 }

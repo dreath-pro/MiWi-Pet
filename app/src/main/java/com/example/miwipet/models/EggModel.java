@@ -4,7 +4,8 @@ import com.example.miwipet.utils.Rarity;
 
 import java.util.Random;
 
-public class EggModel{
+public class EggModel {
+    private int id;
     private String eggName;
     private int eggImage;
     private String petName;
@@ -18,6 +19,26 @@ public class EggModel{
     private String rarityText;
     private Rarity rarity = new Rarity();
 
+    public EggModel(int id, String eggName, int eggImage, String petName, int petImage, int age, int type,
+                    int chipPrice, int glazePrice, int second, int minute, int hour, boolean toHatch,
+                    boolean isSelected, String rarityText) {
+        this.id = id;
+        this.eggName = eggName;
+        this.eggImage = eggImage;
+        this.petName = petName;
+        this.petImage = petImage;
+        this.age = age;
+        this.type = type;
+        this.chipPrice = chipPrice;
+        this.glazePrice = glazePrice;
+        this.second = second;
+        this.minute = minute;
+        this.hour = hour;
+        this.toHatch = toHatch;
+        this.isSelected = isSelected;
+        this.rarityText = rarityText;
+    }
+
     public EggModel(String eggName, int eggImage, int chipPrice, int glazePrice, int second, int minute, int hour) {
         this.eggName = eggName;
         this.eggImage = eggImage;
@@ -30,8 +51,7 @@ public class EggModel{
         age = 0;
         type = 0;
         int selectedType = random.nextInt(3);
-        switch (selectedType)
-        {
+        switch (selectedType) {
             case 0:
                 type = 0;
                 break;
@@ -47,47 +67,49 @@ public class EggModel{
         isSelected = false;
     }
 
-    protected void selectRarity(int[][] petImage, String[][] petNames)
-    {
+    protected void selectRarity(int[][] petImage, String[][] petNames) {
         int selectedRarity = random.nextInt(100) + 1;
         int selectedPet;
 
-        if(selectedRarity <= 2)
-        {
+        if (selectedRarity <= 2) {
             selectedPet = random.nextInt(petImage[4].length);
             this.petImage = petImage[4][selectedPet];
             this.petName = petNames[4][selectedPet];
 
             rarityText = rarity.getRarity(4);
-        }else if(selectedRarity <= 10)
-        {
+        } else if (selectedRarity <= 10) {
             selectedPet = random.nextInt(petImage[3].length);
             this.petImage = petImage[3][selectedPet];
             this.petName = petNames[3][selectedPet];
 
             rarityText = rarity.getRarity(3);
-        }else if(selectedRarity <= 25)
-        {
+        } else if (selectedRarity <= 25) {
             selectedPet = random.nextInt(petImage[2].length);
             this.petImage = petImage[2][selectedPet];
             this.petName = petNames[2][selectedPet];
 
             rarityText = rarity.getRarity(2);
-        }else if(selectedRarity <= 60)
-        {
+        } else if (selectedRarity <= 60) {
             selectedPet = random.nextInt(petImage[1].length);
             this.petImage = petImage[1][selectedPet];
             this.petName = petNames[1][selectedPet];
 
             rarityText = rarity.getRarity(1);
-        }else
-        {
+        } else {
             selectedPet = random.nextInt(petImage[0].length);
             this.petImage = petImage[0][selectedPet];
             this.petName = petNames[0][selectedPet];
 
             rarityText = rarity.getRarity(0);
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEggName() {
