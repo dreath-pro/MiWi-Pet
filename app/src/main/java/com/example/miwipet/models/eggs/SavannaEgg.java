@@ -3,7 +3,7 @@ package com.example.miwipet.models.eggs;
 import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 
-public class SavannahEgg extends EggModel {
+public class SavannaEgg extends EggModel {
     int[][] pets = {
             {R.drawable.elephant, R.drawable.rhino},
 
@@ -32,8 +32,8 @@ public class SavannahEgg extends EggModel {
             {"Blazing Lion", "Death Vulture"}
     };
 
-    public SavannahEgg() {
-        super("Savannah Egg", R.drawable.egg_savannah, 50, 0, 0, 0, 3);
+    public SavannaEgg() {
+        super("Savanna Egg", R.drawable.egg_savanna, 50, 0, 0, 0, 3);
         super.selectRarity(pets, petNames);
     }
 }

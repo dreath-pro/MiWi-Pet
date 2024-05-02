@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,13 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.InventoryModel;
-import com.example.miwipet.models.eggs.ChristmasEgg;
-import com.example.miwipet.models.eggs.ForestEgg;
-import com.example.miwipet.models.eggs.FossilEgg;
-import com.example.miwipet.models.eggs.NormalEgg;
-import com.example.miwipet.models.eggs.OceanEgg;
-import com.example.miwipet.models.eggs.RiverEgg;
-import com.example.miwipet.models.eggs.SavannahEgg;
 import com.example.miwipet.utils.EggSource;
 
 import java.util.ArrayList;
