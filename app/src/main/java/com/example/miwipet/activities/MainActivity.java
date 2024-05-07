@@ -40,7 +40,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 
 //egg hatch, logo, simple
-//parasaurolophus, 3d render, full body view, white background, simplistic kiddy design, cute
+//philippine eagle a monkey eating eagle with beautiful feathers, 3d render, full view, white background, simplistic kiddy design, cute
 //frost egg, 3d render, white background, simple design
 //ocean background, digital art, cartoon, unfocus, blur
 
