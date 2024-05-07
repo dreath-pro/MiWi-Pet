@@ -180,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
                     petDatabase.addPet(petModel);
                     getPetFromDatabase();
+                    getEggFromDatabase();
 
                     incubated.clear();
                 } else {
