@@ -3,16 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A7DF8A"
     tools:context=".fragments.navigation.InboxFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Inbox"
-        android:layout_gravity="center"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/miwi_coming_soon"
+        android:scaleType="fitXY"/>
 
 </FrameLayout>

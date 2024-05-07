@@ -3,17 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.navigation.HistoryFragment"
-    android:background="#E18990">
+    tools:context=".fragments.navigation.HistoryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="History"
-        android:layout_gravity="center"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/miwi_coming_soon"
+        android:scaleType="fitXY"/>
 
 </FrameLayout>
