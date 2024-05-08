@@ -21,7 +21,7 @@ public class RiverEgg extends EggModel {
                     R.drawable.crocodile},
 
 
-            {R.drawable.ancient_turtle, R.drawable.majestic_koi}
+            {R.drawable.ancient_turtle, R.drawable.majestic_koi, R.drawable.waterfall_turtle}
     };
 
     String[][] petNames = {
@@ -33,7 +33,7 @@ public class RiverEgg extends EggModel {
 
             {"Catfish", "Pink Dolphin", "Axolotl", "Bull Shark", "Crocodile"},
 
-            {"Ancient Turtle", "Majestic Koi"}
+            {"Ancient Turtle", "Majestic Koi", "Waterfall Turtle"}
     };
 
     public RiverEgg() {
