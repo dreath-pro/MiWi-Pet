@@ -5,6 +5,7 @@ import com.example.miwipet.models.eggs.ChristmasEgg;
 import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.FossilEgg;
 import com.example.miwipet.models.eggs.NormalEgg;
+import com.example.miwipet.models.eggs.NostalgiaEgg;
 import com.example.miwipet.models.eggs.OceanEgg;
 import com.example.miwipet.models.eggs.RiverEgg;
 import com.example.miwipet.models.eggs.SavannaEgg;
@@ -30,6 +31,7 @@ public class EggSource {
         eggLists.add(new FossilEgg());
         eggLists.add(new ChristmasEgg());
         eggLists.add(new SavannaEgg());
+        eggLists.add(new NostalgiaEgg());
     }
 
     public int getCount()
