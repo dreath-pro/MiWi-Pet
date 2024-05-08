@@ -19,6 +19,9 @@ public class EggModel {
     private String rarityText;
     private Rarity rarity = new Rarity();
 
+    private String[][] petNames;
+    private int[][] petImages;
+
     public EggModel(int id, String eggName, int eggImage, String petName, int petImage, int age, int type,
                     int chipPrice, int glazePrice, int second, int minute, int hour, boolean toHatch,
                     boolean isSelected, String rarityText) {
@@ -67,41 +70,80 @@ public class EggModel {
         isSelected = false;
     }
 
-    protected void selectRarity(int[][] petImage, String[][] petNames) {
+    protected void selectRarity(int[][] petImages, String[][] petNames) {
         int selectedRarity = random.nextInt(100) + 1;
         int selectedPet;
 
+        this.petImages = petImages;
+        this.petNames = petNames;
+
         if (selectedRarity <= 2) {
-            selectedPet = random.nextInt(petImage[4].length);
-            this.petImage = petImage[4][selectedPet];
+            selectedPet = random.nextInt(petImages[4].length);
+            this.petImage = petImages[4][selectedPet];
             this.petName = petNames[4][selectedPet];
 
             rarityText = rarity.getRarity(4);
         } else if (selectedRarity <= 10) {
-            selectedPet = random.nextInt(petImage[3].length);
-            this.petImage = petImage[3][selectedPet];
+            selectedPet = random.nextInt(petImages[3].length);
+            this.petImage = petImages[3][selectedPet];
             this.petName = petNames[3][selectedPet];
 
             rarityText = rarity.getRarity(3);
         } else if (selectedRarity <= 25) {
-            selectedPet = random.nextInt(petImage[2].length);
-            this.petImage = petImage[2][selectedPet];
+            selectedPet = random.nextInt(petImages[2].length);
+            this.petImage = petImages[2][selectedPet];
             this.petName = petNames[2][selectedPet];
 
             rarityText = rarity.getRarity(2);
         } else if (selectedRarity <= 60) {
-            selectedPet = random.nextInt(petImage[1].length);
-            this.petImage = petImage[1][selectedPet];
+            selectedPet = random.nextInt(petImages[1].length);
+            this.petImage = petImages[1][selectedPet];
             this.petName = petNames[1][selectedPet];
 
             rarityText = rarity.getRarity(1);
         } else {
-            selectedPet = random.nextInt(petImage[0].length);
-            this.petImage = petImage[0][selectedPet];
+            selectedPet = random.nextInt(petImages[0].length);
+            this.petImage = petImages[0][selectedPet];
             this.petName = petNames[0][selectedPet];
 
             rarityText = rarity.getRarity(0);
         }
+    }
+
+    public boolean isNameExist(String petName)
+    {
+        boolean result = false;
+
+        for(int i = 0; i <= petNames.length - 1; i++)
+        {
+            for(int j = 0; j <= petNames[i].length - 1; j++)
+            {
+                if(petName.equals(petNames[i][j]))
+                {
+                    result = true;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public int refreshPetImage(String petName)
+    {
+        int image = 0;
+
+        for(int i = 0; i <= petNames.length - 1; i++)
+        {
+            for(int j = 0; j <= petNames[i].length - 1; j++)
+            {
+                if(petName.equals(petNames[i][j]))
+                {
+                    image = petImages[i][j];
+                }
+            }
+        }
+
+        return image;
     }
 
     public int getId() {

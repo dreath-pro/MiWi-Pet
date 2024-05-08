@@ -23,8 +23,10 @@ public class PetDatabase extends SQLiteOpenHelper {
     private static final String maxExp = "max_exp";
     private static final String exp = "exp";
 
+    private static final int DATABASE_VERSION = 4;
+
     public PetDatabase(@Nullable Context context) {
-        super(context, "pet.db", null, 1);
+        super(context, "pet.db", null, DATABASE_VERSION);
     }
 
     @Override
@@ -37,7 +39,48 @@ public class PetDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if(oldVersion < 3)
+        {
+            // Rename the old table
+            db.execSQL("ALTER TABLE " + petTable + " RENAME TO " + petTable + "_temp");
 
+            // Create the new table with the modified column data type
+            String createTableStatement = "CREATE TABLE " + petTable + " (" + id + " INTEGER PRIMARY KEY " +
+                    "AUTOINCREMENT," + image + " TEXT, " + name + " TEXT, " + rarity + " TEXT, " + age + " INT, " +
+                    type + " INT, " + maxExp + " INT, " + exp + " INT)";
+            db.execSQL(createTableStatement);
+
+            // Copy data from the temporary table to the new table
+            db.execSQL("INSERT INTO " + petTable + " (" + id + ", " + name + ", " + rarity + ", " + age + ", " +
+                    type + ", " + maxExp + ", " + exp + ") SELECT " + id + ", " + name + ", " + rarity + ", " +
+                    age + ", " + type + ", " + maxExp + ", " + exp + " FROM " + petTable + "_temp");
+
+            // Drop the temporary table
+            db.execSQL("DROP TABLE IF EXISTS " + petTable + "_temp");
+        }
+
+        if(oldVersion < 4)
+        {
+            // Revert back from version 3 to version 2
+            // Rename the current table
+            db.execSQL("ALTER TABLE " + petTable + " RENAME TO " + petTable + "_temp");
+
+            // Create the new table with the previous schema
+            String createTableStatement = "CREATE TABLE " + petTable + " (" + id + " INTEGER PRIMARY KEY " +
+                    "AUTOINCREMENT," + image + " INT, " + name + " TEXT, " + rarity + " TEXT, " + age + " INT, " +
+                    type + " INT, " + maxExp + " INT, " + exp + " INT)";
+            db.execSQL(createTableStatement);
+
+            // Copy data from the temporary table to the new table
+            db.execSQL("INSERT INTO " + petTable + " (" + id + ", " + name + ", " + rarity + ", " + age + ", " +
+                    type + ", " + maxExp + ", " + exp + ") SELECT " + id + ", " + name + ", " + rarity + ", " +
+                    age + ", " + type + ", " + maxExp + ", " + exp + " FROM " + petTable + "_temp");
+
+            // Drop the temporary table
+            db.execSQL("DROP TABLE IF EXISTS " + petTable + "_temp");
+        }
+
+        db.setVersion(DATABASE_VERSION);
     }
 
     public boolean addPet(PetModel petModel) {

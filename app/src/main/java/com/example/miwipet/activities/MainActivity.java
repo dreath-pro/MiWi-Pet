@@ -104,15 +104,14 @@ public class MainActivity extends AppCompatActivity {
 
         InspectInventory inspectInventory = new InspectInventory(inventoryModel);
         inspectInventory.updatePet();
-        if (inspectInventory.isWithResult()) {
-            petDatabase.clearPet();
+        inspectInventory.updatePetImage();
 
-            for (PetModel petModel : inventoryModel.getPetLists()) {
-                petDatabase.addPet(petModel);
-            }
-            inventoryModel.clearPetLists();
-            getPetFromDatabase();
+        petDatabase.clearPet();
+        for (PetModel petModel : inventoryModel.getPetLists()) {
+            petDatabase.addPet(petModel);
         }
+        inventoryModel.clearPetLists();
+        getPetFromDatabase();
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 MainActivity.this, drawerLayout, materialToolbar, R.string.drawer_close, R.string.drawer_open);

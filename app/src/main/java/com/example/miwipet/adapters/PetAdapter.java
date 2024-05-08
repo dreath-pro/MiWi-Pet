@@ -10,7 +10,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -23,7 +22,7 @@ import com.example.miwipet.utils.Rarity;
 
 import java.util.ArrayList;
 
-public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyViewHolder> {
+public class PetAdapter extends RecyclerView.Adapter<PetAdapter.MyViewHolder> {
     private Context context;
     private Activity activity;
     private ArrayList<PetModel> petModels;
@@ -35,7 +34,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyVi
             rarity.getRarity(3),
             rarity.getRarity(4)};
 
-    public InventoryAdapter(Activity activity, ArrayList<PetModel> petModels) {
+    public PetAdapter(Activity activity, ArrayList<PetModel> petModels) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         this.petModels = petModels;
@@ -43,14 +42,14 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyVi
 
     @NonNull
     @Override
-    public InventoryAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PetAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.inventory_selection, parent, false);
-        return new InventoryAdapter.MyViewHolder(view);
+        return new PetAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InventoryAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PetAdapter.MyViewHolder holder, int position) {
         holder.petImage.setImageResource(petModels.get(position).getPetImage());
         holder.petName.setText(petModels.get(position).getPetName());
         holder.petCardView.setCardBackgroundColor(ContextCompat.getColor(context, petModels.get(position).getRarityColor()));
@@ -85,7 +84,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyVi
         }
     }
 
-    private void inventoryDetails(InventoryAdapter.MyViewHolder holder) {
+    private void inventoryDetails(PetAdapter.MyViewHolder holder) {
         Dialog dialog = new Dialog(activity);
         dialog.setContentView(R.layout.pet_inventory_details);
 
