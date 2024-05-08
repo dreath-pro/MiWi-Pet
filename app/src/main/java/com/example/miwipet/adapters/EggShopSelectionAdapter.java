@@ -16,6 +16,7 @@ import com.example.miwipet.database.EggDatabase;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.utils.EggSource;
+import com.example.miwipet.utils.RefreshInventory;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,7 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
     private InventoryModel inventoryModel;
     private TextView chipToken, glazeToken;
 
+    private RefreshInventory refreshInventory;
     private EggSource eggSource = new EggSource();
 
     public EggShopSelectionAdapter(
@@ -38,6 +40,8 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
         this.chipToken = chipToken;
         this.glazeToken = glazeToken;
         this.inventoryModel = inventoryModel;
+
+        refreshInventory = new RefreshInventory(context, inventoryModel);
     }
 
     @NonNull
@@ -70,7 +74,7 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
                         if(holder.eggName.getText().toString().equals(eggSource.getName(i)))
                         {
                             eggDatabase.addEgg(eggSource.getEgg(i));
-                            inventoryModel.addEggLists(eggSource.getEgg(i));
+                            refreshInventory.getEggFromDatabase();
                         }
                     }
 

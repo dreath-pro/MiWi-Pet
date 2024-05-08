@@ -34,6 +34,7 @@ import com.example.miwipet.database.CurrencyDatabase;
 import com.example.miwipet.utils.InspectInventory;
 import com.example.miwipet.database.PetDatabase;
 import com.example.miwipet.utils.Rarity;
+import com.example.miwipet.utils.RefreshInventory;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private EggDatabase eggDatabase = new EggDatabase(MainActivity.this);
     private PetDatabase petDatabase = new PetDatabase(MainActivity.this);
     private CurrencyDatabase currencyDatabase = new CurrencyDatabase(MainActivity.this);
+    private RefreshInventory refreshInventory;
     private Rarity rarity = new Rarity();
 
     private void initializeComponents() {
@@ -97,10 +99,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        refreshInventory = new RefreshInventory(MainActivity.this, inventoryModel);
+
         initializeComponents();
         generateToken();
-        getPetFromDatabase();
-        getEggFromDatabase();
+        refreshInventory.getPetFromDatabase();
+        refreshInventory.getEggFromDatabase();
 
         InspectInventory inspectInventory = new InspectInventory(inventoryModel);
         inspectInventory.updatePet();
@@ -112,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             petDatabase.addPet(petModel);
         }
         inventoryModel.clearPetLists();
-        getPetFromDatabase();
+        refreshInventory.getPetFromDatabase();
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 MainActivity.this, drawerLayout, materialToolbar, R.string.drawer_close, R.string.drawer_open);
@@ -179,8 +183,7 @@ public class MainActivity extends AppCompatActivity {
                     updateToken();
 
                     petDatabase.addPet(petModel);
-                    getPetFromDatabase();
-                    getEggFromDatabase();
+                    refreshInventory.getPetFromDatabase();
 
                     incubated.clear();
                 } else {
@@ -213,25 +216,5 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-    }
-
-    private void getPetFromDatabase() {
-        ArrayList<PetModel> petModels;
-        petModels = petDatabase.getPetList();
-
-        inventoryModel.clearPetLists();
-        for (PetModel pet : petModels) {
-            inventoryModel.addPetLists(pet);
-        }
-    }
-
-    private void getEggFromDatabase() {
-        ArrayList<EggModel> eggModels;
-        eggModels = eggDatabase.getEggList();
-
-        inventoryModel.clearEggList();
-        for (EggModel egg : eggModels) {
-            inventoryModel.addEggLists(egg);
-        }
     }
 }
