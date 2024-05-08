@@ -85,4 +85,22 @@ public class InspectInventory {
             count++;
         }
     }
+
+    public void updateEggPetImage()
+    {
+        int count = 0;
+
+        for(EggModel eggModel : inventoryModel.getEggLists())
+        {
+            for(int i = 0; i <= eggSource.getCount() - 1; i++)
+            {
+                if(eggSource.getEgg(i).isNameExist(eggModel.getPetName()))
+                {
+                    inventoryModel.getEggLists().get(count).setPetImage(eggSource.getEgg(i).refreshPetImage(eggModel.getPetName()));
+                }
+            }
+        }
+
+        count++;
+    }
 }

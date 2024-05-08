@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
         InspectInventory inspectInventory = new InspectInventory(inventoryModel);
         inspectInventory.updatePet();
+        inspectInventory.updateEggPetImage();
         inspectInventory.updatePetImage();
 
         petDatabase.clearPet();
