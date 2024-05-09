@@ -37,7 +37,7 @@ public class NormalEgg extends EggModel {
     };
 
     public NormalEgg() {
-        super("Normal Egg", R.drawable.egg_normal, 10, 0, 0, 5, 0);
+        super("Normal Egg", R.drawable.egg_normal, 10, 0, 0, 5, 0, 100);
         super.selectRarity(pets, petNames);
     }
 }

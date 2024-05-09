@@ -29,9 +29,12 @@ public class EggDatabase extends SQLiteOpenHelper {
     private static final String toHatch = "to_hatch";
     private static final String isSelected = "is_selected";
     private static final String rarityText = "rarity_text";
+    private static final String eggPercentage = "egg_percentage";
+
+    private static final int DATABASE_VERSION = 2;
 
     public EggDatabase(@Nullable Context context) {
-        super(context, "egg.db", null, 1);
+        super(context, "egg.db", null, DATABASE_VERSION);
     }
 
     @Override
@@ -46,7 +49,12 @@ public class EggDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if(oldVersion < 2)
+        {
+            db.execSQL("ALTER TABLE " + eggTable + " ADD COLUMN " + eggPercentage + " INT");
+        }
 
+        db.setVersion(DATABASE_VERSION);
     }
 
     public boolean addEgg(EggModel eggModel) {
@@ -68,6 +76,7 @@ public class EggDatabase extends SQLiteOpenHelper {
         contentValues.put(toHatch, eggModel.isToHatch());
         contentValues.put(isSelected, eggModel.isSelected());
         contentValues.put(rarityText, eggModel.getRarityText());
+        contentValues.put(eggPercentage, eggModel.getEggPercentage());
 
         long insert = db.insert(eggTable, null, contentValues);
         if (insert == -1) {
@@ -123,10 +132,11 @@ public class EggDatabase extends SQLiteOpenHelper {
                 boolean toHatch = cursor.getInt(12) == 1;
                 boolean isSelecsted = cursor.getInt(13) == 1;
                 String rarityText = cursor.getString(14);
+                int eggPercentage = cursor.getInt(15);
 
                 EggModel eggModel = new EggModel(id, eggName, eggImage, petName, petImage, petAge,
                         petType, chipPrice, glazePrice, second, minute, hour, toHatch, isSelecsted,
-                        rarityText);
+                        rarityText, eggPercentage);
 
                 eggModels.add(eggModel);
             } while (cursor.moveToNext());

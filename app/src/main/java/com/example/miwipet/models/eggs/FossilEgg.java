@@ -37,7 +37,7 @@ public class FossilEgg extends EggModel {
     };
 
     public FossilEgg() {
-        super("Fossil Egg", R.drawable.egg_fossil, 0, 0, 0, 30, 1);
+        super("Fossil Egg", R.drawable.egg_fossil, 0, 0, 0, 30, 1, 100);
         super.selectRarity(pets, petNames);
     }
 }

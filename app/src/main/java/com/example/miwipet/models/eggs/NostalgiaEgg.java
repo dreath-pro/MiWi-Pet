@@ -42,7 +42,7 @@ public class NostalgiaEgg extends EggModel {
     };
 
     public NostalgiaEgg() {
-        super("Nostalgia Egg", R.drawable.egg_nostalgia, 50, 20, 0, 30, 5);
+        super("Nostalgia Egg", R.drawable.egg_nostalgia, 30, 10, 0, 30, 5, 5);
         super.selectRarity(pets, petNames);
     }
 }

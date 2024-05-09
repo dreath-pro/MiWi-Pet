@@ -24,7 +24,7 @@ import java.util.Random;
 
 public class StoreFragment extends Fragment {
     private EggShopSelectionAdapter eggShopSelectionAdapter;
-    private ArrayList<EggModel> eggModels = new ArrayList<>();
+    private ArrayList<EggModel> eggDisplay = new ArrayList<>();
     private InventoryModel inventoryModels;
     private RecyclerView eggShopSelection, itemShopSelection, foodShopSelection;
     private Context context;
@@ -48,14 +48,9 @@ public class StoreFragment extends Fragment {
         itemShopSelection = view.findViewById(R.id.itemShopSelection);
         foodShopSelection = view.findViewById(R.id.foodShopSelection);
 
-        for (int i = 0; i <= 80; i++) {
-            Random random = new Random();
-            int selectedEgg = random.nextInt(eggSource.getCount());
-            eggSource.getEgg(selectedEgg);
-            eggModels.add(eggSource.getEgg(selectedEgg));
-        }
+        eggDisplay.addAll(eggSource.fetchStoreList());
 
-        eggShopSelectionAdapter = new EggShopSelectionAdapter(context, eggModels, chipToken, glazeToken, inventoryModels);
+        eggShopSelectionAdapter = new EggShopSelectionAdapter(context, eggSource, eggDisplay, chipToken, glazeToken, inventoryModels);
         eggShopSelection.setAdapter(eggShopSelectionAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         eggShopSelection.setLayoutManager(layoutManager);

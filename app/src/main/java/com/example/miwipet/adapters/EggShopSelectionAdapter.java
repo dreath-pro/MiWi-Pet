@@ -27,15 +27,17 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
     private TextView chipToken, glazeToken;
 
     private RefreshInventory refreshInventory;
-    private EggSource eggSource = new EggSource();
+    private EggSource eggSource;
 
     public EggShopSelectionAdapter(
             Context context,
+            EggSource eggSource,
             ArrayList<EggModel> displayEggs,
             TextView chipToken,
             TextView glazeToken,
             InventoryModel inventoryModel) {
         this.context = context;
+        this.eggSource = eggSource;
         this.displayEggs = displayEggs;
         this.chipToken = chipToken;
         this.glazeToken = glazeToken;
@@ -69,11 +71,11 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
                         inventoryModel.getGlazeToken() >=
                                 displayEggs.get(holder.getAdapterPosition()).getGlazePrice()) {
 
-                    for(int i = 0; i <= eggSource.getCount() - 1; i++)
+                    for(int i = 0; i <= displayEggs.size() - 1; i++)
                     {
-                        if(holder.eggName.getText().toString().equals(eggSource.getName(i)))
+                        if(holder.eggName.getText().toString().equals(displayEggs.get(i).getEggName()))
                         {
-                            eggDatabase.addEgg(eggSource.getEgg(i));
+                            eggDatabase.addEgg(eggSource.pickStoreEgg(i));
                             refreshInventory.getEggFromDatabase();
                         }
                     }

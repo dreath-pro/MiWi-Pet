@@ -14,6 +14,7 @@ public class EggModel {
     private int chipPrice, glazePrice;
 
     private int second, minute, hour;
+    private int eggPercentage;
     private boolean toHatch, isSelected;
     private Random random = new Random();
     private String rarityText;
@@ -24,7 +25,7 @@ public class EggModel {
 
     public EggModel(int id, String eggName, int eggImage, String petName, int petImage, int age, int type,
                     int chipPrice, int glazePrice, int second, int minute, int hour, boolean toHatch,
-                    boolean isSelected, String rarityText) {
+                    boolean isSelected, String rarityText, int eggPercentage) {
         this.id = id;
         this.eggName = eggName;
         this.eggImage = eggImage;
@@ -40,9 +41,10 @@ public class EggModel {
         this.toHatch = toHatch;
         this.isSelected = isSelected;
         this.rarityText = rarityText;
+        this.eggPercentage = eggPercentage;
     }
 
-    public EggModel(String eggName, int eggImage, int chipPrice, int glazePrice, int second, int minute, int hour) {
+    public EggModel(String eggName, int eggImage, int chipPrice, int glazePrice, int second, int minute, int hour, int eggPercentage) {
         this.eggName = eggName;
         this.eggImage = eggImage;
         this.chipPrice = chipPrice;
@@ -50,8 +52,29 @@ public class EggModel {
         this.second = second;
         this.minute = minute;
         this.hour = hour;
+        this.eggPercentage = eggPercentage;
 
         age = 0;
+        selectType();
+        toHatch = false;
+        isSelected = false;
+    }
+
+    protected void selectRarity(int[][] petImages, String[][] petNames) {
+        this.petImages = petImages;
+        this.petNames = petNames;
+
+        selectPet();
+    }
+
+    public void repickEgg()
+    {
+        selectType();
+        selectPet();
+    }
+
+    private void selectType()
+    {
         type = 0;
         int selectedType = random.nextInt(3);
         switch (selectedType) {
@@ -65,17 +88,12 @@ public class EggModel {
                 type = 2;
                 break;
         }
-
-        toHatch = false;
-        isSelected = false;
     }
 
-    protected void selectRarity(int[][] petImages, String[][] petNames) {
+    private void selectPet()
+    {
         int selectedRarity = random.nextInt(100) + 1;
         int selectedPet;
-
-        this.petImages = petImages;
-        this.petNames = petNames;
 
         if (selectedRarity <= 2) {
             selectedPet = random.nextInt(petImages[4].length);
@@ -272,5 +290,13 @@ public class EggModel {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public int getEggPercentage() {
+        return eggPercentage;
+    }
+
+    public void setEggPercentage(int eggPercentage) {
+        this.eggPercentage = eggPercentage;
     }
 }

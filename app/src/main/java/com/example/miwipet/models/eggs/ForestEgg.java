@@ -37,7 +37,7 @@ public class ForestEgg extends EggModel {
     };
 
     public ForestEgg() {
-        super("Forest Egg", R.drawable.egg_forest, 20, 0, 0, 30, 0);
+        super("Forest Egg", R.drawable.egg_forest, 20, 0, 0, 30, 0, 100);
         super.selectRarity(pets, petNames);
     }
 }

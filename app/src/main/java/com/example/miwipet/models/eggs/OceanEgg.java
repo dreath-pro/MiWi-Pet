@@ -38,7 +38,7 @@ public class OceanEgg extends EggModel {
     };
 
     public OceanEgg() {
-        super("Ocean Egg", R.drawable.egg_ocean, 30, 0, 0, 25, 0);
+        super("Ocean Egg", R.drawable.egg_ocean, 30, 0, 0, 25, 0, 75);
         super.selectRarity(pets, petNames);
     }
 }

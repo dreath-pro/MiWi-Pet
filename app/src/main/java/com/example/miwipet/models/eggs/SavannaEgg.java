@@ -33,7 +33,7 @@ public class SavannaEgg extends EggModel {
     };
 
     public SavannaEgg() {
-        super("Savanna Egg", R.drawable.egg_savanna, 30, 0, 0, 0, 3);
+        super("Savanna Egg", R.drawable.egg_savanna, 30, 0, 0, 0, 3, 30);
         super.selectRarity(pets, petNames);
     }
 }

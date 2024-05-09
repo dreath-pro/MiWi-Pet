@@ -88,9 +88,9 @@ public class InspectInventory {
         {
             for(int i = 0; i <= eggSource.getCount() - 1; i++)
             {
-                if(eggSource.getEgg(i).isNameExist(petModel.getPetName()))
+                if(eggSource.pickOverallEgg(i).isNameExist(petModel.getPetName()))
                 {
-                    inventoryModel.getPetLists().get(count).setPetImage(eggSource.getEgg(i).refreshPetImage(petModel.getPetName()));
+                    inventoryModel.getPetLists().get(count).setPetImage(eggSource.pickOverallEgg(i).refreshPetImage(petModel.getPetName()));
                 }
             }
 
@@ -106,9 +106,9 @@ public class InspectInventory {
         {
             for(int i = 0; i <= eggSource.getCount() - 1; i++)
             {
-                if(eggSource.getEgg(i).isNameExist(eggModel.getPetName()))
+                if(eggSource.pickOverallEgg(i).isNameExist(eggModel.getPetName()))
                 {
-                    inventoryModel.getEggLists().get(count).setPetImage(eggSource.getEgg(i).refreshPetImage(eggModel.getPetName()));
+                    inventoryModel.getEggLists().get(count).setPetImage(eggSource.pickOverallEgg(i).refreshPetImage(eggModel.getPetName()));
                 }
             }
         }
