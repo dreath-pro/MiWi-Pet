@@ -13,7 +13,7 @@ import com.example.miwipet.models.eggs.SavannaEgg;
 import java.util.ArrayList;
 
 public class EggSource {
-    ArrayList<EggModel> eggLists = new ArrayList<>();
+    private ArrayList<EggModel> eggLists = new ArrayList<>();
 
     public EggSource()
     {
