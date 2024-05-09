@@ -64,6 +64,18 @@ public class InspectInventory {
                 inventoryModel.getPetLists().get(count).setPetName("Phorusrhacids");
             }
 
+            if(petModel.getPetName().equals("Buffalo"))
+            {
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.musk_ox);
+                inventoryModel.getPetLists().get(count).setPetName("Musk Ox");
+            }
+
+            if(petModel.getPetName().equals("Musk Ox"))
+            {
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.buffalo);
+                inventoryModel.getPetLists().get(count).setPetName("Buffalo");
+            }
+
             count++;
         }
     }

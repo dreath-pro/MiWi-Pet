@@ -16,7 +16,7 @@ public class NormalEgg extends EggModel {
                     R.drawable.blue_chick, R.drawable.donkey, R.drawable.chicken, R.drawable.cockatoo},
 
 
-            {R.drawable.cow, R.drawable.musk_ox, R.drawable.buffalo, R.drawable.sheep,
+            {R.drawable.cow, R.drawable.buffalo, R.drawable.musk_ox, R.drawable.sheep,
                     R.drawable.pig, R.drawable.parrot, R.drawable.fox, R.drawable.horse},
 
 
@@ -31,7 +31,7 @@ public class NormalEgg extends EggModel {
 
             {"Cat", "Dog", "Bird", "Rabbit", "Blue Chick", "Donkey", "Chicken", "Cockatoo"},
 
-            {"Cow", "Musk Ox", "Buffalo", "Sheep", "Pig", "Parrot", "Fox", "Horse"},
+            {"Cow", "Buffalo", "Musk Ox", "Sheep", "Pig", "Parrot", "Fox", "Horse"},
 
             {"Unicorn", "Pegasus"}
     };
