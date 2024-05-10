@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.miwipet.R;
 import com.example.miwipet.database.EggDatabase;
+import com.example.miwipet.database.TimeDatabase;
 import com.example.miwipet.fragments.navigation.AboutFragment;
 import com.example.miwipet.fragments.navigation.CollectionFragment;
 import com.example.miwipet.fragments.single.EggFragment;
@@ -31,6 +32,7 @@ import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.PetModel;
 import com.example.miwipet.database.CurrencyDatabase;
+import com.example.miwipet.models.TimeModel;
 import com.example.miwipet.utils.InspectInventory;
 import com.example.miwipet.database.PetDatabase;
 import com.example.miwipet.utils.Rarity;
@@ -38,12 +40,18 @@ import com.example.miwipet.utils.RefreshInventory;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 //egg hatch, logo, simple
 //philippine eagle a monkey eating eagle with beautiful feathers, 3d render, full view, white background, simplistic kiddy design, cute
 //frost egg, 3d render, white background, simple design
 //ocean background, digital art, cartoon, unfocus, blur
+//simple noodles, 3d render, full view, white background, simplistic kiddy design
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -57,12 +65,14 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<EggModel> incubated = new ArrayList<>();
     private InventoryModel inventoryModel = new InventoryModel();
+    private TimeModel timeModel = new TimeModel();
 
-    private EggDatabase eggDatabase = new EggDatabase(MainActivity.this);
-    private PetDatabase petDatabase = new PetDatabase(MainActivity.this);
-    private CurrencyDatabase currencyDatabase = new CurrencyDatabase(MainActivity.this);
     private RefreshInventory refreshInventory;
     private Rarity rarity = new Rarity();
+
+    private PetDatabase petDatabase = new PetDatabase(MainActivity.this);
+    private CurrencyDatabase currencyDatabase = new CurrencyDatabase(MainActivity.this);
+    private TimeDatabase timeDatabase = new TimeDatabase(MainActivity.this);
 
     private void initializeComponents() {
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -74,6 +84,64 @@ public class MainActivity extends AppCompatActivity {
         eggImage = findViewById(R.id.eggImage);
         timeText = findViewById(R.id.timeText);
         hatchButton = findViewById(R.id.hatchButton);
+    }
+
+    private void generateTime()
+    {
+        if(!timeDatabase.doesDataExist())
+        {
+            generateTimeModel(false);
+            timeDatabase.generateTable(timeModel);
+        }else
+        {
+            generateTimeModel(true);
+            timeDatabase.updateTime(timeModel);
+        }
+    }
+
+    private void generateTimeModel(boolean doesDataExist)
+    {
+        TimeModel currentTimeModel = new TimeModel();
+
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat currentDay = new SimpleDateFormat("dd", Locale.getDefault());
+        SimpleDateFormat currentMonth = new SimpleDateFormat("MM", Locale.getDefault());
+        SimpleDateFormat currentYear = new SimpleDateFormat("yyyy", Locale.getDefault());
+
+        String formattedDay = currentDay.format(currentTime);
+        String formattedMonth = currentMonth.format(currentTime);
+        String formattedYear = currentYear.format(currentTime);
+
+        currentTimeModel.setCurrentTime(currentTime.toString());
+        currentTimeModel.setLastTimeLogin(currentTime.toString());
+        currentTimeModel.setLastDayLogin(formattedDay);
+        currentTimeModel.setLastMonthLogin(formattedMonth);
+        currentTimeModel.setLastYearLogin(formattedYear);
+
+        if(doesDataExist)
+        {
+            timeModel = timeDatabase.getTimeRecord();
+            timeModel.setLoginStreak(timeModel.getLoginStreak() + 1);
+
+            if(timeModel.isNewDay(currentTimeModel))
+            {
+                if(!timeModel.isLoggedIn())
+                {
+//                    timeModel.setLoginStreak(1);
+//                    timeModel.setLoggedIn(true);
+                }
+            }
+        }else
+        {
+            timeModel.setLoginStreak(1);
+            timeModel.setLoggedIn(true);
+        }
+
+        timeModel.setCurrentTime(currentTime.toString());
+        timeModel.setLastTimeLogin(currentTime.toString());
+        timeModel.setLastDayLogin(formattedDay);
+        timeModel.setLastMonthLogin(formattedMonth);
+        timeModel.setLastYearLogin(formattedYear);
     }
 
     private void generateToken() {
@@ -102,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
         refreshInventory = new RefreshInventory(MainActivity.this, inventoryModel);
 
         initializeComponents();
+        generateTime();
         generateToken();
         refreshInventory.getPetFromDatabase();
         refreshInventory.getEggFromDatabase();

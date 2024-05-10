@@ -31,7 +31,7 @@ public class EggDatabase extends SQLiteOpenHelper {
     private static final String rarityText = "rarity_text";
     private static final String eggPercentage = "egg_percentage";
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public EggDatabase(@Nullable Context context) {
         super(context, "egg.db", null, DATABASE_VERSION);
@@ -42,14 +42,14 @@ public class EggDatabase extends SQLiteOpenHelper {
         String createTableStatement = "CREATE TABLE " + eggTable + " (" + id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 eggImage + " INT, " + eggName + " TEXT, " + petName + " TEXT, " + petImage + " INT, " + petAge + " INT, " +
                 petType + " INT, " + chipPrice + " INT, " + glazePrice + " INT, " + second + " INT, " + minute + " INT, " +
-                hour + " INT, " + toHatch + " BOOL, " + isSelected + " BOOL, " + rarityText + " String)";
+                hour + " INT, " + toHatch + " BOOL, " + isSelected + " BOOL, " + rarityText + " String, " + eggPercentage + ")";
 
         db.execSQL(createTableStatement);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion < 2)
+        if(oldVersion < 3)
         {
             db.execSQL("ALTER TABLE " + eggTable + " ADD COLUMN " + eggPercentage + " INT");
         }
