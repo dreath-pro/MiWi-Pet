@@ -25,8 +25,6 @@ public class EggSource {
     {
         eggLists.clear();
 
-        int count = 0;
-
         switch (type)
         {
             case "All":
