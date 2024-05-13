@@ -12,9 +12,9 @@ public class NostalgiaEgg extends EggModel {
                     R.drawable.nostalgia_parrot, R.drawable.nostalgia_snake, R.drawable.nostalgia_tiger},
 
 
-            {R.drawable.nostalgia_bear, R.drawable.nostalgia_cockatoo, R.drawable.nostalgia_deer,
-                    R.drawable.nostalgia_lion, R.drawable.nostalgia_shark, R.drawable.nostalgia_smilodon,
-                    R.drawable.nostalgia_t_rex, R.drawable.nostalgia_triceratops, R.drawable.nostalgia_whale_shark,
+            {R.drawable.nostalgia_bear, R.drawable.nostalgia_deer, R.drawable.nostalgia_lion,
+                    R.drawable.nostalgia_shark, R.drawable.nostalgia_smilodon, R.drawable.nostalgia_t_rex,
+                    R.drawable.nostalgia_triceratops, R.drawable.nostalgia_whale_shark,
                     R.drawable.nostalgia_crocodile},
 
 
@@ -31,8 +31,8 @@ public class NostalgiaEgg extends EggModel {
             {"Nostalgia Elephant", "Nostalgia Flamingo", "Nostalgia Owl", "Nostalgia Parrot",
                     "Nostalgia Snake", "Nostalgia Tiger"},
 
-            {"Nostalgia Bear", "Nostalgia Cockatoo", "Nostalgia Deer", "Nostalgia Lion",
-                    "Nostalgia Shark", "Nostalgia Smilodon", "Nostalgia T-Rex", "Nostalgia Triceratops",
+            {"Nostalgia Bear", "Nostalgia Deer", "Nostalgia Lion", "Nostalgia Shark",
+                    "Nostalgia Smilodon", "Nostalgia T-Rex", "Nostalgia Triceratops",
                     "Nostalgia Whale Shark", "Nostalgia Crocodile"},
 
             {"Nostalgia Hydra", "Nostalgia Minotaur", "Nostalgia Phoenix", "Nostalgia Rock Golem",

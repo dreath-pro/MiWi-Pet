@@ -21,7 +21,7 @@ public class TimeModel {
         this.loggedIn = loggedIn;
     }
 
-    public TimeModel(int id, String currentTime, String lastTimeLogin, String lastDayLogin, String lastMonthLogin, String lastYearLogin, int loginStreak, boolean rewardRefreshed) {
+    public TimeModel(int id, String currentTime, String lastTimeLogin, String lastDayLogin, String lastMonthLogin, String lastYearLogin, int loginStreak, boolean loggedIn) {
         this.id = id;
         this.currentTime = currentTime;
         this.lastTimeLogin = lastTimeLogin;
@@ -29,7 +29,7 @@ public class TimeModel {
         this.lastMonthLogin = lastMonthLogin;
         this.lastYearLogin = lastYearLogin;
         this.loginStreak = loginStreak;
-        this.loggedIn = rewardRefreshed;
+        this.loggedIn = loggedIn;
     }
 
     public boolean isNewDay(TimeModel currentTime) {
@@ -52,7 +52,6 @@ public class TimeModel {
 
     public boolean missedLogin(TimeModel currentTime) {
         boolean result = false;
-        int timePassed = 0;
 
         int currentDay = Integer.parseInt(currentTime.getLastDayLogin()),
                 currentMonth = Integer.parseInt(currentTime.getLastMonthLogin()),
@@ -61,16 +60,55 @@ public class TimeModel {
                 lastMonth = Integer.parseInt(lastMonthLogin),
                 lastYear = Integer.parseInt(lastYearLogin);
 
-        timePassed = currentDay - lastDay;
+        int dayPassed = currentDay - lastDay;
+        int monthPassed = currentMonth - lastMonth;
+        int yearPassed = currentYear - lastYear;
 
-        if (timePassed >= 2) {
+        if (yearPassed == 0) {
+
+            if (monthPassed == 0) {
+
+                if (dayPassed >= 2) {
+                    result = true;
+                } else if (dayPassed < 0) {
+                    result = true;
+                }
+
+            } else if (monthPassed >= 1) {
+
+                if (dayPassed < 0) {
+                    if(currentDay != 1 || lastDay != getNumberOfDays(lastMonth, lastYear))
+                    {
+                        result = true;
+                    }
+                } else {
+                    result = true;
+                }
+
+            } else {
+                result = true;
+            }
+
+        } else if (yearPassed >= 1) {
+
+            if (monthPassed < 0) {
+                monthPassed = Math.abs(monthPassed);
+
+                if (monthPassed == 11) {
+                    if(currentDay != 1 || lastDay != getNumberOfDays(lastMonth, lastYear))
+                    {
+                        result = true;
+                    }
+                }else
+                {
+                    result = true;
+                }
+            } else {
+                result = true;
+            }
+
+        } else {
             result = true;
-        }else if (timePassed < 0) {
-
-        }
-
-        if (currentYear > lastYear) {
-
         }
 
         return result;
@@ -86,11 +124,9 @@ public class TimeModel {
                 break;
             case 2:
                 //february
-                if(isLeapYear(year))
-                {
+                if (isLeapYear(year)) {
                     numberOfDays = 29;
-                }else
-                {
+                } else {
                     numberOfDays = 28;
                 }
                 break;
@@ -139,21 +175,16 @@ public class TimeModel {
         return numberOfDays;
     }
 
-    private boolean isLeapYear(int year)
-    {
+    private boolean isLeapYear(int year) {
         boolean result = false;
 
-        if(year % 400 == 0)
-        {
+        if (year % 400 == 0) {
             result = true;
-        }else if(year % 100 == 0)
-        {
+        } else if (year % 100 == 0) {
             result = false;
-        }else if(year % 4 == 0)
-        {
+        } else if (year % 4 == 0) {
             result = true;
-        }else
-        {
+        } else {
             result = false;
         }
 

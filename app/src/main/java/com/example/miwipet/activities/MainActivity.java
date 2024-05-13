@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
             generateTimeModel(true);
             timeDatabase.updateTime(timeModel);
         }
+
+        timeModel.setLoggedIn(false);
     }
 
     private void generateTimeModel(boolean doesDataExist)
@@ -118,30 +120,31 @@ public class MainActivity extends AppCompatActivity {
         currentTimeModel.setLastMonthLogin(formattedMonth);
         currentTimeModel.setLastYearLogin(formattedYear);
 
+        timeModel = timeDatabase.getTimeRecord();
+
         if(doesDataExist)
         {
-            timeModel = timeDatabase.getTimeRecord();
-            timeModel.setLoginStreak(timeModel.getLoginStreak() + 1);
-
             if(timeModel.isNewDay(currentTimeModel))
             {
-                if(!timeModel.isLoggedIn())
+                timeModel.setLoggedIn(true);
+                timeModel.setLoginStreak(timeModel.getLoginStreak() + 1);
+
+                if(timeModel.missedLogin(currentTimeModel))
                 {
-//                    timeModel.setLoginStreak(1);
-//                    timeModel.setLoggedIn(true);
+                    timeModel.setLoginStreak(1);
                 }
             }
         }else
         {
-            timeModel.setLoginStreak(1);
             timeModel.setLoggedIn(true);
+            timeModel.setLoginStreak(1);
         }
 
-        timeModel.setCurrentTime(currentTime.toString());
-        timeModel.setLastTimeLogin(currentTime.toString());
-        timeModel.setLastDayLogin(formattedDay);
-        timeModel.setLastMonthLogin(formattedMonth);
-        timeModel.setLastYearLogin(formattedYear);
+        timeModel.setCurrentTime(currentTimeModel.getCurrentTime());
+        timeModel.setLastTimeLogin(currentTimeModel.getCurrentTime());
+        timeModel.setLastDayLogin(currentTimeModel.getLastDayLogin());
+        timeModel.setLastMonthLogin(currentTimeModel.getLastMonthLogin());
+        timeModel.setLastYearLogin(currentTimeModel.getLastYearLogin());
     }
 
     private void generateToken() {
