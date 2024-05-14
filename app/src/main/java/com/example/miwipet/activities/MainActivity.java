@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -74,6 +75,26 @@ public class MainActivity extends AppCompatActivity {
     private CurrencyDatabase currencyDatabase = new CurrencyDatabase(MainActivity.this);
     private TimeDatabase timeDatabase = new TimeDatabase(MainActivity.this);
 
+
+    private Date currentTime;
+
+    private String formattedDay;
+    private String formattedMonth;
+    private String formattedYear;
+
+    private void initializeCurrentTime()
+    {
+        currentTime = Calendar.getInstance().getTime();
+
+        SimpleDateFormat currentDay = new SimpleDateFormat("dd", Locale.getDefault());;
+        SimpleDateFormat currentMonth = new SimpleDateFormat("MM", Locale.getDefault());;
+        SimpleDateFormat currentYear = new SimpleDateFormat("yyyy", Locale.getDefault());;
+
+        formattedDay = currentDay.format(currentTime);
+        formattedMonth = currentMonth.format(currentTime);
+        formattedYear = currentYear.format(currentTime);
+    }
+
     private void initializeComponents() {
         drawerLayout = findViewById(R.id.drawer_layout);
         materialToolbar = findViewById(R.id.materialToolbar);
@@ -103,48 +124,42 @@ public class MainActivity extends AppCompatActivity {
 
     private void generateTimeModel(boolean doesDataExist)
     {
-        TimeModel currentTimeModel = new TimeModel();
-
-        Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat currentDay = new SimpleDateFormat("dd", Locale.getDefault());
-        SimpleDateFormat currentMonth = new SimpleDateFormat("MM", Locale.getDefault());
-        SimpleDateFormat currentYear = new SimpleDateFormat("yyyy", Locale.getDefault());
-
-        String formattedDay = currentDay.format(currentTime);
-        String formattedMonth = currentMonth.format(currentTime);
-        String formattedYear = currentYear.format(currentTime);
-
-        currentTimeModel.setCurrentTime(currentTime.toString());
-        currentTimeModel.setLastTimeLogin(currentTime.toString());
-        currentTimeModel.setLastDayLogin(formattedDay);
-        currentTimeModel.setLastMonthLogin(formattedMonth);
-        currentTimeModel.setLastYearLogin(formattedYear);
-
-        timeModel = timeDatabase.getTimeRecord();
-
         if(doesDataExist)
         {
-            if(timeModel.isNewDay(currentTimeModel))
+            timeModel = timeDatabase.getTimeRecord();
+
+            timeModel.setCurrentTime(currentTime.toString());
+            timeModel.setCurrentTimeLogin(currentTime.toString());
+            timeModel.setCurrentDayLogin(formattedDay);
+            timeModel.setCurrentMonthLogin(formattedMonth);
+            timeModel.setCurrentYearLogin(formattedYear);
+
+            if(timeModel.isNewDay())
             {
                 timeModel.setLoggedIn(true);
                 timeModel.setLoginStreak(timeModel.getLoginStreak() + 1);
 
-                if(timeModel.missedLogin(currentTimeModel))
+                if(timeModel.missedLogin())
                 {
                     timeModel.setLoginStreak(1);
                 }
             }
         }else
         {
+            timeModel.setCurrentTime(currentTime.toString());
+            timeModel.setCurrentTimeLogin(currentTime.toString());
+            timeModel.setCurrentDayLogin(formattedDay);
+            timeModel.setCurrentMonthLogin(formattedMonth);
+            timeModel.setCurrentYearLogin(formattedYear);
+
+            timeModel.setLastTimeLogin(timeModel.getCurrentTimeLogin());
+            timeModel.setLastDayLogin(timeModel.getCurrentDayLogin());
+            timeModel.setLastMonthLogin(timeModel.getCurrentMonthLogin());
+            timeModel.setLastYearLogin(timeModel.getCurrentYearLogin());
+
             timeModel.setLoggedIn(true);
             timeModel.setLoginStreak(1);
         }
-
-        timeModel.setCurrentTime(currentTimeModel.getCurrentTime());
-        timeModel.setLastTimeLogin(currentTimeModel.getCurrentTime());
-        timeModel.setLastDayLogin(currentTimeModel.getLastDayLogin());
-        timeModel.setLastMonthLogin(currentTimeModel.getLastMonthLogin());
-        timeModel.setLastYearLogin(currentTimeModel.getLastYearLogin());
     }
 
     private void generateToken() {
@@ -173,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
         refreshInventory = new RefreshInventory(MainActivity.this, inventoryModel);
 
         initializeComponents();
+        initializeCurrentTime();
         generateTime();
         generateToken();
         refreshInventory.getPetFromDatabase();
@@ -202,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.collection_nav) {
                     replaceFragment(new CollectionFragment(inventoryModel.getPetLists(), getApplicationContext()));
                 } else if (item.getItemId() == R.id.store_nav) {
-                    replaceFragment(new StoreFragment(inventoryModel, chipTokenValue, glazeTokenValue));
+                    replaceFragment(new StoreFragment(inventoryModel, chipTokenValue, glazeTokenValue, timeModel));
                 } else if (item.getItemId() == R.id.trade_nav) {
                     replaceFragment(new TradeFragment());
                 } else if (item.getItemId() == R.id.history_nav) {
@@ -279,7 +295,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Toast.makeText(this, "Hahaha ni stop na jimhardcore", Toast.LENGTH_SHORT).show();
+        timeModel.setLastTimeLogin(timeModel.getCurrentTimeLogin());
+        timeModel.setLastDayLogin(timeModel.getCurrentDayLogin());
+        timeModel.setLastMonthLogin(timeModel.getCurrentMonthLogin());
+        timeModel.setLastYearLogin(timeModel.getCurrentYearLogin());
+
+        timeDatabase.updateTime(timeModel);
     }
 
     private void replaceFragment(Fragment fragment) {

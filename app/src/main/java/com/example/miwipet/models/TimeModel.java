@@ -4,6 +4,7 @@ public class TimeModel {
     private int id;
     private String currentTime;
     private String lastTimeLogin, lastDayLogin, lastMonthLogin, lastYearLogin;
+    private String currentTimeLogin, currentDayLogin, currentMonthLogin, currentYearLogin;
     private int loginStreak;
     private boolean loggedIn;
 
@@ -32,30 +33,30 @@ public class TimeModel {
         this.loggedIn = loggedIn;
     }
 
-    public boolean isNewDay(TimeModel currentTime) {
+    public boolean isNewDay() {
         boolean result = false;
 
-        if (Integer.parseInt(currentTime.getLastDayLogin()) > Integer.parseInt(lastDayLogin)) {
+        if (Integer.parseInt(currentDayLogin) > Integer.parseInt(lastDayLogin)) {
             result = true;
         }
 
-        if (Integer.parseInt(currentTime.getLastMonthLogin()) > Integer.parseInt(lastMonthLogin)) {
+        if (Integer.parseInt(currentMonthLogin) > Integer.parseInt(lastMonthLogin)) {
             result = true;
         }
 
-        if (Integer.parseInt(currentTime.getLastYearLogin()) > Integer.parseInt(lastYearLogin)) {
+        if (Integer.parseInt(currentYearLogin) > Integer.parseInt(lastYearLogin)) {
             result = true;
         }
 
         return result;
     }
 
-    public boolean missedLogin(TimeModel currentTime) {
+    public boolean missedLogin() {
         boolean result = false;
 
-        int currentDay = Integer.parseInt(currentTime.getLastDayLogin()),
-                currentMonth = Integer.parseInt(currentTime.getLastMonthLogin()),
-                currentYear = Integer.parseInt(currentTime.getLastYearLogin());
+        int currentDay = Integer.parseInt(currentDayLogin),
+                currentMonth = Integer.parseInt(currentMonthLogin),
+                currentYear = Integer.parseInt(currentYearLogin);
         int lastDay = Integer.parseInt(lastDayLogin),
                 lastMonth = Integer.parseInt(lastMonthLogin),
                 lastYear = Integer.parseInt(lastYearLogin);
@@ -253,5 +254,37 @@ public class TimeModel {
 
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public String getCurrentTimeLogin() {
+        return currentTimeLogin;
+    }
+
+    public void setCurrentTimeLogin(String currentTimeLogin) {
+        this.currentTimeLogin = currentTimeLogin;
+    }
+
+    public String getCurrentDayLogin() {
+        return currentDayLogin;
+    }
+
+    public void setCurrentDayLogin(String currentDayLogin) {
+        this.currentDayLogin = currentDayLogin;
+    }
+
+    public String getCurrentMonthLogin() {
+        return currentMonthLogin;
+    }
+
+    public void setCurrentMonthLogin(String currentMonthLogin) {
+        this.currentMonthLogin = currentMonthLogin;
+    }
+
+    public String getCurrentYearLogin() {
+        return currentYearLogin;
+    }
+
+    public void setCurrentYearLogin(String currentYearLogin) {
+        this.currentYearLogin = currentYearLogin;
     }
 }

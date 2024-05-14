@@ -86,6 +86,26 @@ public class EggSource {
         return eggLists.get(index);
     }
 
+    public ArrayList<EggModel> getEggByString(ArrayList<String> eggNames)
+    {
+        ArrayList<EggModel> returnedEggList = new ArrayList<>();
+
+        generateEggs("All");
+
+        for(String eggName : eggNames)
+        {
+            for(EggModel eggList : eggLists)
+            {
+                if(eggName.equals(eggList.getEggName()))
+                {
+                    returnedEggList.add(eggList);
+                }
+            }
+        }
+
+        return returnedEggList;
+    }
+
     public ArrayList<EggModel> fetchStoreList()
     {
         refreshEggShop();

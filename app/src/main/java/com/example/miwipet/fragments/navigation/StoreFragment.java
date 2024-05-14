@@ -15,17 +15,26 @@ import android.widget.TextView;
 
 import com.example.miwipet.R;
 import com.example.miwipet.adapters.EggShopSelectionAdapter;
+import com.example.miwipet.database.EggDisplayDatabase;
+import com.example.miwipet.database.TimeDatabase;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.InventoryModel;
+import com.example.miwipet.models.TimeModel;
 import com.example.miwipet.utils.EggSource;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 public class StoreFragment extends Fragment {
+    private EggDisplayDatabase eggDisplayDatabase;
     private EggShopSelectionAdapter eggShopSelectionAdapter;
     private ArrayList<EggModel> eggDisplay = new ArrayList<>();
     private InventoryModel inventoryModels;
+    private TimeModel timeModel;
     private RecyclerView eggShopSelection, itemShopSelection, foodShopSelection;
     private Context context;
 
@@ -33,10 +42,11 @@ public class StoreFragment extends Fragment {
 
     private TextView chipToken, glazeToken;
 
-    public StoreFragment(InventoryModel inventoryModels, TextView chipToken, TextView glazeToken) {
+    public StoreFragment(InventoryModel inventoryModels, TextView chipToken, TextView glazeToken, TimeModel timeModel) {
         this.inventoryModels = inventoryModels;
         this.chipToken = chipToken;
         this.glazeToken = glazeToken;
+        this.timeModel = timeModel;
     }
 
     @Override
@@ -48,7 +58,7 @@ public class StoreFragment extends Fragment {
         itemShopSelection = view.findViewById(R.id.itemShopSelection);
         foodShopSelection = view.findViewById(R.id.foodShopSelection);
 
-        eggDisplay.addAll(eggSource.fetchStoreList());
+        generateEggDisplay();
 
         eggShopSelectionAdapter = new EggShopSelectionAdapter(context, eggSource, eggDisplay, chipToken, glazeToken, inventoryModels);
         eggShopSelection.setAdapter(eggShopSelectionAdapter);
@@ -58,9 +68,49 @@ public class StoreFragment extends Fragment {
         return view;
     }
 
+    private void generateEggDisplay()
+    {
+        if(!eggDisplayDatabase.doesDataExist())
+        {
+            eggDisplay.clear();
+            eggDisplayDatabase.clearDisplay();
+            eggDisplay.addAll(eggSource.fetchStoreList());
+
+            for(EggModel egg : eggDisplay)
+            {
+                eggDisplayDatabase.generateTable(egg);
+            }
+        }
+
+        if(timeModel.isNewDay())
+        {
+            eggDisplay.clear();
+            eggDisplayDatabase.clearDisplay();
+            eggDisplay.addAll(eggSource.fetchStoreList());
+
+            for(EggModel egg : eggDisplay)
+            {
+                eggDisplayDatabase.generateTable(egg);
+            }
+
+            timeModel.setLastTimeLogin(timeModel.getCurrentTimeLogin());
+            timeModel.setLastDayLogin(timeModel.getCurrentDayLogin());
+            timeModel.setLastMonthLogin(timeModel.getCurrentMonthLogin());
+            timeModel.setLastYearLogin(timeModel.getCurrentYearLogin());
+        }else
+        {
+            eggDisplay.clear();
+            ArrayList<String> eggNames;
+            eggNames = eggDisplayDatabase.getDisplayList();
+            eggDisplay = eggSource.getEggByString(eggNames);
+        }
+    }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         this.context = context;
+
+        eggDisplayDatabase = new EggDisplayDatabase(context);
     }
 }
