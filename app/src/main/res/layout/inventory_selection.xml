@@ -24,8 +24,8 @@
 
             <FrameLayout
                 android:id="@+id/petImageContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:background="#B68B69">
 

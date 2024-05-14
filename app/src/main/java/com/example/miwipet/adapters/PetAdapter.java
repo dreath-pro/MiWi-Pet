@@ -53,7 +53,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.MyViewHolder> {
         holder.petImage.setImageResource(petModels.get(position).getPetImage());
         holder.petName.setText(petModels.get(position).getPetName());
         holder.petCardView.setBackgroundResource(petModels.get(position).getRarityBackground());
-        holder.petImageContainer.setBackgroundColor(ContextCompat.getColor(context, petModels.get(position).getTypeColor()));
+        holder.petImageContainer.setBackgroundResource(petModels.get(position).getTypeBackground());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
