@@ -68,6 +68,8 @@ public class EggDisplayDatabase extends SQLiteOpenHelper {
         String[] whereArgs = {String.valueOf(eggModel.getId())};
         int result = db.update(displayTable, contentValues, whereClause, whereArgs);
 
+        db.close();
+
         return result > 0;
     }
 
@@ -87,6 +89,9 @@ public class EggDisplayDatabase extends SQLiteOpenHelper {
                 displayList.add(eggName);
             }while(cursor.moveToNext());
         }
+
+        cursor.close();
+        db.close();
 
         return displayList;
     }

@@ -12,7 +12,7 @@
         android:paddingBottom="30dp"
         android:layout_centerHorizontal="true"
         android:orientation="vertical"
-        android:background="#94BACC">
+        android:background="#BFAB84">
 
         <ImageView
             android:id="@+id/petImage"

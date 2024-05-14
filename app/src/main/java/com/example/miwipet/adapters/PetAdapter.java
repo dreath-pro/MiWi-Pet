@@ -99,6 +99,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.MyViewHolder> {
                 typeColor = dialog.findViewById(R.id.typeColor);
 
         petImage.setImageResource(petModels.get(holder.getAdapterPosition()).getPetImage());
+        petImage.setBackgroundResource(petModels.get(holder.getAdapterPosition()).getRarityBackground());
         petName.setText(petModels.get(holder.getAdapterPosition()).getPetName());
         progressDetail.setText(petModels.get(holder.getAdapterPosition()).getExp() + "/" +
                 petModels.get(holder.getAdapterPosition()).getMaxExp());

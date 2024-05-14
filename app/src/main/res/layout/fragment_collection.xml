@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3B5668"
+    android:background="#B1A082"
     tools:context=".fragments.navigation.CollectionFragment">
 
     <LinearLayout
@@ -24,7 +24,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="#59C17F"
+                android:backgroundTint="#D68A7C"
                 android:text="@string/pets_button"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
@@ -35,7 +35,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="#59C1AC"
+                android:backgroundTint="#97DA73"
                 android:text="@string/items_button"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
@@ -46,7 +46,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="#84C159"
+                android:backgroundTint="#B678DD"
                 android:text="@string/foods_button"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
