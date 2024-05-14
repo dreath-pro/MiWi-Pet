@@ -18,6 +18,10 @@ public class PetModel {
             rarityClass.getRarity(4)};
     private int[] rarityColors = new int[]{R.color.common, R.color.rare, R.color.ultra,
             R.color.legendary, R.color.mythic};
+
+    private int[] rarityBackgrounds = new int[]{R.drawable.background_common, R.drawable.background_rare,
+            R.drawable.background_ultra, R.drawable.background_legendary, R.drawable.background_mythic};
+
     private int[] typeColors = new int[]{R.color.normal, R.color.crystal, R.color.gemstone};
 
     public PetModel(String petName, int petImage, int age, int type, String rarity) {
@@ -62,8 +66,7 @@ public class PetModel {
     public String typeToString() {
         String text = "";
 
-        switch (getType())
-        {
+        switch (getType()) {
             case 0:
                 text = "Normal";
                 break;
@@ -81,8 +84,7 @@ public class PetModel {
     public String ageToString() {
         String text = "";
 
-        switch (getAge())
-        {
+        switch (getAge()) {
             case 0:
                 text = "Offspring";
                 break;
@@ -101,8 +103,7 @@ public class PetModel {
     }
 
     private void growAge() {
-        if(age <= 3)
-        {
+        if (age <= 3) {
             if (exp >= maxExp) {
                 age += 1;
                 exp -= maxExp;
@@ -119,6 +120,11 @@ public class PetModel {
 
     public int getRarityColor() {
         return rarityColors[rarityToInt()];
+    }
+
+    public int getRarityBackground()
+    {
+        return rarityBackgrounds[rarityToInt()];
     }
 
     public int getTypeColor() {
