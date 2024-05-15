@@ -5,8 +5,8 @@ import com.example.miwipet.models.EggModel;
 
 public class FossilEgg extends EggModel {
     int[][] pets = {
-            {R.drawable.brachiosaurus, R.drawable.t_rex, R.drawable.smilodon, R.drawable.mammoth,
-                    R.drawable.paraceratherium},
+            {R.drawable.brachiosaurus, R.drawable.t_rex, R.drawable.smilodon,
+                    R.drawable.mammoth, R.drawable.paraceratherium},
 
 
             {R.drawable.titanoboa, R.drawable.triceratops, R.drawable.spinosaurus,

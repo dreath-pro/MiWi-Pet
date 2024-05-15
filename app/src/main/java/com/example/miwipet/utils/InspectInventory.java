@@ -31,8 +31,8 @@ public class InspectInventory {
 
             if(petModel.getPetName().equals("Golden Tiger"))
             {
-                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.guardian_deer);
-                inventoryModel.getPetLists().get(count).setPetName("Guardian Deer");
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.dire_wolf);
+                inventoryModel.getPetLists().get(count).setPetName("Dire Wolf");
             }
 
             if(petModel.getPetName().equals("Vampire Bat"))
@@ -48,8 +48,14 @@ public class InspectInventory {
 
             if(petModel.getPetName().equals("Tree Deer"))
             {
-                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.guardian_deer);
-                inventoryModel.getPetLists().get(count).setPetName("Guardian Deer");
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.dire_wolf);
+                inventoryModel.getPetLists().get(count).setPetName("Dire Wolf");
+            }
+
+            if(petModel.getPetName().equals("Guardian Deer"))
+            {
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.dire_wolf);
+                inventoryModel.getPetLists().get(count).setPetName("Dire Wolf");
             }
 
             if(petModel.getPetName().equals("Soul Dragon"))

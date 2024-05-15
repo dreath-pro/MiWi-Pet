@@ -18,7 +18,7 @@ public class ChristmasEgg extends EggModel {
 
 
             {R.drawable.pudding_pug, R.drawable.candy_horse, R.drawable.strawberry_golem,
-                    R.drawable.cream_narwhal, R.drawable.crystal_tern},
+                    R.drawable.cream_narwhal, R.drawable.crystal_tern, R.drawable.queen_snowflake},
 
 
             {R.drawable.joy_reindeer, R.drawable.snowflake_dragon, R.drawable.aurora_dragon}
@@ -32,7 +32,8 @@ public class ChristmasEgg extends EggModel {
 
             {"Conductor Penguin", "Ice Cream Bear", "Rudolf", "Gingerbread Walrus", "Yeti", "Snowman"},
 
-            {"Pudding Pug", "Candy Horse", "Strawberry Golem", "Cream Narwhal", "Crystal Tern"},
+            {"Pudding Pug", "Candy Horse", "Strawberry Golem", "Cream Narwhal", "Crystal Tern",
+                    "Queen Snowflake"},
 
             {"Joy Reindeer", "Snowflake Dragon", "Aurora Dragon"}
     };
