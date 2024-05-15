@@ -8,59 +8,71 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:title="Hatch"
-            android:icon="@drawable/hatch"/>
+            android:icon="@drawable/icon_hatch"/>
 
         <item
             android:id="@+id/collection_nav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:title="Collection"
-            android:icon="@drawable/collection"/>
+            android:icon="@drawable/icon_collection"/>
 
         <item
             android:id="@+id/store_nav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:title="Store"
-            android:icon="@drawable/store"/>
+            android:icon="@drawable/icon_store"/>
 
         <item
             android:id="@+id/trade_nav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:title="Trade"
-            android:icon="@drawable/trade"/>
+            android:icon="@drawable/icon_trade"/>
 
         <item
-            android:id="@+id/history_nav"
+            android:id="@+id/flex_nav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:title="History"
-            android:icon="@drawable/history"/>
+            android:title="Flex"
+            android:icon="@drawable/icon_flex"/>
 
         <item
-            android:id="@+id/inbox_nav"
+            android:id="@+id/nursery_nav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:title="Inbox"
-            android:icon="@drawable/inbox"/>
+            android:title="Nursery"
+            android:icon="@drawable/icon_nursery"/>
     </group>
 
     <group
         android:id="@+id/group_2">
 
         <item
+            android:id="@+id/changelog_nav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:title="Changelog"
+            android:icon="@drawable/icon_changelog"/>
+
+    </group>
+
+    <group
+        android:id="@+id/group_3">
+
+        <item
             android:id="@+id/about_nav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:title="About"
-            android:icon="@drawable/about"/>
+            android:icon="@drawable/icon_about"/>
 
         <item
             android:id="@+id/exit_nav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:title="Exit"
-            android:icon="@drawable/quit"/>
+            android:icon="@drawable/icon_quit"/>
     </group>
 </menu>

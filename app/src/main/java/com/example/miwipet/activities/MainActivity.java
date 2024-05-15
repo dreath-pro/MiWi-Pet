@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Application;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -20,13 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.miwipet.R;
-import com.example.miwipet.database.EggDatabase;
 import com.example.miwipet.database.TimeDatabase;
 import com.example.miwipet.fragments.navigation.AboutFragment;
+import com.example.miwipet.fragments.navigation.ChangelogFragment;
 import com.example.miwipet.fragments.navigation.CollectionFragment;
 import com.example.miwipet.fragments.single.EggFragment;
-import com.example.miwipet.fragments.navigation.HistoryFragment;
-import com.example.miwipet.fragments.navigation.InboxFragment;
+import com.example.miwipet.fragments.navigation.FlexFragment;
+import com.example.miwipet.fragments.navigation.NurseryFragment;
 import com.example.miwipet.fragments.navigation.StoreFragment;
 import com.example.miwipet.fragments.navigation.TradeFragment;
 import com.example.miwipet.models.EggModel;
@@ -41,7 +40,6 @@ import com.example.miwipet.utils.RefreshInventory;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,6 +51,34 @@ import java.util.Locale;
 //frost egg, 3d render, white background, simple design
 //ocean background, digital art, cartoon, unfocus, blur
 //simple noodles, 3d render, full view, white background, simplistic kiddy design
+
+//icons used link
+//* cracked egg
+//https://www.flaticon.com/free-icon/egg_812971?term=crack+egg&page=1&position=5&origin=search&related_id=812971
+
+//*shopping bag
+//https://www.flaticon.com/free-icon/shopping-bag_253298?term=bag&page=1&position=8&origin=search&related_id=253298
+
+//*store
+//https://www.flaticon.com/free-icon/store_2639570?term=store&page=1&position=7&origin=search&related_id=2639570
+
+//*trade
+//https://www.flaticon.com/free-icon/transaction_5681355?term=trade&page=1&position=18&origin=search&related_id=5681355
+
+//*flex
+//https://www.flaticon.com/free-icon/arm-muscle_3525876?term=flex&page=1&position=7&origin=search&related_id=3525876
+
+//*nursery
+//https://www.flaticon.com/free-icon/alphabet_3359814?term=nursery&page=1&position=10&origin=search&related_id=3359814
+
+//*changelog
+//https://www.flaticon.com/free-icon/exchange_1372840?term=change&page=1&position=8&origin=search&related_id=1372840
+
+//*info
+//https://www.flaticon.com/free-icon/information-button_1176?term=info&page=1&position=8&origin=search&related_id=1176
+
+//*exit
+//https://www.flaticon.com/free-icon/logout_660350?term=exit&page=1&position=2&origin=search&related_id=660350
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -82,13 +108,11 @@ public class MainActivity extends AppCompatActivity {
     private String formattedMonth;
     private String formattedYear;
 
-    private void initializeCurrentTime()
-    {
+    private void initializeCurrentTime() {
         currentTime = Calendar.getInstance().getTime();
-
-        SimpleDateFormat currentDay = new SimpleDateFormat("dd", Locale.getDefault());;
-        SimpleDateFormat currentMonth = new SimpleDateFormat("MM", Locale.getDefault());;
-        SimpleDateFormat currentYear = new SimpleDateFormat("yyyy", Locale.getDefault());;
+        SimpleDateFormat currentDay = new SimpleDateFormat("dd", Locale.getDefault());
+        SimpleDateFormat currentMonth = new SimpleDateFormat("MM", Locale.getDefault());
+        SimpleDateFormat currentYear = new SimpleDateFormat("yyyy", Locale.getDefault());
 
         formattedDay = currentDay.format(currentTime);
         formattedMonth = currentMonth.format(currentTime);
@@ -107,14 +131,11 @@ public class MainActivity extends AppCompatActivity {
         hatchButton = findViewById(R.id.hatchButton);
     }
 
-    private void generateTime()
-    {
-        if(!timeDatabase.doesDataExist())
-        {
+    private void generateTime() {
+        if (!timeDatabase.doesDataExist()) {
             generateTimeModel(false);
             timeDatabase.generateTable(timeModel);
-        }else
-        {
+        } else {
             generateTimeModel(true);
             timeDatabase.updateTime(timeModel);
         }
@@ -122,10 +143,8 @@ public class MainActivity extends AppCompatActivity {
         timeModel.setLoggedIn(false);
     }
 
-    private void generateTimeModel(boolean doesDataExist)
-    {
-        if(doesDataExist)
-        {
+    private void generateTimeModel(boolean doesDataExist) {
+        if (doesDataExist) {
             timeModel = timeDatabase.getTimeRecord();
 
             timeModel.setCurrentTime(currentTime.toString());
@@ -134,18 +153,15 @@ public class MainActivity extends AppCompatActivity {
             timeModel.setCurrentMonthLogin(formattedMonth);
             timeModel.setCurrentYearLogin(formattedYear);
 
-            if(timeModel.isNewDay())
-            {
+            if (timeModel.isNewDay()) {
                 timeModel.setLoggedIn(true);
                 timeModel.setLoginStreak(timeModel.getLoginStreak() + 1);
 
-                if(timeModel.missedLogin())
-                {
+                if (timeModel.missedLogin()) {
                     timeModel.setLoginStreak(1);
                 }
             }
-        }else
-        {
+        } else {
             timeModel.setCurrentTime(currentTime.toString());
             timeModel.setCurrentTimeLogin(currentTime.toString());
             timeModel.setCurrentDayLogin(formattedDay);
@@ -221,10 +237,12 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new StoreFragment(inventoryModel, chipTokenValue, glazeTokenValue, timeModel));
                 } else if (item.getItemId() == R.id.trade_nav) {
                     replaceFragment(new TradeFragment());
-                } else if (item.getItemId() == R.id.history_nav) {
-                    replaceFragment(new HistoryFragment());
-                } else if (item.getItemId() == R.id.inbox_nav) {
-                    replaceFragment(new InboxFragment());
+                } else if (item.getItemId() == R.id.flex_nav) {
+                    replaceFragment(new FlexFragment());
+                } else if (item.getItemId() == R.id.nursery_nav) {
+                    replaceFragment(new NurseryFragment());
+                } else if (item.getItemId() == R.id.changelog_nav) {
+                    replaceFragment(new ChangelogFragment());
                 } else if (item.getItemId() == R.id.about_nav) {
                     replaceFragment(new AboutFragment());
                 } else if (item.getItemId() == R.id.exit_nav) {
