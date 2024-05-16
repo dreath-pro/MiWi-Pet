@@ -86,7 +86,7 @@ public class EggSource {
         return eggLists.get(index);
     }
 
-    public ArrayList<EggModel> getEggByString(ArrayList<String> eggNames)
+    public ArrayList<EggModel> getEggsByString(ArrayList<String> eggNames)
     {
         ArrayList<EggModel> returnedEggList = new ArrayList<>();
 
@@ -106,25 +106,26 @@ public class EggSource {
         return returnedEggList;
     }
 
+    public EggModel getEggByString(String eggName)
+    {
+        EggModel returnedEgg = null;
+
+        generateEggs("All");
+
+        for(EggModel egglist : eggLists)
+        {
+            if(eggName.equals(egglist.getEggName()))
+            {
+                returnedEgg = egglist;
+            }
+        }
+
+        return returnedEgg;
+    }
+
     public ArrayList<EggModel> fetchStoreList()
     {
         refreshEggShop();
         return eggLists;
-    }
-
-    public EggModel pickStoreEgg(int index)
-    {
-        ArrayList<EggModel> temporaryEggLists = new ArrayList<>();
-
-        for(EggModel eggModel : eggLists)
-        {
-            eggModel.repickEgg();
-            temporaryEggLists.add(eggModel);
-        }
-
-        eggLists.clear();
-        eggLists.addAll(temporaryEggLists);
-
-        return eggLists.get(index);
     }
 }

@@ -102,7 +102,7 @@ public class StoreFragment extends Fragment {
             eggDisplay.clear();
             ArrayList<String> eggNames;
             eggNames = eggDisplayDatabase.getDisplayList();
-            eggDisplay = eggSource.getEggByString(eggNames);
+            eggDisplay = eggSource.getEggsByString(eggNames);
         }
     }
 

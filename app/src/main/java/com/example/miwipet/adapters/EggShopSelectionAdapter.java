@@ -75,7 +75,7 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
                     {
                         if(holder.eggName.getText().toString().equals(displayEggs.get(i).getEggName()))
                         {
-                            eggDatabase.addEgg(eggSource.pickStoreEgg(i));
+                            eggDatabase.addEgg(eggSource.getEggByString(holder.eggName.getText().toString()));
                             refreshInventory.getEggFromDatabase();
                         }
                     }
