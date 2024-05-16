@@ -74,4 +74,41 @@ public class FoodSource {
         generateFoods("All");
         return foodLists.get(index);
     }
+
+    public ArrayList<FoodModel> getFoodsByString(ArrayList<String> foodNames)
+    {
+        ArrayList<FoodModel> returnedFoodList = new ArrayList<>();
+
+        generateFoods("All");
+
+        for(String foodName : foodNames)
+        {
+            for(FoodModel foodList : foodLists)
+            {
+                if(foodName.equals(foodList.getFoodName()))
+                {
+                    returnedFoodList.add(foodList);
+                }
+            }
+        }
+
+        return returnedFoodList;
+    }
+
+    public FoodModel getFoodByString(String foodName)
+    {
+        FoodModel returnedFood = null;
+
+        generateFoods("All");
+
+        for(FoodModel foodList : foodLists)
+        {
+            if(foodName.equals(foodList.getFoodName()))
+            {
+                returnedFood = foodList;
+            }
+        }
+
+        return returnedFood;
+    }
 }
