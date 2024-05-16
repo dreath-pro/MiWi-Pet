@@ -54,7 +54,7 @@ public class EggSource {
         }
     }
 
-    private void refreshEggShop()
+    public ArrayList<EggModel> getStoreEggs()
     {
         generateEggs("Store");
 
@@ -73,6 +73,8 @@ public class EggSource {
 
         eggLists.clear();
         eggLists.addAll(selectedEggsList);
+
+        return eggLists;
     }
 
     public int getCount()
@@ -121,11 +123,5 @@ public class EggSource {
         }
 
         return returnedEgg;
-    }
-
-    public ArrayList<EggModel> fetchStoreList()
-    {
-        refreshEggShop();
-        return eggLists;
     }
 }

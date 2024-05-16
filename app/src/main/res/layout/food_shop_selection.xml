@@ -11,7 +11,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="#84CDAB"
+        android:backgroundTint="#CDCC84"
         android:layout_marginEnd="20dp">
 
         <RelativeLayout
@@ -19,21 +19,21 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/eggImage"
+                android:id="@+id/foodImage"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:scaleType="fitXY"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/egg_lava"/>
+                android:src="@drawable/food_burger"/>
 
             <TextView
-                android:id="@+id/eggName"
+                android:id="@+id/foodName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lava Egg"
+                android:text="Burger"
                 android:textSize="30dp"
                 android:textColor="@color/black"
-                android:layout_below="@+id/eggImage"
+                android:layout_below="@+id/foodImage"
                 android:layout_marginBottom="15dp"
                 android:layout_centerHorizontal="true"/>
 
@@ -41,7 +41,7 @@
                 android:id="@+id/currencyPage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/eggName"
+                android:layout_below="@+id/foodName"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp">
 

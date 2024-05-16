@@ -15,12 +15,15 @@ import android.widget.TextView;
 
 import com.example.miwipet.R;
 import com.example.miwipet.adapters.EggShopSelectionAdapter;
+import com.example.miwipet.adapters.FoodShopSelectionAdapter;
 import com.example.miwipet.database.EggDisplayDatabase;
 import com.example.miwipet.database.TimeDatabase;
 import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.TimeModel;
 import com.example.miwipet.utils.EggSource;
+import com.example.miwipet.utils.FoodSource;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,15 +33,22 @@ import java.util.Locale;
 import java.util.Random;
 
 public class StoreFragment extends Fragment {
-    private EggDisplayDatabase eggDisplayDatabase;
-    private EggShopSelectionAdapter eggShopSelectionAdapter;
     private ArrayList<EggModel> eggDisplay = new ArrayList<>();
-    private InventoryModel inventoryModels;
-    private TimeModel timeModel;
-    private RecyclerView eggShopSelection, itemShopSelection, foodShopSelection;
-    private Context context;
+    private ArrayList<FoodModel> foodDisplay = new ArrayList<>();
 
     private EggSource eggSource = new EggSource();
+    private FoodSource foodSource = new FoodSource();
+
+    private EggShopSelectionAdapter eggShopSelectionAdapter;
+    private FoodShopSelectionAdapter foodShopSelectionAdapter;
+
+    private EggDisplayDatabase eggDisplayDatabase;
+
+
+    private InventoryModel inventoryModels;
+    private TimeModel timeModel;
+    private RecyclerView eggShopSelection, foodShopSelection, itemShopSelection;
+    private Context context;
 
     private TextView chipToken, glazeToken;
 
@@ -59,13 +69,25 @@ public class StoreFragment extends Fragment {
         foodShopSelection = view.findViewById(R.id.foodShopSelection);
 
         generateEggDisplay();
+        generateFoodDisplay();
 
         eggShopSelectionAdapter = new EggShopSelectionAdapter(context, eggSource, eggDisplay, chipToken, glazeToken, inventoryModels);
         eggShopSelection.setAdapter(eggShopSelectionAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         eggShopSelection.setLayoutManager(layoutManager);
 
+        foodShopSelectionAdapter = new FoodShopSelectionAdapter(context, foodSource, foodDisplay, chipToken, glazeToken, inventoryModels);
+        foodShopSelection.setAdapter(foodShopSelectionAdapter);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        foodShopSelection.setLayoutManager(layoutManager2);
+
         return view;
+    }
+
+    private void generateFoodDisplay()
+    {
+        foodDisplay.clear();
+        foodDisplay.addAll(foodSource.getStoreFoods());
     }
 
     private void generateEggDisplay()
@@ -74,7 +96,7 @@ public class StoreFragment extends Fragment {
         {
             eggDisplay.clear();
             eggDisplayDatabase.clearDisplay();
-            eggDisplay.addAll(eggSource.fetchStoreList());
+            eggDisplay.addAll(eggSource.getStoreEggs());
 
             for(EggModel egg : eggDisplay)
             {
@@ -86,7 +108,7 @@ public class StoreFragment extends Fragment {
         {
             eggDisplay.clear();
             eggDisplayDatabase.clearDisplay();
-            eggDisplay.addAll(eggSource.fetchStoreList());
+            eggDisplay.addAll(eggSource.getStoreEggs());
 
             for(EggModel egg : eggDisplay)
             {
