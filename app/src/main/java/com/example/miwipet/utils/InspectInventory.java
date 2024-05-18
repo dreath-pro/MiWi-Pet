@@ -46,6 +46,41 @@ public class InspectInventory {
                 inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(3));
             }
 
+            if(petModel.getPetName().equals("Bee") && petModel.getRarity().equals(rarity.getRarity(1)))
+            {
+                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(0));
+            }
+
+            if(petModel.getPetName().equals("Grasshopper") && petModel.getRarity().equals(rarity.getRarity(1)))
+            {
+                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(0));
+            }
+
+            if(petModel.getPetName().equals("Butterfly") && petModel.getRarity().equals(rarity.getRarity(1)))
+            {
+                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(0));
+            }
+
+            if(petModel.getPetName().equals("Bird") && petModel.getRarity().equals(rarity.getRarity(2)))
+            {
+                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(1));
+            }
+
+            if(petModel.getPetName().equals("Sheep") && petModel.getRarity().equals(rarity.getRarity(3)))
+            {
+                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(2));
+            }
+
+            if(petModel.getPetName().equals("Chicken") && petModel.getRarity().equals(rarity.getRarity(2)))
+            {
+                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(1));
+            }
+
+            if(petModel.getPetName().equals("Blue Chick") && petModel.getRarity().equals(rarity.getRarity(2)))
+            {
+                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(1));
+            }
+
             if(petModel.getPetName().equals("Tree Deer"))
             {
                 inventoryModel.getPetLists().get(count).setPetImage(R.drawable.dire_wolf);
@@ -72,14 +107,14 @@ public class InspectInventory {
 
             if(petModel.getPetName().equals("Buffalo"))
             {
-                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.musk_ox);
-                inventoryModel.getPetLists().get(count).setPetName("Musk Ox");
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.boar);
+                inventoryModel.getPetLists().get(count).setPetName("Boar");
             }
 
             if(petModel.getPetName().equals("Musk Ox"))
             {
-                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.buffalo);
-                inventoryModel.getPetLists().get(count).setPetName("Buffalo");
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.boar);
+                inventoryModel.getPetLists().get(count).setPetName("Boar");
             }
 
             count++;

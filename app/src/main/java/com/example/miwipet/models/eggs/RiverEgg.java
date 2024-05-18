@@ -37,7 +37,7 @@ public class RiverEgg extends EggModel {
     };
 
     public RiverEgg() {
-        super("River Egg", R.drawable.egg_river, 20, 0, 0, 50, 1, 80);
+        super("River Egg", R.drawable.egg_river, 20, 0, 0, 50, 1, 75);
         super.selectRarity(pets, petNames);
     }
 }
