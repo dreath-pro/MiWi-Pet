@@ -86,10 +86,21 @@ public class InspectInventory {
                 inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(1));
             }
 
+            if(petModel.getPetName().equals("Lion") && petModel.getRarity().equals(rarity.getRarity(2)))
+            {
+                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(3));
+            }
+
             if(petModel.getPetName().equals("Tree Deer"))
             {
                 inventoryModel.getPetLists().get(count).setPetImage(R.drawable.dire_wolf);
                 inventoryModel.getPetLists().get(count).setPetName("Dire Wolf");
+            }
+
+            if(petModel.getPetName().equals("Blazing Lion"))
+            {
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.sun_war_lion);
+                inventoryModel.getPetLists().get(count).setPetName("Sun War Lion");
             }
 
             if(petModel.getPetName().equals("Guardian Deer"))
