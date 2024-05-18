@@ -81,6 +81,11 @@ public class InspectInventory {
                 inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(1));
             }
 
+            if(petModel.getPetName().equals("Lobster") && petModel.getRarity().equals(rarity.getRarity(2)))
+            {
+                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(1));
+            }
+
             if(petModel.getPetName().equals("Tree Deer"))
             {
                 inventoryModel.getPetLists().get(count).setPetImage(R.drawable.dire_wolf);
@@ -116,6 +121,25 @@ public class InspectInventory {
                 inventoryModel.getPetLists().get(count).setPetImage(R.drawable.boar);
                 inventoryModel.getPetLists().get(count).setPetName("Boar");
             }
+
+            if(petModel.getPetName().equals("Goldfish"))
+            {
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.mecha_spermwhale);
+                inventoryModel.getPetLists().get(count).setPetName("Mecha Sperm Whale");
+            }
+
+            if(petModel.getPetName().equals("Ghost Shark"))
+            {
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.terror_shark);
+                inventoryModel.getPetLists().get(count).setPetName("Terror Shark");
+            }
+
+            if(petModel.getPetName().equals("Hollow Squid"))
+            {
+                inventoryModel.getPetLists().get(count).setPetImage(R.drawable.devil_kraken);
+                inventoryModel.getPetLists().get(count).setPetName("Devil Kraken");
+            }
+
 
             count++;
         }
