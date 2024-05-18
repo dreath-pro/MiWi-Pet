@@ -49,7 +49,7 @@ public class EggDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion < 3)
+        if(oldVersion < DATABASE_VERSION)
         {
             db.execSQL("ALTER TABLE " + eggTable + " ADD COLUMN " + eggPercentage + " INT");
         }

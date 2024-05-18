@@ -39,7 +39,7 @@ public class PetDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion < 3)
+        if(oldVersion < DATABASE_VERSION)
         {
             // Rename the old table
             db.execSQL("ALTER TABLE " + petTable + " RENAME TO " + petTable + "_temp");
@@ -59,7 +59,7 @@ public class PetDatabase extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + petTable + "_temp");
         }
 
-        if(oldVersion < 4)
+        if(oldVersion < DATABASE_VERSION)
         {
             // Revert back from version 3 to version 2
             // Rename the current table

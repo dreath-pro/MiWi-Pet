@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class InventoryModel {
     private ArrayList<PetModel> petLists = new ArrayList<>();
     private ArrayList<EggModel> eggLists = new ArrayList<>();
+    private ArrayList<FoodModel> foodLists = new ArrayList<>();
     private int chipToken = 0, glazeToken = 0;
 
     public InventoryModel() {
@@ -27,6 +28,7 @@ public class InventoryModel {
         petLists.clear();
     }
 
+
     public ArrayList<EggModel> getEggLists() {
         return eggLists;
     }
@@ -43,6 +45,25 @@ public class InventoryModel {
     {
         eggLists.clear();
     }
+
+
+    public ArrayList<FoodModel> getFoodLists() {
+        return foodLists;
+    }
+
+    public void addFoodLists(FoodModel food) {
+        foodLists.add(food);
+    }
+
+    public void removeFoodLists(int idx) {
+        foodLists.remove(idx);
+    }
+
+    public void clearFoodList()
+    {
+        foodLists.clear();
+    }
+
 
     public int getChipToken() {
         return chipToken;

@@ -1,6 +1,7 @@
 package com.example.miwipet.models;
 
 public class FoodModel {
+    private int id;
     private int foodImage;
     private String foodName;
     private String rarity;
@@ -20,6 +21,24 @@ public class FoodModel {
         this.foodPercentage = foodPercentage;
         this.chipPrice = chipPrice;
         this.glazePrice = glazePrice;
+    }
+
+    public FoodModel(int id, int foodImage, String foodName, int expReward, int foodPercentage, int chipPrice, int glazePrice) {
+        this.id = id;
+        this.foodImage = foodImage;
+        this.foodName = foodName;
+        this.expReward = expReward;
+        this.foodPercentage = foodPercentage;
+        this.chipPrice = chipPrice;
+        this.glazePrice = glazePrice;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getFoodImage() {

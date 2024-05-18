@@ -209,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
         generateToken();
         refreshInventory.getPetFromDatabase();
         refreshInventory.getEggFromDatabase();
+        refreshInventory.getFoodFromDatabase();
 
         InspectInventory inspectInventory = new InspectInventory(inventoryModel);
         inspectInventory.updatePet();
