@@ -25,15 +25,15 @@ public class SavannaEgg extends EggModel {
     };
 
     String[][] petNames = {
-            {"Elephant", "Rhino"},
+            {"Elephant", "Rhino", "Warthog", "Lemur", "Black Mamba"},
 
-            {"Zebra", "Cheetah", "Gazelle"},
+            {"Zebra", "Cheetah", "Gazelle", "Vine Snake", "Mandrill"},
 
-            {"Lion", "Vulture", "Wildebeest"},
+            {"Ostrich", "Vulture", "Wildebeest", "African Wild Dog", "Caracal"},
 
-            {"Giraffe", "Hyena"},
+            {"Giraffe", "Hyena", "Lion", "Leopard", "Leopard Turtle", "Lynx"},
 
-            {"Blazing Lion", "Death Vulture"}
+            {"Sun War Lion", "Death Vulture"}
     };
 
     public SavannaEgg() {
