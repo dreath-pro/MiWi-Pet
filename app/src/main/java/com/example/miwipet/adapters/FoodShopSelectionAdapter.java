@@ -75,7 +75,7 @@ public class FoodShopSelectionAdapter extends RecyclerView.Adapter<FoodShopSelec
                                 displayFoods.get(holder.getAdapterPosition()).getGlazePrice()) {
 
                     foodDatabase.addFood(foodSource.getFoodByString(holder.foodName.getText().toString()));
-                    refreshInventory.getEggFromDatabase();
+                    refreshInventory.getFoodFromDatabase();
 
                     inventoryModel.setChipToken(inventoryModel.getChipToken() -
                             displayFoods.get(holder.getAdapterPosition()).getChipPrice());

@@ -26,13 +26,6 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.MyViewHolder> {
     private Context context;
     private Activity activity;
     private ArrayList<PetModel> petModels;
-    private Rarity rarity = new Rarity();
-    private String[] rarities = new String[]{
-            rarity.getRarity(0),
-            rarity.getRarity(1),
-            rarity.getRarity(2),
-            rarity.getRarity(3),
-            rarity.getRarity(4)};
 
     public PetAdapter(Activity activity, ArrayList<PetModel> petModels) {
         this.activity = activity;
@@ -44,7 +37,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.MyViewHolder> {
     @Override
     public PetAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.inventory_selection, parent, false);
+        View view = inflater.inflate(R.layout.pet_inventory, parent, false);
         return new PetAdapter.MyViewHolder(view);
     }
 

@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.home_nav) {
                     getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 } else if (item.getItemId() == R.id.collection_nav) {
-                    replaceFragment(new CollectionFragment(inventoryModel.getPetLists(), getApplicationContext()));
+                    replaceFragment(new CollectionFragment(inventoryModel, getApplicationContext()));
                 } else if (item.getItemId() == R.id.store_nav) {
                     replaceFragment(new StoreFragment(inventoryModel, chipTokenValue, glazeTokenValue, timeModel));
                 } else if (item.getItemId() == R.id.trade_nav) {

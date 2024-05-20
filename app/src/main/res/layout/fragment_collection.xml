@@ -54,7 +54,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/petInventory"
+            android:id="@+id/collectionView"
             android:layout_width="match_parent"
             android:layout_height="500dp" />
 

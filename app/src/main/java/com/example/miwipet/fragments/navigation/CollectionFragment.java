@@ -10,22 +10,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.miwipet.R;
+import com.example.miwipet.adapters.FoodAdapter;
 import com.example.miwipet.adapters.PetAdapter;
+import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.PetModel;
 
 import java.util.ArrayList;
 
 public class CollectionFragment extends Fragment {
-    RecyclerView petInventory;
-    Context context;
+    private RecyclerView collectionView;
+    private Context context;
+    private Button petsButton, itemsButton, foodsButton;
 
-    private ArrayList<PetModel> petModels;
+    private InventoryModel inventoryModel;
 
-    public CollectionFragment(ArrayList<PetModel> petModels, Context context)
+    public CollectionFragment(InventoryModel inventoryModel, Context context)
     {
-        this.petModels = petModels;
+        this.inventoryModel = inventoryModel;
         this.context = context;
     }
 
@@ -34,14 +38,51 @@ public class CollectionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_collection, container, false);
-        petInventory = view.findViewById(R.id.petInventory);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2);
-        petInventory.setLayoutManager(gridLayoutManager);
+        petsButton = view.findViewById(R.id.petsButton);
+        itemsButton = view.findViewById(R.id.itemsButton);
+        foodsButton = view.findViewById(R.id.foodsButton);
+        collectionView = view.findViewById(R.id.collectionView);
 
-        PetAdapter petAdapter = new PetAdapter(getActivity(), petModels);
-        petInventory.setAdapter(petAdapter);
+        GridLayoutManager petLayoutManager = new GridLayoutManager(context, 2);
+        GridLayoutManager foodLayoutManager = new GridLayoutManager(context, 2);
+        showPetCollection(petLayoutManager);
+
+        petsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPetCollection(petLayoutManager);
+            }
+        });
+
+        itemsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        foodsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFoodCollection(foodLayoutManager);
+            }
+        });
 
         return view;
+    }
+
+    private void showPetCollection(GridLayoutManager petLayoutManager)
+    {
+        collectionView.setLayoutManager(petLayoutManager);
+        PetAdapter petAdapter = new PetAdapter(getActivity(), inventoryModel.getPetLists());
+        collectionView.setAdapter(petAdapter);
+    }
+
+    private void showFoodCollection(GridLayoutManager foodLayoutManager)
+    {
+        collectionView.setLayoutManager(foodLayoutManager);
+        FoodAdapter foodAdapter = new FoodAdapter(getActivity(), inventoryModel.getFoodLists());
+        collectionView.setAdapter(foodAdapter);
     }
 }

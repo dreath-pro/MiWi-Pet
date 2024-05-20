@@ -17,6 +17,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
     private static final String foodTable = "food_table";
     private static final String foodImage = "food_image";
     private static final String foodName = "food_name";
+    private static final String rarity = "rarity";
     private static final String expReward = "exp_reward";
     private static final String foodPercentage = "food_percentage";
     private static final String chipPrice = "chip_price";
@@ -31,8 +32,8 @@ public class FoodDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "CREATE TABLE " + foodTable + " (" + id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                foodImage + " INT, " + foodName + " TEXT, " + expReward + " INT, " + foodPercentage + " INT, " +
-                chipPrice + " INT, " + glazePrice + " INT)";
+                foodImage + " INT, " + foodName + " TEXT, " + rarity + " TEXT, " + expReward + " INT, " +
+                foodPercentage + " INT, " + chipPrice + " INT, " + glazePrice + " INT)";
 
         db.execSQL(createTableStatement);
     }
@@ -49,6 +50,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
 
         contentValues.put(foodImage, foodModel.getFoodImage());
         contentValues.put(foodName, foodModel.getFoodName());
+        contentValues.put(rarity, foodModel.getRarity());
         contentValues.put(expReward, foodModel.getExpReward());
         contentValues.put(foodPercentage, foodModel.getFoodPercentage());
         contentValues.put(chipPrice, foodModel.getChipPrice());
@@ -97,12 +99,15 @@ public class FoodDatabase extends SQLiteOpenHelper {
                 int id = cursor.getInt(0);
                 int foodImage = cursor.getInt(1);
                 String foodName = cursor.getString(2);
-                int expReward = cursor.getInt(3);
-                int foodPercentage = cursor.getInt(4);
-                int chipPrice = cursor.getInt(5);
-                int glazePrice = cursor.getInt(6);
+                String rarity = cursor.getString(3);
+                int expReward = cursor.getInt(4);
+                int foodPercentage = cursor.getInt(5);
+                int chipPrice = cursor.getInt(6);
+                int glazePrice = cursor.getInt(7);
 
                 FoodModel foodModel = new FoodModel(id, foodImage, foodName, expReward, foodPercentage, chipPrice, glazePrice);
+                foodModel.setRarity(rarity);
+
                 foodModels.add(foodModel);
             } while(cursor.moveToNext());
         }
