@@ -17,7 +17,7 @@ public class Burger extends FoodModel {
 
     public Burger()
     {
-        super(R.drawable.food_burger, "Burger", 10, 100, 10, 0);
+        super(R.drawable.food_burger, "Burger", 10, 100, 20, 0);
         setRarity(fixedRarity.getRarity(0));
     }
 }

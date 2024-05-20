@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
+import com.example.miwipet.database.FoodDatabase;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
@@ -58,6 +59,7 @@ public class FoodShopSelectionAdapter extends RecyclerView.Adapter<FoodShopSelec
 
     @Override
     public void onBindViewHolder(@NonNull FoodShopSelectionAdapter.MyViewHolder holder, int position) {
+        FoodDatabase foodDatabase = new FoodDatabase(context);
 
         holder.foodImage.setImageResource(displayFoods.get(position).getFoodImage());
         holder.foodName.setText(displayFoods.get(position).getFoodName());
@@ -67,24 +69,24 @@ public class FoodShopSelectionAdapter extends RecyclerView.Adapter<FoodShopSelec
         holder.buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (inventoryModel.getChipToken() >=
-//                        displayFoods.get(holder.getAdapterPosition()).getChipPrice() &&
-//                        inventoryModel.getGlazeToken() >=
-//                                displayFoods.get(holder.getAdapterPosition()).getGlazePrice()) {
-//
-//                    eggDatabase.addEgg(foodSource.getEggByString(holder.foodName.getText().toString()));
-//                    refreshInventory.getEggFromDatabase();
-//
-//                    inventoryModel.setChipToken(inventoryModel.getChipToken() -
-//                            displayFoods.get(holder.getAdapterPosition()).getChipPrice());
-//
-//                    inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() -
-//                            displayFoods.get(holder.getAdapterPosition()).getGlazePrice());
-//
-//                    chipToken.setText(inventoryModel.getChipToken() + "");
-//                    glazeToken.setText(inventoryModel.getGlazeToken() + "");
-//
-//                }
+                if (inventoryModel.getChipToken() >=
+                        displayFoods.get(holder.getAdapterPosition()).getChipPrice() &&
+                        inventoryModel.getGlazeToken() >=
+                                displayFoods.get(holder.getAdapterPosition()).getGlazePrice()) {
+
+                    foodDatabase.addFood(foodSource.getFoodByString(holder.foodName.getText().toString()));
+                    refreshInventory.getEggFromDatabase();
+
+                    inventoryModel.setChipToken(inventoryModel.getChipToken() -
+                            displayFoods.get(holder.getAdapterPosition()).getChipPrice());
+
+                    inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() -
+                            displayFoods.get(holder.getAdapterPosition()).getGlazePrice());
+
+                    chipToken.setText(inventoryModel.getChipToken() + "");
+                    glazeToken.setText(inventoryModel.getGlazeToken() + "");
+
+                }
             }
         });
     }
