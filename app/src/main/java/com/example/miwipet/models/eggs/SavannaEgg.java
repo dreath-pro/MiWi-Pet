@@ -6,7 +6,7 @@ import com.example.miwipet.models.EggModel;
 public class SavannaEgg extends EggModel {
     int[][] pets = {
             {R.drawable.elephant, R.drawable.rhino, R.drawable.warthog, R.drawable.lemur,
-                    R.drawable.black_mamba},
+                    R.drawable.black_mamba, R.drawable.meerkat},
 
 
             {R.drawable.zebra, R.drawable.cheetah, R.drawable.gazelle, R.drawable.vine_snake,
@@ -25,7 +25,7 @@ public class SavannaEgg extends EggModel {
     };
 
     String[][] petNames = {
-            {"Elephant", "Rhino", "Warthog", "Lemur", "Black Mamba"},
+            {"Elephant", "Rhino", "Warthog", "Lemur", "Black Mamba", "Meerkat"},
 
             {"Zebra", "Cheetah", "Gazelle", "Vine Snake", "Mandrill", "African Buffalo"},
 
