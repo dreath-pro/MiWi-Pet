@@ -42,7 +42,7 @@ public class NostalgiaEgg extends EggModel {
     };
 
     public NostalgiaEgg() {
-        super("Nostalgia Egg", "egg_nostalgia", 30, 10, 0, 30, 5, 5);
+        super("Nostalgia Egg", "egg_nostalgia", 30, 10, 0, 30, 5, 20);
         super.selectRarity(petImages, petNames);
     }
 }
