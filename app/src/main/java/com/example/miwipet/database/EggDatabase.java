@@ -49,11 +49,11 @@ public class EggDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < 3) {
+        if (oldVersion < DATABASE_VERSION) {
             db.execSQL("ALTER TABLE " + eggTable + " ADD COLUMN " + eggPercentage + " INT");
         }
 
-        if (oldVersion < 5) {
+        if (oldVersion < DATABASE_VERSION) {
             db.execSQL("ALTER TABLE " + eggTable + " RENAME TO " + eggTable + "_temp");
 
             String createTableStatement = "CREATE TABLE " + eggTable + " (" + id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

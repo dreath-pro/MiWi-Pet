@@ -17,6 +17,7 @@ import com.example.miwipet.R;
 import com.example.miwipet.adapters.EggShopSelectionAdapter;
 import com.example.miwipet.adapters.FoodShopSelectionAdapter;
 import com.example.miwipet.database.EggDisplayDatabase;
+import com.example.miwipet.database.FoodDisplayDatabase;
 import com.example.miwipet.database.TimeDatabase;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
@@ -43,6 +44,7 @@ public class StoreFragment extends Fragment {
     private FoodShopSelectionAdapter foodShopSelectionAdapter;
 
     private EggDisplayDatabase eggDisplayDatabase;
+    private FoodDisplayDatabase foodDisplayDatabase;
 
 
     private InventoryModel inventoryModels;
@@ -86,8 +88,40 @@ public class StoreFragment extends Fragment {
 
     private void generateFoodDisplay()
     {
-        foodDisplay.clear();
-        foodDisplay.addAll(foodSource.getStoreFoods());
+        if(!foodDisplayDatabase.doesDataExist())
+        {
+            foodDisplay.clear();
+            foodDisplayDatabase.clearDisplay();
+            foodDisplay.addAll(foodSource.getStoreFoods());
+
+            for(FoodModel food : foodDisplay)
+            {
+                foodDisplayDatabase.generateTable(food);
+            }
+        }
+
+        if(timeModel.isNewDay())
+        {
+            foodDisplay.clear();
+            foodDisplayDatabase.clearDisplay();
+            foodDisplay.addAll(foodSource.getStoreFoods());
+
+            for(FoodModel food : foodDisplay)
+            {
+                foodDisplayDatabase.generateTable(food);
+            }
+
+            timeModel.setLastTimeLogin(timeModel.getCurrentTimeLogin());
+            timeModel.setLastDayLogin(timeModel.getCurrentDayLogin());
+            timeModel.setLastMonthLogin(timeModel.getCurrentMonthLogin());
+            timeModel.setLastYearLogin(timeModel.getCurrentYearLogin());
+        }else
+        {
+            foodDisplay.clear();
+            ArrayList<String> foodNames;
+            foodNames = foodDisplayDatabase.getDisplayList();
+            foodDisplay = foodSource.getFoodsByString(foodNames);
+        }
     }
 
     private void generateEggDisplay()
@@ -134,5 +168,6 @@ public class StoreFragment extends Fragment {
         this.context = context;
 
         eggDisplayDatabase = new EggDisplayDatabase(context);
+        foodDisplayDatabase = new FoodDisplayDatabase(context);
     }
 }
