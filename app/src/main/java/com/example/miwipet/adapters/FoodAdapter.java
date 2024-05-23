@@ -40,7 +40,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull FoodAdapter.MyViewHolder holder, int position) {
-        holder.foodImage.setImageResource(foodModels.get(position).getFoodImage());
+        int resourceId = context.getResources().getIdentifier(foodModels.get(position).getFoodImage(), "drawable", context.getPackageName());
+
+        holder.foodImage.setImageResource(resourceId);
         holder.foodName.setText(foodModels.get(position).getFoodName());
         holder.foodCardView.setBackgroundResource(foodModels.get(position).getRarityBackground());
     }

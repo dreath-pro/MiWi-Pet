@@ -31,7 +31,7 @@ public class EggDatabase extends SQLiteOpenHelper {
     private static final String rarityText = "rarity_text";
     private static final String eggPercentage = "egg_percentage";
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 5;
 
     public EggDatabase(@Nullable Context context) {
         super(context, "egg.db", null, DATABASE_VERSION);
@@ -40,7 +40,7 @@ public class EggDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "CREATE TABLE " + eggTable + " (" + id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                eggImage + " INT, " + eggName + " TEXT, " + petName + " TEXT, " + petImage + " INT, " + petAge + " INT, " +
+                eggImage + " TEXT, " + eggName + " TEXT, " + petName + " TEXT, " + petImage + " TEXT, " + petAge + " INT, " +
                 petType + " INT, " + chipPrice + " INT, " + glazePrice + " INT, " + second + " INT, " + minute + " INT, " +
                 hour + " INT, " + toHatch + " BOOL, " + isSelected + " BOOL, " + rarityText + " String, " + eggPercentage + ")";
 
@@ -49,9 +49,27 @@ public class EggDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion < DATABASE_VERSION)
-        {
+        if (oldVersion < 3) {
             db.execSQL("ALTER TABLE " + eggTable + " ADD COLUMN " + eggPercentage + " INT");
+        }
+
+        if (oldVersion < 5) {
+            db.execSQL("ALTER TABLE " + eggTable + " RENAME TO " + eggTable + "_temp");
+
+            String createTableStatement = "CREATE TABLE " + eggTable + " (" + id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    eggImage + " TEXT, " + eggName + " TEXT, " + petName + " TEXT, " + petImage + " TEXT, " + petAge + " INT, " +
+                    petType + " INT, " + chipPrice + " INT, " + glazePrice + " INT, " + second + " INT, " + minute + " INT, " +
+                    hour + " INT, " + toHatch + " BOOL, " + isSelected + " BOOL, " + rarityText + " String, " + eggPercentage + ")";
+            db.execSQL(createTableStatement);
+
+            db.execSQL("INSERT INTO " + eggTable + " (" + id + ", " + eggImage + ", " + eggName + ", " + petName + ", " +
+                    petImage + ", " + petAge + ", " + petType + ", " + chipPrice + ", " + glazePrice + ", " + second + ", " +
+                    minute + ", " + hour + ", " + toHatch + ", " + isSelected + ", " + rarityText + ", " + eggPercentage + ") " +
+                    "SELECT " + id + ", " + eggImage + ", " + eggName + ", " + petName + ", " + petImage + ", " + petAge + ", " +
+                    petType + ", " + chipPrice + ", " + glazePrice + ", " + second + ", " + minute + ", " + hour + ", " +
+                    toHatch + ",  " + isSelected + ", " + rarityText + ", " + eggPercentage + " FROM " + eggTable + "_temp");
+
+            db.execSQL("DROP TABLE IF EXISTS " + eggTable + "_temp");
         }
 
         db.setVersion(DATABASE_VERSION);
@@ -108,6 +126,21 @@ public class EggDatabase extends SQLiteOpenHelper {
         return result;
     }
 
+    public boolean clearEgg() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        boolean result;
+
+        int rowsDeleted = db.delete(eggTable, null, null);
+        if (rowsDeleted > 0) {
+            result = true;
+        } else {
+            result = false;
+        }
+
+        db.close();
+        return result;
+    }
+
     public ArrayList<EggModel> getEggList() {
         ArrayList<EggModel> eggModels = new ArrayList<>();
         String queryString = "SELECT * FROM " + eggTable;
@@ -118,10 +151,10 @@ public class EggDatabase extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
-                int eggImage = cursor.getInt(1);
+                String eggImage = cursor.getString(1);
                 String eggName = cursor.getString(2);
                 String petName = cursor.getString(3);
-                int petImage = cursor.getInt(4);
+                String petImage = cursor.getString(4);
                 int petAge = cursor.getInt(5);
                 int petType = cursor.getInt(6);
                 int chipPrice = cursor.getInt(7);

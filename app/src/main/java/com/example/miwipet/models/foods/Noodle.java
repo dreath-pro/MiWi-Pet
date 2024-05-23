@@ -17,7 +17,7 @@ public class Noodle extends FoodModel {
 
     public Noodle()
     {
-        super(R.drawable.food_noodle, "Noodle", 25, 70, 30, 0);
+        super("food_noodle", "Noodle", 25, 70, 30, 0);
         setRarity(fixedRarity.getRarity(2));
     }
 }

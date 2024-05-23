@@ -17,7 +17,7 @@ public class IceCream extends FoodModel {
 
     public IceCream()
     {
-        super(R.drawable.food_ice_cream, "Ice Cream", 15, 85, 20, 0);
+        super("food_ice_cream", "Ice Cream", 15, 85, 20, 0);
         setRarity(fixedRarity.getRarity(1));
     }
 }

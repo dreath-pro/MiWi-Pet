@@ -4,27 +4,27 @@ import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 
 public class FossilEgg extends EggModel {
-    int[][] pets = {
-            {R.drawable.brachiosaurus, R.drawable.t_rex, R.drawable.smilodon,
-                    R.drawable.mammoth, R.drawable.paraceratherium},
+    private final String[][] petImages = {
+            {"brachiosaurus", "t_rex", "smilodon",
+                    "mammoth", "paraceratherium"},
 
 
-            {R.drawable.titanoboa, R.drawable.triceratops, R.drawable.spinosaurus,
-                    R.drawable.parasaurolophus, R.drawable.megalodon},
+            {"titanoboa", "triceratops", "spinosaurus",
+                    "parasaurolophus", "megalodon"},
 
 
-            {R.drawable.ankylosaurus, R.drawable.stegosaurus, R.drawable.plesiosaurus,
-                    R.drawable.amargasaurus, R.drawable.sarcosuchus},
+            {"ankylosaurus", "stegosaurus", "plesiosaurus",
+                    "amargasaurus", "sarcosuchus"},
 
 
-            {R.drawable.pteranodon, R.drawable.dodo, R.drawable.dunkleosteus,
-                    R.drawable.phorusrhacids, R.drawable.glyptodon},
+            {"pteranodon", "dodo", "dunkleosteus",
+                    "phorusrhacids", "glyptodon"},
 
 
-            {R.drawable.polymesh_rex, R.drawable.skeleton_t_rex, R.drawable.leviathan}
+            {"polymesh_rex", "skeleton_t_rex", "leviathan"}
     };
 
-    String[][] petNames = {
+    private final String[][] petNames = {
             {"Brachiosaurus", "T-Rex", "Smilodon", "Mammoth", "Paraceratherium"},
 
             {"Titanoboa", "Triceratops", "Spinosaurus", "Parasaurolophus", "Megalodon"},
@@ -37,7 +37,7 @@ public class FossilEgg extends EggModel {
     };
 
     public FossilEgg() {
-        super("Fossil Egg", R.drawable.egg_fossil, 0, 0, 0, 30, 1, 100);
-        super.selectRarity(pets, petNames);
+        super("Fossil Egg", "egg_fossil", 0, 0, 0, 30, 1, 100);
+        super.selectRarity(petImages, petNames);
     }
 }

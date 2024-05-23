@@ -4,27 +4,27 @@ import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 
 public class ForestEgg extends EggModel {
-    int[][] pets = {
-            {R.drawable.ant, R.drawable.beaver, R.drawable.panther, R.drawable.spider,
-                    R.drawable.squirrel, R.drawable.woodpecker},
+    private final String[][] petImages = {
+            {"ant", "beaver", "panther", "spider",
+                    "squirrel", "woodpecker"},
 
 
-            {R.drawable.owl, R.drawable.monkey, R.drawable.deer, R.drawable.snake,
-                    R.drawable.bat, R.drawable.orangutan},
+            {"owl", "monkey", "deer", "snake",
+                    "bat", "orangutan"},
 
 
-            {R.drawable.bear, R.drawable.gorilla, R.drawable.moose, R.drawable.sloth,
-                    R.drawable.hawk, R.drawable.koala},
+            {"bear", "gorilla", "moose", "sloth",
+                    "hawk", "koala"},
 
 
-            {R.drawable.albino_tiger, R.drawable.sugar_glider, R.drawable.tiger, R.drawable.peacock,
-                    R.drawable.kangaroo, R.drawable.panda},
+            {"albino_tiger", "sugar_glider", "tiger", "peacock",
+                    "kangaroo", "panda"},
 
 
-            {R.drawable.galactic_owl, R.drawable.dire_wolf, R.drawable.dark_deer}
+            {"galactic_owl", "dire_wolf", "dark_deer"}
     };
 
-    String[][] petNames = {
+    private final String[][] petNames = {
             {"Ant", "Beaver", "Panther", "Spider", "Squirrel", "Woodpecker"},
 
             {"Owl", "Monkey", "Deer", "Snake", "Bat", "Orangutan"},
@@ -37,7 +37,7 @@ public class ForestEgg extends EggModel {
     };
 
     public ForestEgg() {
-        super("Forest Egg", R.drawable.egg_forest, 20, 0, 0, 30, 0, 100);
-        super.selectRarity(pets, petNames);
+        super("Forest Egg", "egg_forest", 20, 0, 0, 30, 0, 100);
+        super.selectRarity(petImages, petNames);
     }
 }

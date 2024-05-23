@@ -4,27 +4,27 @@ import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 
 public class ChristmasEgg extends EggModel {
-    int[][] pets = {
-            {R.drawable.golden_walrus, R.drawable.ski_lion, R.drawable.gingerbread_mouse,
-                    R.drawable.choco_milk_albatross, R.drawable.diamond_tern, R.drawable.snowball},
+    private final String[][] petImages = {
+            {"golden_walrus", "ski_lion", "gingerbread_mouse",
+                    "choco_milk_albatross", "diamond_tern", "snowball"},
 
 
-            {R.drawable.winter_seal, R.drawable.toy_mouse, R.drawable.christmas_puffin,
-                    R.drawable.elf_squirrel, R.drawable.toy_cat, R.drawable.christmas_seal},
+            {"winter_seal", "toy_mouse", "christmas_puffin",
+                    "elf_squirrel", "toy_cat", "christmas_seal"},
 
 
-            {R.drawable.conductor_penguin, R.drawable.ice_cream_bear, R.drawable.rudolf,
-                    R.drawable.gingerbread_walrus, R.drawable.yeti, R.drawable.snowman},
+            {"conductor_penguin", "ice_cream_bear", "rudolf",
+                    "gingerbread_walrus", "yeti", "snowman"},
 
 
-            {R.drawable.pudding_pug, R.drawable.candy_horse, R.drawable.strawberry_golem,
-                    R.drawable.cream_narwhal, R.drawable.crystal_tern, R.drawable.queen_snowflake},
+            {"pudding_pug", "candy_horse", "strawberry_golem",
+                    "cream_narwhal", "crystal_tern", "queen_snowflake"},
 
 
-            {R.drawable.joy_reindeer, R.drawable.snowflake_dragon, R.drawable.aurora_dragon}
+            {"joy_reindeer", "snowflake_dragon", "aurora_dragon"}
     };
 
-    String[][] petNames = {
+    private final String[][] petNames = {
             {"Golden Walrus", "Ski Lion", "Gingerbread Mouse", "Choco-Milk Albatross", "Diamond Tern",
                     "Snowball"},
 
@@ -39,7 +39,7 @@ public class ChristmasEgg extends EggModel {
     };
 
     public ChristmasEgg() {
-        super("Christmas Egg", R.drawable.egg_christmas, 0, 0, 0, 0, 2, 100);
-        super.selectRarity(pets, petNames);
+        super("Christmas Egg", "egg_christmas", 0, 0, 0, 0, 2, 100);
+        super.selectRarity(petImages, petNames);
     }
 }

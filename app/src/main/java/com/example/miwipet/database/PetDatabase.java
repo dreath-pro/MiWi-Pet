@@ -23,7 +23,7 @@ public class PetDatabase extends SQLiteOpenHelper {
     private static final String maxExp = "max_exp";
     private static final String exp = "exp";
 
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     public PetDatabase(@Nullable Context context) {
         super(context, "pet.db", null, DATABASE_VERSION);
@@ -32,14 +32,14 @@ public class PetDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "CREATE TABLE " + petTable + " (" + id + " INTEGER PRIMARY KEY " +
-                "AUTOINCREMENT," + image + " INT, " + name + " TEXT, " + rarity + " TEXT, " + age + " INT, " +
+                "AUTOINCREMENT," + image + " TEXT, " + name + " TEXT, " + rarity + " TEXT, " + age + " INT, " +
                 type + " INT, " + maxExp + " INT, " + exp + " INT)";
         db.execSQL(createTableStatement);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion < DATABASE_VERSION)
+        if(oldVersion < 5)
         {
             // Rename the old table
             db.execSQL("ALTER TABLE " + petTable + " RENAME TO " + petTable + "_temp");
@@ -47,27 +47,6 @@ public class PetDatabase extends SQLiteOpenHelper {
             // Create the new table with the modified column data type
             String createTableStatement = "CREATE TABLE " + petTable + " (" + id + " INTEGER PRIMARY KEY " +
                     "AUTOINCREMENT," + image + " TEXT, " + name + " TEXT, " + rarity + " TEXT, " + age + " INT, " +
-                    type + " INT, " + maxExp + " INT, " + exp + " INT)";
-            db.execSQL(createTableStatement);
-
-            // Copy data from the temporary table to the new table
-            db.execSQL("INSERT INTO " + petTable + " (" + id + ", " + name + ", " + rarity + ", " + age + ", " +
-                    type + ", " + maxExp + ", " + exp + ") SELECT " + id + ", " + name + ", " + rarity + ", " +
-                    age + ", " + type + ", " + maxExp + ", " + exp + " FROM " + petTable + "_temp");
-
-            // Drop the temporary table
-            db.execSQL("DROP TABLE IF EXISTS " + petTable + "_temp");
-        }
-
-        if(oldVersion < DATABASE_VERSION)
-        {
-            // Revert back from version 3 to version 2
-            // Rename the current table
-            db.execSQL("ALTER TABLE " + petTable + " RENAME TO " + petTable + "_temp");
-
-            // Create the new table with the previous schema
-            String createTableStatement = "CREATE TABLE " + petTable + " (" + id + " INTEGER PRIMARY KEY " +
-                    "AUTOINCREMENT," + image + " INT, " + name + " TEXT, " + rarity + " TEXT, " + age + " INT, " +
                     type + " INT, " + maxExp + " INT, " + exp + " INT)";
             db.execSQL(createTableStatement);
 
@@ -133,7 +112,7 @@ public class PetDatabase extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
-                int image = cursor.getInt(1);
+                String image = cursor.getString(1);
                 String name = cursor.getString(2);
                 String rarity = cursor.getString(3);
                 int age = cursor.getInt(4);

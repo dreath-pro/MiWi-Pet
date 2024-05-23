@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.miwipet.R;
+import com.example.miwipet.database.EggDatabase;
+import com.example.miwipet.database.FoodDatabase;
 import com.example.miwipet.database.TimeDatabase;
 import com.example.miwipet.fragments.navigation.AboutFragment;
 import com.example.miwipet.fragments.navigation.ChangelogFragment;
@@ -29,6 +31,7 @@ import com.example.miwipet.fragments.navigation.NurseryFragment;
 import com.example.miwipet.fragments.navigation.StoreFragment;
 import com.example.miwipet.fragments.navigation.TradeFragment;
 import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.PetModel;
 import com.example.miwipet.database.CurrencyDatabase;
@@ -94,10 +97,15 @@ public class MainActivity extends AppCompatActivity {
     private InventoryModel inventoryModel = new InventoryModel();
     private TimeModel timeModel = new TimeModel();
 
+
     private RefreshInventory refreshInventory;
     private Rarity rarity = new Rarity();
 
+
     private PetDatabase petDatabase = new PetDatabase(MainActivity.this);
+    private EggDatabase eggDatabase = new EggDatabase(MainActivity.this);
+    private FoodDatabase foodDatabase = new FoodDatabase(MainActivity.this);
+
     private CurrencyDatabase currencyDatabase = new CurrencyDatabase(MainActivity.this);
     private TimeDatabase timeDatabase = new TimeDatabase(MainActivity.this);
 
@@ -196,6 +204,31 @@ public class MainActivity extends AppCompatActivity {
         glazeTokenValue.setText("" + inventoryModel.getGlazeToken());
     }
 
+    private void resetInventory()
+    {
+        petDatabase.clearPet();
+        eggDatabase.clearEgg();
+        foodDatabase.clearFood();
+
+        for (PetModel petModel : inventoryModel.getPetLists()) {
+            petDatabase.addPet(petModel);
+        }
+
+        for(EggModel eggModel : inventoryModel.getEggLists())
+        {
+            eggDatabase.addEgg(eggModel);
+        }
+
+        for(FoodModel foodModel : inventoryModel.getFoodLists())
+        {
+            foodDatabase.addFood(foodModel);
+        }
+
+        refreshInventory.getPetFromDatabase();
+        refreshInventory.getEggFromDatabase();
+        refreshInventory.getFoodFromDatabase();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -213,15 +246,11 @@ public class MainActivity extends AppCompatActivity {
 
         InspectInventory inspectInventory = new InspectInventory(inventoryModel);
         inspectInventory.updatePet();
-        inspectInventory.updateEggPetImage();
+        inspectInventory.updateEggImage();
         inspectInventory.updatePetImage();
+        inspectInventory.updateFoodImage();
 
-        petDatabase.clearPet();
-        for (PetModel petModel : inventoryModel.getPetLists()) {
-            petDatabase.addPet(petModel);
-        }
-        inventoryModel.clearPetLists();
-        refreshInventory.getPetFromDatabase();
+        resetInventory();
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 MainActivity.this, drawerLayout, materialToolbar, R.string.drawer_close, R.string.drawer_open);
@@ -260,8 +289,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!incubated.isEmpty()) {
                     PetModel petModel;
+                    int resourceId = getResources().getIdentifier(incubated.get(0).getPetImage(), "drawable", getPackageName());
+                    eggImage.setImageResource(resourceId);
 
-                    eggImage.setImageResource(incubated.get(0).getPetImage());
                     petModel = new PetModel(incubated.get(0).getPetName(), incubated.get(0).getPetImage(),
                             incubated.get(0).getAge(), incubated.get(0).getType(), incubated.get(0).getRarityText());
 

@@ -4,27 +4,27 @@ import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 
 public class RiverEgg extends EggModel {
-    int[][] pets = {
-            {R.drawable.firefly, R.drawable.bass, R.drawable.frog, R.drawable.duck,
-                    R.drawable.otter},
+    private final String[][] petImages = {
+            {"firefly", "bass", "frog", "duck",
+                    "otter"},
 
 
-            {R.drawable.salmon, R.drawable.goose, R.drawable.capybara, R.drawable.hippo,
-                    R.drawable.salamander},
+            {"salmon", "goose", "capybara", "hippo",
+                    "salamander"},
 
 
-            {R.drawable.swan, R.drawable.turtle, R.drawable.electric_eel, R.drawable.piranha,
-                    R.drawable.koi},
+            {"swan", "turtle", "electric_eel", "piranha",
+                    "koi"},
 
 
-            {R.drawable.catfish, R.drawable.pink_dolphin, R.drawable.axolotl, R.drawable.bull_shark,
-                    R.drawable.crocodile},
+            {"catfish", "pink_dolphin", "axolotl", "bull_shark",
+                    "crocodile"},
 
 
-            {R.drawable.ancient_turtle, R.drawable.majestic_koi, R.drawable.waterfall_turtle}
+            {"ancient_turtle", "majestic_koi", "waterfall_turtle"}
     };
 
-    String[][] petNames = {
+    private final String[][] petNames = {
             {"Firefly", "Bass", "Frog", "Duck", "Otter"},
 
             {"Salmon", "Goose", "Capybara", "Hippo", "Salamander"},
@@ -37,7 +37,7 @@ public class RiverEgg extends EggModel {
     };
 
     public RiverEgg() {
-        super("River Egg", R.drawable.egg_river, 20, 0, 0, 50, 1, 75);
-        super.selectRarity(pets, petNames);
+        super("River Egg", "egg_river", 20, 0, 0, 50, 1, 75);
+        super.selectRarity(petImages, petNames);
     }
 }

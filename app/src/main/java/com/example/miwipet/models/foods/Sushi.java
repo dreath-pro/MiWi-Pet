@@ -17,7 +17,7 @@ public class Sushi extends FoodModel {
 
     public Sushi()
     {
-        super(R.drawable.food_sushi, "Sushi", 15, 80, 40, 0);
+        super("food_sushi", "Sushi", 15, 80, 40, 0);
         setRarity(fixedRarity.getRarity(1));
     }
 }

@@ -4,27 +4,27 @@ import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 
 public class SavannaEgg extends EggModel {
-    int[][] pets = {
-            {R.drawable.elephant, R.drawable.rhino, R.drawable.warthog, R.drawable.lemur,
-                    R.drawable.black_mamba, R.drawable.meerkat},
+    private final String[][] petImages = {
+            {"elephant", "rhino", "warthog", "lemur",
+                    "black_mamba", "meerkat"},
 
 
-            {R.drawable.zebra, R.drawable.cheetah, R.drawable.gazelle, R.drawable.vine_snake,
-                    R.drawable.mandrill, R.drawable.african_buffalo},
+            {"zebra", "cheetah", "gazelle", "vine_snake",
+                    "mandrill", "african_buffalo"},
 
 
-            {R.drawable.ostrich, R.drawable.vulture, R.drawable.wildebeest, R.drawable.african_wild_dog,
-                    R.drawable.caracal, R.drawable.impala},
+            {"ostrich", "vulture", "wildebeest", "african_wild_dog",
+                    "caracal", "impala"},
 
 
-            {R.drawable.giraffe, R.drawable.hyena, R.drawable.lion, R.drawable.leopard,
-                    R.drawable.leopard_turtle, R.drawable.lynx},
+            {"giraffe", "hyena", "lion", "leopard",
+                    "leopard_turtle", "lynx"},
 
 
-            {R.drawable.sun_war_lion, R.drawable.death_vulture, R.drawable.viper_snake}
+            {"sun_war_lion", "death_vulture", "viper_snake"}
     };
 
-    String[][] petNames = {
+    private final String[][] petNames = {
             {"Elephant", "Rhino", "Warthog", "Lemur", "Black Mamba", "Meerkat"},
 
             {"Zebra", "Cheetah", "Gazelle", "Vine Snake", "Mandrill", "African Buffalo"},
@@ -37,7 +37,7 @@ public class SavannaEgg extends EggModel {
     };
 
     public SavannaEgg() {
-        super("Savanna Egg", R.drawable.egg_savanna, 30, 0, 0, 0, 3, 30);
-        super.selectRarity(pets, petNames);
+        super("Savanna Egg", "egg_savanna", 30, 0, 0, 0, 3, 30);
+        super.selectRarity(petImages, petNames);
     }
 }

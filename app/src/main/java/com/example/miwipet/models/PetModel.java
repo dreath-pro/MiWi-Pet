@@ -4,8 +4,8 @@ import com.example.miwipet.R;
 import com.example.miwipet.utils.Rarity;
 
 public class PetModel {
-    private String petName, rarity;
-    private int petImage, age, type;
+    private String petName, rarity, petImage;
+    private int age, type;
     private int maxExp;
     private int exp;
 
@@ -25,7 +25,7 @@ public class PetModel {
             R.color.legendary, R.color.mythic};
     private int[] typeColors = new int[]{R.color.normal, R.color.crystal, R.color.gemstone};
 
-    public PetModel(String petName, int petImage, int age, int type, String rarity) {
+    public PetModel(String petName, String petImage, int age, int type, String rarity) {
         this.petName = petName;
         this.petImage = petImage;
         this.age = age;
@@ -36,7 +36,7 @@ public class PetModel {
         exp = 0;
     }
 
-    public PetModel(String petName, int petImage, int age, int type, String rarity, int maxExp, int exp) {
+    public PetModel(String petName, String petImage, int age, int type, String rarity, int maxExp, int exp) {
         this.petName = petName;
         this.petImage = petImage;
         this.age = age;
@@ -145,11 +145,11 @@ public class PetModel {
         this.petName = petName;
     }
 
-    public int getPetImage() {
+    public String getPetImage() {
         return petImage;
     }
 
-    public void setPetImage(int petImage) {
+    public void setPetImage(String petImage) {
         this.petImage = petImage;
     }
 

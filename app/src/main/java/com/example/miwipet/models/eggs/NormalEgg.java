@@ -4,27 +4,27 @@ import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 
 public class NormalEgg extends EggModel {
-    int[][] pets = {
-            {R.drawable.cockroach, R.drawable.fly, R.drawable.mosquito, R.drawable.slug,
-                    R.drawable.grasshopper, R.drawable.bee, R.drawable.butterfly, R.drawable.mantis},
+    private final String[][] petImages = {
+            {"cockroach", "fly", "mosquito", "slug",
+                    "grasshopper", "bee", "butterfly", "mantis"},
 
 
-            {R.drawable.blue_chick, R.drawable.monarch_butterfly, R.drawable.dragonfly, R.drawable.chicken,
-                    R.drawable.lizard, R.drawable.lady_bug, R.drawable.bird, R.drawable.caterpillar},
+            {"blue_chick", "monarch_butterfly", "dragonfly", "chicken",
+                    "lizard", "lady_bug", "bird", "caterpillar"},
 
 
-            {R.drawable.cat, R.drawable.dog, R.drawable.sheep, R.drawable.rabbit,
-                    R.drawable.wolf, R.drawable.donkey, R.drawable.toucan, R.drawable.cockatoo},
+            {"cat", "dog", "sheep", "rabbit",
+                    "wolf", "donkey", "toucan", "cockatoo"},
 
 
-            {R.drawable.cow, R.drawable.buffalo, R.drawable.boar, R.drawable.chameleon,
-                    R.drawable.pig, R.drawable.parrot, R.drawable.fox, R.drawable.horse},
+            {"cow", "buffalo", "boar", "chameleon",
+                    "pig", "parrot", "fox", "horse"},
 
 
-            {R.drawable.unicorn, R.drawable.pegasus, R.drawable.undead_unicorn}
+            {"unicorn", "pegasus", "undead_unicorn"}
     };
 
-    String[][] petNames = {
+    private final String[][] petNames = {
             {"Cockroach", "Fly", "Mosquito", "Slug", "Grasshopper", "Bee", "Butterfly", "Mantis"},
 
             {"Blue Chick", "Monarch Butterfly", "Dragonfly", "Chicken", "Lizard", "Lady Bug",
@@ -38,7 +38,7 @@ public class NormalEgg extends EggModel {
     };
 
     public NormalEgg() {
-        super("Normal Egg", R.drawable.egg_normal, 10, 0, 0, 5, 0, 100);
-        super.selectRarity(pets, petNames);
+        super("Normal Egg", "egg_normal", 10, 0, 0, 5, 0, 100);
+        super.selectRarity(petImages, petNames);
     }
 }

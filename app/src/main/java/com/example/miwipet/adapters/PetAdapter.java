@@ -1,5 +1,4 @@
 package com.example.miwipet.adapters;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -43,7 +42,10 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PetAdapter.MyViewHolder holder, int position) {
-        holder.petImage.setImageResource(petModels.get(position).getPetImage());
+        PetModel petModel = petModels.get(position);
+        int resourceId = context.getResources().getIdentifier(petModel.getPetImage(), "drawable", context.getPackageName());
+
+        holder.petImage.setImageResource(resourceId);
         holder.petName.setText(petModels.get(position).getPetName());
         holder.petCardView.setBackgroundResource(petModels.get(position).getRarityBackground());
         holder.petImageContainer.setBackgroundResource(petModels.get(position).getTypeBackground());
@@ -91,7 +93,10 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.MyViewHolder> {
         ImageView rarityColor = dialog.findViewById(R.id.rarityColor),
                 typeColor = dialog.findViewById(R.id.typeColor);
 
-        petImage.setImageResource(petModels.get(holder.getAdapterPosition()).getPetImage());
+        PetModel petModel = petModels.get(holder.getAdapterPosition());
+        int resourceId = context.getResources().getIdentifier(petModel.getPetImage(), "drawable", context.getPackageName());
+
+        petImage.setImageResource(resourceId);
         petImage.setBackgroundResource(petModels.get(holder.getAdapterPosition()).getRarityBackground());
         petName.setText(petModels.get(holder.getAdapterPosition()).getPetName());
         progressDetail.setText(petModels.get(holder.getAdapterPosition()).getExp() + "/" +

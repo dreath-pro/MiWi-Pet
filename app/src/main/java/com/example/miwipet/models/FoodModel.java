@@ -5,7 +5,7 @@ import com.example.miwipet.utils.Rarity;
 
 public class FoodModel {
     private int id;
-    private int foodImage;
+    private String foodImage;
     private String foodName;
     private String rarity;
     private int expReward;
@@ -25,7 +25,7 @@ public class FoodModel {
     private int[] rarityColors = new int[]{R.color.common, R.color.rare, R.color.ultra,
             R.color.legendary, R.color.mythic};
 
-    public FoodModel(int foodImage, String foodName, int expReward, int foodPercentage, int chipPrice, int glazePrice) {
+    public FoodModel(String foodImage, String foodName, int expReward, int foodPercentage, int chipPrice, int glazePrice) {
         this.foodImage = foodImage;
         this.foodName = foodName;
         this.expReward = expReward;
@@ -34,7 +34,7 @@ public class FoodModel {
         this.glazePrice = glazePrice;
     }
 
-    public FoodModel(int id, int foodImage, String foodName, int expReward, int foodPercentage, int chipPrice, int glazePrice) {
+    public FoodModel(int id, String foodImage, String foodName, int expReward, int foodPercentage, int chipPrice, int glazePrice) {
         this.id = id;
         this.foodImage = foodImage;
         this.foodName = foodName;
@@ -78,11 +78,11 @@ public class FoodModel {
         this.id = id;
     }
 
-    public int getFoodImage() {
+    public String getFoodImage() {
         return foodImage;
     }
 
-    public void setFoodImage(int foodImage) {
+    public void setFoodImage(String foodImage) {
         this.foodImage = foodImage;
     }
 

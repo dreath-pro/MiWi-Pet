@@ -17,7 +17,7 @@ public class Pizza extends FoodModel {
 
     public Pizza()
     {
-        super(R.drawable.food_pizza, "Pizza", 10, 100, 20, 0);
+        super("food_pizza", "Pizza", 10, 100, 20, 0);
         setRarity(fixedRarity.getRarity(0));
     }
 }

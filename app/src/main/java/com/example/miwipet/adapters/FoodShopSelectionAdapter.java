@@ -60,8 +60,9 @@ public class FoodShopSelectionAdapter extends RecyclerView.Adapter<FoodShopSelec
     @Override
     public void onBindViewHolder(@NonNull FoodShopSelectionAdapter.MyViewHolder holder, int position) {
         FoodDatabase foodDatabase = new FoodDatabase(context);
+        int resourceId = context.getResources().getIdentifier(displayFoods.get(position).getFoodImage(), "drawable", context.getPackageName());
 
-        holder.foodImage.setImageResource(displayFoods.get(position).getFoodImage());
+        holder.foodImage.setImageResource(resourceId);
         holder.foodName.setText(displayFoods.get(position).getFoodName());
         holder.chipPrice.setText(displayFoods.get(position).getChipPrice() + "");
         holder.glazePrice.setText(displayFoods.get(position).getGlazePrice() + "");

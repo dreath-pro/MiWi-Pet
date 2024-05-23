@@ -7,9 +7,9 @@ import java.util.Random;
 public class EggModel {
     private int id;
     private String eggName;
-    private int eggImage;
+    private String eggImage;
     private String petName;
-    private int petImage;
+    private String petImage;
     private int age, type;
     private int chipPrice, glazePrice;
 
@@ -21,9 +21,9 @@ public class EggModel {
     private Rarity rarity = new Rarity();
 
     private String[][] petNames;
-    private int[][] petImages;
+    private String[][] petImages;
 
-    public EggModel(int id, String eggName, int eggImage, String petName, int petImage, int age, int type,
+    public EggModel(int id, String eggName, String eggImage, String petName, String petImage, int age, int type,
                     int chipPrice, int glazePrice, int second, int minute, int hour, boolean toHatch,
                     boolean isSelected, String rarityText, int eggPercentage) {
         this.id = id;
@@ -44,7 +44,7 @@ public class EggModel {
         this.eggPercentage = eggPercentage;
     }
 
-    public EggModel(String eggName, int eggImage, int chipPrice, int glazePrice, int second, int minute, int hour, int eggPercentage) {
+    public EggModel(String eggName, String eggImage, int chipPrice, int glazePrice, int second, int minute, int hour, int eggPercentage) {
         this.eggName = eggName;
         this.eggImage = eggImage;
         this.chipPrice = chipPrice;
@@ -60,7 +60,7 @@ public class EggModel {
         isSelected = false;
     }
 
-    protected void selectRarity(int[][] petImages, String[][] petNames) {
+    protected void selectRarity(String[][] petImages, String[][] petNames) {
         this.petImages = petImages;
         this.petNames = petNames;
 
@@ -128,42 +128,6 @@ public class EggModel {
         }
     }
 
-    public boolean isNameExist(String petName)
-    {
-        boolean result = false;
-
-        for(int i = 0; i <= petNames.length - 1; i++)
-        {
-            for(int j = 0; j <= petNames[i].length - 1; j++)
-            {
-                if(petName.equals(petNames[i][j]))
-                {
-                    result = true;
-                }
-            }
-        }
-
-        return result;
-    }
-
-    public int refreshPetImage(String petName)
-    {
-        int image = 0;
-
-        for(int i = 0; i <= petNames.length - 1; i++)
-        {
-            for(int j = 0; j <= petNames[i].length - 1; j++)
-            {
-                if(petName.equals(petNames[i][j]))
-                {
-                    image = petImages[i][j];
-                }
-            }
-        }
-
-        return image;
-    }
-
     public int getId() {
         return id;
     }
@@ -180,11 +144,11 @@ public class EggModel {
         this.eggName = eggName;
     }
 
-    public int getEggImage() {
+    public String getEggImage() {
         return eggImage;
     }
 
-    public void setEggImage(int eggImage) {
+    public void setEggImage(String eggImage) {
         this.eggImage = eggImage;
     }
 
@@ -196,11 +160,11 @@ public class EggModel {
         this.petName = petName;
     }
 
-    public int getPetImage() {
+    public String getPetImage() {
         return petImage;
     }
 
-    public void setPetImage(int petImage) {
+    public void setPetImage(String petImage) {
         this.petImage = petImage;
     }
 

@@ -82,12 +82,6 @@ public class EggSource {
         return eggLists.size();
     }
 
-    public EggModel pickOverallEgg(int index)
-    {
-        generateEggs("All");
-        return eggLists.get(index);
-    }
-
     public ArrayList<EggModel> getEggsByString(ArrayList<String> eggNames)
     {
         ArrayList<EggModel> returnedEggList = new ArrayList<>();

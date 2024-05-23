@@ -49,15 +49,17 @@ public class EggSelectionAdapter extends RecyclerView.Adapter<EggSelectionAdapte
     @Override
     public void onBindViewHolder(@NonNull EggSelectionAdapter.MyViewHolder holder, int position) {
         EggDatabase eggDatabase = new EggDatabase(context);
+        int resourceId = context.getResources().getIdentifier(inventoryModels.getEggLists().get(position).getEggImage(), "drawable", context.getPackageName());
 
-        holder.eggImage.setImageResource(inventoryModels.getEggLists().get(position).getEggImage());
+        holder.eggImage.setImageResource(resourceId);
         holder.eggName.setText(inventoryModels.getEggLists().get(position).getEggName());
         holder.eggQuantity.setText("x1");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                eggImage.setImageResource(inventoryModels.getEggLists().get(holder.getAdapterPosition()).getEggImage());
+                int resourceId = context.getResources().getIdentifier(inventoryModels.getEggLists().get(holder.getAdapterPosition()).getEggImage(), "drawable", context.getPackageName());
+                eggImage.setImageResource(resourceId);
 
                 for(EggModel eggModel : inventoryModels.getEggLists())
                 {

@@ -23,7 +23,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
     private static final String chipPrice = "chip_price";
     private static final String glazePrice = "glaze_price";
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public FoodDatabase(@Nullable Context context) {
         super(context, "food.db", null, DATABASE_VERSION);
@@ -32,7 +32,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "CREATE TABLE " + foodTable + " (" + id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                foodImage + " INT, " + foodName + " TEXT, " + rarity + " TEXT, " + expReward + " INT, " +
+                foodImage + " TEXT, " + foodName + " TEXT, " + rarity + " TEXT, " + expReward + " INT, " +
                 foodPercentage + " INT, " + chipPrice + " INT, " + glazePrice + " INT)";
 
         db.execSQL(createTableStatement);
@@ -40,7 +40,24 @@ public class FoodDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if(oldVersion < 2)
+        {
+            db.execSQL("ALTER TABLE " + foodTable + " RENAME TO " + foodTable + "_temp");
 
+            String createTableStatement = "CREATE TABLE " + foodTable + " (" + id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    foodImage + " TEXT, " + foodName + " TEXT, " + rarity + " TEXT, " + expReward + " INT, " +
+                    foodPercentage + " INT, " + chipPrice + " INT, " + glazePrice + " INT)";
+            db.execSQL(createTableStatement);
+
+            db.execSQL("INSERT INTO " + foodTable + " (" + id + ", " + foodImage + ", " + foodName + ", " + rarity + ", " +
+                    expReward + ", " + foodPercentage + ", " + chipPrice + ", " + glazePrice + ") SELECT " + id + ", " +
+                    foodImage + ", " + foodName + ", " + rarity + ", " + expReward + ", " + foodPercentage + ", " +
+                    chipPrice + ", " + glazePrice + " FROM " + foodTable + "_temp");
+
+            db.execSQL("DROP TABLE IF EXISTS " + foodTable + "_temp");
+        }
+
+        db.setVersion(DATABASE_VERSION);
     }
 
     public boolean addFood(FoodModel foodModel) {
@@ -86,6 +103,21 @@ public class FoodDatabase extends SQLiteOpenHelper {
         return result;
     }
 
+    public boolean clearFood() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        boolean result;
+
+        int rowsDeleted = db.delete(foodTable, null, null);
+        if (rowsDeleted > 0) {
+            result = true;
+        } else {
+            result = false;
+        }
+
+        db.close();
+        return result;
+    }
+
     public ArrayList<FoodModel> getFoodList() {
         ArrayList<FoodModel> foodModels = new ArrayList<>();
         String queryString  = "SELECT * FROM " + foodTable;
@@ -97,7 +129,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
         {
             do {
                 int id = cursor.getInt(0);
-                int foodImage = cursor.getInt(1);
+                String foodImage = cursor.getString(1);
                 String foodName = cursor.getString(2);
                 String rarity = cursor.getString(3);
                 int expReward = cursor.getInt(4);
