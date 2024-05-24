@@ -31,7 +31,7 @@ public class EggDatabase extends SQLiteOpenHelper {
     private static final String rarityText = "rarity_text";
     private static final String eggPercentage = "egg_percentage";
 
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 7;
 
     public EggDatabase(@Nullable Context context) {
         super(context, "egg.db", null, DATABASE_VERSION);
@@ -71,9 +71,8 @@ public class EggDatabase extends SQLiteOpenHelper {
             {
                 db.execSQL("ALTER TABLE " + eggTable + " ADD COLUMN " + eggPercentage + " INT");
             }
-        }
 
-        if (oldVersion < DATABASE_VERSION) {
+
             db.execSQL("ALTER TABLE " + eggTable + " RENAME TO " + eggTable + "_temp");
 
             String createTableStatement = "CREATE TABLE " + eggTable + " (" + id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

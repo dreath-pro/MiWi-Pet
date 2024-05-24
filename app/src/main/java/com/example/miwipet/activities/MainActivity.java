@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView eggImage;
     TextView timeText;
     Button hatchButton;
+    TextView errorText;
 
     private ArrayList<EggModel> incubated = new ArrayList<>();
     private InventoryModel inventoryModel = new InventoryModel();
@@ -141,6 +142,9 @@ public class MainActivity extends AppCompatActivity {
         eggImage = findViewById(R.id.eggImage);
         timeText = findViewById(R.id.timeText);
         hatchButton = findViewById(R.id.hatchButton);
+        errorText = findViewById(R.id.errorText);
+
+        errorText.setVisibility(View.INVISIBLE);
     }
 
     private void generateTime() {
@@ -235,113 +239,120 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        refreshInventory = new RefreshInventory(MainActivity.this, inventoryModel);
+        try {
+            refreshInventory = new RefreshInventory(MainActivity.this, inventoryModel);
 
-        initializeComponents();
-        initializeCurrentTime();
-        generateTime();
-        generateToken();
-        refreshInventory.getPetFromDatabase();
-        refreshInventory.getEggFromDatabase();
-        refreshInventory.getFoodFromDatabase();
+            initializeComponents();
+            initializeCurrentTime();
+            generateTime();
+            generateToken();
+            refreshInventory.getPetFromDatabase();
+            refreshInventory.getEggFromDatabase();
+            refreshInventory.getFoodFromDatabase();
 
-        InspectInventory inspectInventory = new InspectInventory(inventoryModel);
-        inspectInventory.updatePet();
-        inspectInventory.updateEggImage();
-        inspectInventory.updatePetImage();
-        inspectInventory.updateFoodImage();
+            InspectInventory inspectInventory = new InspectInventory(inventoryModel);
+            inspectInventory.updatePet();
+            inspectInventory.updateEggImage();
+            inspectInventory.updatePetImage();
+            inspectInventory.updateFoodImage();
 
-        resetInventory();
+            resetInventory();
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                MainActivity.this, drawerLayout, materialToolbar, R.string.drawer_close, R.string.drawer_open);
-        drawerLayout.addDrawerListener(toggle);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    MainActivity.this, drawerLayout, materialToolbar, R.string.drawer_close, R.string.drawer_open);
+            drawerLayout.addDrawerListener(toggle);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home_nav) {
-                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                } else if (item.getItemId() == R.id.collection_nav) {
-                    replaceFragment(new CollectionFragment(inventoryModel, getApplicationContext()));
-                } else if (item.getItemId() == R.id.store_nav) {
-                    replaceFragment(new StoreFragment(inventoryModel, chipTokenValue, glazeTokenValue, timeModel));
-                } else if (item.getItemId() == R.id.trade_nav) {
-                    replaceFragment(new TradeFragment());
-                } else if (item.getItemId() == R.id.flex_nav) {
-                    replaceFragment(new FlexFragment());
-                } else if (item.getItemId() == R.id.nursery_nav) {
-                    replaceFragment(new NurseryFragment());
-                } else if (item.getItemId() == R.id.tier_nav) {
-                    replaceFragment(new TierFragment());
-                } else if (item.getItemId() == R.id.changelog_nav) {
-                    replaceFragment(new ChangelogFragment());
-                } else if (item.getItemId() == R.id.about_nav) {
-                    replaceFragment(new AboutFragment());
-                } else if (item.getItemId() == R.id.exit_nav) {
-                    System.exit(0);
-                }
-
-                drawerLayout.closeDrawer(Gravity.LEFT);
-                return false;
-            }
-        });
-
-        hatchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!incubated.isEmpty()) {
-                    PetModel petModel;
-                    int resourceId = getResources().getIdentifier(incubated.get(0).getPetImage(), "drawable", getPackageName());
-                    eggImage.setImageResource(resourceId);
-
-                    petModel = new PetModel(incubated.get(0).getPetName(), incubated.get(0).getPetImage(),
-                            incubated.get(0).getAge(), incubated.get(0).getType(), incubated.get(0).getRarityText());
-
-                    String[] rarities = new String[]{
-                            rarity.getRarity(0),
-                            rarity.getRarity(1),
-                            rarity.getRarity(2),
-                            rarity.getRarity(3),
-                            rarity.getRarity(4)};
-
-                    if (petModel.getRarity().equals(rarities[0])) {
-                        inventoryModel.setChipToken(inventoryModel.getChipToken() + 10);
-                    } else if (petModel.getRarity().equals(rarities[1])) {
-                        inventoryModel.setChipToken(inventoryModel.getChipToken() + 20);
-                    } else if (petModel.getRarity().equals(rarities[2])) {
-                        inventoryModel.setChipToken(inventoryModel.getChipToken() + 30);
-                    } else if (petModel.getRarity().equals(rarities[3])) {
-                        inventoryModel.setChipToken(inventoryModel.getChipToken() + 40);
-                        inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() + 10);
-                    } else if (petModel.getRarity().equals(rarities[4])) {
-                        inventoryModel.setChipToken(inventoryModel.getChipToken() + 50);
-                        inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() + 20);
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    if (item.getItemId() == R.id.home_nav) {
+                        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    } else if (item.getItemId() == R.id.collection_nav) {
+                        replaceFragment(new CollectionFragment(inventoryModel, getApplicationContext()));
+                    } else if (item.getItemId() == R.id.store_nav) {
+                        replaceFragment(new StoreFragment(inventoryModel, chipTokenValue, glazeTokenValue, timeModel));
+                    } else if (item.getItemId() == R.id.trade_nav) {
+                        replaceFragment(new TradeFragment());
+                    } else if (item.getItemId() == R.id.flex_nav) {
+                        replaceFragment(new FlexFragment());
+                    } else if (item.getItemId() == R.id.nursery_nav) {
+                        replaceFragment(new NurseryFragment());
+                    } else if (item.getItemId() == R.id.tier_nav) {
+                        replaceFragment(new TierFragment());
+                    } else if (item.getItemId() == R.id.changelog_nav) {
+                        replaceFragment(new ChangelogFragment());
+                    } else if (item.getItemId() == R.id.about_nav) {
+                        replaceFragment(new AboutFragment());
+                    } else if (item.getItemId() == R.id.exit_nav) {
+                        System.exit(0);
                     }
 
-                    currencyDatabase.updateToken(inventoryModel);
-                    updateToken();
-
-                    petDatabase.addPet(petModel);
-                    refreshInventory.getPetFromDatabase();
-
-                    incubated.clear();
-                } else {
-                    Toast.makeText(MainActivity.this, "Please tap the egg to select first", Toast.LENGTH_SHORT).show();
+                    drawerLayout.closeDrawer(Gravity.LEFT);
+                    return false;
                 }
-            }
-        });
+            });
 
-        eggImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (incubated.isEmpty()) {
-                    replaceFragment(new EggFragment(inventoryModel, incubated, eggImage));
-                } else {
-                    Toast.makeText(MainActivity.this, "Please hatch the egg first", Toast.LENGTH_SHORT).show();
+            hatchButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!incubated.isEmpty()) {
+                        PetModel petModel;
+                        int resourceId = getResources().getIdentifier(incubated.get(0).getPetImage(), "drawable", getPackageName());
+                        eggImage.setImageResource(resourceId);
+
+                        petModel = new PetModel(incubated.get(0).getPetName(), incubated.get(0).getPetImage(),
+                                incubated.get(0).getAge(), incubated.get(0).getType(), incubated.get(0).getRarityText());
+
+                        String[] rarities = new String[]{
+                                rarity.getRarity(0),
+                                rarity.getRarity(1),
+                                rarity.getRarity(2),
+                                rarity.getRarity(3),
+                                rarity.getRarity(4)};
+
+                        if (petModel.getRarity().equals(rarities[0])) {
+                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 10);
+                        } else if (petModel.getRarity().equals(rarities[1])) {
+                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 20);
+                        } else if (petModel.getRarity().equals(rarities[2])) {
+                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 30);
+                        } else if (petModel.getRarity().equals(rarities[3])) {
+                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 40);
+                            inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() + 10);
+                        } else if (petModel.getRarity().equals(rarities[4])) {
+                            inventoryModel.setChipToken(inventoryModel.getChipToken() + 50);
+                            inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() + 20);
+                        }
+
+                        currencyDatabase.updateToken(inventoryModel);
+                        updateToken();
+
+                        petDatabase.addPet(petModel);
+                        refreshInventory.getPetFromDatabase();
+
+                        incubated.clear();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Please tap the egg to select first", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+
+            eggImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (incubated.isEmpty()) {
+                        replaceFragment(new EggFragment(inventoryModel, incubated, eggImage));
+                    } else {
+                        Toast.makeText(MainActivity.this, "Please hatch the egg first", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }catch (Exception e)
+        {
+            Toast.makeText(this, "Error: " + e, Toast.LENGTH_SHORT).show();
+            errorText.setVisibility(View.VISIBLE);
+            errorText.setText("Error: " + e);
+        }
     }
 
     @Override

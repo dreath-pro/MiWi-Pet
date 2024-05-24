@@ -114,6 +114,14 @@
                 android:textSize="28sp"
                 android:layout_gravity="center|bottom"
                 android:layout_marginBottom="55dp"/>
+
+            <TextView
+                android:id="@+id/errorText"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:text="I am text"
+                android:textColor="#FF0000"/>
         </FrameLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
