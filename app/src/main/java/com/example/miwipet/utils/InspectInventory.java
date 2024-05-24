@@ -134,10 +134,13 @@ public class InspectInventory {
                 inventoryModel.getPetLists().get(count).setPetName("Boar");
             }
 
-            if(petModel.getPetImage().equals("mecha_spermwhale"))
-            {
-                inventoryModel.getPetLists().get(count).setPetImage("mecha_sperm_whale");
-            }
+//            if(!petImage.isEmpty())
+//            {
+//                if(petModel.getPetImage().equals("mecha_spermwhale"))
+//                {
+//                    inventoryModel.getPetLists().get(count).setPetImage("mecha_sperm_whale");
+//                }
+//            }
 
             if(petModel.getPetName().equals("Goldfish"))
             {

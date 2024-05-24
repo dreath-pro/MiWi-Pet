@@ -42,6 +42,28 @@ public class FoodDatabase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if(oldVersion < DATABASE_VERSION)
         {
+            boolean columnExists = false;
+            Cursor cursor = db.rawQuery("PRAGMA table_info(" + foodTable + ")", null);
+            if(cursor != null)
+            {
+                while(cursor.moveToNext())
+                {
+                    String columnName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                    if(columnName.equals(rarity))
+                    {
+                        columnExists = true;
+                        break;
+                    }
+                }
+                cursor.close();
+            }
+
+            if(!columnExists)
+            {
+                db.execSQL("ALTER TABLE " + foodTable + " ADD COLUMN " + rarity + " TEXT");
+            }
+
+
             db.execSQL("ALTER TABLE " + foodTable + " RENAME TO " + foodTable + "_temp");
 
             String createTableStatement = "CREATE TABLE " + foodTable + " (" + id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
