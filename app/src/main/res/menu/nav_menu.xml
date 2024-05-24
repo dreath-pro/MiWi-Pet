@@ -44,6 +44,13 @@
             android:layout_height="wrap_content"
             android:title="Nursery"
             android:icon="@drawable/icon_nursery"/>
+
+        <item
+            android:id="@+id/tier_nav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:title="Tier"
+            android:icon="@drawable/icon_tier"/>
     </group>
 
     <group

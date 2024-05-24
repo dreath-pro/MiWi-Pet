@@ -25,6 +25,7 @@ import com.example.miwipet.database.TimeDatabase;
 import com.example.miwipet.fragments.navigation.AboutFragment;
 import com.example.miwipet.fragments.navigation.ChangelogFragment;
 import com.example.miwipet.fragments.navigation.CollectionFragment;
+import com.example.miwipet.fragments.navigation.TierFragment;
 import com.example.miwipet.fragments.single.EggFragment;
 import com.example.miwipet.fragments.navigation.FlexFragment;
 import com.example.miwipet.fragments.navigation.NurseryFragment;
@@ -82,6 +83,9 @@ import java.util.Locale;
 
 //*exit
 //https://www.flaticon.com/free-icon/logout_660350?term=exit&page=1&position=2&origin=search&related_id=660350
+
+//*tier
+//https://www.flaticon.com/free-icon/pyramid_6403728?term=tier&page=1&position=6&origin=search&related_id=6403728
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -204,8 +208,7 @@ public class MainActivity extends AppCompatActivity {
         glazeTokenValue.setText("" + inventoryModel.getGlazeToken());
     }
 
-    private void resetInventory()
-    {
+    private void resetInventory() {
         petDatabase.clearPet();
         eggDatabase.clearEgg();
         foodDatabase.clearFood();
@@ -214,13 +217,11 @@ public class MainActivity extends AppCompatActivity {
             petDatabase.addPet(petModel);
         }
 
-        for(EggModel eggModel : inventoryModel.getEggLists())
-        {
+        for (EggModel eggModel : inventoryModel.getEggLists()) {
             eggDatabase.addEgg(eggModel);
         }
 
-        for(FoodModel foodModel : inventoryModel.getFoodLists())
-        {
+        for (FoodModel foodModel : inventoryModel.getFoodLists()) {
             foodDatabase.addFood(foodModel);
         }
 
@@ -271,6 +272,8 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new FlexFragment());
                 } else if (item.getItemId() == R.id.nursery_nav) {
                     replaceFragment(new NurseryFragment());
+                } else if (item.getItemId() == R.id.tier_nav) {
+                    replaceFragment(new TierFragment());
                 } else if (item.getItemId() == R.id.changelog_nav) {
                     replaceFragment(new ChangelogFragment());
                 } else if (item.getItemId() == R.id.about_nav) {

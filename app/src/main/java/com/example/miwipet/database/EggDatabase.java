@@ -49,8 +49,28 @@ public class EggDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < DATABASE_VERSION) {
-            db.execSQL("ALTER TABLE " + eggTable + " ADD COLUMN " + eggPercentage + " INT");
+        if(oldVersion < DATABASE_VERSION)
+        {
+            boolean columnExists = false;
+            Cursor cursor = db.rawQuery("PRAGMA table_info(" + eggTable + ")", null);
+            if(cursor != null)
+            {
+                while(cursor.moveToNext())
+                {
+                    String columnName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                    if(columnName.equals(eggPercentage))
+                    {
+                        columnExists = true;
+                        break;
+                    }
+                }
+                cursor.close();
+            }
+
+            if(!columnExists)
+            {
+                db.execSQL("ALTER TABLE " + eggTable + " ADD COLUMN " + eggPercentage + " INT");
+            }
         }
 
         if (oldVersion < DATABASE_VERSION) {
