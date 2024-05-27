@@ -44,6 +44,9 @@ public class EggSource {
                 eggLists.add(new RiverEgg());
                 eggLists.add(new SavannaEgg());
                 eggLists.add(new NostalgiaEgg());
+
+                eggLists.add(new ChristmasEgg());
+                eggLists.add(new FossilEgg());
                 break;
             case "Christmas":
                 eggLists.add(new ChristmasEgg());
