@@ -104,6 +104,14 @@ public class PetModel {
     }
 
     private void growAge() {
+        /*
+        max exp
+        offspring = 50
+        baby = 100
+        teen = 200
+        adult = 400
+         */
+
         if (age <= 3) {
             if (exp >= maxExp) {
                 age += 1;
@@ -116,6 +124,11 @@ public class PetModel {
                     maxExp *= 2;
                 }
             }
+        }
+
+        if(age == 3)
+        {
+            exp = maxExp;
         }
     }
 

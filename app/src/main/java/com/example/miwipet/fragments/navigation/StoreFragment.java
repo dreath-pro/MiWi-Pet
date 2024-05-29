@@ -86,28 +86,23 @@ public class StoreFragment extends Fragment {
         return view;
     }
 
-    private void generateFoodDisplay()
-    {
-        if(!foodDisplayDatabase.doesDataExist())
-        {
+    private void generateFoodDisplay() {
+        if (!foodDisplayDatabase.doesDataExist()) {
             foodDisplay.clear();
             foodDisplayDatabase.clearDisplay();
             foodDisplay.addAll(foodSource.getStoreFoods());
 
-            for(FoodModel food : foodDisplay)
-            {
+            for (FoodModel food : foodDisplay) {
                 foodDisplayDatabase.generateTable(food);
             }
         }
 
-        if(timeModel.isNewDay())
-        {
+        if (timeModel.isNewDay()) {
             foodDisplay.clear();
             foodDisplayDatabase.clearDisplay();
             foodDisplay.addAll(foodSource.getStoreFoods());
 
-            for(FoodModel food : foodDisplay)
-            {
+            for (FoodModel food : foodDisplay) {
                 foodDisplayDatabase.generateTable(food);
             }
 
@@ -115,8 +110,7 @@ public class StoreFragment extends Fragment {
             timeModel.setLastDayLogin(timeModel.getCurrentDayLogin());
             timeModel.setLastMonthLogin(timeModel.getCurrentMonthLogin());
             timeModel.setLastYearLogin(timeModel.getCurrentYearLogin());
-        }else
-        {
+        } else {
             foodDisplay.clear();
             ArrayList<String> foodNames;
             foodNames = foodDisplayDatabase.getDisplayList();
@@ -124,28 +118,23 @@ public class StoreFragment extends Fragment {
         }
     }
 
-    private void generateEggDisplay()
-    {
-        if(!eggDisplayDatabase.doesDataExist())
-        {
+    private void generateEggDisplay() {
+        if (!eggDisplayDatabase.doesDataExist()) {
             eggDisplay.clear();
             eggDisplayDatabase.clearDisplay();
             eggDisplay.addAll(eggSource.getStoreEggs());
 
-            for(EggModel egg : eggDisplay)
-            {
+            for (EggModel egg : eggDisplay) {
                 eggDisplayDatabase.generateTable(egg);
             }
         }
 
-        if(timeModel.isNewDay())
-        {
+        if (timeModel.isNewDay()) {
             eggDisplay.clear();
             eggDisplayDatabase.clearDisplay();
             eggDisplay.addAll(eggSource.getStoreEggs());
 
-            for(EggModel egg : eggDisplay)
-            {
+            for (EggModel egg : eggDisplay) {
                 eggDisplayDatabase.generateTable(egg);
             }
 
@@ -153,8 +142,7 @@ public class StoreFragment extends Fragment {
             timeModel.setLastDayLogin(timeModel.getCurrentDayLogin());
             timeModel.setLastMonthLogin(timeModel.getCurrentMonthLogin());
             timeModel.setLastYearLogin(timeModel.getCurrentYearLogin());
-        }else
-        {
+        } else {
             eggDisplay.clear();
             ArrayList<String> eggNames;
             eggNames = eggDisplayDatabase.getDisplayList();

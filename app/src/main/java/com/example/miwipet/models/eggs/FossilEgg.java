@@ -21,7 +21,7 @@ public class FossilEgg extends EggModel {
                     "phorusrhacids", "glyptodon"},
 
 
-            {"polymesh_rex", "skeleton_t_rex", "leviathan"}
+            {"poly_rex", "skeleton_t_rex", "leviathan"}
     };
 
     private final String[][] petNames = {

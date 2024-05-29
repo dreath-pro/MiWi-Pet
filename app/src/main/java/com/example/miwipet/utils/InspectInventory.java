@@ -148,6 +148,12 @@ public class InspectInventory {
                 inventoryModel.getPetLists().get(count).setPetName("Mecha Sperm Whale");
             }
 
+            if(petModel.getPetName().equals("Puffer Fish"))
+            {
+                inventoryModel.getPetLists().get(count).setPetImage("pufferfish");
+                inventoryModel.getPetLists().get(count).setPetName("Pufferfish");
+            }
+
             if(petModel.getPetName().equals("Ghost Shark"))
             {
                 inventoryModel.getPetLists().get(count).setPetImage("terror_shark");
@@ -172,6 +178,7 @@ public class InspectInventory {
         {
             String lowerCaseName = petModel.getPetName().toLowerCase();
             String underscoreName = lowerCaseName.replace(" ", "_");
+            underscoreName = underscoreName.replace("-", "_");
 
             petModel.setPetImage(underscoreName);
             petModels.add(petModel);
@@ -198,6 +205,7 @@ public class InspectInventory {
 
             String lowerCaseName2 = eggModel.getPetName().toLowerCase();
             String underscoreName2 = lowerCaseName2.replace(" ", "_");
+            underscoreName2 = underscoreName2.replace("-", "_");
 
             eggModel.setPetImage(underscoreName2);
             eggModels.add(eggModel);
@@ -218,6 +226,7 @@ public class InspectInventory {
         {
             String lowerCaseName = foodModel.getFoodName().toLowerCase();
             String underscoreName = lowerCaseName.replace(" ", "_");
+            underscoreName = underscoreName.replace("-", "_");
             String foodFrontName = "food_" + underscoreName;
 
             foodModel.setFoodImage(foodFrontName);

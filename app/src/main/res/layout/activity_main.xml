@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity"
     tools:openDrawer="start"
-    android:background="@drawable/plain_biome">
+    android:background="@drawable/biome_plain">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

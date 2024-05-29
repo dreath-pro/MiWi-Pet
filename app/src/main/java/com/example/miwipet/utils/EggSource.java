@@ -16,17 +16,14 @@ import java.util.Random;
 public class EggSource {
     private ArrayList<EggModel> eggLists = new ArrayList<>();
 
-    public EggSource()
-    {
+    public EggSource() {
 
     }
 
-    private void generateEggs(String type)
-    {
+    private void generateEggs(String type) {
         eggLists.clear();
 
-        switch (type)
-        {
+        switch (type) {
             case "All":
                 eggLists.add(new NormalEgg());
                 eggLists.add(new ForestEgg());
@@ -44,9 +41,6 @@ public class EggSource {
                 eggLists.add(new RiverEgg());
                 eggLists.add(new SavannaEgg());
                 eggLists.add(new NostalgiaEgg());
-
-                eggLists.add(new ChristmasEgg());
-                eggLists.add(new FossilEgg());
                 break;
             case "Christmas":
                 eggLists.add(new ChristmasEgg());
@@ -57,19 +51,21 @@ public class EggSource {
         }
     }
 
-    public ArrayList<EggModel> getStoreEggs()
-    {
+    public ArrayList<EggModel> getAllEggs() {
+        generateEggs("All");
+        return eggLists;
+    }
+
+    public ArrayList<EggModel> getStoreEggs() {
         generateEggs("Store");
 
         ArrayList<EggModel> selectedEggsList = new ArrayList<>();
         Random random = new Random();
 
-        for(int i = 0; i <= eggLists.size() - 1; i++)
-        {
+        for (int i = 0; i <= eggLists.size() - 1; i++) {
             int chances = random.nextInt(100) + 1;
 
-            if(chances <= eggLists.get(i).getEggPercentage())
-            {
+            if (chances <= eggLists.get(i).getEggPercentage()) {
                 selectedEggsList.add(eggLists.get(i));
             }
         }
@@ -80,23 +76,18 @@ public class EggSource {
         return eggLists;
     }
 
-    public int getCount()
-    {
+    public int getCount() {
         return eggLists.size();
     }
 
-    public ArrayList<EggModel> getEggsByString(ArrayList<String> eggNames)
-    {
+    public ArrayList<EggModel> getEggsByString(ArrayList<String> eggNames) {
         ArrayList<EggModel> returnedEggList = new ArrayList<>();
 
         generateEggs("All");
 
-        for(String eggName : eggNames)
-        {
-            for(EggModel eggList : eggLists)
-            {
-                if(eggName.equals(eggList.getEggName()))
-                {
+        for (String eggName : eggNames) {
+            for (EggModel eggList : eggLists) {
+                if (eggName.equals(eggList.getEggName())) {
                     returnedEggList.add(eggList);
                 }
             }
@@ -105,16 +96,13 @@ public class EggSource {
         return returnedEggList;
     }
 
-    public EggModel getEggByString(String eggName)
-    {
+    public EggModel getEggByString(String eggName) {
         EggModel returnedEgg = null;
 
         generateEggs("All");
 
-        for(EggModel egglist : eggLists)
-        {
-            if(eggName.equals(egglist.getEggName()))
-            {
+        for (EggModel egglist : eggLists) {
+            if (eggName.equals(egglist.getEggName())) {
                 returnedEgg = egglist;
             }
         }
