@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,13 +35,14 @@ import java.util.concurrent.ExecutionException;
 
 public class FindOfferFragment extends Fragment {
     RecyclerView offerView;
-    Button backPageButton, nextPageButton;
+    ImageView backPageButton, nextPageButton;
     Button searchOfferButton, refreshOfferButton, lookupButton;
     TextView pageIndicator, errorText;
 
     private Random random = new Random();
     private Context context;
     private int wantItemSingle;
+    private int page = 1;
     private ArrayList<Integer> offererItemSeries = new ArrayList<>();
 
     private ArrayList<OfferModel> offerModels = new ArrayList<>();
@@ -66,6 +68,49 @@ public class FindOfferFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_find_offer, container, false);
         generateComponents(view);
 
+        backPageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                page--;
+                if(page < 1)
+                {
+                    page = 1;
+                }else
+                {
+                    resetAdapter();
+                }
+
+                pageIndicator.setText(page + " out of 10");
+            }
+        });
+
+        nextPageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                page++;
+                if(page > 10)
+                {
+                    page = 10;
+                }else
+                {
+                    resetAdapter();
+                }
+
+                pageIndicator.setText(page + " out of 10");
+            }
+        });
+
+        refreshOfferButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                page = 1;
+                pageIndicator.setText(page + " out of 10");
+
+                generateOffers();
+                resetAdapter();
+            }
+        });
+
         return view;
     }
 
@@ -78,22 +123,83 @@ public class FindOfferFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        refreshOffers();
-
-        offerAdapter = new OfferAdapter(requireActivity(), offerModels);
-        offerView.setAdapter(offerAdapter);
-        offerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        generateOffers();
+        resetAdapter();
     }
 
-    private void refreshOffers() {
-        for (int i = 1; i <= 10; i++) {
+    private void generateOffers()
+    {
+        offerModels.clear();
+
+        for (int i = 1; i <= 100; i++) {
             offerModels.add(new OfferModel(generateName(), generateProfile(), generateTradeHistory(),
                     generateTradeHistory(), generateItem(true), generateItem(false)));
 
             offerModels.get(i - 1).setWantItemSingle(wantItemSingle);
             offerModels.get(i - 1).setOffererItemSeries(offererItemSeries);
         }
+    }
+
+    private void resetAdapter()
+    {
+        int pageMinIndex = 0, pageMaxIndex = 0;
+        dividedOfferModels.clear();
+
+        switch (page)
+        {
+            case 1:
+                pageMinIndex = 1;
+                pageMaxIndex = (pageMinIndex + 9);
+                break;
+            case 2:
+                pageMinIndex = 11;
+                pageMaxIndex = (pageMinIndex + 9);
+                break;
+            case 3:
+                pageMinIndex = 21;
+                pageMaxIndex = (pageMinIndex + 9);
+                break;
+            case 4:
+                pageMinIndex = 31;
+                pageMaxIndex = (pageMinIndex + 9);
+                break;
+            case 5:
+                pageMinIndex = 41;
+                pageMaxIndex = (pageMinIndex + 9);
+                break;
+            case 6:
+                pageMinIndex = 51;
+                pageMaxIndex = (pageMinIndex + 9);
+                break;
+            case 7:
+                pageMinIndex = 61;
+                pageMaxIndex = (pageMinIndex + 9);
+                break;
+            case 8:
+                pageMinIndex = 71;
+                pageMaxIndex = (pageMinIndex + 9);
+                break;
+            case 9:
+                pageMinIndex = 81;
+                pageMaxIndex = (pageMinIndex + 9);
+                break;
+            case 10:
+                pageMinIndex = 91;
+                pageMaxIndex = (pageMinIndex + 9);
+                break;
+        }
+
+        pageMinIndex -= 1;
+        pageMaxIndex -= 1;
+
+        for(int i = pageMinIndex; i <= pageMaxIndex; i++)
+        {
+            dividedOfferModels.add(offerModels.get(i));
+        }
+
+        offerAdapter = new OfferAdapter(requireActivity(), dividedOfferModels);
+        offerView.setAdapter(offerAdapter);
+        offerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
     }
 
     private String generateName() {
