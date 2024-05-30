@@ -13,9 +13,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
+import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.OfferModel;
 import com.example.miwipet.models.PetModel;
 
@@ -26,8 +29,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
     private Activity activity;
     private ArrayList<OfferModel> offerModels;
 
-    public OfferAdapter(Activity activity, ArrayList<OfferModel> offerModels)
-    {
+    public OfferAdapter(Activity activity, ArrayList<OfferModel> offerModels) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         this.offerModels = offerModels;
@@ -43,13 +45,47 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull OfferAdapter.MyViewHolder holder, int position) {
-        PetModel petModel = offerModels.get(position).getWantItem().getPetLists().get(0);
-        int resourceId = context.getResources().getIdentifier(petModel.getPetImage(), "drawable", context.getPackageName());
+        switch (offerModels.get(position).getWantItemSingle()) {
+            case 0:
+                PetModel petModel = offerModels.get(position).getWantItem().getPetLists().get(0);
+                int resourceId = context.getResources().getIdentifier(petModel.getPetImage(), "drawable", context.getPackageName());
 
-        holder.wantImage.setImageResource(resourceId);
-        holder.wantName.setText(offerModels.get(position).getWantItem().getPetLists().get(0).getPetName());
-        holder.petCardView.setBackgroundResource(offerModels.get(position).getWantItem().getPetLists().get(0).getRarityColor());
-        holder.wantImageContainer.setBackgroundResource(offerModels.get(position).getWantItem().getPetLists().get(0).getTypeColor());
+                holder.wantImage.setImageResource(resourceId);
+                holder.wantName.setText(offerModels.get(position).getWantItem().getPetLists().get(0).getPetName());
+
+                int rarityColor = ContextCompat.getColor(context, offerModels.get(position).getWantItem().getPetLists().get(0).getRarityColor());
+                int typeColor = ContextCompat.getColor(context, offerModels.get(position).getWantItem().getPetLists().get(0).getTypeColor());
+
+                holder.wantImageContainer.setBackgroundColor(rarityColor);
+                holder.wantImage.setBackgroundColor(typeColor);
+                break;
+            case 1:
+                EggModel eggModel = offerModels.get(position).getWantItem().getEggLists().get(0);
+                int resourceId2 = context.getResources().getIdentifier(eggModel.getEggImage(), "drawable", context.getPackageName());
+
+                holder.wantImage.setImageResource(resourceId2);
+                holder.wantName.setText(offerModels.get(position).getWantItem().getEggLists().get(0).getEggName());
+
+                int imageColor = ContextCompat.getColor(context, R.color.common);
+                int backgroundColor = ContextCompat.getColor(context, R.color.white);
+
+                holder.wantImageContainer.setBackgroundColor(backgroundColor);
+                holder.wantImage.setBackgroundColor(imageColor);
+                break;
+            case 2:
+                FoodModel foodModel = offerModels.get(position).getWantItem().getFoodLists().get(0);
+                int resourceId3 = context.getResources().getIdentifier(foodModel.getFoodImage(), "drawable", context.getPackageName());
+
+                holder.wantImage.setImageResource(resourceId3);
+                holder.wantName.setText(offerModels.get(position).getWantItem().getFoodLists().get(0).getFoodName());
+
+                int rarityColor2 = ContextCompat.getColor(context, offerModels.get(position).getWantItem().getFoodLists().get(0).getRarityColor());
+                int typeColor2 = ContextCompat.getColor(context, R.color.white);
+
+                holder.wantImageContainer.setBackgroundColor(rarityColor2);
+                holder.wantImage.setBackgroundColor(typeColor2);
+                break;
+        }
 
         holder.userIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,14 +93,14 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
                 Toast.makeText(context, "Viewed Profile", Toast.LENGTH_SHORT).show();
             }
         });
-        
+
         holder.viewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Viewed Offer", Toast.LENGTH_SHORT).show();
             }
         });
-        
+
         holder.acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,18 +114,15 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         return offerModels.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView userIcon;
         ImageView wantImage;
         TextView wantName;
         Button viewButton;
         Button acceptButton;
         FrameLayout wantImageContainer;
-        CardView petCardView;
 
-        public MyViewHolder(@NonNull View itemView)
-        {
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             userIcon = itemView.findViewById(R.id.userIcon);
@@ -98,7 +131,6 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
             viewButton = itemView.findViewById(R.id.viewButton);
             acceptButton = itemView.findViewById(R.id.acceptButton);
             wantImageContainer = itemView.findViewById(R.id.wantImageContainer);
-            petCardView = itemView.findViewById(R.id.petCardView);
         }
     }
 }

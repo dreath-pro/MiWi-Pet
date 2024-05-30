@@ -1,26 +1,28 @@
 package com.example.miwipet.models;
 
+import java.util.ArrayList;
+
 public class OfferModel {
     private String username;
     private String userImage;
     private int successTrade, failedTrade;
     private InventoryModel wantItem;
     private InventoryModel offererItem;
-    private int priorityWant;
+    private int wantItemSingle;
+    private ArrayList<Integer> offererItemSeries;
 
     public OfferModel()
     {
 
     }
 
-    public OfferModel(String username, String userImage, int successTrade, int failedTrade, InventoryModel wantItem, InventoryModel offererItem, int priorityWant) {
+    public OfferModel(String username, String userImage, int successTrade, int failedTrade, InventoryModel wantItem, InventoryModel offererItem) {
         this.username = username;
         this.userImage = userImage;
         this.successTrade = successTrade;
         this.failedTrade = failedTrade;
         this.wantItem = wantItem;
         this.offererItem = offererItem;
-        this.priorityWant = priorityWant;
     }
 
     public String getUsername() {
@@ -71,11 +73,19 @@ public class OfferModel {
         this.offererItem = offererItem;
     }
 
-    public int getPriorityWant() {
-        return priorityWant;
+    public int getWantItemSingle() {
+        return wantItemSingle;
     }
 
-    public void setPriorityWant(int priorityWant) {
-        this.priorityWant = priorityWant;
+    public void setWantItemSingle(int wantItemSingle) {
+        this.wantItemSingle = wantItemSingle;
+    }
+
+    public ArrayList<Integer> getOffererItemSeries() {
+        return offererItemSeries;
+    }
+
+    public void setOffererItemSeries(ArrayList<Integer> offererItemSeries) {
+        this.offererItemSeries = offererItemSeries;
     }
 }

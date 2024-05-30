@@ -41,9 +41,15 @@ public class FoodSource {
         }
     }
 
-    public ArrayList<FoodModel> getStoreFoods()
+    public ArrayList<FoodModel> getAllFoods()
     {
         generateFoods("All");
+        return foodLists;
+    }
+
+    public ArrayList<FoodModel> getStoreFoods()
+    {
+        generateFoods("Store");
 
         ArrayList<FoodModel> selectedFoodsList = new ArrayList<>();
         Random random = new Random();
