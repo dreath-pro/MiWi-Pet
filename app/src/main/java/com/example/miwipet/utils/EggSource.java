@@ -1,6 +1,7 @@
 package com.example.miwipet.utils;
 
 import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.eggs.ArcticEgg;
 import com.example.miwipet.models.eggs.ChristmasEgg;
 import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.models.eggs.FossilEgg;
@@ -35,6 +36,7 @@ public class EggSource {
                 eggLists.add(new ChristmasEgg());
                 eggLists.add(new FossilEgg());
                 eggLists.add(new MythicEgg());
+                eggLists.add(new ArcticEgg());
                 break;
             case "Store":
                 eggLists.add(new NormalEgg());
@@ -44,6 +46,7 @@ public class EggSource {
                 eggLists.add(new SavannaEgg());
                 eggLists.add(new NostalgiaEgg());
                 eggLists.add(new MythicEgg());
+                eggLists.add(new ArcticEgg());
                 break;
             case "Christmas":
                 eggLists.add(new ChristmasEgg());
