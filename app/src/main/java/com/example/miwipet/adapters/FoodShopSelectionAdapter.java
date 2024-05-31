@@ -71,18 +71,18 @@ public class FoodShopSelectionAdapter extends RecyclerView.Adapter<FoodShopSelec
             @Override
             public void onClick(View v) {
                 if (inventoryModel.getChipToken() >=
-                        displayFoods.get(holder.getAdapterPosition()).getChipPrice() &&
+                        displayFoods.get(holder.getBindingAdapterPosition()).getChipPrice() &&
                         inventoryModel.getGlazeToken() >=
-                                displayFoods.get(holder.getAdapterPosition()).getGlazePrice()) {
+                                displayFoods.get(holder.getBindingAdapterPosition()).getGlazePrice()) {
 
                     foodDatabase.addFood(foodSource.getFoodByString(holder.foodName.getText().toString()));
                     refreshInventory.getFoodFromDatabase();
 
                     inventoryModel.setChipToken(inventoryModel.getChipToken() -
-                            displayFoods.get(holder.getAdapterPosition()).getChipPrice());
+                            displayFoods.get(holder.getBindingAdapterPosition()).getChipPrice());
 
                     inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() -
-                            displayFoods.get(holder.getAdapterPosition()).getGlazePrice());
+                            displayFoods.get(holder.getBindingAdapterPosition()).getGlazePrice());
 
                     chipToken.setText(inventoryModel.getChipToken() + "");
                     glazeToken.setText(inventoryModel.getGlazeToken() + "");

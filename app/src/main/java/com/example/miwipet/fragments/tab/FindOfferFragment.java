@@ -211,7 +211,7 @@ public class FindOfferFragment extends Fragment {
     }
 
     private String generateProfile() {
-        String[] userProfile = {"profile_lilboy", "profile_lilgal"};
+        String[] userProfile = {"profile_amy", "profile_sasa"};
         int selectedProfile = random.nextInt(userProfile.length);
 
         return userProfile[selectedProfile];

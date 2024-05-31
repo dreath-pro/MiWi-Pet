@@ -65,11 +65,11 @@ public class EggSelectionAdapter extends RecyclerView.Adapter<EggSelectionAdapte
                 {
                     eggModel.setSelected(false);
                 }
-                inventoryModels.getEggLists().get(holder.getAdapterPosition()).setSelected(true);
+                inventoryModels.getEggLists().get(holder.getBindingAdapterPosition()).setSelected(true);
 
-                eggDatabase.deleteEgg(inventoryModels.getEggLists().get(holder.getAdapterPosition()));
-                incubated.add(inventoryModels.getEggLists().get(holder.getAdapterPosition()));
-                inventoryModels.getEggLists().remove(holder.getAdapterPosition());
+                eggDatabase.deleteEgg(inventoryModels.getEggLists().get(holder.getBindingAdapterPosition()));
+                incubated.add(inventoryModels.getEggLists().get(holder.getBindingAdapterPosition()));
+                inventoryModels.getEggLists().remove(holder.getBindingAdapterPosition());
 
                 if (fragmentManager != null) {
                     fragmentManager.popBackStack();

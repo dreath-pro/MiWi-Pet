@@ -90,25 +90,23 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.MyViewHolder> {
                 age = dialog.findViewById(R.id.age),
                 type = dialog.findViewById(R.id.type);
         ProgressBar expBar = dialog.findViewById(R.id.expBar);
-        ImageView rarityColor = dialog.findViewById(R.id.rarityColor),
-                typeColor = dialog.findViewById(R.id.typeColor);
+        ImageView rarityColor = dialog.findViewById(R.id.rarityColor), typeColor = dialog.findViewById(R.id.typeColor);
 
-        PetModel petModel = petModels.get(holder.getAdapterPosition());
+        PetModel petModel = petModels.get(holder.getBindingAdapterPosition());
         int resourceId = context.getResources().getIdentifier(petModel.getPetImage(), "drawable", context.getPackageName());
 
         petImage.setImageResource(resourceId);
-        petImage.setBackgroundResource(petModels.get(holder.getAdapterPosition()).getRarityBackground());
-        petName.setText(petModels.get(holder.getAdapterPosition()).getPetName());
-        progressDetail.setText(petModels.get(holder.getAdapterPosition()).getExp() + "/" +
-                petModels.get(holder.getAdapterPosition()).getMaxExp());
-        rarity.setText(petModels.get(holder.getAdapterPosition()).getRarity());
-        age.setText(petModels.get(holder.getAdapterPosition()).ageToString() + "");
-        type.setText(petModels.get(holder.getAdapterPosition()).typeToString() + "");
-        expBar.setMax(petModels.get(holder.getAdapterPosition()).getMaxExp());
-        expBar.setProgress(petModels.get(holder.getAdapterPosition()).getExp());
+        petImage.setBackgroundResource(petModels.get(holder.getBindingAdapterPosition()).getRarityBackground());
+        petName.setText(petModels.get(holder.getBindingAdapterPosition()).getPetName());
+        progressDetail.setText(petModels.get(holder.getBindingAdapterPosition()).getExp() + "/" + petModels.get(holder.getBindingAdapterPosition()).getMaxExp());
+        rarity.setText(petModels.get(holder.getBindingAdapterPosition()).getRarity());
+        age.setText(petModels.get(holder.getBindingAdapterPosition()).ageToString() + "");
+        type.setText(petModels.get(holder.getBindingAdapterPosition()).typeToString() + "");
+        expBar.setMax(petModels.get(holder.getBindingAdapterPosition()).getMaxExp());
+        expBar.setProgress(petModels.get(holder.getBindingAdapterPosition()).getExp());
 
-        rarityColor.setBackgroundColor(ContextCompat.getColor(context, petModels.get(holder.getAdapterPosition()).getRarityColor()));
-        typeColor.setBackgroundColor(ContextCompat.getColor(context, petModels.get(holder.getAdapterPosition()).getTypeColor()));
+        rarityColor.setBackgroundColor(ContextCompat.getColor(context, petModels.get(holder.getBindingAdapterPosition()).getRarityColor()));
+        typeColor.setBackgroundColor(ContextCompat.getColor(context, petModels.get(holder.getBindingAdapterPosition()).getTypeColor()));
 
         dialog.show();
     }

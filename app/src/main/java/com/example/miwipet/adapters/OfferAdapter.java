@@ -1,6 +1,7 @@
 package com.example.miwipet.adapters;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.example.miwipet.models.OfferModel;
 import com.example.miwipet.models.PetModel;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder> {
     private Context context;
@@ -90,7 +92,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         holder.userIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Viewed Profile", Toast.LENGTH_SHORT).show();
+                profileDetails(holder);
             }
         });
 
@@ -132,5 +134,45 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
             acceptButton = itemView.findViewById(R.id.acceptButton);
             wantImageContainer = itemView.findViewById(R.id.wantImageContainer);
         }
+    }
+
+    private void profileDetails(OfferAdapter.MyViewHolder holder)
+    {
+        Dialog dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.profile_details);
+
+        ImageView userProfile = dialog.findViewById(R.id.userProfile);
+        TextView username = dialog.findViewById(R.id.username);
+        ImageView status = dialog.findViewById(R.id.status);
+        TextView successTradeText = dialog.findViewById(R.id.successTradeText);
+        TextView failedTradeText = dialog.findViewById(R.id.failedTradeText);
+
+        OfferModel offerModel = offerModels.get(holder.getBindingAdapterPosition());
+        int userResourceId = context.getResources().getIdentifier(offerModel.getUserImage(), "drawable", context.getPackageName());
+
+        Random random = new Random();
+        int statusResourceId = 0;
+        int selectedStatus = random.nextInt(3);
+
+        switch (selectedStatus)
+        {
+            case 0:
+                statusResourceId = context.getResources().getIdentifier("status_active", "drawable", context.getPackageName());
+                break;
+            case 1:
+                statusResourceId = context.getResources().getIdentifier("status_away", "drawable", context.getPackageName());
+                break;
+            case 2:
+                statusResourceId = context.getResources().getIdentifier("status_do_not_disturb", "drawable", context.getPackageName());
+                break;
+        }
+
+        userProfile.setImageResource(userResourceId);
+        username.setText(offerModel.getUsername());
+        status.setImageResource(statusResourceId);
+        successTradeText.setText("✅ Success Trade: " + offerModel.getSuccessTrade());
+        failedTradeText.setText("❌ Failed Trade: " + offerModel.getFailedTrade());
+
+        dialog.show();
     }
 }

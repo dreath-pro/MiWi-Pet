@@ -68,18 +68,18 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
             @Override
             public void onClick(View v) {
                 if (inventoryModel.getChipToken() >=
-                        displayEggs.get(holder.getAdapterPosition()).getChipPrice() &&
+                        displayEggs.get(holder.getBindingAdapterPosition()).getChipPrice() &&
                         inventoryModel.getGlazeToken() >=
-                                displayEggs.get(holder.getAdapterPosition()).getGlazePrice()) {
+                                displayEggs.get(holder.getBindingAdapterPosition()).getGlazePrice()) {
 
                     eggDatabase.addEgg(eggSource.getEggByString(holder.eggName.getText().toString()));
                     refreshInventory.getEggFromDatabase();
 
                     inventoryModel.setChipToken(inventoryModel.getChipToken() -
-                            displayEggs.get(holder.getAdapterPosition()).getChipPrice());
+                            displayEggs.get(holder.getBindingAdapterPosition()).getChipPrice());
 
                     inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() -
-                            displayEggs.get(holder.getAdapterPosition()).getGlazePrice());
+                            displayEggs.get(holder.getBindingAdapterPosition()).getGlazePrice());
 
                     chipToken.setText(inventoryModel.getChipToken() + "");
                     glazeToken.setText(inventoryModel.getGlazeToken() + "");
