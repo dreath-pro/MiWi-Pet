@@ -1,0 +1,238 @@
+package com.example.miwipet.adapters;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.miwipet.R;
+import com.example.miwipet.models.EggModel;
+import com.example.miwipet.models.FoodModel;
+import com.example.miwipet.models.OfferModel;
+import com.example.miwipet.models.PetModel;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.MyViewHolder> {
+    private Context context;
+    private Activity activity;
+    private ArrayList<OfferModel> offerModels;
+    private TheirOfferAdapter theirOfferAdapter;
+
+    public LookingForAdapter(Activity activity, ArrayList<OfferModel> offerModels) {
+        this.activity = activity;
+        this.context = activity.getApplicationContext();
+        this.offerModels = offerModels;
+    }
+
+    @NonNull
+    @Override
+    public LookingForAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.looking_for_view, parent, false);
+        return new LookingForAdapter.MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull LookingForAdapter.MyViewHolder holder, int position) {
+        int rarityColor = 0;
+        int typeColor = 0;
+        int resourceId = 0;
+
+        switch (offerModels.get(position).getWantItemSingle()) {
+            case 0:
+                PetModel petModel = offerModels.get(position).getWantItem().getPetLists().get(0);
+                resourceId = context.getResources().getIdentifier(petModel.getPetImage(), "drawable", context.getPackageName());
+
+                holder.wantName.setText(offerModels.get(position).getWantItem().getPetLists().get(0).getPetName());
+
+                rarityColor = ContextCompat.getColor(context, offerModels.get(position).getWantItem().getPetLists().get(0).getRarityColor());
+                typeColor = ContextCompat.getColor(context, offerModels.get(position).getWantItem().getPetLists().get(0).getTypeColor());
+                break;
+            case 1:
+                EggModel eggModel = offerModels.get(position).getWantItem().getEggLists().get(0);
+                resourceId = context.getResources().getIdentifier(eggModel.getEggImage(), "drawable", context.getPackageName());
+
+                holder.wantName.setText(offerModels.get(position).getWantItem().getEggLists().get(0).getEggName());
+
+                rarityColor = ContextCompat.getColor(context, R.color.common);
+                typeColor = ContextCompat.getColor(context, R.color.white);
+                break;
+            case 2:
+                FoodModel foodModel = offerModels.get(position).getWantItem().getFoodLists().get(0);
+                resourceId = context.getResources().getIdentifier(foodModel.getFoodImage(), "drawable", context.getPackageName());
+
+                holder.wantName.setText(offerModels.get(position).getWantItem().getFoodLists().get(0).getFoodName());
+
+                rarityColor = ContextCompat.getColor(context, offerModels.get(position).getWantItem().getFoodLists().get(0).getRarityColor());
+                typeColor = ContextCompat.getColor(context, R.color.white);
+                break;
+        }
+
+        holder.wantImage.setImageResource(resourceId);
+        holder.wantImageContainer.setBackgroundColor(rarityColor);
+        holder.wantImage.setBackgroundColor(typeColor);
+
+        holder.userIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                profileDetails(holder);
+            }
+        });
+
+        holder.viewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                theirTradeDetails(holder);
+            }
+        });
+
+        holder.acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Accepted Offer", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return offerModels.size();
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        ImageView userIcon;
+        ImageView wantImage;
+        TextView wantName;
+        Button viewButton;
+        Button acceptButton;
+        FrameLayout wantImageContainer;
+
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            userIcon = itemView.findViewById(R.id.userIcon);
+            wantImage = itemView.findViewById(R.id.wantImage);
+            wantName = itemView.findViewById(R.id.wantName);
+            viewButton = itemView.findViewById(R.id.viewButton);
+            acceptButton = itemView.findViewById(R.id.acceptButton);
+            wantImageContainer = itemView.findViewById(R.id.wantImageContainer);
+        }
+    }
+
+    private void theirTradeDetails(LookingForAdapter.MyViewHolder holder) {
+        Dialog dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.their_trade_details);
+
+        TextView yourName = dialog.findViewById(R.id.yourName);
+        TextView offererName = dialog.findViewById(R.id.offererName);
+        LinearLayout wantImageContainer = dialog.findViewById(R.id.wantImageContainer);
+        ImageView wantImage = dialog.findViewById(R.id.wantImage);
+        RecyclerView theirOfferView = dialog.findViewById(R.id.theirOfferView);
+        Button acceptButton = dialog.findViewById(R.id.acceptButton);
+        Button declineButton = dialog.findViewById(R.id.declineButton);
+
+        OfferModel offerModel = offerModels.get(holder.getBindingAdapterPosition());
+        int wantResourceId = 0;
+        int wantRarity = 0;
+        int wantType = 0;
+
+        switch (offerModel.getWantItemSingle()) {
+            case 0:
+                wantResourceId = context.getResources().getIdentifier(offerModel.getWantItem().getPetLists().get(0).getPetImage(), "drawable", context.getPackageName());
+                wantRarity = ContextCompat.getColor(context, offerModel.getWantItem().getPetLists().get(0).getRarityColor());
+                wantType = ContextCompat.getColor(context, offerModel.getWantItem().getPetLists().get(0).getTypeColor());
+                break;
+            case 1:
+                wantResourceId = context.getResources().getIdentifier(offerModel.getWantItem().getEggLists().get(0).getEggImage(), "drawable", context.getPackageName());
+                wantRarity = ContextCompat.getColor(context, R.color.white);
+                wantType = ContextCompat.getColor(context, R.color.common);
+                break;
+            case 2:
+                wantResourceId = context.getResources().getIdentifier(offerModel.getWantItem().getFoodLists().get(0).getFoodImage(), "drawable", context.getPackageName());
+                wantRarity = ContextCompat.getColor(context, offerModel.getWantItem().getFoodLists().get(0).getRarityColor());
+                wantType = ContextCompat.getColor(context, R.color.white);
+                break;
+        }
+
+        yourName.setText("You");
+        offererName.setText(offerModel.getUsername());
+        wantImage.setImageResource(wantResourceId);
+        wantImageContainer.setBackgroundColor(wantRarity);
+        wantImage.setBackgroundColor(wantType);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2);
+        theirOfferView.setLayoutManager(gridLayoutManager);
+        theirOfferAdapter = new TheirOfferAdapter(activity, offerModels.get(holder.getBindingAdapterPosition()).getOffererItemSeries(), offerModels.get(holder.getBindingAdapterPosition()).getOffererItem());
+        theirOfferView.setAdapter(theirOfferAdapter);
+
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Haha accepted!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        declineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void profileDetails(LookingForAdapter.MyViewHolder holder) {
+        Dialog dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.profile_details);
+
+        ImageView userProfile = dialog.findViewById(R.id.userProfile);
+        TextView username = dialog.findViewById(R.id.username);
+        ImageView status = dialog.findViewById(R.id.status);
+        TextView successTradeText = dialog.findViewById(R.id.successTradeText);
+        TextView failedTradeText = dialog.findViewById(R.id.failedTradeText);
+
+        OfferModel offerModel = offerModels.get(holder.getBindingAdapterPosition());
+        int userResourceId = context.getResources().getIdentifier(offerModel.getUserImage(), "drawable", context.getPackageName());
+
+        Random random = new Random();
+        int statusResourceId = 0;
+        int selectedStatus = random.nextInt(3);
+
+        switch (selectedStatus) {
+            case 0:
+                statusResourceId = context.getResources().getIdentifier("status_active", "drawable", context.getPackageName());
+                break;
+            case 1:
+                statusResourceId = context.getResources().getIdentifier("status_away", "drawable", context.getPackageName());
+                break;
+            case 2:
+                statusResourceId = context.getResources().getIdentifier("status_do_not_disturb", "drawable", context.getPackageName());
+                break;
+        }
+
+        userProfile.setImageResource(userResourceId);
+        username.setText(offerModel.getUsername());
+        status.setImageResource(statusResourceId);
+        successTradeText.setText("✅ Success Trade: " + offerModel.getSuccessTrade());
+        failedTradeText.setText("❌ Failed Trade: " + offerModel.getFailedTrade());
+
+        dialog.show();
+    }
+}

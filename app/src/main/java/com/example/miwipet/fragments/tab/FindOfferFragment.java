@@ -15,23 +15,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.miwipet.R;
-import com.example.miwipet.adapters.OfferAdapter;
+import com.example.miwipet.adapters.LookingForAdapter;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.OfferModel;
 import com.example.miwipet.models.PetModel;
-import com.example.miwipet.models.eggs.ChristmasEgg;
-import com.example.miwipet.models.eggs.ForestEgg;
 import com.example.miwipet.utils.EggSource;
 import com.example.miwipet.utils.FoodSource;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
 
 public class FindOfferFragment extends Fragment {
     RecyclerView offerView;
@@ -43,11 +39,12 @@ public class FindOfferFragment extends Fragment {
     private Context context;
     private int wantItemSingle;
     private int page = 1;
-    private ArrayList<Integer> offererItemSeries = new ArrayList<>();
+
+    private ArrayList<ArrayList<Integer>> listOfOffererItemSeries = new ArrayList<>();
 
     private ArrayList<OfferModel> offerModels = new ArrayList<>();
     private ArrayList<OfferModel> dividedOfferModels = new ArrayList<>();
-    private OfferAdapter offerAdapter;
+    private LookingForAdapter lookingForAdapter;
 
     private void generateComponents(View view) {
         offerView = view.findViewById(R.id.offerView);
@@ -72,11 +69,9 @@ public class FindOfferFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 page--;
-                if(page < 1)
-                {
+                if (page < 1) {
                     page = 1;
-                }else
-                {
+                } else {
                     resetAdapter();
                 }
 
@@ -88,11 +83,9 @@ public class FindOfferFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 page++;
-                if(page > 10)
-                {
+                if (page > 10) {
                     page = 10;
-                }else
-                {
+                } else {
                     resetAdapter();
                 }
 
@@ -127,26 +120,24 @@ public class FindOfferFragment extends Fragment {
         resetAdapter();
     }
 
-    private void generateOffers()
-    {
+    private void generateOffers() {
         offerModels.clear();
+        listOfOffererItemSeries.clear();
 
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 0; i <= 99; i++) {
             offerModels.add(new OfferModel(generateName(), generateProfile(), generateTradeHistory(),
                     generateTradeHistory(), generateItem(true), generateItem(false)));
 
-            offerModels.get(i - 1).setWantItemSingle(wantItemSingle);
-            offerModels.get(i - 1).setOffererItemSeries(offererItemSeries);
+            offerModels.get(i).setWantItemSingle(wantItemSingle);
+            offerModels.get(i).setOffererItemSeries(listOfOffererItemSeries.get(i));
         }
     }
 
-    private void resetAdapter()
-    {
+    private void resetAdapter() {
         int pageMinIndex = 0, pageMaxIndex = 0;
         dividedOfferModels.clear();
 
-        switch (page)
-        {
+        switch (page) {
             case 1:
                 pageMinIndex = 1;
                 pageMaxIndex = (pageMinIndex + 9);
@@ -192,13 +183,12 @@ public class FindOfferFragment extends Fragment {
         pageMinIndex -= 1;
         pageMaxIndex -= 1;
 
-        for(int i = pageMinIndex; i <= pageMaxIndex; i++)
-        {
+        for (int i = pageMinIndex; i <= pageMaxIndex; i++) {
             dividedOfferModels.add(offerModels.get(i));
         }
 
-        offerAdapter = new OfferAdapter(requireActivity(), dividedOfferModels);
-        offerView.setAdapter(offerAdapter);
+        lookingForAdapter = new LookingForAdapter(requireActivity(), dividedOfferModels);
+        offerView.setAdapter(lookingForAdapter);
         offerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
     }
 
@@ -227,16 +217,16 @@ public class FindOfferFragment extends Fragment {
         EggSource eggSource = new EggSource();
         FoodSource foodSource = new FoodSource();
 
-        int numberOfItems = random.nextInt(9);
+        int numberOfItems;
         int selectedItem = random.nextInt(3);
 
-        offererItemSeries.clear();
+        ArrayList<Integer> offererItemSeries = new ArrayList<>();
 
-        if(!wantItem)
-        {
+        if (!wantItem) {
+            numberOfItems = random.nextInt(9);
             offererItemSeries.add(selectedItem);
-        }else
-        {
+        } else {
+            numberOfItems = random.nextInt(1);
             wantItemSingle = selectedItem;
         }
 
@@ -270,11 +260,19 @@ public class FindOfferFragment extends Fragment {
                     break;
             }
 
+            if (i == numberOfItems) {
+                break;
+            }
+
             selectedItem = random.nextInt(3);
-            if(!wantItem)
-            {
+            if (!wantItem) {
                 offererItemSeries.add(selectedItem);
             }
+        }
+
+        if(!wantItem)
+        {
+            listOfOffererItemSeries.add(offererItemSeries);
         }
 
         return inventoryModel;
