@@ -201,7 +201,9 @@ public class FindOfferFragment extends Fragment {
     }
 
     private String generateProfile() {
-        String[] userProfile = {"profile_amy", "profile_sasa"};
+        String[] userProfile = {"profile_amy", "profile_sasa", "profile_gabrielle", "profile_andrea",
+                "profile_luke", "profile_jacob", "profile_kimberly", "profile_ashley", "profile_amanda",
+                "profile_eve", "profile_matthew"};
         int selectedProfile = random.nextInt(userProfile.length);
 
         return userProfile[selectedProfile];
@@ -270,8 +272,7 @@ public class FindOfferFragment extends Fragment {
             }
         }
 
-        if(!wantItem)
-        {
+        if (!wantItem) {
             listOfOffererItemSeries.add(offererItemSeries);
         }
 

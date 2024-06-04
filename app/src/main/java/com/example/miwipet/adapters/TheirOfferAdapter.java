@@ -26,7 +26,6 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
     private Activity activity;
     private ArrayList<Integer> itemSeries;
     private InventoryModel inventoryModels;
-    private int counter = 0;
     private int petCounter = 0, eggCounter = 0, foodCounter = 0;
 
     public TheirOfferAdapter(Activity activity, ArrayList<Integer> itemSeries, InventoryModel inventoryModels) {
@@ -35,7 +34,9 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
         this.itemSeries = itemSeries;
         this.inventoryModels = inventoryModels;
 
-        counter = 0;
+        petCounter = 0;
+        eggCounter = 0;
+        foodCounter = 0;
     }
 
     @NonNull
@@ -53,7 +54,7 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
         int resourceId = 0;
 
         //itemSeries.get(counter))
-        switch (itemSeries.get(counter)) {
+        switch (itemSeries.get(position)) {
             case 0:
                 PetModel petModel = inventoryModels.getPetLists().get(petCounter);
                 resourceId = context.getResources().getIdentifier(petModel.getPetImage(), "drawable", context.getPackageName());
@@ -86,8 +87,6 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
         holder.offererItemImage.setImageResource(resourceId);
         holder.offererItemImageContainer.setBackgroundColor(rarityColor);
         holder.offererItemImage.setBackgroundColor(typeColor);
-
-        counter++;
     }
 
     @Override

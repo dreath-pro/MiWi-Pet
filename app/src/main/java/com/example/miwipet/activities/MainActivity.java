@@ -55,7 +55,7 @@ import java.util.Locale;
 //frost egg, 3d render, white background, simple design
 //ocean background, digital art, cartoon, unfocus, blur
 //simple noodles, 3d render, full view, white background, simplistic kiddy design
-//female librarian girl, cute cartoon, digital art, hd, illustration, profile picture
+//female student, cute cartoon, digital art, hd, profile picture
 
 //icons used link
 //* cracked egg
