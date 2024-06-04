@@ -7,10 +7,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.miwipet.fragments.tab.FindOfferFragment;
 import com.example.miwipet.fragments.tab.MakeOfferFragment;
+import com.example.miwipet.models.InventoryModel;
 
 public class MyViewPagerAdapter extends FragmentStateAdapter {
-    public MyViewPagerAdapter(@NonNull Fragment fragment) {
+    private InventoryModel yourInventory;
+
+    public MyViewPagerAdapter(@NonNull Fragment fragment, InventoryModel yourInventory) {
         super(fragment);
+        this.yourInventory = yourInventory;
     }
 
     @NonNull
@@ -20,7 +24,7 @@ public class MyViewPagerAdapter extends FragmentStateAdapter {
             case 0:
                 return new MakeOfferFragment();
             case 1:
-                return new FindOfferFragment();
+                return new FindOfferFragment(yourInventory);
             default:
                 return new MakeOfferFragment();
         }

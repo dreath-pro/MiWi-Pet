@@ -3,6 +3,7 @@ package com.example.miwipet.adapters;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,22 +23,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
+import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.OfferModel;
 import com.example.miwipet.models.PetModel;
 
 import java.util.ArrayList;
 import java.util.Random;
+import android.os.Handler;
+import android.os.Looper;
 
 public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.MyViewHolder> {
     private Context context;
     private Activity activity;
     private ArrayList<OfferModel> offerModels;
+    private InventoryModel yourInventory;
     private TheirOfferAdapter theirOfferAdapter;
 
-    public LookingForAdapter(Activity activity, ArrayList<OfferModel> offerModels) {
+    public LookingForAdapter(Activity activity, ArrayList<OfferModel> offerModels, InventoryModel yourInventory) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         this.offerModels = offerModels;
+        this.yourInventory = yourInventory;
     }
 
     @NonNull
@@ -146,11 +152,14 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
         RecyclerView theirOfferView = dialog.findViewById(R.id.theirOfferView);
         Button acceptButton = dialog.findViewById(R.id.acceptButton);
         Button declineButton = dialog.findViewById(R.id.declineButton);
+        ImageView offererReady = dialog.findViewById(R.id.offererReady);
 
         OfferModel offerModel = offerModels.get(holder.getBindingAdapterPosition());
         int wantResourceId = 0;
         int wantRarity = 0;
         int wantType = 0;
+
+        offererReady.setVisibility(View.INVISIBLE);
 
         switch (offerModel.getWantItemSingle()) {
             case 0:
@@ -184,7 +193,46 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Haha accepted!", Toast.LENGTH_SHORT).show();
+                boolean doesItemExist = false;
+
+                switch (offerModel.getWantItemSingle())
+                {
+                    case 0:
+                        for(PetModel yourPets : yourInventory.getPetLists())
+                        {
+                            if(yourPets.getPetName().equals(offerModel.getWantItem().getPetLists().get(0).getPetName()))
+                            {
+                                doesItemExist = true;
+                            }
+                        }
+                        break;
+                    case 1:
+                        for(EggModel yourEggs : yourInventory.getEggLists())
+                        {
+                            if(yourEggs.getEggName().equals(offerModel.getWantItem().getEggLists().get(0).getEggName()))
+                            {
+                                doesItemExist = true;
+                            }
+                        }
+                        break;
+                    case 2:
+                        for(FoodModel yourFoods : yourInventory.getFoodLists())
+                        {
+                            if(yourFoods.getFoodName().equals(offerModel.getWantItem().getFoodLists().get(0).getFoodName()))
+                            {
+                                doesItemExist = true;
+                            }
+                        }
+                        break;
+                }
+
+                if(doesItemExist)
+                {
+                    offererReady.setVisibility(View.VISIBLE);
+                }else
+                {
+                    Toast.makeText(context, "Requirements not met", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

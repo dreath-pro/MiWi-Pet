@@ -16,27 +16,24 @@ import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
-import com.example.miwipet.models.OfferModel;
 import com.example.miwipet.models.PetModel;
 
 import java.util.ArrayList;
 
 public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.MyViewHolder> {
-    private Context context;
-    private Activity activity;
-    private ArrayList<Integer> itemSeries;
-    private InventoryModel inventoryModels;
-    private int petCounter = 0, eggCounter = 0, foodCounter = 0;
+    private final Context context;
+    private final Activity activity;
+    private final ArrayList<Integer> itemSeries;
+    private final InventoryModel theirInventory;
+    private int petCounter, eggCounter, foodCounter;
 
-    public TheirOfferAdapter(Activity activity, ArrayList<Integer> itemSeries, InventoryModel inventoryModels) {
+    public TheirOfferAdapter(Activity activity, ArrayList<Integer> itemSeries, InventoryModel theirInventory) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         this.itemSeries = itemSeries;
-        this.inventoryModels = inventoryModels;
+        this.theirInventory = theirInventory;
 
-        petCounter = 0;
-        eggCounter = 0;
-        foodCounter = 0;
+        resetCounters();
     }
 
     @NonNull
@@ -44,58 +41,107 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
     public TheirOfferAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.their_offer, parent, false);
-        return new TheirOfferAdapter.MyViewHolder(view);
+        return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TheirOfferAdapter.MyViewHolder holder, int position) {
-        int rarityColor = 0;
-        int typeColor = 0;
-        int resourceId = 0;
-
-        //itemSeries.get(counter))
         switch (itemSeries.get(position)) {
             case 0:
-                PetModel petModel = inventoryModels.getPetLists().get(petCounter);
-                resourceId = context.getResources().getIdentifier(petModel.getPetImage(), "drawable", context.getPackageName());
-
-                rarityColor = ContextCompat.getColor(context, inventoryModels.getPetLists().get(petCounter).getRarityColor());
-                typeColor = ContextCompat.getColor(context, inventoryModels.getPetLists().get(petCounter).getTypeColor());
-
-                petCounter++;
+                bindPetItem(holder);
                 break;
             case 1:
-                EggModel eggModel = inventoryModels.getEggLists().get(eggCounter);
-                resourceId = context.getResources().getIdentifier(eggModel.getEggImage(), "drawable", context.getPackageName());
-
-                rarityColor = ContextCompat.getColor(context, R.color.common);
-                typeColor = ContextCompat.getColor(context, R.color.white);
-
-                eggCounter++;
+                bindEggItem(holder);
                 break;
             case 2:
-                FoodModel foodModel = inventoryModels.getFoodLists().get(foodCounter);
-                resourceId = context.getResources().getIdentifier(foodModel.getFoodImage(), "drawable", context.getPackageName());
-
-                rarityColor = ContextCompat.getColor(context, inventoryModels.getFoodLists().get(foodCounter).getRarityColor());
-                typeColor = ContextCompat.getColor(context, R.color.white);
-
-                foodCounter++;
+                bindFoodItem(holder);
                 break;
         }
+    }
 
+    @Override
+    public int getItemCount() {
+        return itemSeries.size();
+    }
+
+    private void bindPetItem(MyViewHolder holder) {
+        if (petCounter < theirInventory.getPetLists().size()) {
+            PetModel petModel = theirInventory.getPetLists().get(petCounter);
+            int resourceId = getResourceId(petModel.getPetImage());
+
+            int rarityColor = getColor(petModel.getRarityColor());
+            int typeColor = getColor(petModel.getTypeColor());
+
+            setItemProperties(holder, resourceId, rarityColor, typeColor);
+
+            petCounter++;
+        } else {
+            // Handle case where there are no more pets
+            setPlaceholderProperties(holder);
+        }
+    }
+
+    private void bindEggItem(MyViewHolder holder) {
+        if (eggCounter < theirInventory.getEggLists().size()) {
+            EggModel eggModel = theirInventory.getEggLists().get(eggCounter);
+            int resourceId = getResourceId(eggModel.getEggImage());
+
+            int rarityColor = getColor(R.color.common);
+            int typeColor = getColor(R.color.white);
+
+            setItemProperties(holder, resourceId, rarityColor, typeColor);
+
+            eggCounter++;
+        } else {
+            // Handle case where there are no more eggs
+            setPlaceholderProperties(holder);
+        }
+    }
+
+    private void bindFoodItem(MyViewHolder holder) {
+        if (foodCounter < theirInventory.getFoodLists().size()) {
+            FoodModel foodModel = theirInventory.getFoodLists().get(foodCounter);
+            int resourceId = getResourceId(foodModel.getFoodImage());
+
+            int rarityColor = getColor(foodModel.getRarityColor());
+            int typeColor = getColor(R.color.white);
+
+            setItemProperties(holder, resourceId, rarityColor, typeColor);
+
+            foodCounter++;
+        } else {
+            // Handle case where there are no more foods
+            setPlaceholderProperties(holder);
+        }
+    }
+
+    private int getResourceId(String resourceName) {
+        return context.getResources().getIdentifier(resourceName, "drawable", context.getPackageName());
+    }
+
+    private int getColor(int colorId) {
+        return ContextCompat.getColor(context, colorId);
+    }
+
+    private void setItemProperties(MyViewHolder holder, int resourceId, int rarityColor, int typeColor) {
         holder.offererItemImage.setImageResource(resourceId);
         holder.offererItemImageContainer.setBackgroundColor(rarityColor);
         holder.offererItemImage.setBackgroundColor(typeColor);
     }
 
-    @Override
-    public int getItemCount() {
-        int totalSize = 0;
-        totalSize += inventoryModels.getPetLists().size();
-        totalSize += inventoryModels.getEggLists().size();
-        totalSize += inventoryModels.getFoodLists().size();
-        return totalSize;
+    private void setPlaceholderProperties(MyViewHolder holder) {
+        int placeholderResourceId = getResourceId("icon_blank"); // Assuming there's a placeholder image
+        int placeholderColor = getColor(R.color.common);
+
+        holder.offererItemImage.setImageResource(placeholderResourceId);
+        holder.offererItemImageContainer.setBackgroundColor(placeholderColor);
+        holder.offererItemImage.setBackgroundColor(placeholderColor);
+    }
+
+    public void resetCounters() {
+        petCounter = 0;
+        eggCounter = 0;
+        foodCounter = 0;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -104,7 +150,6 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
             offererItemImage = itemView.findViewById(R.id.offererItemImage);
             offererItemImageContainer = itemView.findViewById(R.id.offererItemImageContainer);
         }

@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity {
                     } else if (item.getItemId() == R.id.store_nav) {
                         replaceFragment(new StoreFragment(inventoryModel, chipTokenValue, glazeTokenValue, timeModel));
                     } else if (item.getItemId() == R.id.trade_nav) {
-                        replaceFragment(new TradeFragment());
+                        replaceFragment(new TradeFragment(inventoryModel));
                     } else if (item.getItemId() == R.id.flex_nav) {
                         replaceFragment(new FlexFragment());
                     } else if (item.getItemId() == R.id.nursery_nav) {

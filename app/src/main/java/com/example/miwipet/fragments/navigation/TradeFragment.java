@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.miwipet.R;
 import com.example.miwipet.adapters.MyViewPagerAdapter;
+import com.example.miwipet.models.InventoryModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -21,6 +22,13 @@ public class TradeFragment extends Fragment {
     TabLayout tradeTab;
     ViewPager2 viewPager2;
     MyViewPagerAdapter myViewPagerAdapter;
+
+    private InventoryModel yourInventory;
+
+    public TradeFragment(InventoryModel yourInventory)
+    {
+        this.yourInventory = yourInventory;
+    }
 
     @Nullable
     @Override
@@ -35,7 +43,7 @@ public class TradeFragment extends Fragment {
 
         tradeTab = view.findViewById(R.id.tradeTab);
         viewPager2 = view.findViewById(R.id.viewPager2);
-        myViewPagerAdapter = new MyViewPagerAdapter(this);
+        myViewPagerAdapter = new MyViewPagerAdapter(this, yourInventory);
         viewPager2.setAdapter(myViewPagerAdapter);
 
         new TabLayoutMediator(tradeTab, viewPager2,

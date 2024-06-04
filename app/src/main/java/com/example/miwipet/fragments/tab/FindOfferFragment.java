@@ -42,6 +42,7 @@ public class FindOfferFragment extends Fragment {
 
     private ArrayList<ArrayList<Integer>> listOfOffererItemSeries = new ArrayList<>();
 
+    private InventoryModel yourInventory;
     private ArrayList<OfferModel> offerModels = new ArrayList<>();
     private ArrayList<OfferModel> dividedOfferModels = new ArrayList<>();
     private LookingForAdapter lookingForAdapter;
@@ -57,6 +58,11 @@ public class FindOfferFragment extends Fragment {
         errorText = view.findViewById(R.id.errorText);
 
         errorText.setVisibility(View.INVISIBLE);
+    }
+
+    public FindOfferFragment(InventoryModel yourInventory)
+    {
+        this.yourInventory = yourInventory;
     }
 
     @Override
@@ -187,7 +193,7 @@ public class FindOfferFragment extends Fragment {
             dividedOfferModels.add(offerModels.get(i));
         }
 
-        lookingForAdapter = new LookingForAdapter(requireActivity(), dividedOfferModels);
+        lookingForAdapter = new LookingForAdapter(requireActivity(), dividedOfferModels, yourInventory);
         offerView.setAdapter(lookingForAdapter);
         offerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
     }
