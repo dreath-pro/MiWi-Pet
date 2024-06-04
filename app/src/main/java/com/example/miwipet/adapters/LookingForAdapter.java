@@ -21,12 +21,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
+import com.example.miwipet.database.EggDatabase;
+import com.example.miwipet.database.FoodDatabase;
+import com.example.miwipet.database.PetDatabase;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.OfferModel;
 import com.example.miwipet.models.PetModel;
+import com.example.miwipet.utils.RefreshInventory;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import android.os.Handler;
@@ -39,11 +44,26 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
     private InventoryModel yourInventory;
     private TheirOfferAdapter theirOfferAdapter;
 
-    public LookingForAdapter(Activity activity, ArrayList<OfferModel> offerModels, InventoryModel yourInventory) {
+    private RefreshInventory refreshInventory;
+    private PetDatabase petDatabase;
+    private EggDatabase eggDatabase;
+    private FoodDatabase foodDatabase;
+
+    private Handler handler = new Handler();
+
+    Button refreshOfferButton;
+
+    public LookingForAdapter(Activity activity, ArrayList<OfferModel> offerModels, InventoryModel yourInventory, Button refreshOfferButton) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         this.offerModels = offerModels;
         this.yourInventory = yourInventory;
+        this.refreshOfferButton = refreshOfferButton;
+
+        petDatabase = new PetDatabase(context);
+        eggDatabase = new EggDatabase(context);
+        foodDatabase = new FoodDatabase(context);
+        refreshInventory = new RefreshInventory(context, yourInventory);
     }
 
     @NonNull
@@ -198,29 +218,68 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
                 switch (offerModel.getWantItemSingle())
                 {
                     case 0:
-                        for(PetModel yourPets : yourInventory.getPetLists())
+                        for(int i = 0; i <= yourInventory.getPetLists().size() - 1; i++)
                         {
-                            if(yourPets.getPetName().equals(offerModel.getWantItem().getPetLists().get(0).getPetName()))
+                            if(yourInventory.getPetLists().get(i).getPetName().equals(offerModel.getWantItem().getPetLists().get(0).getPetName()))
                             {
-                                doesItemExist = true;
+                                if(yourInventory.getPetLists().get(i).getType() == offerModel.getWantItem().getPetLists().get(0).getType())
+                                {
+                                    ArrayList<PetModel> temporaryPetModels = yourInventory.getPetLists();
+                                    temporaryPetModels.remove(i);
+                                    petDatabase.clearPet();
+                                    for(PetModel petModel : temporaryPetModels)
+                                    {
+                                        petDatabase.addPet(petModel);
+                                    }
+                                    refreshInventory.getPetFromDatabase();
+
+                                    getAllOffers(offerModel);
+                                    doesItemExist = true;
+
+                                    break;
+                                }
                             }
                         }
                         break;
                     case 1:
-                        for(EggModel yourEggs : yourInventory.getEggLists())
+                        for(int i = 0; i <= yourInventory.getEggLists().size() - 1; i++)
                         {
-                            if(yourEggs.getEggName().equals(offerModel.getWantItem().getEggLists().get(0).getEggName()))
+                            if(yourInventory.getEggLists().get(i).getEggName().equals(offerModel.getWantItem().getEggLists().get(0).getEggName()))
                             {
+                                ArrayList<EggModel> temporaryEggModels = yourInventory.getEggLists();
+                                temporaryEggModels.remove(i);
+                                eggDatabase.clearEgg();
+                                for(EggModel eggModel : temporaryEggModels)
+                                {
+                                    eggDatabase.addEgg(eggModel);
+                                }
+                                refreshInventory.getEggFromDatabase();
+
+                                getAllOffers(offerModel);
                                 doesItemExist = true;
+
+                                break;
                             }
                         }
                         break;
                     case 2:
-                        for(FoodModel yourFoods : yourInventory.getFoodLists())
+                        for(int i = 0; i <= yourInventory.getFoodLists().size() - 1; i++)
                         {
-                            if(yourFoods.getFoodName().equals(offerModel.getWantItem().getFoodLists().get(0).getFoodName()))
+                            if(yourInventory.getFoodLists().get(i).getFoodName().equals(offerModel.getWantItem().getFoodLists().get(0).getFoodName()))
                             {
+                                ArrayList<FoodModel> temporaryFoodModels = yourInventory.getFoodLists();
+                                temporaryFoodModels.remove(i);
+                                foodDatabase.clearFood();
+                                for(FoodModel foodModel : temporaryFoodModels)
+                                {
+                                    foodDatabase.addFood(foodModel);
+                                }
+                                refreshInventory.getFoodFromDatabase();
+
+                                getAllOffers(offerModel);
                                 doesItemExist = true;
+
+                                break;
                             }
                         }
                         break;
@@ -228,10 +287,13 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
 
                 if(doesItemExist)
                 {
+                    acceptButton.setEnabled(false);
                     offererReady.setVisibility(View.VISIBLE);
+                    startCloseDelay(dialog);
+                    refreshOfferButton.performClick();
                 }else
                 {
-                    Toast.makeText(context, "Requirements not met", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Requirements not met!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -244,6 +306,38 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
         });
 
         dialog.show();
+    }
+
+    private void startCloseDelay(Dialog dialog)
+    {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 1800);
+    }
+
+    private void getAllOffers(OfferModel offerModel)
+    {
+        for(PetModel theirPets : offerModel.getOffererItem().getPetLists())
+        {
+            petDatabase.addPet(theirPets);
+        }
+
+        for(EggModel theirEggs : offerModel.getOffererItem().getEggLists())
+        {
+            eggDatabase.addEgg(theirEggs);
+        }
+
+        for(FoodModel theirFoods : offerModel.getOffererItem().getFoodLists())
+        {
+            foodDatabase.addFood(theirFoods);
+        }
+
+        refreshInventory.getPetFromDatabase();
+        refreshInventory.getEggFromDatabase();
+        refreshInventory.getFoodFromDatabase();
     }
 
     private void profileDetails(LookingForAdapter.MyViewHolder holder) {

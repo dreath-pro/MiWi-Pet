@@ -193,7 +193,7 @@ public class FindOfferFragment extends Fragment {
             dividedOfferModels.add(offerModels.get(i));
         }
 
-        lookingForAdapter = new LookingForAdapter(requireActivity(), dividedOfferModels, yourInventory);
+        lookingForAdapter = new LookingForAdapter(requireActivity(), dividedOfferModels, yourInventory, refreshOfferButton);
         offerView.setAdapter(lookingForAdapter);
         offerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
     }
