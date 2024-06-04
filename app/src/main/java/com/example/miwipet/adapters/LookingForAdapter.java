@@ -315,7 +315,7 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
             public void run() {
                 dialog.dismiss();
             }
-        }, 1800);
+        }, 900);
     }
 
     private void getAllOffers(OfferModel offerModel)

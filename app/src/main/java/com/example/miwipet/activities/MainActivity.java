@@ -328,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
                         currencyDatabase.updateToken(inventoryModel);
                         updateToken();
 
+                        petModel.setType(0);
                         petDatabase.addPet(petModel);
                         refreshInventory.getPetFromDatabase();
 
