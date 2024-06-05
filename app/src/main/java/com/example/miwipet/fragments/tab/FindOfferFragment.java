@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.miwipet.R;
 import com.example.miwipet.adapters.LookingForAdapter;
@@ -96,6 +97,20 @@ public class FindOfferFragment extends Fragment {
                 }
 
                 pageIndicator.setText(page + " out of 10");
+            }
+        });
+        
+        searchOfferButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Coming soon baby girl!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        
+        lookupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Coming soon baby girl!", Toast.LENGTH_SHORT).show();
             }
         });
 

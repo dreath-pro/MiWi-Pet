@@ -131,7 +131,7 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
         holder.acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Accepted Offer", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Coming soon baby girl!", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#89E3A0"
+    android:background="@drawable/miwi_coming_soon"
     tools:context=".fragments.tab.MakeOfferFragment">
 
     <LinearLayout
@@ -11,13 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Make Offer"
-            android:textSize="40sp"
-            android:textColor="@color/black"
-            android:layout_gravity="center"/>
     </LinearLayout>
 
 </FrameLayout>
