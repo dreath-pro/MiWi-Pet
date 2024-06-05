@@ -124,14 +124,14 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
         holder.viewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                theirTradeDetails(holder);
+                theirTradeDetails(holder, false);
             }
         });
 
         holder.acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Coming soon baby girl!", Toast.LENGTH_SHORT).show();
+                theirTradeDetails(holder, true);
             }
         });
     }
@@ -161,7 +161,7 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
         }
     }
 
-    private void theirTradeDetails(LookingForAdapter.MyViewHolder holder) {
+    private void theirTradeDetails(LookingForAdapter.MyViewHolder holder, boolean triggerAccept) {
         Dialog dialog = new Dialog(activity);
         dialog.setContentView(R.layout.their_trade_details);
 
@@ -304,6 +304,11 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
                 dialog.dismiss();
             }
         });
+
+        if(triggerAccept)
+        {
+            acceptButton.performClick();
+        }
 
         dialog.show();
     }
