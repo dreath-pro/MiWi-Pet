@@ -1,63 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B1A082"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#6E8F8A"
     tools:context=".fragments.navigation.CollectionFragment">
 
-    <LinearLayout
-        android:layout_width="350dp"
-        android:layout_height="640dp"
+    <EditText
+        android:id="@+id/inventorySearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:background="@color/white"
+        android:padding="5dp"
+        android:inputType="text"
+        android:textSize="20sp"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        android:textColor="@color/black"
+        android:hint="Search Item"
+        android:textAlignment="center"
+        android:drawableStart="@drawable/icon_search"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonsLayout"/>
 
-        <LinearLayout
+    <LinearLayout
+        android:id="@+id/buttonsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/inventorySearch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/collectionView">
+
+        <Button
+            android:id="@+id/petsButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="50dp"
+            android:backgroundTint="#D68A7C"
+            android:text="@string/pets_button"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginEnd="8dp"/>
 
-            <Button
-                android:id="@+id/petsButton"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="#D68A7C"
-                android:text="@string/pets_button"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+        <Button
+            android:id="@+id/objectsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:backgroundTint="#97DA73"
+            android:text="@string/items_button"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginEnd="8dp"/>
 
-            <Button
-                android:id="@+id/objectsButton"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="#97DA73"
-                android:text="@string/items_button"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/foodsButton"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="#B678DD"
-                android:text="@string/foods_button"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/collectionView"
-            android:layout_width="match_parent"
-            android:layout_height="500dp" />
+        <Button
+            android:id="@+id/foodsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:backgroundTint="#B678DD"
+            android:text="@string/foods_button"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/collectionView"
+        android:layout_width="370dp"
+        android:layout_height="450dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonsLayout"
+        app:layout_constraintBottom_toTopOf="@+id/navigationLayout"/>
+
+    <LinearLayout
+        android:id="@+id/navigationLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/collectionView">
+
+        <ImageView
+            android:id="@+id/backPageButton"
+            android:layout_gravity="center"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/arrow_left_icon"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/pageIndicator"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 out of 10"
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
+
+        <ImageView
+            android:id="@+id/nextPageButton"
+            android:layout_gravity="center"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/arrow_right_icon"
+            android:scaleType="fitXY"/>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
