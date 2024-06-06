@@ -23,10 +23,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.miwipet.R;
 import com.example.miwipet.database.EggDatabase;
 import com.example.miwipet.database.FoodDatabase;
+import com.example.miwipet.database.ObjectDatabase;
 import com.example.miwipet.database.PetDatabase;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
+import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.models.OfferModel;
 import com.example.miwipet.models.PetModel;
 import com.example.miwipet.utils.RefreshInventory;
@@ -48,6 +50,7 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
     private PetDatabase petDatabase;
     private EggDatabase eggDatabase;
     private FoodDatabase foodDatabase;
+    private ObjectDatabase objectDatabase;
 
     private Handler handler = new Handler();
 
@@ -63,6 +66,7 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
         petDatabase = new PetDatabase(context);
         eggDatabase = new EggDatabase(context);
         foodDatabase = new FoodDatabase(context);
+        objectDatabase = new ObjectDatabase(context);
         refreshInventory = new RefreshInventory(context, yourInventory);
     }
 
@@ -107,6 +111,15 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
 
                 rarityColor = ContextCompat.getColor(context, offerModels.get(position).getWantItem().getFoodLists().get(0).getRarityColor());
                 typeColor = ContextCompat.getColor(context, R.color.white);
+                break;
+            case 3:
+                ObjectModel objectModel = offerModels.get(position).getWantItem().getObjectLists().get(0);
+                resourceId = context.getResources().getIdentifier(objectModel.getObjectImage(), "drawable", context.getPackageName());
+
+                holder.wantName.setText(offerModels.get(position).getWantItem().getObjectLists().get(0).getObjectName());
+
+                rarityColor = ContextCompat.getColor(context, offerModels.get(position).getWantItem().getObjectLists().get(0).getRarityColor());
+                typeColor = ContextCompat.getColor(context, R.color.object);
                 break;
         }
 
@@ -197,6 +210,11 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
                 wantRarity = ContextCompat.getColor(context, offerModel.getWantItem().getFoodLists().get(0).getRarityColor());
                 wantType = ContextCompat.getColor(context, R.color.white);
                 break;
+            case 3:
+                wantResourceId = context.getResources().getIdentifier(offerModel.getWantItem().getObjectLists().get(0).getObjectImage(), "drawable", context.getPackageName());
+                wantRarity = ContextCompat.getColor(context, offerModel.getWantItem().getObjectLists().get(0).getRarityColor());
+                wantType = ContextCompat.getColor(context, R.color.object);
+                break;
         }
 
         yourName.setText("You");
@@ -283,6 +301,27 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
                             }
                         }
                         break;
+                    case 3:
+                        for(int i = 0; i <= yourInventory.getObjectLists().size() - 1; i++)
+                        {
+                            if(yourInventory.getObjectLists().get(i).getObjectName().equals(offerModel.getWantItem().getObjectLists().get(0).getObjectName()))
+                            {
+                                ArrayList<ObjectModel> temporaryObjectModels = yourInventory.getObjectLists();
+                                temporaryObjectModels.remove(i);
+                                objectDatabase.clearObject();
+                                for(ObjectModel objectModel : temporaryObjectModels)
+                                {
+                                    objectDatabase.addObject(objectModel);
+                                }
+                                refreshInventory.getObjectFromDatabase();
+
+                                getAllOffers(offerModel);
+                                doesItemExist = true;
+
+                                break;
+                            }
+                        }
+                        break;
                 }
 
                 if(doesItemExist)
@@ -340,9 +379,15 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
             foodDatabase.addFood(theirFoods);
         }
 
+        for(ObjectModel theirObjects : offerModel.getOffererItem().getObjectLists())
+        {
+            objectDatabase.addObject(theirObjects);
+        }
+
         refreshInventory.getPetFromDatabase();
         refreshInventory.getEggFromDatabase();
         refreshInventory.getFoodFromDatabase();
+        refreshInventory.getObjectFromDatabase();
     }
 
     private void profileDetails(LookingForAdapter.MyViewHolder holder) {

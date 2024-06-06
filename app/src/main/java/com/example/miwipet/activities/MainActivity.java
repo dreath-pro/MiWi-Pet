@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.miwipet.R;
 import com.example.miwipet.database.EggDatabase;
 import com.example.miwipet.database.FoodDatabase;
+import com.example.miwipet.database.ObjectDatabase;
 import com.example.miwipet.database.TimeDatabase;
 import com.example.miwipet.fragments.navigation.AboutFragment;
 import com.example.miwipet.fragments.navigation.ChangelogFragment;
@@ -34,6 +35,7 @@ import com.example.miwipet.fragments.navigation.TradeFragment;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
+import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.models.PetModel;
 import com.example.miwipet.database.CurrencyDatabase;
 import com.example.miwipet.models.TimeModel;
@@ -56,6 +58,7 @@ import java.util.Locale;
 //ocean background, digital art, cartoon, unfocus, blur
 //simple noodles, 3d render, full view, white background, simplistic kiddy design
 //female student, cute cartoon, digital art, hd, profile picture
+//simple flower in a pot, 3d render, full view, white background, simplistic cute design
 
 //icons used link
 //* cracked egg
@@ -111,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
     private PetDatabase petDatabase = new PetDatabase(MainActivity.this);
     private EggDatabase eggDatabase = new EggDatabase(MainActivity.this);
     private FoodDatabase foodDatabase = new FoodDatabase(MainActivity.this);
+    private ObjectDatabase objectDatabase = new ObjectDatabase(MainActivity.this);
 
     private CurrencyDatabase currencyDatabase = new CurrencyDatabase(MainActivity.this);
     private TimeDatabase timeDatabase = new TimeDatabase(MainActivity.this);
@@ -217,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
         petDatabase.clearPet();
         eggDatabase.clearEgg();
         foodDatabase.clearFood();
+        objectDatabase.clearObject();
 
         for (PetModel petModel : inventoryModel.getPetLists()) {
             petDatabase.addPet(petModel);
@@ -230,9 +235,14 @@ public class MainActivity extends AppCompatActivity {
             foodDatabase.addFood(foodModel);
         }
 
+        for (ObjectModel objectModel : inventoryModel.getObjectLists()) {
+            objectDatabase.addObject(objectModel);
+        }
+
         refreshInventory.getPetFromDatabase();
         refreshInventory.getEggFromDatabase();
         refreshInventory.getFoodFromDatabase();
+        refreshInventory.getObjectFromDatabase();
     }
 
     @Override
@@ -250,12 +260,14 @@ public class MainActivity extends AppCompatActivity {
             refreshInventory.getPetFromDatabase();
             refreshInventory.getEggFromDatabase();
             refreshInventory.getFoodFromDatabase();
+            refreshInventory.getObjectFromDatabase();
 
             InspectInventory inspectInventory = new InspectInventory(inventoryModel);
             inspectInventory.updatePet();
             inspectInventory.updateEggImage();
             inspectInventory.updatePetImage();
             inspectInventory.updateFoodImage();
+            inspectInventory.updateObjectImage();
 
             resetInventory();
 
@@ -349,8 +361,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             Toast.makeText(this, "Error: " + e, Toast.LENGTH_SHORT).show();
             errorText.setVisibility(View.VISIBLE);
             errorText.setText("Error: " + e);

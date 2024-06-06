@@ -22,10 +22,12 @@ import com.example.miwipet.adapters.LookingForAdapter;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
+import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.models.OfferModel;
 import com.example.miwipet.models.PetModel;
 import com.example.miwipet.utils.EggSource;
 import com.example.miwipet.utils.FoodSource;
+import com.example.miwipet.utils.ObjectSource;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -239,9 +241,10 @@ public class FindOfferFragment extends Fragment {
         InventoryModel inventoryModel = new InventoryModel();
         EggSource eggSource = new EggSource();
         FoodSource foodSource = new FoodSource();
+        ObjectSource objectSource = new ObjectSource();
 
         int numberOfItems;
-        int selectedItem = random.nextInt(3);
+        int selectedItem = random.nextInt(4);
 
         ArrayList<Integer> offererItemSeries = new ArrayList<>();
 
@@ -280,6 +283,12 @@ public class FindOfferFragment extends Fragment {
 
                     int selectedFood = random.nextInt(foodModels.size());
                     inventoryModel.addFoodLists(foodModels.get(selectedFood));
+                    break;
+                case 3:
+                    ArrayList<ObjectModel> objectModels = objectSource.getAllObjects();
+
+                    int selectedObject = random.nextInt(objectModels.size());
+                    inventoryModel.addObjectLists(objectModels.get(selectedObject));
                     break;
             }
 

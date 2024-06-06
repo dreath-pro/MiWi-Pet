@@ -4,6 +4,7 @@ import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
+import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.models.PetModel;
 
 import java.lang.reflect.Array;
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 public class InspectInventory {
     private InventoryModel inventoryModel;
     private Rarity rarity = new Rarity();
-    private EggSource eggSource = new EggSource();
 
     public InspectInventory(InventoryModel inventoryModel)
     {
@@ -36,134 +36,9 @@ public class InspectInventory {
                 inventoryModel.getPetLists().get(count).setPetName("Dire Wolf");
             }
 
-            if(petModel.getPetName().equals("Vampire Bat"))
-            {
-                inventoryModel.getPetLists().get(count).setPetImage("dark_deer");
-                inventoryModel.getPetLists().get(count).setPetName("Dark Deer");
-            }
-
-            if(petModel.getPetName().equals("Kangaroo") && petModel.getRarity().equals(rarity.getRarity(2)))
-            {
-                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(3));
-            }
-
-            if(petModel.getPetName().equals("Bee") && petModel.getRarity().equals(rarity.getRarity(1)))
-            {
-                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(0));
-            }
-
-            if(petModel.getPetName().equals("Grasshopper") && petModel.getRarity().equals(rarity.getRarity(1)))
-            {
-                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(0));
-            }
-
-            if(petModel.getPetName().equals("Butterfly") && petModel.getRarity().equals(rarity.getRarity(1)))
-            {
-                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(0));
-            }
-
-            if(petModel.getPetName().equals("Bird") && petModel.getRarity().equals(rarity.getRarity(2)))
-            {
-                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(1));
-            }
-
-            if(petModel.getPetName().equals("Sheep") && petModel.getRarity().equals(rarity.getRarity(3)))
-            {
-                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(2));
-            }
-
-            if(petModel.getPetName().equals("Chicken") && petModel.getRarity().equals(rarity.getRarity(2)))
-            {
-                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(1));
-            }
-
-            if(petModel.getPetName().equals("Blue Chick") && petModel.getRarity().equals(rarity.getRarity(2)))
-            {
-                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(1));
-            }
-
-            if(petModel.getPetName().equals("Lobster") && petModel.getRarity().equals(rarity.getRarity(2)))
-            {
-                inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(1));
-            }
-
             if(petModel.getPetName().equals("Lion") && petModel.getRarity().equals(rarity.getRarity(2)))
             {
                 inventoryModel.getPetLists().get(count).setRarity(rarity.getRarity(3));
-            }
-
-            if(petModel.getPetName().equals("Tree Deer"))
-            {
-                inventoryModel.getPetLists().get(count).setPetImage("dire_wolf");
-                inventoryModel.getPetLists().get(count).setPetName("Dire Wolf");
-            }
-
-            if(petModel.getPetName().equals("Blazing Lion"))
-            {
-                inventoryModel.getPetLists().get(count).setPetImage("sun_war_lion");
-                inventoryModel.getPetLists().get(count).setPetName("Sun War Lion");
-            }
-
-            if(petModel.getPetName().equals("Guardian Deer"))
-            {
-                inventoryModel.getPetLists().get(count).setPetImage("dire_wolf");
-                inventoryModel.getPetLists().get(count).setPetName("Dire Wolf");
-            }
-
-            if(petModel.getPetName().equals("Soul Dragon"))
-            {
-                inventoryModel.getPetLists().get(count).setPetImage("dark_deer");
-                inventoryModel.getPetLists().get(count).setPetName("Dark Deer");
-            }
-
-            if(petModel.getPetName().equals("Carnotaurus"))
-            {
-                inventoryModel.getPetLists().get(count).setPetImage("phorusrhacids");
-                inventoryModel.getPetLists().get(count).setPetName("Phorusrhacids");
-            }
-
-            if(petModel.getPetName().equals("Buffalo"))
-            {
-                inventoryModel.getPetLists().get(count).setPetImage("boar");
-                inventoryModel.getPetLists().get(count).setPetName("Boar");
-            }
-
-            if(petModel.getPetName().equals("Musk Ox"))
-            {
-                inventoryModel.getPetLists().get(count).setPetImage("boar");
-                inventoryModel.getPetLists().get(count).setPetName("Boar");
-            }
-
-//            if(!petImage.isEmpty())
-//            {
-//                if(petModel.getPetImage().equals("mecha_spermwhale"))
-//                {
-//                    inventoryModel.getPetLists().get(count).setPetImage("mecha_sperm_whale");
-//                }
-//            }
-
-            if(petModel.getPetName().equals("Goldfish"))
-            {
-                inventoryModel.getPetLists().get(count).setPetImage("mecha_sperm_whale");
-                inventoryModel.getPetLists().get(count).setPetName("Mecha Sperm Whale");
-            }
-
-            if(petModel.getPetName().equals("Puffer Fish"))
-            {
-                inventoryModel.getPetLists().get(count).setPetImage("pufferfish");
-                inventoryModel.getPetLists().get(count).setPetName("Pufferfish");
-            }
-
-            if(petModel.getPetName().equals("Ghost Shark"))
-            {
-                inventoryModel.getPetLists().get(count).setPetImage("terror_shark");
-                inventoryModel.getPetLists().get(count).setPetName("Terror Shark");
-            }
-
-            if(petModel.getPetName().equals("Hollow Squid"))
-            {
-                inventoryModel.getPetLists().get(count).setPetImage("devil_kraken");
-                inventoryModel.getPetLists().get(count).setPetName("Devil Kraken");
             }
 
             count++;
@@ -238,6 +113,29 @@ public class InspectInventory {
         for(FoodModel foodList : foodModels)
         {
             inventoryModel.addFoodLists(foodList);
+        }
+    }
+
+    public void updateObjectImage()
+    {
+        ArrayList<ObjectModel> objectModels = new ArrayList<>();
+
+        for(ObjectModel objectModel : inventoryModel.getObjectLists())
+        {
+            String lowerCaseName = objectModel.getObjectName().toLowerCase();
+            String underscoreName = lowerCaseName.replace("", "_");
+            underscoreName = underscoreName.replace("-", "_");
+            String objectFrontName = "object_" + underscoreName;
+
+            objectModel.setObjectImage(objectFrontName);
+
+            objectModels.add(objectModel);
+        }
+
+        inventoryModel.clearObjectList();
+        for(ObjectModel objectList : objectModels)
+        {
+            inventoryModel.addObjectLists(objectList);
         }
     }
 }

@@ -9,24 +9,25 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.NonNull;
 
 import com.example.miwipet.models.FoodModel;
+import com.example.miwipet.models.ObjectModel;
 
 import java.util.ArrayList;
 
-public class FoodDisplayDatabase extends SQLiteOpenHelper {
+public class ObjectDisplayDatabase extends SQLiteOpenHelper {
     private static final String id = "id";
     private static final String displayTable = "display_table";
-    private static final String foodName = "food_name";
+    private static final String objectName = "object_name";
 
     private static final int DATABASE_VERSION = 1;
 
-    public FoodDisplayDatabase(@NonNull Context context) {
-        super(context, "food_display.db", null, DATABASE_VERSION);
+    public ObjectDisplayDatabase(@NonNull Context context) {
+        super(context, "object_display.db", null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + displayTable + "(" + id + " INTEGER PRIMARY KEY " +
-                "AUTOINCREMENT, " + foodName + " TEXT)";
+        String createTableStatement = "CREATE TABLE " + displayTable + " (" + id + " INTEGER PRIMARY KEY " +
+                "AUTOINCREMENT, " + objectName + " TEXT)";
         db.execSQL(createTableStatement);
     }
 
@@ -35,12 +36,12 @@ public class FoodDisplayDatabase extends SQLiteOpenHelper {
 
     }
 
-    public boolean generateTable(FoodModel foodModel) {
+    public boolean generateTable(ObjectModel objectModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         boolean result;
 
-        contentValues.put(foodName, foodModel.getFoodName());
+        contentValues.put(objectName, objectModel.getObjectName());
 
         long insert = db.insert(displayTable, null, contentValues);
         if (insert == -1) {
@@ -54,13 +55,13 @@ public class FoodDisplayDatabase extends SQLiteOpenHelper {
         return result;
     }
 
-    public boolean updateDisplay(FoodModel foodModel) {
+    public boolean updateDisplay(ObjectModel objectModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(foodName, foodModel.getFoodName());
+        contentValues.put(objectName, objectModel.getObjectName());
 
         String whereClause = id + "=?";
-        String[] whereArgs = {String.valueOf(foodModel.getId())};
+        String[] whereArgs = {String.valueOf(objectModel.getId())};
         int result = db.update(displayTable, contentValues, whereClause, whereArgs);
 
         db.close();

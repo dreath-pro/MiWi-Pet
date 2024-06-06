@@ -16,6 +16,7 @@ import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
+import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.models.PetModel;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
     private final Activity activity;
     private final ArrayList<Integer> itemSeries;
     private final InventoryModel theirInventory;
-    private int petCounter, eggCounter, foodCounter;
+    private int petCounter, eggCounter, foodCounter, objectCounter;
 
     public TheirOfferAdapter(Activity activity, ArrayList<Integer> itemSeries, InventoryModel theirInventory) {
         this.activity = activity;
@@ -55,6 +56,9 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
                 break;
             case 2:
                 bindFoodItem(holder);
+                break;
+            case 3:
+                bindObjectItem(holder);
                 break;
         }
     }
@@ -115,6 +119,23 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
         }
     }
 
+    private void bindObjectItem(MyViewHolder holder) {
+        if (objectCounter < theirInventory.getObjectLists().size()) {
+            ObjectModel objectModel = theirInventory.getObjectLists().get(objectCounter);
+            int resourceId = getResourceId(objectModel.getObjectImage());
+
+            int rarityColor = getColor(objectModel.getRarityColor());
+            int typeColor = getColor(R.color.object);
+
+            setItemProperties(holder, resourceId, rarityColor, typeColor);
+
+            objectCounter++;
+        } else {
+            // Handle case where there are no more foods
+            setPlaceholderProperties(holder);
+        }
+    }
+
     private int getResourceId(String resourceName) {
         return context.getResources().getIdentifier(resourceName, "drawable", context.getPackageName());
     }
@@ -142,6 +163,7 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
         petCounter = 0;
         eggCounter = 0;
         foodCounter = 0;
+        objectCounter = 0;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

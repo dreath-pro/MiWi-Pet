@@ -14,6 +14,7 @@ import android.widget.Button;
 
 import com.example.miwipet.R;
 import com.example.miwipet.adapters.FoodAdapter;
+import com.example.miwipet.adapters.ObjectAdapter;
 import com.example.miwipet.adapters.PetAdapter;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.PetModel;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 public class CollectionFragment extends Fragment {
     private RecyclerView collectionView;
     private Context context;
-    private Button petsButton, itemsButton, foodsButton;
+    private Button petsButton, objectsButton, foodsButton;
 
     private InventoryModel inventoryModel;
 
@@ -40,12 +41,13 @@ public class CollectionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_collection, container, false);
 
         petsButton = view.findViewById(R.id.petsButton);
-        itemsButton = view.findViewById(R.id.itemsButton);
+        objectsButton = view.findViewById(R.id.objectsButton);
         foodsButton = view.findViewById(R.id.foodsButton);
         collectionView = view.findViewById(R.id.collectionView);
 
         GridLayoutManager petLayoutManager = new GridLayoutManager(context, 2);
         GridLayoutManager foodLayoutManager = new GridLayoutManager(context, 2);
+        GridLayoutManager objectLayoutManager = new GridLayoutManager(context, 2);
         showPetCollection(petLayoutManager);
 
         petsButton.setOnClickListener(new View.OnClickListener() {
@@ -55,10 +57,10 @@ public class CollectionFragment extends Fragment {
             }
         });
 
-        itemsButton.setOnClickListener(new View.OnClickListener() {
+        objectsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showObjectCollection(objectLayoutManager);
             }
         });
 
@@ -84,5 +86,12 @@ public class CollectionFragment extends Fragment {
         collectionView.setLayoutManager(foodLayoutManager);
         FoodAdapter foodAdapter = new FoodAdapter(getActivity(), inventoryModel.getFoodLists());
         collectionView.setAdapter(foodAdapter);
+    }
+
+    private void showObjectCollection(GridLayoutManager objectLayoutManager)
+    {
+        collectionView.setLayoutManager(objectLayoutManager);
+        ObjectAdapter objectAdapter = new ObjectAdapter(getActivity(), inventoryModel.getObjectLists());
+        collectionView.setAdapter(objectAdapter);
     }
 }

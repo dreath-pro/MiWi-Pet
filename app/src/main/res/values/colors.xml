@@ -13,4 +13,6 @@
     <color name="normal">#B68B69</color>
     <color name="crystal">#59D3E3</color>
     <color name="gemstone">#E4489E</color>
+
+    <color name="object">#7E6BA9BC</color>
 </resources>
