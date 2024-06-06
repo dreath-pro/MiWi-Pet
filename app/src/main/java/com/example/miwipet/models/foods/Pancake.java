@@ -1,9 +1,11 @@
 package com.example.miwipet.models.foods;
 
+import com.example.miwipet.R;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.utils.Rarity;
 
 public class Pancake extends FoodModel {
+    private int reference = R.drawable.food_pancake;
     private Rarity fixedRarity = new Rarity();
 
     /**

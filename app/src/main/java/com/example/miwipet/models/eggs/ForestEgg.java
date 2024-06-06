@@ -4,6 +4,22 @@ import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 
 public class ForestEgg extends EggModel {
+    private final int[][] references = {
+            {R.drawable.ant, R.drawable.beaver, R.drawable.panther, R.drawable.spider,
+                    R.drawable.squirrel, R.drawable.woodpecker},
+
+            {R.drawable.owl, R.drawable.monkey, R.drawable.deer, R.drawable.snake,
+                    R.drawable.bat, R.drawable.orangutan},
+
+            {R.drawable.bear, R.drawable.gorilla, R.drawable.moose, R.drawable.sloth,
+                    R.drawable.hawk, R.drawable.koala},
+
+            {R.drawable.albino_tiger, R.drawable.sugar_glider, R.drawable.tiger, R.drawable.peacock,
+                    R.drawable.kangaroo, R.drawable.panda},
+
+            {R.drawable.galactic_owl, R.drawable.dire_wolf, R.drawable.dark_deer}
+    };
+
     private final String[][] petImages = {
             {"ant", "beaver", "panther", "spider",
                     "squirrel", "woodpecker"},

@@ -5,6 +5,7 @@ import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.utils.Rarity;
 
 public class Burger extends FoodModel {
+    private int reference = R.drawable.food_burger;
     private Rarity fixedRarity = new Rarity();
 
     /**

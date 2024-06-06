@@ -1,9 +1,11 @@
 package com.example.miwipet.models.objects;
 
+import com.example.miwipet.R;
 import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.utils.Rarity;
 
 public class Cap extends ObjectModel {
+    private int reference = R.drawable.object_cap;
     private Rarity fixedRarity = new Rarity();
 
     /**

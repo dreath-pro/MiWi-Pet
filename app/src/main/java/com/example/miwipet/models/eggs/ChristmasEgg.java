@@ -4,6 +4,22 @@ import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 
 public class ChristmasEgg extends EggModel {
+    private final int[][] references = {
+            {R.drawable.golden_walrus, R.drawable.ski_lion, R.drawable.gingerbread_walrus,
+                    R.drawable.choco_milk_albatross, R.drawable.diamond_tern, R.drawable.snowball},
+
+            {R.drawable.winter_seal, R.drawable.toy_mouse, R.drawable.christmas_puffin,
+                    R.drawable.elf_squirrel, R.drawable.toy_cat, R.drawable.christmas_seal},
+
+            {R.drawable.conductor_penguin, R.drawable.ice_cream_bear, R.drawable.rudolf,
+                    R.drawable.gingerbread_walrus, R.drawable.yeti, R.drawable.snowman},
+
+            {R.drawable.pudding_pug, R.drawable.candy_horse, R.drawable.strawberry_golem,
+                    R.drawable.cream_narwhal, R.drawable.crystal_tern, R.drawable.queen_snowflake},
+
+            {R.drawable.joy_reindeer, R.drawable.snowflake_dragon, R.drawable.aurora_dragon}
+    };
+
     private final String[][] petImages = {
             {"golden_walrus", "ski_lion", "gingerbread_mouse",
                     "choco_milk_albatross", "diamond_tern", "snowball"},

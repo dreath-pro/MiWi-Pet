@@ -4,6 +4,22 @@ import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 
 public class FossilEgg extends EggModel {
+    private final int[][] references = {
+            {R.drawable.brachiosaurus, R.drawable.t_rex, R.drawable.smilodon,
+                    R.drawable.mammoth, R.drawable.paraceratherium},
+
+            {R.drawable.titanoboa, R.drawable.triceratops, R.drawable.spinosaurus,
+                    R.drawable.parasaurolophus, R.drawable.megalodon},
+
+            {R.drawable.ankylosaurus, R.drawable.stegosaurus, R.drawable.plesiosaurus,
+                    R.drawable.amargasaurus, R.drawable.sarcosuchus},
+
+            {R.drawable.pteranodon, R.drawable.dodo, R.drawable.dunkleosteus,
+                    R.drawable.phorusrhacids, R.drawable.glyptodon},
+
+            {R.drawable.poly_rex, R.drawable.skeleton_t_rex, R.drawable.leviathan}
+    };
+
     private final String[][] petImages = {
             {"brachiosaurus", "t_rex", "smilodon",
                     "mammoth", "paraceratherium"},
