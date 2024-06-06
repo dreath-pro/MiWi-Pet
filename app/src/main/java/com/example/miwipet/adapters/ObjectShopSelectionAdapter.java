@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
+import com.example.miwipet.database.CurrencyDatabase;
 import com.example.miwipet.database.FoodDatabase;
 import com.example.miwipet.database.ObjectDatabase;
 import com.example.miwipet.database.ObjectDisplayDatabase;
@@ -61,6 +62,7 @@ public class ObjectShopSelectionAdapter extends RecyclerView.Adapter<ObjectShopS
     @Override
     public void onBindViewHolder(@NonNull ObjectShopSelectionAdapter.MyViewHolder holder, int position) {
         ObjectDatabase objectDatabase = new ObjectDatabase(context);
+        CurrencyDatabase currencyDatabase = new CurrencyDatabase(context);
         int resourceId = context.getResources().getIdentifier(displayObjects.get(position).getObjectImage(), "drawable", context.getPackageName());
 
         holder.objectImage.setImageResource(resourceId);
@@ -84,6 +86,8 @@ public class ObjectShopSelectionAdapter extends RecyclerView.Adapter<ObjectShopS
 
                     inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() -
                             displayObjects.get(holder.getBindingAdapterPosition()).getGlazePrice());
+
+                    currencyDatabase.updateToken(inventoryModel);
 
                     chipToken.setText(inventoryModel.getChipToken() + "");
                     glazeToken.setText(inventoryModel.getGlazeToken() + "");

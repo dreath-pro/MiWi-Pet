@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
+import com.example.miwipet.database.CurrencyDatabase;
 import com.example.miwipet.database.FoodDatabase;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
@@ -60,6 +61,7 @@ public class FoodShopSelectionAdapter extends RecyclerView.Adapter<FoodShopSelec
     @Override
     public void onBindViewHolder(@NonNull FoodShopSelectionAdapter.MyViewHolder holder, int position) {
         FoodDatabase foodDatabase = new FoodDatabase(context);
+        CurrencyDatabase currencyDatabase = new CurrencyDatabase(context);
         int resourceId = context.getResources().getIdentifier(displayFoods.get(position).getFoodImage(), "drawable", context.getPackageName());
 
         holder.foodImage.setImageResource(resourceId);
@@ -83,6 +85,8 @@ public class FoodShopSelectionAdapter extends RecyclerView.Adapter<FoodShopSelec
 
                     inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() -
                             displayFoods.get(holder.getBindingAdapterPosition()).getGlazePrice());
+
+                    currencyDatabase.updateToken(inventoryModel);
 
                     chipToken.setText(inventoryModel.getChipToken() + "");
                     glazeToken.setText(inventoryModel.getGlazeToken() + "");

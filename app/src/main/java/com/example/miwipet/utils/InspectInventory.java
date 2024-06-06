@@ -123,7 +123,7 @@ public class InspectInventory {
         for(ObjectModel objectModel : inventoryModel.getObjectLists())
         {
             String lowerCaseName = objectModel.getObjectName().toLowerCase();
-            String underscoreName = lowerCaseName.replace("", "_");
+            String underscoreName = lowerCaseName.replace(" ", "_");
             underscoreName = underscoreName.replace("-", "_");
             String objectFrontName = "object_" + underscoreName;
 

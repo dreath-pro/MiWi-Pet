@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
+import com.example.miwipet.database.CurrencyDatabase;
 import com.example.miwipet.database.EggDatabase;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.InventoryModel;
@@ -57,6 +58,7 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
     @Override
     public void onBindViewHolder(@NonNull EggShopSelectionAdapter.MyViewHolder holder, int position) {
         EggDatabase eggDatabase = new EggDatabase(context);
+        CurrencyDatabase currencyDatabase = new CurrencyDatabase(context);
         int resourceId = context.getResources().getIdentifier(displayEggs.get(position).getEggImage(), "drawable", context.getPackageName());
 
         holder.eggImage.setImageResource(resourceId);
@@ -80,6 +82,8 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
 
                     inventoryModel.setGlazeToken(inventoryModel.getGlazeToken() -
                             displayEggs.get(holder.getBindingAdapterPosition()).getGlazePrice());
+
+                    currencyDatabase.updateToken(inventoryModel);
 
                     chipToken.setText(inventoryModel.getChipToken() + "");
                     glazeToken.setText(inventoryModel.getGlazeToken() + "");
