@@ -27,7 +27,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
-                android:background="#FFFFFF">
+                android:background="#C59CB1">
 
                 <ImageView
                     android:id="@+id/foodImage"
