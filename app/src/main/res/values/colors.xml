@@ -15,4 +15,6 @@
     <color name="gemstone">#E4489E</color>
 
     <color name="object">#7E6BA9BC</color>
+    <color name="food">#C59CB1</color>
+    <color name="egg">#B3B287</color>
 </resources>

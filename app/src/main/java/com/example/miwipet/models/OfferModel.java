@@ -11,9 +11,16 @@ public class OfferModel {
     private int wantItemSingle;
     private ArrayList<Integer> offererItemSeries;
 
-    public OfferModel()
-    {
+    public OfferModel() {
 
+    }
+
+    public OfferModel(String username, String userImage, int successTrade, int failedTrade, InventoryModel wantItem) {
+        this.username = username;
+        this.userImage = userImage;
+        this.successTrade = successTrade;
+        this.failedTrade = failedTrade;
+        this.wantItem = wantItem;
     }
 
     public OfferModel(String username, String userImage, int successTrade, int failedTrade, InventoryModel wantItem, InventoryModel offererItem) {

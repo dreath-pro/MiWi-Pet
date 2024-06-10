@@ -91,7 +91,7 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
             int resourceId = getResourceId(eggModel.getEggImage());
 
             int rarityColor = getColor(R.color.common);
-            int typeColor = getColor(R.color.white);
+            int typeColor = getColor(R.color.egg);
 
             setItemProperties(holder, resourceId, rarityColor, typeColor);
 
@@ -108,7 +108,7 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
             int resourceId = getResourceId(foodModel.getFoodImage());
 
             int rarityColor = getColor(foodModel.getRarityColor());
-            int typeColor = getColor(R.color.white);
+            int typeColor = getColor(R.color.food);
 
             setItemProperties(holder, resourceId, rarityColor, typeColor);
 

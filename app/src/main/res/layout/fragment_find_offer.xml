@@ -71,7 +71,7 @@
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Look Up"
-                android:backgroundTint="#6A4A9E"
+                android:backgroundTint="#2B6A61"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:layout_marginEnd="15dp"/>
@@ -81,7 +81,7 @@
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Refresh"
-                android:backgroundTint="#37632B"
+                android:backgroundTint="#224468"
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
 

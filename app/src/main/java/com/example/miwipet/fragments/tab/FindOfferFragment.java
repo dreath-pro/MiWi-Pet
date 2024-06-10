@@ -37,15 +37,16 @@ import com.example.miwipet.models.PetModel;
 import com.example.miwipet.utils.EggSource;
 import com.example.miwipet.utils.FoodSource;
 import com.example.miwipet.utils.ObjectSource;
+import com.example.miwipet.utils.TradeGeneration;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class FindOfferFragment extends Fragment {
-    RecyclerView offerView;
-    ImageView backPageButton, nextPageButton;
-    Button refreshOfferButton, lookupButton;
-    TextView pageIndicator, errorText;
+    private RecyclerView offerView;
+    private ImageView backPageButton, nextPageButton;
+    private Button refreshOfferButton, lookupButton;
+    private TextView pageIndicator, errorText;
 
     private Random random = new Random();
     private Context context;
@@ -59,6 +60,8 @@ public class FindOfferFragment extends Fragment {
     private ArrayList<OfferModel> dividedOfferModels = new ArrayList<>();
     private LookingForAdapter lookingForAdapter;
 
+    private TradeGeneration tradeGeneration = new TradeGeneration();
+
     private void generateComponents(View view) {
         offerView = view.findViewById(R.id.offerView);
         backPageButton = view.findViewById(R.id.backPageButton);
@@ -71,8 +74,7 @@ public class FindOfferFragment extends Fragment {
         errorText.setVisibility(View.INVISIBLE);
     }
 
-    public FindOfferFragment(InventoryModel yourInventory)
-    {
+    public FindOfferFragment(InventoryModel yourInventory) {
         this.yourInventory = yourInventory;
     }
 
@@ -109,7 +111,7 @@ public class FindOfferFragment extends Fragment {
                 pageIndicator.setText(page + " out of 10");
             }
         });
-        
+
         lookupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,8 +151,9 @@ public class FindOfferFragment extends Fragment {
         listOfOffererItemSeries.clear();
 
         for (int i = 0; i <= 99; i++) {
-            offerModels.add(new OfferModel(generateName(), generateProfile(), generateTradeHistory(),
-                    generateTradeHistory(), generateItem(true), generateItem(false)));
+            offerModels.add(new OfferModel(tradeGeneration.generateName(), tradeGeneration.generateProfile(),
+                    tradeGeneration.generateTradeHistory(), tradeGeneration.generateTradeHistory(),
+                    generateItem(true), generateItem(false)));
 
             offerModels.get(i).setWantItemSingle(wantItemSingle);
             offerModels.get(i).setOffererItemSeries(listOfOffererItemSeries.get(i));
@@ -216,28 +219,6 @@ public class FindOfferFragment extends Fragment {
         offerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
     }
 
-    private String generateName() {
-        String[] nameList = {"Lily X boy", "Amandiax160", "cutiepie_x069", "dreath_pro", "Jade the grinder",
-                "Liam Naz", "Marzie262", "Nath", "Joyce269"};
-        int selectedName = random.nextInt(nameList.length);
-
-        return nameList[selectedName];
-    }
-
-    private String generateProfile() {
-        String[] userProfile = {"profile_amy", "profile_sasa", "profile_gabrielle", "profile_andrea",
-                "profile_luke", "profile_jacob", "profile_kimberly", "profile_ashley", "profile_amanda",
-                "profile_eve", "profile_matthew"};
-        int selectedProfile = random.nextInt(userProfile.length);
-
-        return userProfile[selectedProfile];
-    }
-
-    private int generateTradeHistory() {
-        int tradeHistory = random.nextInt(1000) + 1;
-        return tradeHistory;
-    }
-
     private InventoryModel generateItem(boolean wantItem) {
         InventoryModel inventoryModel = new InventoryModel();
         EggSource eggSource = new EggSource();
@@ -297,7 +278,7 @@ public class FindOfferFragment extends Fragment {
                 break;
             }
 
-            selectedItem = random.nextInt(3);
+            selectedItem = random.nextInt(4);
             if (!wantItem) {
                 offererItemSeries.add(selectedItem);
             }
@@ -323,8 +304,7 @@ public class FindOfferFragment extends Fragment {
     private ImageView dialogNextPageButton;
     private TextView dialogPageIndicator;
 
-    private void showInventory()
-    {
+    private void showInventory() {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.fragment_collection);
 
@@ -376,11 +356,9 @@ public class FindOfferFragment extends Fragment {
                 if (inventoryPage < 1) {
                     inventoryPage = 1;
                 } else {
-                    if(inventorySearch.getText().toString().isEmpty())
-                    {
+                    if (inventorySearch.getText().toString().isEmpty()) {
                         showCollection(selectedItem, false, "");
-                    }else
-                    {
+                    } else {
                         showCollection(selectedItem, true, inventorySearch.getText().toString());
                     }
                 }
@@ -394,11 +372,9 @@ public class FindOfferFragment extends Fragment {
                 if (inventoryPage > inventoryMaxPage) {
                     inventoryPage = inventoryMaxPage;
                 } else {
-                    if(inventorySearch.getText().toString().isEmpty())
-                    {
+                    if (inventorySearch.getText().toString().isEmpty()) {
                         showCollection(selectedItem, false, "");
-                    }else
-                    {
+                    } else {
                         showCollection(selectedItem, true, inventorySearch.getText().toString());
                     }
                 }
@@ -467,8 +443,7 @@ public class FindOfferFragment extends Fragment {
 
         int minIndex = 0, maxIndex = inventoryMaxSize - 1;
 
-        switch (selectedItem)
-        {
+        switch (selectedItem) {
             case 0:
                 if (petLists.size() < inventoryMaxSize) {
                     maxIndex = petLists.size() - 1;
@@ -489,8 +464,7 @@ public class FindOfferFragment extends Fragment {
         inventoryMaxPage = 1;
         int tempMaxSize = inventoryMaxSize;
 
-        switch (selectedItem)
-        {
+        switch (selectedItem) {
             case 0:
                 for (int i = 1; i <= petLists.size(); i++) {
                     if (i > tempMaxSize) {
@@ -524,8 +498,7 @@ public class FindOfferFragment extends Fragment {
 
         ArrayList<PetModel> petTempList = new ArrayList<>();
         for (int i = minIndex; i <= maxIndex; i++) {
-            if(i > petLists.size() - 1)
-            {
+            if (i > petLists.size() - 1) {
                 break;
             }
             petTempList.add(petLists.get(i));
@@ -534,8 +507,7 @@ public class FindOfferFragment extends Fragment {
 
         ArrayList<FoodModel> foodTempList = new ArrayList<>();
         for (int i = minIndex; i <= maxIndex; i++) {
-            if(i > foodLists.size() - 1)
-            {
+            if (i > foodLists.size() - 1) {
                 break;
             }
             foodTempList.add(foodLists.get(i));
@@ -544,16 +516,14 @@ public class FindOfferFragment extends Fragment {
 
         ArrayList<ObjectModel> objectTempList = new ArrayList<>();
         for (int i = minIndex; i <= maxIndex; i++) {
-            if(i > objectLists.size() - 1)
-            {
+            if (i > objectLists.size() - 1) {
                 break;
             }
             objectTempList.add(objectLists.get(i));
         }
         objectLists = objectTempList;
 
-        switch (selectedItem)
-        {
+        switch (selectedItem) {
             case 0:
                 GridLayoutManager petLayoutManager = new GridLayoutManager(context, 2);
                 collectionView.setLayoutManager(petLayoutManager);

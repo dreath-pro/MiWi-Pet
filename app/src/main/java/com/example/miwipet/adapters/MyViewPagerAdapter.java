@@ -22,11 +22,11 @@ public class MyViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new MakeOfferFragment();
+                return new MakeOfferFragment(yourInventory);
             case 1:
                 return new FindOfferFragment(yourInventory);
             default:
-                return new MakeOfferFragment();
+                return new MakeOfferFragment(yourInventory);
         }
     }
 

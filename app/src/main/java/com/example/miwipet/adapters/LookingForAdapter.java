@@ -101,7 +101,7 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
                 holder.wantName.setText(offerModels.get(position).getWantItem().getEggLists().get(0).getEggName());
 
                 rarityColor = ContextCompat.getColor(context, R.color.common);
-                typeColor = ContextCompat.getColor(context, R.color.white);
+                typeColor = ContextCompat.getColor(context, R.color.egg);
                 break;
             case 2:
                 FoodModel foodModel = offerModels.get(position).getWantItem().getFoodLists().get(0);
@@ -110,7 +110,7 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
                 holder.wantName.setText(offerModels.get(position).getWantItem().getFoodLists().get(0).getFoodName());
 
                 rarityColor = ContextCompat.getColor(context, offerModels.get(position).getWantItem().getFoodLists().get(0).getRarityColor());
-                typeColor = ContextCompat.getColor(context, R.color.white);
+                typeColor = ContextCompat.getColor(context, R.color.food);
                 break;
             case 3:
                 ObjectModel objectModel = offerModels.get(position).getWantItem().getObjectLists().get(0);
@@ -202,13 +202,13 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
                 break;
             case 1:
                 wantResourceId = context.getResources().getIdentifier(offerModel.getWantItem().getEggLists().get(0).getEggImage(), "drawable", context.getPackageName());
-                wantRarity = ContextCompat.getColor(context, R.color.white);
-                wantType = ContextCompat.getColor(context, R.color.common);
+                wantRarity = ContextCompat.getColor(context, R.color.common);
+                wantType = ContextCompat.getColor(context, R.color.egg);
                 break;
             case 2:
                 wantResourceId = context.getResources().getIdentifier(offerModel.getWantItem().getFoodLists().get(0).getFoodImage(), "drawable", context.getPackageName());
                 wantRarity = ContextCompat.getColor(context, offerModel.getWantItem().getFoodLists().get(0).getRarityColor());
-                wantType = ContextCompat.getColor(context, R.color.white);
+                wantType = ContextCompat.getColor(context, R.color.food);
                 break;
             case 3:
                 wantResourceId = context.getResources().getIdentifier(offerModel.getWantItem().getObjectLists().get(0).getObjectImage(), "drawable", context.getPackageName());
