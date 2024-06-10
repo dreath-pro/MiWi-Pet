@@ -67,18 +67,18 @@
             android:layout_gravity="center_horizontal">
 
             <Button
-                android:id="@+id/searchOfferButton"
-                android:layout_width="120dp"
+                android:id="@+id/lookupButton"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:text="Search"
-                android:backgroundTint="#2B4263"
+                android:text="Look Up"
+                android:backgroundTint="#6A4A9E"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginEnd="15dp"/>
 
             <Button
                 android:id="@+id/refreshOfferButton"
-                android:layout_width="120dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Refresh"
                 android:backgroundTint="#37632B"
@@ -86,24 +86,6 @@
                 android:textSize="20sp"/>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
-
-            <Button
-                android:id="@+id/lookupButton"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:text="Look Up"
-                android:backgroundTint="#6A4A9E"
-                android:textColor="@color/white"
-                android:textSize="20sp"/>
-
-        </LinearLayout>
-
     </LinearLayout>
 
     <TextView

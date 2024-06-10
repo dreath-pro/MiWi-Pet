@@ -73,32 +73,35 @@ public class CollectionFragment extends Fragment {
         nextPageButton = view.findViewById(R.id.nextPageButton);
         pageIndicator = view.findViewById(R.id.pageIndicator);
 
-        showPetCollection(false, "");
+        showCollection(selectedItem, false, "");
 
         petsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedItem = 0;
                 inventorySearch.setText("");
                 page = 1;
-                showPetCollection(false, "");
-            }
-        });
-
-        objectsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                inventorySearch.setText("");
-                page = 1;
-                showObjectCollection(false, "");
+                showCollection(selectedItem, false, "");
             }
         });
 
         foodsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedItem = 1;
                 inventorySearch.setText("");
                 page = 1;
-                showFoodCollection(false, "");
+                showCollection(selectedItem, false, "");
+            }
+        });
+
+        objectsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedItem = 2;
+                inventorySearch.setText("");
+                page = 1;
+                showCollection(selectedItem, false, "");
             }
         });
 
@@ -109,34 +112,12 @@ public class CollectionFragment extends Fragment {
                 if (page < 1) {
                     page = 1;
                 } else {
-                    switch (selectedItem) {
-                        case 0:
-                            if(inventorySearch.getText().toString().isEmpty())
-                            {
-                                showPetCollection(false, "");
-                            }else
-                            {
-                                showPetCollection(true, inventorySearch.getText().toString());
-                            }
-                            break;
-                        case 1:
-                            if(inventorySearch.getText().toString().isEmpty())
-                            {
-                                showFoodCollection(false, "");
-                            }else
-                            {
-                                showFoodCollection(true, inventorySearch.getText().toString());
-                            }
-                            break;
-                        case 2:
-                            if(inventorySearch.getText().toString().isEmpty())
-                            {
-                                showObjectCollection(false, "");
-                            }else
-                            {
-                                showObjectCollection(true, inventorySearch.getText().toString());
-                            }
-                            break;
+                    if(inventorySearch.getText().toString().isEmpty())
+                    {
+                        showCollection(selectedItem, false, "");
+                    }else
+                    {
+                        showCollection(selectedItem, true, inventorySearch.getText().toString());
                     }
                 }
             }
@@ -149,34 +130,12 @@ public class CollectionFragment extends Fragment {
                 if (page > maxPage) {
                     page = maxPage;
                 } else {
-                    switch (selectedItem) {
-                        case 0:
-                            if(inventorySearch.getText().toString().isEmpty())
-                            {
-                                showPetCollection(false, "");
-                            }else
-                            {
-                                showPetCollection(true, inventorySearch.getText().toString());
-                            }
-                            break;
-                        case 1:
-                            if(inventorySearch.getText().toString().isEmpty())
-                            {
-                                showFoodCollection(false, "");
-                            }else
-                            {
-                                showFoodCollection(true, inventorySearch.getText().toString());
-                            }
-                            break;
-                        case 2:
-                            if(inventorySearch.getText().toString().isEmpty())
-                            {
-                                showObjectCollection(false, "");
-                            }else
-                            {
-                                showObjectCollection(true, inventorySearch.getText().toString());
-                            }
-                            break;
+                    if(inventorySearch.getText().toString().isEmpty())
+                    {
+                        showCollection(selectedItem, false, "");
+                    }else
+                    {
+                        showCollection(selectedItem, true, inventorySearch.getText().toString());
                     }
                 }
             }
@@ -210,36 +169,11 @@ public class CollectionFragment extends Fragment {
     }
 
     private void filterInventory(String query) {
-        /**
-         * items
-         * 0 - pets
-         * 1 - foods
-         * 2 - objects
-         */
+        page = 1;
         if (!query.isEmpty()) {
-            switch (selectedItem) {
-                case 0:
-                    showPetCollection(true, query);
-                    break;
-                case 1:
-                    showFoodCollection(true, query);
-                    break;
-                case 2:
-                    showObjectCollection(true, query);
-                    break;
-            }
+            showCollection(selectedItem, true, query);
         } else {
-            switch (selectedItem) {
-                case 0:
-                    showPetCollection(false, "");
-                    break;
-                case 1:
-                    showFoodCollection(false, "");
-                    break;
-                case 2:
-                    showObjectCollection(false, "");
-                    break;
-            }
+            showCollection(selectedItem, false, "");
         }
     }
 
@@ -263,124 +197,9 @@ public class CollectionFragment extends Fragment {
         return sortedInventory;
     }
 
-    private void showPetCollection(boolean filtered, String query) {
-        selectedItem = 0;
-        ArrayList<PetModel> petLists = new ArrayList<>();
-
-        if (!lockSort) {
-            inventoryModel = sortInventory(inventoryModel);
-        }
-
-        if (!filtered) {
-            petLists = inventoryModel.getPetLists();
-        } else {
-            for (PetModel pet : inventoryModel.getPetLists()) {
-                if (pet.getPetName().toLowerCase().contains(query.toLowerCase())) {
-                    petLists.add(pet);
-                }
-            }
-        }
-
-
-        int minIndex = 0, maxIndex = maxSize - 1;
-        if (petLists.size() < maxSize) {
-            maxIndex = petLists.size() - 1;
-        }
-
-        maxPage = 1;
-        int tempMaxSize = maxSize;
-        for (int i = 1; i <= petLists.size(); i++) {
-            if (i > tempMaxSize) {
-                maxPage++;
-                tempMaxSize += maxSize;
-            }
-        }
-
-        for (int i = 1; i <= page - 1; i++) {
-            minIndex = maxIndex + 1;
-            maxIndex += maxSize;
-        }
-
-        ArrayList<PetModel> tempList = new ArrayList<>();
-        for (int i = minIndex; i <= maxIndex; i++) {
-            if(i > petLists.size() - 1)
-            {
-                break;
-            }
-            tempList.add(petLists.get(i));
-        }
-
-        petLists = tempList;
-
-
-        GridLayoutManager petLayoutManager = new GridLayoutManager(context, 2);
-        collectionView.setLayoutManager(petLayoutManager);
-        PetAdapter petAdapter = new PetAdapter(getActivity(), petLists);
-        collectionView.setAdapter(petAdapter);
-
-        pageIndicator.setText(page + " out of " + maxPage);
-    }
-
-    private void showFoodCollection(boolean filtered, String query) {
-        selectedItem = 1;
+    private void showCollection(int selectedItem, boolean filtered, String query) {
         ArrayList<FoodModel> foodLists = new ArrayList<>();
-
-        if (!lockSort) {
-            inventoryModel = sortInventory(inventoryModel);
-        }
-
-        if (!filtered) {
-            foodLists = inventoryModel.getFoodLists();
-        } else {
-            for (FoodModel food : inventoryModel.getFoodLists()) {
-                if (food.getFoodName().toLowerCase().contains(query.toLowerCase())) {
-                    foodLists.add(food);
-                }
-            }
-        }
-
-
-        int minIndex = 0, maxIndex = maxSize - 1;
-        if (foodLists.size() < maxSize) {
-            maxIndex = foodLists.size() - 1;
-        }
-
-        maxPage = 1;
-        int tempMaxSize = maxSize;
-        for (int i = 1; i <= foodLists.size(); i++) {
-            if (i > tempMaxSize) {
-                maxPage++;
-                tempMaxSize += maxSize;
-            }
-        }
-
-        for (int i = 1; i <= page - 1; i++) {
-            minIndex = maxIndex + 1;
-            maxIndex += maxSize;
-        }
-
-        ArrayList<FoodModel> tempList = new ArrayList<>();
-        for (int i = minIndex; i <= maxIndex; i++) {
-            if(i > foodLists.size() - 1)
-            {
-                break;
-            }
-            tempList.add(foodLists.get(i));
-        }
-
-        foodLists = tempList;
-
-
-        GridLayoutManager foodLayoutManager = new GridLayoutManager(context, 2);
-        collectionView.setLayoutManager(foodLayoutManager);
-        FoodAdapter foodAdapter = new FoodAdapter(getActivity(), foodLists);
-        collectionView.setAdapter(foodAdapter);
-
-        pageIndicator.setText(page + " out of " + maxPage);
-    }
-
-    private void showObjectCollection(boolean filtered, String query) {
-        selectedItem = 2;
+        ArrayList<PetModel> petLists = new ArrayList<>();
         ArrayList<ObjectModel> objectLists = new ArrayList<>();
 
         if (!lockSort) {
@@ -388,8 +207,22 @@ public class CollectionFragment extends Fragment {
         }
 
         if (!filtered) {
+            petLists = inventoryModel.getPetLists();
+            foodLists = inventoryModel.getFoodLists();
             objectLists = inventoryModel.getObjectLists();
         } else {
+            for (PetModel pet : inventoryModel.getPetLists()) {
+                if (pet.getPetName().toLowerCase().contains(query.toLowerCase())) {
+                    petLists.add(pet);
+                }
+            }
+
+            for (FoodModel food : inventoryModel.getFoodLists()) {
+                if (food.getFoodName().toLowerCase().contains(query.toLowerCase())) {
+                    foodLists.add(food);
+                }
+            }
+
             for (ObjectModel object : inventoryModel.getObjectLists()) {
                 if (object.getObjectName().toLowerCase().contains(query.toLowerCase())) {
                     objectLists.add(object);
@@ -397,19 +230,56 @@ public class CollectionFragment extends Fragment {
             }
         }
 
-
         int minIndex = 0, maxIndex = maxSize - 1;
-        if (objectLists.size() < maxSize) {
-            maxIndex = objectLists.size() - 1;
+
+        switch (selectedItem)
+        {
+            case 0:
+                if (petLists.size() < maxSize) {
+                    maxIndex = petLists.size() - 1;
+                }
+                break;
+            case 1:
+                if (foodLists.size() < maxSize) {
+                    maxIndex = foodLists.size() - 1;
+                }
+                break;
+            case 2:
+                if (objectLists.size() < maxSize) {
+                    maxIndex = objectLists.size() - 1;
+                }
+                break;
         }
 
         maxPage = 1;
         int tempMaxSize = maxSize;
-        for (int i = 1; i <= objectLists.size(); i++) {
-            if (i > tempMaxSize) {
-                maxPage++;
-                tempMaxSize += maxSize;
-            }
+
+        switch (selectedItem)
+        {
+            case 0:
+                for (int i = 1; i <= petLists.size(); i++) {
+                    if (i > tempMaxSize) {
+                        maxPage++;
+                        tempMaxSize += maxSize;
+                    }
+                }
+                break;
+            case 1:
+                for (int i = 1; i <= foodLists.size(); i++) {
+                    if (i > tempMaxSize) {
+                        maxPage++;
+                        tempMaxSize += maxSize;
+                    }
+                }
+                break;
+            case 2:
+                for (int i = 1; i <= objectLists.size(); i++) {
+                    if (i > tempMaxSize) {
+                        maxPage++;
+                        tempMaxSize += maxSize;
+                    }
+                }
+                break;
         }
 
         for (int i = 1; i <= page - 1; i++) {
@@ -417,22 +287,57 @@ public class CollectionFragment extends Fragment {
             maxIndex += maxSize;
         }
 
-        ArrayList<ObjectModel> tempList = new ArrayList<>();
+        ArrayList<PetModel> petTempList = new ArrayList<>();
+        for (int i = minIndex; i <= maxIndex; i++) {
+            if(i > petLists.size() - 1)
+            {
+                break;
+            }
+            petTempList.add(petLists.get(i));
+        }
+        petLists = petTempList;
+
+        ArrayList<FoodModel> foodTempList = new ArrayList<>();
+        for (int i = minIndex; i <= maxIndex; i++) {
+            if(i > foodLists.size() - 1)
+            {
+                break;
+            }
+            foodTempList.add(foodLists.get(i));
+        }
+        foodLists = foodTempList;
+
+        ArrayList<ObjectModel> objectTempList = new ArrayList<>();
         for (int i = minIndex; i <= maxIndex; i++) {
             if(i > objectLists.size() - 1)
             {
                 break;
             }
-            tempList.add(objectLists.get(i));
+            objectTempList.add(objectLists.get(i));
         }
+        objectLists = objectTempList;
 
-        objectLists = tempList;
-
-
-        GridLayoutManager objectLayoutManager = new GridLayoutManager(context, 2);
-        collectionView.setLayoutManager(objectLayoutManager);
-        ObjectAdapter objectAdapter = new ObjectAdapter(getActivity(), objectLists);
-        collectionView.setAdapter(objectAdapter);
+        switch (selectedItem)
+        {
+            case 0:
+                GridLayoutManager petLayoutManager = new GridLayoutManager(context, 2);
+                collectionView.setLayoutManager(petLayoutManager);
+                PetAdapter petAdapter = new PetAdapter(getActivity(), petLists);
+                collectionView.setAdapter(petAdapter);
+                break;
+            case 1:
+                GridLayoutManager foodLayoutManager = new GridLayoutManager(context, 2);
+                collectionView.setLayoutManager(foodLayoutManager);
+                FoodAdapter foodAdapter = new FoodAdapter(getActivity(), foodLists);
+                collectionView.setAdapter(foodAdapter);
+                break;
+            case 2:
+                GridLayoutManager objectLayoutManager = new GridLayoutManager(context, 2);
+                collectionView.setLayoutManager(objectLayoutManager);
+                ObjectAdapter objectAdapter = new ObjectAdapter(getActivity(), objectLists);
+                collectionView.setAdapter(objectAdapter);
+                break;
+        }
 
         pageIndicator.setText(page + " out of " + maxPage);
     }
