@@ -9,7 +9,7 @@ public class ArcticEgg extends EggModel {
                     R.drawable.beluga_whale, R.drawable.kittiwake, R.drawable.arctic_cod},
 
             {R.drawable.albatross, R.drawable.penguin, R.drawable.elk, R.drawable.dall_sheep,
-                    R.drawable.seal, R.drawable.glaucous_gull},
+                    R.drawable.seal, R.drawable.glaucous_gull, R.drawable.arctic_lemming},
 
             {R.drawable.great_gray_owl, R.drawable.snowy_owl, R.drawable.walrus, R.drawable.polar_bear,
                     R.drawable.puffin, R.drawable.snowy_leopard, R.drawable.reindeer},
@@ -26,7 +26,7 @@ public class ArcticEgg extends EggModel {
 
 
             {"albatross", "penguin", "elk", "dall_sheep",
-                    "seal", "glaucous_gull"},
+                    "seal", "glaucous_gull", "arctic_lemming"},
 
 
             {"great_gray_owl", "snowy_owl", "walrus", "polar_bear",
@@ -45,7 +45,7 @@ public class ArcticEgg extends EggModel {
                     "Beluga Whale", "Kittiwake", "Arctic Cod"},
 
             {"Albatross", "Penguin", "Elk", "Dall Sheep",
-                    "Seal", "Glaucous Gull"},
+                    "Seal", "Glaucous Gull", "Arctic Lemming"},
 
             {"Great Gray Owl", "Snowy Owl", "Walrus", "Polar Bear",
                     "Puffin", "Snowy Leopard", "Reindeer"},
