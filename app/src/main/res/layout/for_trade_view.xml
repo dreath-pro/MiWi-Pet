@@ -29,8 +29,7 @@
                 android:layout_height="45dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/ai_user"
-                android:layout_marginEnd="25dp"
-                app:tint="#041C02" />
+                android:layout_marginEnd="25dp"/>
 
             <LinearLayout
                 android:id="@+id/wantLayout"

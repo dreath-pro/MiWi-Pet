@@ -25,6 +25,11 @@ public class ObjectModel {
     private int[] rarityColors = new int[]{R.color.common, R.color.rare, R.color.ultra,
             R.color.legendary, R.color.mythic};
 
+    public ObjectModel(String objectName)
+    {
+        this.objectName = objectName;
+    }
+
     public ObjectModel(String objectImage, String objectName, int objectChance,
                        int chipPrice, int glazePrice, int timeBuff, int chipBuff, int glazeBuff) {
         this.objectImage = objectImage;

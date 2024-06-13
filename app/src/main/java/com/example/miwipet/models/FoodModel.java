@@ -25,6 +25,11 @@ public class FoodModel {
     private int[] rarityColors = new int[]{R.color.common, R.color.rare, R.color.ultra,
             R.color.legendary, R.color.mythic};
 
+    public FoodModel(String foodName)
+    {
+        this.foodName = foodName;
+    }
+
     public FoodModel(String foodImage, String foodName, int expReward, int foodPercentage, int chipPrice, int glazePrice) {
         this.foodImage = foodImage;
         this.foodName = foodName;

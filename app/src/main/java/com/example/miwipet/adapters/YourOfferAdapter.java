@@ -18,35 +18,43 @@ import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.models.PetModel;
+import com.example.miwipet.utils.MiniInventory;
 
 import java.util.ArrayList;
 
-public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.MyViewHolder> {
+public class YourOfferAdapter extends RecyclerView.Adapter<YourOfferAdapter.MyViewHolder> {
+    private MiniInventory miniInventory;
+
     private final Context context;
     private final Activity activity;
     private final ArrayList<Integer> itemSeries;
-    private final InventoryModel theirInventory;
+    private final InventoryModel yourSelectedItems;
+    private final InventoryModel yourInventory;
     private int petCounter, eggCounter, foodCounter, objectCounter;
 
-    public TheirOfferAdapter(Activity activity, ArrayList<Integer> itemSeries, InventoryModel theirInventory) {
+    public YourOfferAdapter(Context context, Activity activity, ArrayList<Integer> itemSeries, InventoryModel yourSelectedItems, InventoryModel yourInventory) {
+        this.context = context;
         this.activity = activity;
-        this.context = activity.getApplicationContext();
-        this.itemSeries = itemSeries;
-        this.theirInventory = theirInventory;
+        this.itemSeries = itemSeries != null ? itemSeries : new ArrayList<>();
+        this.yourSelectedItems = yourSelectedItems != null ? yourSelectedItems : new InventoryModel();
+        this.yourInventory = yourInventory;
 
+        this.miniInventory = new MiniInventory(activity, yourInventory);
+
+        resetOffer();
         resetCounters();
     }
 
     @NonNull
     @Override
-    public TheirOfferAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public YourOfferAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.offer, parent, false);
-        return new MyViewHolder(view);
+        return new YourOfferAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TheirOfferAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull YourOfferAdapter.MyViewHolder holder, int position) {
         switch (itemSeries.get(position)) {
             case 0:
                 bindPetItem(holder);
@@ -61,6 +69,19 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
                 bindObjectItem(holder);
                 break;
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemSeries.get(holder.getBindingAdapterPosition()) == 0)
+                {
+                    if(yourSelectedItems.getPetLists().get(holder.getBindingAdapterPosition()).getPetName().equals("add"))
+                    {
+                        miniInventory.showInventory();
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -68,13 +89,22 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
         return itemSeries.size();
     }
 
-    private void bindPetItem(MyViewHolder holder) {
-        if (petCounter < theirInventory.getPetLists().size()) {
-            PetModel petModel = theirInventory.getPetLists().get(petCounter);
-            int resourceId = getResourceId(petModel.getPetImage());
+    private void bindPetItem(YourOfferAdapter.MyViewHolder holder) {
+        if (petCounter < yourSelectedItems.getPetLists().size()) {
+            PetModel petModel = yourSelectedItems.getPetLists().get(petCounter);
+            int resourceId;
+            int rarityColor;
+            int typeColor;
 
-            int rarityColor = getColor(petModel.getRarityColor());
-            int typeColor = getColor(petModel.getTypeColor());
+            if (!petModel.getPetName().equals("add")) {
+                resourceId = getResourceId(petModel.getPetImage());
+                rarityColor = getColor(petModel.getRarityColor());
+                typeColor = getColor(petModel.getTypeColor());
+            } else {
+                resourceId = getResourceId("icon_add");
+                rarityColor = getColor(R.color.green);
+                typeColor = getColor(R.color.green);
+            }
 
             setItemProperties(holder, resourceId, rarityColor, typeColor);
 
@@ -85,9 +115,9 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
         }
     }
 
-    private void bindEggItem(MyViewHolder holder) {
-        if (eggCounter < theirInventory.getEggLists().size()) {
-            EggModel eggModel = theirInventory.getEggLists().get(eggCounter);
+    private void bindEggItem(YourOfferAdapter.MyViewHolder holder) {
+        if (eggCounter < yourSelectedItems.getEggLists().size()) {
+            EggModel eggModel = yourSelectedItems.getEggLists().get(eggCounter);
             int resourceId = getResourceId(eggModel.getEggImage());
 
             int rarityColor = getColor(R.color.common);
@@ -102,9 +132,9 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
         }
     }
 
-    private void bindFoodItem(MyViewHolder holder) {
-        if (foodCounter < theirInventory.getFoodLists().size()) {
-            FoodModel foodModel = theirInventory.getFoodLists().get(foodCounter);
+    private void bindFoodItem(YourOfferAdapter.MyViewHolder holder) {
+        if (foodCounter < yourSelectedItems.getFoodLists().size()) {
+            FoodModel foodModel = yourSelectedItems.getFoodLists().get(foodCounter);
             int resourceId = getResourceId(foodModel.getFoodImage());
 
             int rarityColor = getColor(foodModel.getRarityColor());
@@ -119,9 +149,9 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
         }
     }
 
-    private void bindObjectItem(MyViewHolder holder) {
-        if (objectCounter < theirInventory.getObjectLists().size()) {
-            ObjectModel objectModel = theirInventory.getObjectLists().get(objectCounter);
+    private void bindObjectItem(YourOfferAdapter.MyViewHolder holder) {
+        if (objectCounter < yourSelectedItems.getObjectLists().size()) {
+            ObjectModel objectModel = yourSelectedItems.getObjectLists().get(objectCounter);
             int resourceId = getResourceId(objectModel.getObjectImage());
 
             int rarityColor = getColor(objectModel.getRarityColor());
@@ -144,13 +174,13 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
         return ContextCompat.getColor(context, colorId);
     }
 
-    private void setItemProperties(MyViewHolder holder, int resourceId, int rarityColor, int typeColor) {
+    private void setItemProperties(YourOfferAdapter.MyViewHolder holder, int resourceId, int rarityColor, int typeColor) {
         holder.offererItemImage.setImageResource(resourceId);
         holder.offererItemImageContainer.setBackgroundColor(rarityColor);
         holder.offererItemImage.setBackgroundColor(typeColor);
     }
 
-    private void setPlaceholderProperties(MyViewHolder holder) {
+    private void setPlaceholderProperties(YourOfferAdapter.MyViewHolder holder) {
         int placeholderResourceId = getResourceId("icon_blank"); // Assuming there's a placeholder image
         int placeholderColor = getColor(R.color.common);
 
@@ -159,11 +189,17 @@ public class TheirOfferAdapter extends RecyclerView.Adapter<TheirOfferAdapter.My
         holder.offererItemImage.setBackgroundColor(placeholderColor);
     }
 
-    public void resetCounters() {
+    private void resetCounters() {
         petCounter = 0;
         eggCounter = 0;
         foodCounter = 0;
         objectCounter = 0;
+    }
+
+    private void resetOffer()
+    {
+        this.yourSelectedItems.addPetLists(new PetModel("add"));
+        this.itemSeries.add(0);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

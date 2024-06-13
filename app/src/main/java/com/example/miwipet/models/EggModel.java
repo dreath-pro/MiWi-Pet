@@ -23,6 +23,11 @@ public class EggModel {
     private String[][] petNames;
     private String[][] petImages;
 
+    public EggModel(String eggName)
+    {
+        this.eggName = eggName;
+    }
+
     public EggModel(int id, String eggName, String eggImage, String petName, String petImage, int age, int type,
                     int chipPrice, int glazePrice, int second, int minute, int hour, boolean toHatch,
                     boolean isSelected, String rarityText, int eggPercentage) {

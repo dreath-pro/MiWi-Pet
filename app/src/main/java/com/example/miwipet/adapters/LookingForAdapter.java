@@ -3,7 +3,6 @@ package com.example.miwipet.adapters;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
@@ -33,11 +31,9 @@ import com.example.miwipet.models.OfferModel;
 import com.example.miwipet.models.PetModel;
 import com.example.miwipet.utils.RefreshInventory;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import android.os.Handler;
-import android.os.Looper;
 
 public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.MyViewHolder> {
     private Context context;
@@ -45,6 +41,7 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
     private ArrayList<OfferModel> offerModels;
     private InventoryModel yourInventory;
     private TheirOfferAdapter theirOfferAdapter;
+    private OnItemAcceptListener onItemAcceptListener;
 
     private RefreshInventory refreshInventory;
     private PetDatabase petDatabase;
@@ -145,6 +142,9 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
             @Override
             public void onClick(View v) {
                 theirTradeDetails(holder, true);
+                if (onItemAcceptListener != null) {
+                    onItemAcceptListener.onItemAccepted(offerModels.get(holder.getBindingAdapterPosition()));
+                }
             }
         });
     }
@@ -174,9 +174,19 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
         }
     }
 
+    public void setOnItemAcceptListener(OnItemAcceptListener listener) {
+        this.onItemAcceptListener = listener;
+    }
+
+    public interface OnItemAcceptListener {
+        void onItemAccepted(OfferModel offerModel);
+
+        void onItemAccepted();
+    }
+
     private void theirTradeDetails(LookingForAdapter.MyViewHolder holder, boolean triggerAccept) {
         Dialog dialog = new Dialog(activity);
-        dialog.setContentView(R.layout.their_trade_details);
+        dialog.setContentView(R.layout.their_offer);
 
         TextView yourName = dialog.findViewById(R.id.yourName);
         TextView offererName = dialog.findViewById(R.id.offererName);

@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
@@ -38,7 +40,7 @@ public class ForTradeAdapter extends RecyclerView.Adapter<ForTradeAdapter.MyView
     private Activity activity;
     private ArrayList<OfferModel> offerModels;
     private InventoryModel yourInventory;
-    private TheirOfferAdapter theirOfferAdapter;
+    private YourOfferAdapter yourOfferAdapter;
 
     private RefreshInventory refreshInventory;
     private PetDatabase petDatabase;
@@ -124,7 +126,7 @@ public class ForTradeAdapter extends RecyclerView.Adapter<ForTradeAdapter.MyView
         holder.makeOfferButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Otw na!", Toast.LENGTH_SHORT).show();
+                yourTradeDetails(holder);
             }
         });
         
@@ -157,6 +159,83 @@ public class ForTradeAdapter extends RecyclerView.Adapter<ForTradeAdapter.MyView
             forTradeName = itemView.findViewById(R.id.forTradeName);
             makeOfferButton = itemView.findViewById(R.id.makeOfferButton);
         }
+    }
+
+    private void yourTradeDetails(ForTradeAdapter.MyViewHolder holder)
+    {
+        Dialog dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.your_offer);
+
+        TextView yourChat = dialog.findViewById(R.id.yourChat);
+        TextView theirChat = dialog.findViewById(R.id.theirChat);
+        TextView yourName = dialog.findViewById(R.id.yourName);
+        TextView theirName = dialog.findViewById(R.id.theirName);
+        ImageView offerReady = dialog.findViewById(R.id.offerReady);
+        RecyclerView yourOfferView = dialog.findViewById(R.id.yourOfferView);
+        LinearLayout wantImageContainer = dialog.findViewById(R.id.wantImageContainer);
+        ImageView wantImage = dialog.findViewById(R.id.wantImage);
+        Button offerButton = dialog.findViewById(R.id.offerButton);
+        Button cancelButton = dialog.findViewById(R.id.cancelButton);
+
+        OfferModel offerModel = offerModels.get(holder.getBindingAdapterPosition());
+        int wantResourceId = 0;
+        int wantRarity = 0;
+        int wantType = 0;
+
+        yourChat.setVisibility(View.INVISIBLE);
+        theirChat.setVisibility(View.INVISIBLE);
+        offerReady.setVisibility(View.INVISIBLE);
+
+        switch (offerModel.getWantItemSingle())
+        {
+            case 0:
+                wantResourceId = context.getResources().getIdentifier(offerModel.getWantItem().getPetLists().get(0).getPetImage(), "drawable", context.getPackageName());
+                wantRarity = activity.getColor(offerModel.getWantItem().getPetLists().get(0).getRarityColor());
+                wantType = activity.getColor(offerModel.getWantItem().getPetLists().get(0).getTypeColor());
+                break;
+            case 1:
+                wantResourceId = context.getResources().getIdentifier(offerModel.getWantItem().getEggLists().get(0).getEggImage(), "drawable", context.getPackageName());
+                wantRarity = activity.getColor(R.color.common);
+                wantType = activity.getColor(R.color.egg);
+                break;
+            case 2:
+                wantResourceId = context.getResources().getIdentifier(offerModel.getWantItem().getFoodLists().get(0).getFoodImage(), "drawable", context.getPackageName());
+                wantRarity = activity.getColor(offerModel.getWantItem().getFoodLists().get(0).getRarityColor());
+                wantType = activity.getColor(R.color.food);
+                break;
+            case 3:
+                wantResourceId = context.getResources().getIdentifier(offerModel.getWantItem().getObjectLists().get(0).getObjectImage(), "drawable", context.getPackageName());
+                wantRarity = activity.getColor(offerModel.getWantItem().getObjectLists().get(0).getRarityColor());
+                wantType = activity.getColor(R.color.object);
+                break;
+        }
+
+        yourName.setText("You");
+        theirName.setText(offerModel.getUsername());
+        wantImage.setImageResource(wantResourceId);
+        wantImageContainer.setBackgroundColor(wantRarity);
+        wantImage.setBackgroundColor(wantType);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2);
+        yourOfferView.setLayoutManager(gridLayoutManager);
+        yourOfferAdapter = new YourOfferAdapter(context, activity, offerModels.get(holder.getBindingAdapterPosition()).getOffererItemSeries(), offerModels.get(holder.getBindingAdapterPosition()).getOffererItem(), yourInventory);
+        yourOfferView.setAdapter(yourOfferAdapter);
+        
+        offerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Haha offer!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     private void profileDetails(ForTradeAdapter.MyViewHolder holder) {

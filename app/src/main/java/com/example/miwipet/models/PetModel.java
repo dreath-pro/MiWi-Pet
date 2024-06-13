@@ -25,6 +25,11 @@ public class PetModel {
             R.color.legendary, R.color.mythic};
     private int[] typeColors = new int[]{R.color.normal, R.color.crystal, R.color.gemstone};
 
+    public PetModel(String petName)
+    {
+        this.petName = petName;
+    }
+
     public PetModel(String petName, String petImage, int age, int type, String rarity) {
         this.petName = petName;
         this.petImage = petImage;
