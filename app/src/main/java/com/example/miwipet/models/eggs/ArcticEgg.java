@@ -15,7 +15,7 @@ public class ArcticEgg extends EggModel {
                     R.drawable.puffin, R.drawable.snowy_leopard, R.drawable.reindeer},
 
             {R.drawable.orca, R.drawable.mountain_goat, R.drawable.narwhal, R.drawable.wild_yak,
-                    R.drawable.arctic_wolf, R.drawable.greenland_shark},
+                    R.drawable.arctic_wolf, R.drawable.greenland_shark, R.drawable.stoat},
 
             {R.drawable.ice_wolf, R.drawable.spirit_reindeer, R.drawable.milky_way_albatross}
     };
@@ -34,7 +34,7 @@ public class ArcticEgg extends EggModel {
 
 
             {"orca", "mountain_goat", "narwhal", "wild_yak",
-                    "arctic_wolf", "greenland_shark"},
+                    "arctic_wolf", "greenland_shark", "stoat"},
 
 
             {"ice_wolf", "spirit_reindeer", "milky_way_albatross"}
@@ -51,7 +51,7 @@ public class ArcticEgg extends EggModel {
                     "Puffin", "Snowy Leopard", "Reindeer"},
 
             {"Orca", "Mountain Goat", "Narwhal", "Wild Yak",
-                    "Arctic Wolf", "Greenland Shark"},
+                    "Arctic Wolf", "Greenland Shark", "Stoat"},
 
             {"Ice Wolf", "Spirit Reindeer", "Milky Way Albatross"}
     };
