@@ -45,6 +45,12 @@ public class YourOfferAdapter extends RecyclerView.Adapter<YourOfferAdapter.MyVi
         resetCounters();
     }
 
+    public void onPetSelected(PetModel petModel)
+    {
+        yourSelectedItems.addPetLists(petModel);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public YourOfferAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

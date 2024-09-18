@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.miwipet.R;
 import com.example.miwipet.adapters.FoodAdapter;
 import com.example.miwipet.adapters.ObjectAdapter;
+import com.example.miwipet.adapters.OfferedPetAdapter;
 import com.example.miwipet.adapters.PetAdapter;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
@@ -286,8 +287,8 @@ public class MiniInventory {
             case 0:
                 GridLayoutManager petLayoutManager = new GridLayoutManager(context, 2);
                 collectionView.setLayoutManager(petLayoutManager);
-                PetAdapter petAdapter = new PetAdapter(activity, petLists);
-                collectionView.setAdapter(petAdapter);
+                OfferedPetAdapter offeredPetAdapter = new OfferedPetAdapter(activity, petLists, (OfferedPetAdapter.OnPetSelectedListener) activity);
+                collectionView.setAdapter(offeredPetAdapter);
                 break;
             case 1:
                 GridLayoutManager foodLayoutManager = new GridLayoutManager(context, 2);
