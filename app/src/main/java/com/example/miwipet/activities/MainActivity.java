@@ -92,15 +92,15 @@ import java.util.Locale;
 //https://www.flaticon.com/free-icon/pyramid_6403728?term=tier&page=1&position=6&origin=search&related_id=6403728
 
 public class MainActivity extends AppCompatActivity {
-    DrawerLayout drawerLayout;
-    MaterialToolbar materialToolbar;
-    FrameLayout frameLayout;
-    NavigationView navigationView;
-    TextView chipTokenValue, glazeTokenValue;
-    ImageView eggImage;
-    TextView timeText;
-    Button hatchButton;
-    TextView errorText;
+    private DrawerLayout drawerLayout;
+    private MaterialToolbar materialToolbar;
+    private FrameLayout frameLayout;
+    private NavigationView navigationView;
+    private TextView chipTokenValue, glazeTokenValue;
+    private ImageView eggImage;
+    private TextView timeText;
+    private Button hatchButton;
+    private TextView errorText;
 
     private ArrayList<EggModel> incubated = new ArrayList<>();
     private InventoryModel inventoryModel = new InventoryModel();
@@ -119,9 +119,7 @@ public class MainActivity extends AppCompatActivity {
     private CurrencyDatabase currencyDatabase = new CurrencyDatabase(MainActivity.this);
     private TimeDatabase timeDatabase = new TimeDatabase(MainActivity.this);
 
-
     private Date currentTime;
-
     private String formattedDay;
     private String formattedMonth;
     private String formattedYear;

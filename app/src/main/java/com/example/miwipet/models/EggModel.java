@@ -23,8 +23,7 @@ public class EggModel {
     private String[][] petNames;
     private String[][] petImages;
 
-    public EggModel(String eggName)
-    {
+    public EggModel(String eggName) {
         this.eggName = eggName;
     }
 
@@ -72,14 +71,12 @@ public class EggModel {
         selectPet();
     }
 
-    public void repickEgg()
-    {
+    public void repickEgg() {
         selectType();
         selectPet();
     }
 
-    private void selectType()
-    {
+    private void selectType() {
         type = 0;
         int selectedType = random.nextInt(3);
         switch (selectedType) {
@@ -95,8 +92,7 @@ public class EggModel {
         }
     }
 
-    private void selectPet()
-    {
+    private void selectPet() {
         int selectedRarity = random.nextInt(100) + 1;
         int selectedPet;
 
