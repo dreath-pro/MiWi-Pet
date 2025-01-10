@@ -259,7 +259,7 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
                                     {
                                         petDatabase.addPet(petModel);
                                     }
-                                    refreshInventory.getPetFromDatabase();
+                                    refreshInventory.refreshInventory();
 
                                     getAllOffers(offerModel);
                                     doesItemExist = true;
@@ -281,7 +281,7 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
                                 {
                                     eggDatabase.addEgg(eggModel);
                                 }
-                                refreshInventory.getEggFromDatabase();
+                                refreshInventory.refreshInventory();
 
                                 getAllOffers(offerModel);
                                 doesItemExist = true;
@@ -302,7 +302,7 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
                                 {
                                     foodDatabase.addFood(foodModel);
                                 }
-                                refreshInventory.getFoodFromDatabase();
+                                refreshInventory.refreshInventory();
 
                                 getAllOffers(offerModel);
                                 doesItemExist = true;
@@ -323,7 +323,7 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
                                 {
                                     objectDatabase.addObject(objectModel);
                                 }
-                                refreshInventory.getObjectFromDatabase();
+                                refreshInventory.refreshInventory();
 
                                 getAllOffers(offerModel);
                                 doesItemExist = true;
@@ -394,10 +394,7 @@ public class LookingForAdapter extends RecyclerView.Adapter<LookingForAdapter.My
             objectDatabase.addObject(theirObjects);
         }
 
-        refreshInventory.getPetFromDatabase();
-        refreshInventory.getEggFromDatabase();
-        refreshInventory.getFoodFromDatabase();
-        refreshInventory.getObjectFromDatabase();
+        refreshInventory.refreshInventory();
     }
 
     private void profileDetails(LookingForAdapter.MyViewHolder holder) {

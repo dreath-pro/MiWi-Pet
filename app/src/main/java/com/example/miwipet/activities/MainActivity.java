@@ -244,10 +244,7 @@ public class MainActivity extends AppCompatActivity {
             objectDatabase.addObject(objectModel);
         }
 
-        refreshInventory.getPetFromDatabase();
-        refreshInventory.getEggFromDatabase();
-        refreshInventory.getFoodFromDatabase();
-        refreshInventory.getObjectFromDatabase();
+        refreshInventory.refreshInventory();
     }
 
     @Override
@@ -263,10 +260,7 @@ public class MainActivity extends AppCompatActivity {
             initializeCurrentTime();
             checkTimeDatabase();
             createToken();
-            refreshInventory.getPetFromDatabase();
-            refreshInventory.getEggFromDatabase();
-            refreshInventory.getFoodFromDatabase();
-            refreshInventory.getObjectFromDatabase();
+            refreshInventory.refreshInventory();
 
             InspectInventory inspectInventory = new InspectInventory(inventoryModel);
             inspectInventory.updatePet();
@@ -349,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
 
                         petModel.setType(0);
                         petDatabase.addPet(petModel);
-                        refreshInventory.getPetFromDatabase();
+                        refreshInventory.refreshInventory();
 
                         incubated.clear();
                     } else {

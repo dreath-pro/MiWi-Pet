@@ -75,7 +75,7 @@ public class ObjectShopSelectionAdapter extends RecyclerView.Adapter<ObjectShopS
                                 displayObjects.get(holder.getBindingAdapterPosition()).getGlazePrice()) {
 
                     objectDatabase.addObject(objectSource.getObjectByString(holder.objectName.getText().toString()));
-                    refreshInventory.getObjectFromDatabase();
+                    refreshInventory.refreshInventory();
 
                     inventoryModel.setChipToken(inventoryModel.getChipToken() -
                             displayObjects.get(holder.getBindingAdapterPosition()).getChipPrice());

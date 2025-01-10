@@ -29,7 +29,14 @@ public class RefreshInventory {
         objectDatabase = new ObjectDatabase(context);
     }
 
-    public void getPetFromDatabase() {
+    public void refreshInventory() {
+        getPetFromDatabase();
+        getEggFromDatabase();
+        getFoodFromDatabase();
+        getObjectFromDatabase();
+    }
+
+    private void getPetFromDatabase() {
         ArrayList<PetModel> petModels;
         petModels = petDatabase.getPetList();
 
@@ -39,7 +46,7 @@ public class RefreshInventory {
         }
     }
 
-    public void getEggFromDatabase() {
+    private void getEggFromDatabase() {
         ArrayList<EggModel> eggModels;
         eggModels = eggDatabase.getEggList();
 
@@ -49,7 +56,7 @@ public class RefreshInventory {
         }
     }
 
-    public void getFoodFromDatabase() {
+    private void getFoodFromDatabase() {
         ArrayList<FoodModel> foodModels;
         foodModels = foodDatabase.getFoodList();
 
@@ -59,14 +66,12 @@ public class RefreshInventory {
         }
     }
 
-    public void getObjectFromDatabase()
-    {
+    private void getObjectFromDatabase() {
         ArrayList<ObjectModel> objectModels;
         objectModels = objectDatabase.getObjectList();
 
         inventoryModel.clearObjectList();
-        for(ObjectModel object : objectModels)
-        {
+        for (ObjectModel object : objectModels) {
             inventoryModel.addObjectLists(object);
         }
     }

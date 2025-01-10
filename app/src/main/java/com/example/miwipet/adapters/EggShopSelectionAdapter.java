@@ -75,7 +75,7 @@ public class EggShopSelectionAdapter extends RecyclerView.Adapter<EggShopSelecti
                                 displayEggs.get(holder.getBindingAdapterPosition()).getGlazePrice()) {
 
                     eggDatabase.addEgg(eggSource.getEggByString(holder.eggName.getText().toString()));
-                    refreshInventory.getEggFromDatabase();
+                    refreshInventory.refreshInventory();
 
                     inventoryModel.setChipToken(inventoryModel.getChipToken() -
                             displayEggs.get(holder.getBindingAdapterPosition()).getChipPrice());
