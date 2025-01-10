@@ -254,12 +254,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try {
-            refreshInventory = new RefreshInventory(MainActivity.this, inventoryModel);
-
             initializeComponents();
             initializeCurrentTime();
             checkTimeDatabase();
             createToken();
+
+            refreshInventory = new RefreshInventory(MainActivity.this, inventoryModel);
             refreshInventory.refreshInventory();
 
             InspectInventory inspectInventory = new InspectInventory(inventoryModel);
