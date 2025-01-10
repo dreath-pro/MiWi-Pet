@@ -137,6 +137,20 @@ public class MainActivity extends AppCompatActivity {
         formattedYear = currentYear.format(currentTime);
     }
 
+    //checks if the time database does exist or not if it exist,
+    // it will generate as new time else it will update the time table
+    private void checkTimeDatabase() {
+        if (!timeDatabase.doesDataExist()) {
+            updateTimeDatabase(false);
+            timeDatabase.generateTable(timeModel);
+        } else {
+            updateTimeDatabase(true);
+            timeDatabase.updateTime(timeModel);
+        }
+
+        timeModel.setLoggedIn(false);
+    }
+
     private void initializeComponents() {
         drawerLayout = findViewById(R.id.main);
         materialToolbar = findViewById(R.id.materialToolbar);
@@ -152,19 +166,8 @@ public class MainActivity extends AppCompatActivity {
         errorText.setVisibility(View.INVISIBLE);
     }
 
-    private void generateTime() {
-        if (!timeDatabase.doesDataExist()) {
-            generateTimeModel(false);
-            timeDatabase.generateTable(timeModel);
-        } else {
-            generateTimeModel(true);
-            timeDatabase.updateTime(timeModel);
-        }
-
-        timeModel.setLoggedIn(false);
-    }
-
-    private void generateTimeModel(boolean doesDataExist) {
+    //validation to update the time model if player has consistent login streak and is new day logged
+    private void updateTimeDatabase(boolean doesDataExist) {
         if (doesDataExist) {
             timeModel = timeDatabase.getTimeRecord();
 
@@ -199,17 +202,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void generateToken() {
+    //creates a token database in the first run
+    private void createToken() {
         if (!currencyDatabase.doesDataExist()) {
             currencyDatabase.generateTokens();
 
             inventoryModel.setChipToken(10);
             currencyDatabase.updateToken(inventoryModel);
         }
-        updateToken();
+        syncUiToken();
     }
 
-    private void updateToken() {
+    //syncs the database token value to your current token UI
+    private void syncUiToken() {
         inventoryModel.setChipToken(currencyDatabase.getChipToken());
         inventoryModel.setGlazeToken(currencyDatabase.getGlazeToken());
 
@@ -256,8 +261,8 @@ public class MainActivity extends AppCompatActivity {
 
             initializeComponents();
             initializeCurrentTime();
-            generateTime();
-            generateToken();
+            checkTimeDatabase();
+            createToken();
             refreshInventory.getPetFromDatabase();
             refreshInventory.getEggFromDatabase();
             refreshInventory.getFoodFromDatabase();
@@ -340,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         currencyDatabase.updateToken(inventoryModel);
-                        updateToken();
+                        syncUiToken();
 
                         petModel.setType(0);
                         petDatabase.addPet(petModel);

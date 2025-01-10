@@ -22,8 +22,7 @@ public class TimeDatabase extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
 
-    public TimeDatabase(@NonNull Context context)
-    {
+    public TimeDatabase(@NonNull Context context) {
         super(context, "time.db", null, DATABASE_VERSION);
     }
 
@@ -40,8 +39,7 @@ public class TimeDatabase extends SQLiteOpenHelper {
 
     }
 
-    public boolean generateTable(TimeModel timeModel)
-    {
+    public boolean generateTable(TimeModel timeModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         boolean result;
@@ -53,12 +51,10 @@ public class TimeDatabase extends SQLiteOpenHelper {
         contentValues.put(loginStreak, timeModel.getLoginStreak());
         contentValues.put(loggedIn, timeModel.isLoggedIn());
 
-        long insert  = db.insert(timeTable, null, contentValues);
-        if(insert == -1)
-        {
+        long insert = db.insert(timeTable, null, contentValues);
+        if (insert == -1) {
             result = false;
-        }else
-        {
+        } else {
             result = true;
         }
 
@@ -67,8 +63,7 @@ public class TimeDatabase extends SQLiteOpenHelper {
         return result;
     }
 
-    public boolean updateTime(TimeModel timeModel)
-    {
+    public boolean updateTime(TimeModel timeModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -86,16 +81,14 @@ public class TimeDatabase extends SQLiteOpenHelper {
         return result > 0;
     }
 
-    public TimeModel getTimeRecord()
-    {
+    public TimeModel getTimeRecord() {
         TimeModel timeModel = null;
         String queryString = "SELECT * FROM " + timeTable;
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(queryString, null);
 
-        if(cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
                 String lastTimeLogin = cursor.getString(1);
@@ -106,25 +99,23 @@ public class TimeDatabase extends SQLiteOpenHelper {
                 boolean rewardRefreshed = cursor.getInt(6) == 1;
 
                 timeModel = new TimeModel(id, lastTimeLogin, lastDayLogin, lastMonthLogin, lastYearLogin, loginStreak, rewardRefreshed);
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
 
         return timeModel;
     }
 
-    public boolean doesDataExist()
-    {
+    public boolean doesDataExist() {
         int count = 0;
         String queryString = "SELECT * FROM " + timeTable;
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(queryString, null);
 
-        if(cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 count++;
-            }while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
 
         cursor.close();
