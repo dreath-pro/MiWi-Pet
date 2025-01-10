@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.miwipet.models.ObjectModel;
-import com.example.miwipet.utils.Rarity;
 
 import java.util.ArrayList;
 

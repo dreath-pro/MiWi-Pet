@@ -1,4 +1,4 @@
-package com.example.miwipet.utils;
+package com.example.miwipet.logics;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +18,6 @@ import com.example.miwipet.R;
 import com.example.miwipet.adapters.FoodAdapter;
 import com.example.miwipet.adapters.ObjectAdapter;
 import com.example.miwipet.adapters.OfferedPetAdapter;
-import com.example.miwipet.adapters.PetAdapter;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.ObjectModel;

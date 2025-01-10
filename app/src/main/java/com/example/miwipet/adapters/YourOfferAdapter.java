@@ -18,7 +18,7 @@ import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.models.PetModel;
-import com.example.miwipet.utils.MiniInventory;
+import com.example.miwipet.logics.MiniInventory;
 
 import java.util.ArrayList;
 

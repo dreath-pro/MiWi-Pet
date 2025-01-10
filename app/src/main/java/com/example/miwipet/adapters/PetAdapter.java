@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
 import com.example.miwipet.models.PetModel;
-import com.example.miwipet.utils.Rarity;
 
 import java.util.ArrayList;
 

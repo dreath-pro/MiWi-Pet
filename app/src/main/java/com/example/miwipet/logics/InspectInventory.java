@@ -1,13 +1,11 @@
-package com.example.miwipet.utils;
+package com.example.miwipet.logics;
 
-import com.example.miwipet.R;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.models.PetModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class InspectInventory {

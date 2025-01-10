@@ -2,7 +2,7 @@ package com.example.miwipet.models.objects;
 
 import com.example.miwipet.R;
 import com.example.miwipet.models.ObjectModel;
-import com.example.miwipet.utils.Rarity;
+import com.example.miwipet.logics.Rarity;
 
 public class Backpack extends ObjectModel {
     private int reference = R.drawable.object_backpack;

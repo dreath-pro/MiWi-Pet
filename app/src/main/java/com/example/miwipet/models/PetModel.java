@@ -1,7 +1,7 @@
 package com.example.miwipet.models;
 
 import com.example.miwipet.R;
-import com.example.miwipet.utils.Rarity;
+import com.example.miwipet.logics.Rarity;
 
 public class PetModel {
     private String petName, rarity, petImage;

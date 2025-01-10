@@ -16,8 +16,8 @@ import com.example.miwipet.database.CurrencyDatabase;
 import com.example.miwipet.database.EggDatabase;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.InventoryModel;
-import com.example.miwipet.utils.EggSource;
-import com.example.miwipet.utils.RefreshInventory;
+import com.example.miwipet.logics.EggSource;
+import com.example.miwipet.logics.RefreshInventory;
 
 import java.util.ArrayList;
 

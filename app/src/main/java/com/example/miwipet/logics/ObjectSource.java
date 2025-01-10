@@ -1,4 +1,4 @@
-package com.example.miwipet.utils;
+package com.example.miwipet.logics;
 
 import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.models.objects.Backpack;

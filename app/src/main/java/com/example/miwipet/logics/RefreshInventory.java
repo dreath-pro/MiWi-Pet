@@ -1,4 +1,4 @@
-package com.example.miwipet.utils;
+package com.example.miwipet.logics;
 
 import android.content.Context;
 

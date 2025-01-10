@@ -34,8 +34,7 @@ public class CurrencyDatabase extends SQLiteOpenHelper {
 
     }
 
-    public boolean generateTokens()
-    {
+    public boolean generateTokens() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         boolean result;
@@ -44,11 +43,9 @@ public class CurrencyDatabase extends SQLiteOpenHelper {
         contentValues.put(glazeToken, 0);
 
         long insert = db.insert(currencyTable, null, contentValues);
-        if(insert == -1)
-        {
+        if (insert == -1) {
             result = false;
-        }else
-        {
+        } else {
             result = true;
         }
 
@@ -57,8 +54,7 @@ public class CurrencyDatabase extends SQLiteOpenHelper {
         return result;
     }
 
-    public boolean updateToken(InventoryModel inventoryModel)
-    {
+    public boolean updateToken(InventoryModel inventoryModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -74,19 +70,17 @@ public class CurrencyDatabase extends SQLiteOpenHelper {
         return result > 0;
     }
 
-    public boolean doesDataExist()
-    {
+    public boolean doesDataExist() {
         int count = 0;
         String queryString = "SELECT * FROM " + currencyTable;
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(queryString, null);
 
-        if(cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 count++;
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
 
         cursor.close();
@@ -95,19 +89,17 @@ public class CurrencyDatabase extends SQLiteOpenHelper {
         return count > 0;
     }
 
-    public int getChipToken()
-    {
+    public int getChipToken() {
         String queryString = "SELECT * FROM " + currencyTable;
         SQLiteDatabase db = this.getWritableDatabase();
         int result = 0;
 
         Cursor cursor = db.rawQuery(queryString, null);
 
-        if(cursor.moveToFirst())
-        {
-            do{
+        if (cursor.moveToFirst()) {
+            do {
                 result = cursor.getInt(1);
-            }while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
 
         cursor.close();
@@ -116,19 +108,17 @@ public class CurrencyDatabase extends SQLiteOpenHelper {
         return result;
     }
 
-    public int getGlazeToken()
-    {
+    public int getGlazeToken() {
         String queryString = "SELECT * FROM " + currencyTable;
         SQLiteDatabase db = this.getWritableDatabase();
         int result = 0;
 
         Cursor cursor = db.rawQuery(queryString, null);
 
-        if(cursor.moveToFirst())
-        {
-            do{
+        if (cursor.moveToFirst()) {
+            do {
                 result = cursor.getInt(2);
-            }while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
 
         cursor.close();

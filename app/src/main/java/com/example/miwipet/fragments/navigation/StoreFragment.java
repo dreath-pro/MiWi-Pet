@@ -20,22 +20,16 @@ import com.example.miwipet.adapters.ObjectShopSelectionAdapter;
 import com.example.miwipet.database.EggDisplayDatabase;
 import com.example.miwipet.database.FoodDisplayDatabase;
 import com.example.miwipet.database.ObjectDisplayDatabase;
-import com.example.miwipet.database.TimeDatabase;
 import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.models.TimeModel;
-import com.example.miwipet.utils.EggSource;
-import com.example.miwipet.utils.FoodSource;
-import com.example.miwipet.utils.ObjectSource;
+import com.example.miwipet.logics.EggSource;
+import com.example.miwipet.logics.FoodSource;
+import com.example.miwipet.logics.ObjectSource;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Random;
 
 public class StoreFragment extends Fragment {
     private ArrayList<EggModel> eggDisplay = new ArrayList<>();

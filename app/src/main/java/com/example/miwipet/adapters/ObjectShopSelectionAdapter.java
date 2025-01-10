@@ -13,15 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miwipet.R;
 import com.example.miwipet.database.CurrencyDatabase;
-import com.example.miwipet.database.FoodDatabase;
 import com.example.miwipet.database.ObjectDatabase;
-import com.example.miwipet.database.ObjectDisplayDatabase;
-import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.ObjectModel;
-import com.example.miwipet.utils.FoodSource;
-import com.example.miwipet.utils.ObjectSource;
-import com.example.miwipet.utils.RefreshInventory;
+import com.example.miwipet.logics.ObjectSource;
+import com.example.miwipet.logics.RefreshInventory;
 
 import java.util.ArrayList;
 

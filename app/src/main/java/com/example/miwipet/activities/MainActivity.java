@@ -1,8 +1,12 @@
 package com.example.miwipet.activities;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -39,10 +43,10 @@ import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.models.PetModel;
 import com.example.miwipet.database.CurrencyDatabase;
 import com.example.miwipet.models.TimeModel;
-import com.example.miwipet.utils.InspectInventory;
+import com.example.miwipet.logics.InspectInventory;
 import com.example.miwipet.database.PetDatabase;
-import com.example.miwipet.utils.Rarity;
-import com.example.miwipet.utils.RefreshInventory;
+import com.example.miwipet.logics.Rarity;
+import com.example.miwipet.logics.RefreshInventory;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -106,10 +110,8 @@ public class MainActivity extends AppCompatActivity {
     private InventoryModel inventoryModel = new InventoryModel();
     private TimeModel timeModel = new TimeModel();
 
-
     private RefreshInventory refreshInventory;
     private Rarity rarity = new Rarity();
-
 
     private PetDatabase petDatabase = new PetDatabase(MainActivity.this);
     private EggDatabase eggDatabase = new EggDatabase(MainActivity.this);
@@ -136,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeComponents() {
-        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.main);
         materialToolbar = findViewById(R.id.materialToolbar);
         frameLayout = findViewById(R.id.frameLayout);
         navigationView = findViewById(R.id.navigationView);
@@ -246,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
         try {
@@ -321,6 +324,7 @@ public class MainActivity extends AppCompatActivity {
                                 rarity.getRarity(3),
                                 rarity.getRarity(4)};
 
+                        //reward system, reward the player with tokens depending on the rarity pet hatched
                         if (petModel.getRarity().equals(rarities[0])) {
                             inventoryModel.setChipToken(inventoryModel.getChipToken() + 10);
                         } else if (petModel.getRarity().equals(rarities[1])) {
@@ -364,6 +368,12 @@ public class MainActivity extends AppCompatActivity {
             errorText.setVisibility(View.VISIBLE);
             errorText.setText("Error: " + e);
         }
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
     }
 
     @Override

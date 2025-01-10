@@ -1,7 +1,6 @@
 package com.example.miwipet.adapters;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.miwipet.R;
 import com.example.miwipet.database.CurrencyDatabase;
 import com.example.miwipet.database.FoodDatabase;
-import com.example.miwipet.models.EggModel;
 import com.example.miwipet.models.FoodModel;
 import com.example.miwipet.models.InventoryModel;
-import com.example.miwipet.utils.EggSource;
-import com.example.miwipet.utils.FoodSource;
-import com.example.miwipet.utils.RefreshInventory;
+import com.example.miwipet.logics.FoodSource;
+import com.example.miwipet.logics.RefreshInventory;
 
 import java.util.ArrayList;
 

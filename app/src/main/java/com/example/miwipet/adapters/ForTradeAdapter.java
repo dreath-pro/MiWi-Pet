@@ -30,7 +30,7 @@ import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.models.OfferModel;
 import com.example.miwipet.models.PetModel;
-import com.example.miwipet.utils.RefreshInventory;
+import com.example.miwipet.logics.RefreshInventory;
 
 import java.util.ArrayList;
 import java.util.Random;

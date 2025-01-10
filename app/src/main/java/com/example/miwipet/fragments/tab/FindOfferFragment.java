@@ -24,11 +24,11 @@ import com.example.miwipet.models.InventoryModel;
 import com.example.miwipet.models.ObjectModel;
 import com.example.miwipet.models.OfferModel;
 import com.example.miwipet.models.PetModel;
-import com.example.miwipet.utils.EggSource;
-import com.example.miwipet.utils.FoodSource;
-import com.example.miwipet.utils.MiniInventory;
-import com.example.miwipet.utils.ObjectSource;
-import com.example.miwipet.utils.TradeGeneration;
+import com.example.miwipet.logics.EggSource;
+import com.example.miwipet.logics.FoodSource;
+import com.example.miwipet.logics.MiniInventory;
+import com.example.miwipet.logics.ObjectSource;
+import com.example.miwipet.logics.TradeGeneration;
 
 import java.util.ArrayList;
 import java.util.Random;
